@@ -89,21 +89,68 @@ describe("resolveConfigPath — 3-source cascade (S-CONFIG)", () => {
     expect(resolveConfigPath([], { HOME: dir2 })).toBe(dot);
   });
 
-  it("fails loud and lists EVERY checked path when nothing is found", () => {
+  it("fails loud (home tier) and lists every checked home path when no explicit source is set", () => {
     const dir = tmpRoot();
-    const env = { HOME: dir, DELEGATE_MCP_CONFIG: join(dir, "missing-env.json") };
     try {
-      resolveConfigPath(["--config", join(dir, "missing-cli.json")], env);
+      resolveConfigPath([], { HOME: dir }); // no CLI, no ENV → home tier only
       throw new Error("should have thrown");
     } catch (e) {
       expect(e).toBeInstanceOf(ConfigError);
       const msg = (e as Error).message;
-      expect(msg).toContain("missing-cli.json"); // CLI candidate
-      expect(msg).toContain("missing-env.json"); // ENV candidate
       expect(msg).toContain(join(dir, ".config", "delegate-mcp", "config.json")); // XDG default
       expect(msg).toContain(join(dir, ".delegate-mcp", "config.json"));
       expect(msg).toContain(join(dir, ".delegate-mcp.json"));
     }
+  });
+});
+
+// --- L02b: explicit-source set-but-missing = fail-loud (S-CONFIG ruling) ------
+
+describe("resolveConfigPath — explicit set-but-missing fails loud (S-CONFIG L02b)", () => {
+  it("--config <missing> throws ConfigError naming --config + the path (no home fall-through)", () => {
+    const dir = tmpRoot();
+    const missing = join(dir, "nope.json");
+    // A resolvable home config EXISTS — the explicit --config must still win + fail, not fall through.
+    mkdirSync(join(dir, ".config", "delegate-mcp"), { recursive: true });
+    writeConfig(join(dir, ".config", "delegate-mcp"), "config.json", validConfig());
+    try {
+      resolveConfigPath(["--config", missing], { HOME: dir });
+      throw new Error("should have thrown");
+    } catch (e) {
+      expect(e).toBeInstanceOf(ConfigError);
+      const msg = (e as Error).message;
+      expect(msg).toContain("--config"); // names the source
+      expect(msg).toContain(missing); // names the path
+      expect(msg).not.toContain(".config/delegate-mcp/config.json"); // did NOT fall through to home
+    }
+  });
+
+  it("DELEGATE_MCP_CONFIG set-but-missing throws ConfigError naming the ENV var + the path", () => {
+    const dir = tmpRoot();
+    const missing = join(dir, "stale-env.json");
+    // Home config present too — the explicit env var must win + fail, not fall through.
+    mkdirSync(join(dir, ".config", "delegate-mcp"), { recursive: true });
+    writeConfig(join(dir, ".config", "delegate-mcp"), "config.json", validConfig());
+    try {
+      resolveConfigPath([], { HOME: dir, DELEGATE_MCP_CONFIG: missing });
+      throw new Error("should have thrown");
+    } catch (e) {
+      expect(e).toBeInstanceOf(ConfigError);
+      const msg = (e as Error).message;
+      expect(msg).toContain("DELEGATE_MCP_CONFIG"); // names the source
+      expect(msg).toContain(missing); // names the path
+    }
+  });
+
+  it("keeps the happy path: valid --config / valid ENV / valid home each still resolve", () => {
+    const dir = tmpRoot();
+    const cli = writeConfig(dir, "cli.json", validConfig());
+    const envp = writeConfig(dir, "env.json", validConfig());
+    expect(resolveConfigPath(["--config", cli], { HOME: dir })).toBe(cli);
+    expect(resolveConfigPath([], { HOME: dir, DELEGATE_MCP_CONFIG: envp })).toBe(envp);
+    mkdirSync(join(dir, ".config", "delegate-mcp"), { recursive: true });
+    const homeFile = writeConfig(join(dir, ".config", "delegate-mcp"), "config.json", validConfig());
+    expect(resolveConfigPath([], { HOME: dir })).toBe(homeFile);
   });
 });
 

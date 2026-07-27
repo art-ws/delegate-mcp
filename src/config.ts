@@ -90,42 +90,63 @@ const REQUIRED_PROVIDER_FIELDS = ["name", "base_url", "api_key", "default_model"
 // ---- Path resolution --------------------------------------------------------
 
 /**
- * Resolve the config file path via the frozen 3-source cascade (first found wins):
+ * Resolve the config file path via the frozen 3-source cascade (priority CLI > ENV > home):
  *  1. CLI `--config <path>` / `-c <path>` (also `--config=<path>`)
  *  2. env `DELEGATE_MCP_CONFIG`
  *  3. home-convention: `$XDG_CONFIG_HOME/delegate-mcp/config.json`
  *     (default `~/.config/delegate-mcp/config.json`) → `~/.delegate-mcp/config.json`
  *     → `~/.delegate-mcp.json`
  *
- * None found → ConfigError listing every checked path.
+ * Explicit-source semantics (S-CONFIG ruling, L02b): if an EXPLICIT source (CLI
+ * `--config`/`-c` or the `DELEGATE_MCP_CONFIG` env var) is SET but its file is
+ * missing/unreadable, that is a hard error (fail-loud, names the source + path) — it
+ * does NOT silently fall through to the home convention. A typo in `--config` or a
+ * stale env var must surface, not resolve to some unrelated home file.
+ *
+ * The home-convention tier is best-effort: each path is tried-if-exists, first found
+ * wins; none present → fail-loud listing the checked home paths.
  */
 export function resolveConfigPath(
   argv: string[] = process.argv.slice(2),
   env: NodeJS.ProcessEnv = process.env,
 ): string {
   const home = homeFrom(env);
-  const candidates: { source: string; path: string }[] = [];
 
+  // 1. CLI --config/-c — explicit + highest priority: set-but-missing is an error.
   const cli = cliConfigArg(argv);
-  if (cli) candidates.push({ source: "CLI --config", path: resolve(expandHome(cli, home)) });
-
-  const envPath = env.DELEGATE_MCP_CONFIG;
-  if (envPath) {
-    candidates.push({ source: "env DELEGATE_MCP_CONFIG", path: resolve(expandHome(envPath, home)) });
+  if (cli) {
+    const path = resolve(expandHome(cli, home));
+    if (isFile(path)) return path;
+    throw new ConfigError(
+      `config file given via --config does not exist or is not readable: ${path}`,
+    );
   }
 
-  const xdgBase = env.XDG_CONFIG_HOME || join(home, ".config");
-  candidates.push({ source: "XDG_CONFIG_HOME", path: join(xdgBase, "delegate-mcp", "config.json") });
-  candidates.push({ source: "home", path: join(home, ".delegate-mcp", "config.json") });
-  candidates.push({ source: "home", path: join(home, ".delegate-mcp.json") });
+  // 2. env DELEGATE_MCP_CONFIG — explicit: set-but-missing is an error.
+  const envPath = env.DELEGATE_MCP_CONFIG;
+  if (envPath) {
+    const path = resolve(expandHome(envPath, home));
+    if (isFile(path)) return path;
+    throw new ConfigError(
+      `config file given via DELEGATE_MCP_CONFIG env var does not exist or is not readable: ${path}`,
+    );
+  }
 
-  for (const c of candidates) {
+  // 3. home-convention — best-effort tier, first found wins, else fail-loud with list.
+  const xdgBase = env.XDG_CONFIG_HOME || join(home, ".config");
+  const homeCandidates: { source: string; path: string }[] = [
+    { source: "XDG_CONFIG_HOME", path: join(xdgBase, "delegate-mcp", "config.json") },
+    { source: "home", path: join(home, ".delegate-mcp", "config.json") },
+    { source: "home", path: join(home, ".delegate-mcp.json") },
+  ];
+
+  for (const c of homeCandidates) {
     if (isFile(c.path)) return c.path;
   }
 
-  const list = candidates.map((c) => `  - [${c.source}] ${c.path}`).join("\n");
+  const list = homeCandidates.map((c) => `  - [${c.source}] ${c.path}`).join("\n");
   throw new ConfigError(
-    `no delegate-mcp config found. Checked (in priority order):\n${list}\n` +
+    `no delegate-mcp config found. Checked home-convention paths (in priority order):\n${list}\n` +
       `Provide one via --config <path>, the DELEGATE_MCP_CONFIG env var, or a home-convention path.`,
   );
 }
