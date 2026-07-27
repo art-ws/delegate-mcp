@@ -1,0 +1,70 @@
+{
+  "name": "delegate-mcp",
+  "version": "0.1.0",
+  "description": "MCP delegate server: routes large tool outputs to a cheap model to save orchestrator tokens.",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "delegate",
+    "llm",
+    "tokens",
+    "openai",
+    "ai",
+    "cli"
+  ],
+  "homepage": "https://github.com/art-ws/delegate-mcp#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/art-ws/delegate-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/art-ws/delegate-mcp/issues"
+  },
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "delegate-mcp": "dist/index.js"
+  },
+  "main": "dist/index.js",
+  "files": [
+    "dist",
+    "delegate-config.example.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "lint": "eslint src test",
+    "secretlint": "secretlint '**/*'",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "openai": "^6.49.0",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "@secretlint/secretlint-rule-preset-recommend": "^13.0.4",
+    "@semantic-release/changelog": "^7.0.0",
+    "@semantic-release/commit-analyzer": "^13.0.1",
+    "@semantic-release/git": "^11.0.1",
+    "@semantic-release/github": "^12.0.9",
+    "@semantic-release/npm": "^13.1.5",
+    "@semantic-release/release-notes-generator": "^14.1.1",
+    "@types/node": "^20.11.0",
+    "eslint": "^9.0.0",
+    "secretlint": "^13.0.4",
+    "semantic-release": "^25.0.8",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.0",
+    "typescript-eslint": "^8.0.0",
+    "vitest": "^3.0.0"
+  }
+}

@@ -1,0 +1,36 @@
+name: Release
+
+# Manual-only release. There is NO push/tag trigger: the first and every real
+# `npm publish` happens solely on an operator-initiated workflow_dispatch, after
+# the security gate. `dry_run: true` computes the version + changelog with no
+# tag / GitHub Release / publish side effects.
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry run: compute next version + changelog preview, no tag/release/publish"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write # semantic-release commits CHANGELOG + version bump and creates the tag/release
+  id-token: write # npm provenance (OIDC)
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # full history: semantic-release analyzes commits since the last tag
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run build # build BEFORE publish — dist/ must exist before @semantic-release/npm packs
+      - name: semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx semantic-release ${{ inputs.dry_run && '--dry-run' || '' }}

@@ -1,0 +1,29 @@
+{
+  "providers": [
+    {
+      "name": "openai",
+      "base_url": "https://api.openai.com/v1",
+      "api_key": "env:OPENAI_API_KEY",
+      "default_model": "gpt-4o-mini",
+      "weight": 1,
+      "timeout_ms": 60000,
+      "max_input_tokens": 128000,
+      "headers": {}
+    }
+  ],
+  "disabled_providers": [],
+  "_disabled_note": "List provider names here to keep their config in this file but out of the active pool.",
+  "session_dir": "~/.delegate-mcp/state/sessions",
+  "metrics_file": "~/.delegate-mcp/state/metrics.jsonl",
+  "default_max_output_tokens": 4096,
+  "file_walker": {
+    "max_file_bytes": 262144,
+    "max_total_bytes": 4194304,
+    "_exclude_glob_note": "Illustrative USER patterns only. Sensible defaults (node_modules, .git, dist, build, target, .next, __pycache__ + secret patterns .env* *.pem *.key id_* *secret* *.lock) are ALWAYS merged in and cannot be dropped. Convention (.gitignore-style): a pattern WITHOUT '/' matches a path segment at ANY depth ('coverage', '*.min.js'); a pattern WITH '/' is anchored to the work_dir root ('src/generated/**').",
+    "exclude_glob": [
+      "coverage",
+      "*.min.js",
+      "src/generated/**"
+    ]
+  }
+}
