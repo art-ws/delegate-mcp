@@ -18,4 +18,16 @@ jobs:
       - run: npm run lint
       - run: npm run build
       - run: npm test
+
+  secretlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      # Scan the working tree for secret VALUES; fails the build (and blocks PR merge) on any finding.
+      - run: npx secretlint "**/*"
 # publish is NOT run in CI — the operator publishes manually after the security gate.

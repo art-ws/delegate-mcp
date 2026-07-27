@@ -245,6 +245,23 @@ configured — is returned as an error result.
 Rule of thumb: optimistic when conflicts are rare, pessimistic when they're the norm.
 ```
 
+## Agent usage
+
+### Delegate large reads to save tokens
+You have a `delegate-mcp` MCP server with tools `analyze`, `query`, `resume`. It routes large-context reads to a cheap model so they don't fill your expensive context.
+
+Default to delegating when you'd otherwise pull a large payload into context:
+- Scanning a large file / whole directory for a fact or summary → `analyze` (work_dir + prompt)
+- A big log / command output / web page you only need summarized → save to a temp dir and `analyze` it (or paste small inline data into `query`)
+- A general question not needing your own reasoning → `query`
+- A follow-up on a prior delegate answer → `resume` (session_id + prompt), pinned to the same model
+
+Rule of thumb: raw content likely > ~5K tokens and you only need to find/summarize (not edit) → delegate and reason over the reply.
+
+Read directly instead when: (1) about to edit the file; (2) it's tiny (< ~50 lines); (3) you need an exact quote/line number/byte-precise detail; (4) the delegate failed → fall back and say so.
+
+Prompting: state the output shape (table/bullets/JSON); cap `max_output_tokens`; trust the answer (don't re-read the source to "double-check" unless a destructive action depends on it).
+
 ## How it works
 
 ```

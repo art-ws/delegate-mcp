@@ -16,8 +16,16 @@ describe("scaffold: package manifest (S-PKG)", () => {
     expect((pkg.engines as Record<string, string>).node).toBe(">=20");
   });
 
-  it("ships only the built dist directory", () => {
-    expect(pkg.files).toEqual(["dist"]);
+  it("ships the dist bundle plus the runtime companion files (L08 whitelist)", () => {
+    expect(pkg.files).toEqual(["dist", "delegate-config.example.json", "README.md", "LICENSE"]);
+  });
+
+  it("carries publish-ready metadata (S-PKG §3.7)", () => {
+    expect(pkg.name).toBe("delegate-mcp");
+    expect(pkg.license).toBe("MIT");
+    expect((pkg.repository as Record<string, string>).url).toContain("art-ws/delegate-mcp");
+    expect((pkg.publishConfig as Record<string, string>).access).toBe("public");
+    expect(Array.isArray(pkg.keywords) && (pkg.keywords as string[]).length).toBeTruthy();
   });
 
   it("depends on the MCP SDK and the OpenAI SDK", () => {

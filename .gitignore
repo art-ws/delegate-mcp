@@ -19,3 +19,6 @@ state/
 *.key
 id_*
 *secret*
+# ...but the secretlint config itself must be tracked (matched by *secret* above)
+!.secretlintrc.json
+!.secretlintignore
