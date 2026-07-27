@@ -19,11 +19,11 @@
   "file_walker": {
     "max_file_bytes": 262144,
     "max_total_bytes": 4194304,
-    "exclude": [
-      "node_modules",
-      ".git",
-      "dist",
-      "build",
+    "exclude_glob": [
+      "node_modules/**",
+      ".git/**",
+      "dist/**",
+      "build/**",
       ".env*",
       "*.pem",
       "*.key",
