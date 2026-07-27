@@ -25,7 +25,10 @@ jobs:
           fetch-depth: 0 # full history: semantic-release analyzes commits since the last tag
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          # Node 24 for the release job: semantic-release requires Node >=22.14 || >=24.10.
+          # This is the CI runner only — the published package still supports Node >=20
+          # (see package.json "engines"), which ci.yml tests against.
+          node-version: 24
           cache: npm
       - run: npm ci
       - run: npm run build # build BEFORE publish — dist/ must exist before @semantic-release/npm packs
