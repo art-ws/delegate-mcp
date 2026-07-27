@@ -1,0 +1,21 @@
+# dependencies & build output
+node_modules/
+dist/
+
+# npm pack artifacts
+*.tgz
+
+# real (non-example) configs — public repo: NEVER commit real keys or endpoints
+delegate-config.json
+*.local.json
+
+# runtime state (sessions JSON, metrics JSONL)
+state/
+
+# secrets / credential material
+.env
+.env.*
+*.pem
+*.key
+id_*
+*secret*

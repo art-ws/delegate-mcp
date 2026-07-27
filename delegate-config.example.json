@@ -1,0 +1,34 @@
+{
+  "providers": [
+    {
+      "name": "openai",
+      "base_url": "https://api.openai.com/v1",
+      "api_key": "env:OPENAI_API_KEY",
+      "default_model": "gpt-4o-mini",
+      "weight": 1,
+      "timeout_ms": 60000,
+      "max_input_tokens": 128000,
+      "headers": {}
+    }
+  ],
+  "disabled_providers": [],
+  "_disabled_note": "List provider names here to keep their config in this file but out of the active pool.",
+  "session_dir": "~/.delegate-mcp/state/sessions",
+  "metrics_file": "~/.delegate-mcp/state/metrics.jsonl",
+  "default_max_output_tokens": 4096,
+  "file_walker": {
+    "max_file_bytes": 262144,
+    "max_total_bytes": 4194304,
+    "exclude": [
+      "node_modules",
+      ".git",
+      "dist",
+      "build",
+      ".env*",
+      "*.pem",
+      "*.key",
+      "id_*",
+      "*secret*"
+    ]
+  }
+}
