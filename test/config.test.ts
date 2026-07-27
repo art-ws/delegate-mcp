@@ -235,10 +235,13 @@ describe("loadConfig — example config shape (AC5) + defaults", () => {
       api_key: "fake-key",
       default_model: "gpt-4o-mini",
     });
-    // frozen seam reconcile: field is exclude_glob (not "exclude"), values in GLOB form
-    expect(app.file_walker.exclude_glob).toContain(".env*");
-    expect(app.file_walker.exclude_glob).toContain("node_modules/**");
-    expect(app.file_walker.exclude_glob).not.toContain("node_modules"); // bare name is wrong
+    // frozen seam reconcile (variant C): field is exclude_glob (not "exclude"); the
+    // example carries only illustrative USER patterns, NOT a copy of the always-merged
+    // defaults. Bare name → any depth; slash → anchored to the work_dir root.
+    expect(app.file_walker.exclude_glob).toContain("coverage"); // bare dir, any depth
+    expect(app.file_walker.exclude_glob).toContain("*.min.js"); // no-slash glob, any depth
+    expect(app.file_walker.exclude_glob).toContain("src/generated/**"); // slash → anchored
+    expect(app.file_walker.exclude_glob).not.toContain("node_modules/**"); // defaults not duplicated
     expect(app.default_max_output_tokens).toBe(4096);
     // ~ expanded in path-like fields
     expect(app.session_dir.startsWith("~")).toBe(false);
@@ -252,7 +255,8 @@ describe("loadConfig — example config shape (AC5) + defaults", () => {
     expect(app.file_walker.max_file_bytes).toBe(262144);
     expect(app.file_walker.max_total_bytes).toBe(4194304);
     expect(app.file_walker.exclude_glob).toContain("*secret*");
-    expect(app.file_walker.exclude_glob).toContain(".git/**"); // glob form, not bare ".git"
+    expect(app.file_walker.exclude_glob).toContain(".git"); // variant C: bare name, not ".git/**"
+    expect(app.file_walker.exclude_glob).toContain("node_modules"); // bare dir → any depth
     expect(app.session_dir).toContain(".delegate-mcp");
     expect(app.metrics_file).toContain("metrics.jsonl");
   });

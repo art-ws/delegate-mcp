@@ -60,14 +60,21 @@ const DEFAULT_SESSION_DIR = "~/.delegate-mcp/state/sessions";
 const DEFAULT_METRICS_FILE = "~/.delegate-mcp/state/metrics.jsonl";
 
 /**
- * Default file-walker excludes, in GLOB form (consistent with the S-FILES glob→regex
- * matcher that leaf 03 applies) — directory names use `/**`, plus secret-bearing patterns.
+ * Default file-walker excludes, in the variant-C (.gitignore) convention consumed by
+ * the S-FILES matcher (leaf 03): heavy build/VCS/cache directories are named BARE (no
+ * slash → pruned at any depth), plus no-slash secret-bearing patterns. Mirrors
+ * `files.ts` DEFAULT_EXCLUDE (which is additionally always-merged on top of any user
+ * override, so secret patterns can never be dropped).
  */
 const DEFAULT_EXCLUDE_GLOB: readonly string[] = [
-  "node_modules/**",
-  ".git/**",
-  "dist/**",
-  "build/**",
+  "node_modules",
+  ".git",
+  "dist",
+  "build",
+  "target",
+  ".next",
+  "__pycache__",
+  "*.lock",
   ".env*",
   "*.pem",
   "*.key",

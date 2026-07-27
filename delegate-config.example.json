@@ -19,16 +19,11 @@
   "file_walker": {
     "max_file_bytes": 262144,
     "max_total_bytes": 4194304,
+    "_exclude_glob_note": "Illustrative USER patterns only. Sensible defaults (node_modules, .git, dist, build, target, .next, __pycache__ + secret patterns .env* *.pem *.key id_* *secret* *.lock) are ALWAYS merged in and cannot be dropped. Convention (.gitignore-style): a pattern WITHOUT '/' matches a path segment at ANY depth ('coverage', '*.min.js'); a pattern WITH '/' is anchored to the work_dir root ('src/generated/**').",
     "exclude_glob": [
-      "node_modules/**",
-      ".git/**",
-      "dist/**",
-      "build/**",
-      ".env*",
-      "*.pem",
-      "*.key",
-      "id_*",
-      "*secret*"
+      "coverage",
+      "*.min.js",
+      "src/generated/**"
     ]
   }
 }

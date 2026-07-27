@@ -68,15 +68,25 @@ export const READER_SYSTEM_PROMPT =
 // ---- Defaults ---------------------------------------------------------------
 
 /**
- * Always-applied exclude floor, merged with the user's `exclude_glob`. Keeping the
- * secret-bearing patterns here (not only in the config default) guarantees they can
- * never be dropped by a user who overrides `exclude_glob` with their own list.
+ * Always-applied exclude floor, merged with the user's `exclude_glob` under the
+ * variant-C (.gitignore) convention. Heavy build/VCS/cache directories are named
+ * BARE (no slash) so they prune at ANY depth; the secret-bearing patterns are
+ * likewise no-slash so they catch a stray key / `.env` / `*secret*` in any subtree.
+ * Keeping them here (not only in the config default) guarantees a user who overrides
+ * `exclude_glob` with their own list can never drop them. Binary blobs are handled
+ * by the content heuristic ({@link isBinary}), so no extension list is enumerated.
  */
 export const DEFAULT_EXCLUDE: readonly string[] = [
-  "node_modules/**",
-  ".git/**",
-  "dist/**",
-  "build/**",
+  // heavy build / VCS / cache directories — bare names → pruned at any depth
+  "node_modules",
+  ".git",
+  "dist",
+  "build",
+  "target",
+  ".next",
+  "__pycache__",
+  // secret-bearing patterns + lockfiles — no-slash → matched by basename at any depth
+  "*.lock",
   ".env*",
   "*.pem",
   "*.key",
@@ -99,12 +109,16 @@ function escapeRegexChar(c: string): string {
 }
 
 /**
- * Translate a glob into an anchored RegExp. Supported wildcards:
+ * Translate a glob into an anchored (`^…$`) RegExp. Supported wildcards:
  *  - `**​/` → any number of leading directory segments (including none)
  *  - `**`  → any run of characters, including `/`
  *  - `*`   → any run of non-`/` characters
  *  - `?`   → a single non-`/` character
  * Every other character is matched literally.
+ *
+ * The regex encodes only the wildcards; whether it is tested against a path's
+ * basename or its full root-relative path is the .gitignore-style variant-C
+ * decision made by {@link compileExclude} / {@link isExcluded}.
  */
 export function globToRegex(pattern: string): RegExp {
   let re = "";
@@ -132,27 +146,53 @@ export function globToRegex(pattern: string): RegExp {
 }
 
 /**
- * Segment-suffixes of a path: the path itself, then it with each leading directory
- * segment peeled off. This is what makes an anchored pattern like `node_modules/**`
- * match at ANY depth (its suffix `node_modules/...` matches), so the frozen default
- * excludes work on nested directories without changing their values. Empty tails are
- * dropped so a permissive pattern can't match "nothing".
+ * A compiled exclude pattern under the variant-C (.gitignore) convention:
+ *  - a pattern WITHOUT `/` (`node_modules`, `*.lock`, `*.pem`, `id_*`, `*secret*`)
+ *    matches a path SEGMENT (basename) at ANY depth;
+ *  - a pattern WITH `/` (`src/gen/**`, `**​/foo`) is ANCHORED to the traversal root
+ *    and matched against the full root-relative path — a leading `**​/` re-opens
+ *    "any depth" explicitly.
+ * Rationale (CTO seam ruling): a public tool should behave like `.gitignore`
+ * (least surprise); depth-agnostic-for-all is a footgun on users' slash patterns.
  */
-function suffixesOf(p: string): string[] {
-  const out = [p];
-  let idx = p.indexOf("/");
-  while (idx !== -1) {
-    const suf = p.slice(idx + 1);
-    if (suf.length) out.push(suf);
-    idx = p.indexOf("/", idx + 1);
-  }
-  return out;
+export interface ExcludeMatcher {
+  /** The original glob pattern (kept for debugging / introspection). */
+  source: string;
+  /** True if the pattern contains `/` → anchored to the traversal root. */
+  anchored: boolean;
+  /** Compiled anchored RegExp (`^…$`) from {@link globToRegex}. */
+  regex: RegExp;
 }
 
-function matchesAny(regexes: RegExp[], candidates: string[]): boolean {
-  for (const r of regexes) {
-    for (const c of candidates) {
-      if (r.test(c)) return true;
+/** Compile one glob into an {@link ExcludeMatcher} (variant-C anchoring rule). */
+export function compileExclude(pattern: string): ExcludeMatcher {
+  return { source: pattern, anchored: pattern.includes("/"), regex: globToRegex(pattern) };
+}
+
+/** Last `/`-separated segment (basename) of a POSIX-style relative path. */
+function baseSegment(relPath: string): string {
+  const i = relPath.lastIndexOf("/");
+  return i === -1 ? relPath : relPath.slice(i + 1);
+}
+
+/**
+ * True if `relPath` is excluded by any matcher (variant C). No-slash matchers test
+ * the basename (matching at any depth); anchored matchers test the full root-relative
+ * path. Directories are additionally tested with a trailing `/` so an anchored
+ * `dir/**` prunes `dir` itself (the pattern names the directory's contents).
+ */
+export function isExcluded(
+  matchers: readonly ExcludeMatcher[],
+  relPath: string,
+  isDir: boolean,
+): boolean {
+  const base = baseSegment(relPath);
+  for (const m of matchers) {
+    if (m.anchored) {
+      if (m.regex.test(relPath)) return true;
+      if (isDir && m.regex.test(`${relPath}/`)) return true;
+    } else if (m.regex.test(base)) {
+      return true;
     }
   }
   return false;
@@ -216,7 +256,7 @@ function mergeExcludes(user: string[]): string[] {
 function walk(
   root: string,
   relDir: string,
-  regexes: RegExp[],
+  matchers: readonly ExcludeMatcher[],
   files: FileRef[],
   skipped: SkippedFile[],
 ): void {
@@ -233,11 +273,11 @@ function walk(
     const childRel = relDir === "" ? d.name : `${relDir}/${d.name}`;
     const childAbs = join(root, childRel);
     if (d.isDirectory()) {
-      if (matchesAny(regexes, suffixesOf(`${childRel}/`))) {
+      if (isExcluded(matchers, childRel, true)) {
         skipped.push({ path: `${childRel}/`, reason: "excluded" });
         continue;
       }
-      walk(root, childRel, regexes, files, skipped);
+      walk(root, childRel, matchers, files, skipped);
     } else if (d.isFile()) {
       files.push({ rel: childRel, abs: childAbs });
     } else if (d.isSymbolicLink()) {
@@ -274,7 +314,7 @@ function readCapped(abs: string, size: number, cap: number): Buffer {
  * the same input tree always yields a byte-identical prompt.
  */
 export function packDir(workDir: string, cfg: FileWalkerConfig): PackResult {
-  const regexes = mergeExcludes(cfg.exclude_glob).map(globToRegex);
+  const matchers = mergeExcludes(cfg.exclude_glob).map(compileExclude);
   const maxFile = cfg.max_file_bytes;
   const maxTotal = cfg.max_total_bytes;
 
@@ -291,7 +331,7 @@ export function packDir(workDir: string, cfg: FileWalkerConfig): PackResult {
   if (root.isFile()) {
     collected.push({ rel: basename(workDir), abs: workDir });
   } else if (root.isDirectory()) {
-    walk(workDir, "", regexes, collected, skipped);
+    walk(workDir, "", matchers, collected, skipped);
   } else {
     throw new Error(`delegate-mcp: work_dir "${workDir}" is neither a file nor a directory`);
   }
@@ -302,7 +342,7 @@ export function packDir(workDir: string, cfg: FileWalkerConfig): PackResult {
   // Split off loose excluded files (files under pruned dirs never reach here).
   const candidates: FileRef[] = [];
   for (const f of collected) {
-    if (matchesAny(regexes, suffixesOf(f.rel))) {
+    if (isExcluded(matchers, f.rel, false)) {
       skipped.push({ path: f.rel, reason: "excluded" });
     } else {
       candidates.push(f);

@@ -5,8 +5,10 @@ import { join } from "node:path";
 import {
   DEFAULT_EXCLUDE,
   READER_SYSTEM_PROMPT,
+  compileExclude,
   globToRegex,
   isBinary,
+  isExcluded,
   packDir,
 } from "../src/files.ts";
 // files.ts consumes L02's FileWalkerConfig verbatim (input contract, S-FILES).
@@ -73,6 +75,66 @@ describe("globToRegex — hand-rolled glob → regex (S-FILES)", () => {
       for (const n of noMatch) expect(re.test(n), `${pattern} should NOT match ${n}`).toBe(false);
     });
   }
+});
+
+// --- variant C: .gitignore-style exclude anchoring (S-FILES seam ruling) -----
+
+describe("isExcluded — variant-C .gitignore anchoring (S-FILES)", () => {
+  const compile = (patterns: string[]) => patterns.map(compileExclude);
+
+  // (§1) a pattern WITHOUT '/' matches a path SEGMENT (basename) at ANY depth.
+  it("(a) a bare directory name prunes at ANY depth", () => {
+    const m = compile(["node_modules"]);
+    expect(isExcluded(m, "node_modules", true)).toBe(true);
+    expect(isExcluded(m, "src/vendor/node_modules", true)).toBe(true); // deep dir → pruned
+    expect(isExcluded(m, "a/b/c/node_modules", true)).toBe(true);
+    // it must NOT match a mere substring or a same-named file's siblings
+    expect(isExcluded(m, "node_modules_old", true)).toBe(false);
+    expect(isExcluded(m, "src/node.js", false)).toBe(false);
+  });
+
+  it("(a') a no-slash file glob matches by basename at any depth", () => {
+    const m = compile(["*.lock"]);
+    expect(isExcluded(m, "bun.lock", false)).toBe(true);
+    expect(isExcluded(m, "yarn.lock", false)).toBe(true);
+    expect(isExcluded(m, "a/b/deep/Cargo.lock", false)).toBe(true);
+    expect(isExcluded(m, "a/lockfile", false)).toBe(false); // basename "lockfile" ≠ *.lock
+  });
+
+  // (§2) a pattern WITH '/' is ANCHORED to the traversal root.
+  it("(b) a user slash pattern `a/b/**` is anchored — does NOT match `x/a/b`", () => {
+    const m = compile(["a/b/**"]);
+    expect(isExcluded(m, "x/a/b", true)).toBe(false); // NOT anchored at root → not excluded
+    expect(isExcluded(m, "x/a/b/c.ts", false)).toBe(false);
+    expect(isExcluded(m, "a/b", true)).toBe(true); // prunes the dir it names
+    expect(isExcluded(m, "a/b/c.ts", false)).toBe(true); // …and its contents
+    expect(isExcluded(m, "a/bc", true)).toBe(false); // segment boundary respected
+  });
+
+  it("an anchored `src/gen/**` matches only under the root, not a nested `src/gen`", () => {
+    const m = compile(["src/gen/**"]);
+    expect(isExcluded(m, "src/gen", true)).toBe(true);
+    expect(isExcluded(m, "src/gen/x.ts", false)).toBe(true);
+    expect(isExcluded(m, "pkg/src/gen/x.ts", false)).toBe(false); // not at root
+  });
+
+  // (§3) a leading '**/' re-opens "any depth" explicitly.
+  it("(c) `**/foo` matches `foo` at ANY depth", () => {
+    const m = compile(["**/foo"]);
+    expect(isExcluded(m, "foo", false)).toBe(true);
+    expect(isExcluded(m, "a/foo", false)).toBe(true);
+    expect(isExcluded(m, "a/b/foo", false)).toBe(true);
+    expect(isExcluded(m, "a/foo", true)).toBe(true); // as a directory too
+    expect(isExcluded(m, "foobar", false)).toBe(false);
+    expect(isExcluded(m, "a/foo.ts", false)).toBe(false);
+  });
+
+  it("records the anchored flag from the presence of a slash", () => {
+    expect(compileExclude("node_modules").anchored).toBe(false);
+    expect(compileExclude("*secret*").anchored).toBe(false);
+    expect(compileExclude("src/gen/**").anchored).toBe(true);
+    expect(compileExclude("**/foo").anchored).toBe(true);
+  });
 });
 
 // --- isBinary heuristic ------------------------------------------------------
@@ -232,10 +294,38 @@ describe("packDir — default secret excludes are unconditional (AC5)", () => {
     expect(r.skipped).toContainEqual({ path: "notes.md", reason: "excluded" });
   });
 
+  it("always-merges secret defaults even under a NON-empty user exclude_glob", () => {
+    const root = tmpRoot();
+    write(root, "keep.ts", "ok\n");
+    write(root, "notes.md", "SECRET_MD_MARKER\n"); // user pattern will drop this
+    write(root, ".env", "DOTENV_SECRET_MARKER=1\n"); // default must still drop this
+    write(root, "id_rsa", "OPENSSH_MARKER\n");
+    // user provides their OWN list — it must NOT reset the secret floor
+    const r = packDir(root, cfg({ exclude_glob: ["*.md"] }));
+    expect(r.prompt).toContain("--- file: keep.ts ---");
+    expect(r.skipped).toContainEqual({ path: "notes.md", reason: "excluded" });
+    expect(r.skipped).toContainEqual({ path: ".env", reason: "excluded" });
+    expect(r.skipped).toContainEqual({ path: "id_rsa", reason: "excluded" });
+    for (const marker of ["DOTENV_SECRET_MARKER", "OPENSSH_MARKER", "SECRET_MD_MARKER"]) {
+      expect(r.prompt).not.toContain(marker);
+    }
+  });
+
   it("keeps the secret patterns in DEFAULT_EXCLUDE (guard against accidental drop)", () => {
     for (const p of [".env*", "*.pem", "*.key", "id_*", "*secret*"]) {
       expect(DEFAULT_EXCLUDE).toContain(p);
     }
+  });
+
+  it("anchors a user slash-pattern to the root end-to-end (variant C, §2)", () => {
+    const root = tmpRoot();
+    write(root, "a/b/rooted.ts", "AT_ROOT_MARKER\n"); // <root>/a/b → excluded
+    write(root, "x/a/b/nested.ts", "NESTED_KEEP_MARKER\n"); // x/a/b → NOT excluded (anchored)
+    const r = packDir(root, cfg({ exclude_glob: ["a/b/**"] }));
+    expect(r.prompt).not.toContain("AT_ROOT_MARKER");
+    expect(r.skipped).toContainEqual({ path: "a/b/", reason: "excluded" });
+    expect(r.prompt).toContain("--- file: x/a/b/nested.ts ---");
+    expect(r.prompt).toContain("NESTED_KEEP_MARKER");
   });
 });
 
