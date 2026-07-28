@@ -14,7 +14,7 @@ on:
 
 permissions:
   contents: write # semantic-release commits CHANGELOG + version bump and creates the tag/release
-  # No id-token/OIDC: releases publish via NPM_TOKEN without npm provenance (operator decision).
+  id-token: write # npm provenance (OIDC)
 
 jobs:
   release:
