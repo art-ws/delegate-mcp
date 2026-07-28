@@ -383,4 +383,4 @@ OpenAI-compatible chat-completions surface).
 
 <p align="center"><em>Not a single line of code written by a human.<br>
 Not a single idea taken from AI.<br>
-Made by Human &amp; AI, with Love. ❤️</em></p>
+Made by Human &amp; AI, with Love to art. ❤️</em></p>
