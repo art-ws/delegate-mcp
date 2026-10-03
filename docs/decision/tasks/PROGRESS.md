@@ -25,7 +25,7 @@
 | D05 | dev | WAIT_DEPENDENCIES | нет | — |
 | D06 | dev | WAIT_DEPENDENCIES | нет | — |
 | D07 | dev | WAIT_DEPENDENCIES | нет | — |
-| Q00 | test | REWORK_REQUIRED | 2026-10-03 17:03 MSK; `5f3bf707-0058-4600-9144-7f6cbb104c4a` | QA `d108021b2b4e62f28a4c80394b4022d887fb63bc`; TL findings F-Q00-AND/USAGE/FIXTURE, [REWORK r1](08-independent-test-plan.REWORK-r1.md) |
+| Q00 | test | R1_DISPATCH_PREPARED | 2026-10-03 17:03 MSK; `5f3bf707-0058-4600-9144-7f6cbb104c4a` | QA `d108021b2b4e62f28a4c80394b4022d887fb63bc`; TL findings F-Q00-AND/USAGE/FIXTURE, [REWORK r1](08-independent-test-plan.REWORK-r1.md) |
 | Q01 | test | WAIT_DEPENDENCIES | нет | — |
 | G1 | tl | WAIT_DEPENDENCIES | нет | — |
 | Q02 | test | WAIT_DEPENDENCIES | нет | — |
@@ -36,8 +36,8 @@
 | Роль | Активный исполнительный лист | Очередь после GO |
 |---|---|---|
 | tl | диспетч D03 / доработка Q00 | review/диспетч → G1 → G2 |
-| dev | предзадачный cleanup перед D03 | D03 → D04 → D05 → D06 → D07 |
-| test | предзадачный cleanup перед Q00 r1 | Q00 r1 → Q01 после D07 → Q02 после G1 |
+| dev | ожидает предзадачный сигнал перед D03 | D03 → D04 → D05 → D06 → D07 |
+| test | Q00 r1 подготовлен после /clear | Q00 r1 → Q01 после D07 → Q02 после G1 |
 
 При G0 MCP list_peers и закрывающие сообщения подтвердили dev/test idle в резерве; чужие задачи не вытесняются. dev подтвердил WIP=0 и cleanup сообщением `c52f5ee6-197c-487f-a54d-85c706e208dd` (служебные дочерние удалены, основная/чужие сохранены, checkout чистый, аренды отсутствуют). Live get_status=idle и /clear перед D01 выполнены, rc=0. Актуальные исполнительные листы — в раскладке выше.
 
@@ -68,3 +68,6 @@ Re-resolve G0: локальный main и live origin/main совпадают �
 - По авторскому evidence: build три entry, typecheck, focused D02+legacy-config+D01 528/528 (212+21+295), lint, focused test typecheck, secretlint/whitespace rc=0. Сохранены first focused rc=1 (D01 dist fixture копировал один файл при shared tsup chunks) и secretlint rc=1 (synthetic BasicAuth literal); final rc=0. Изменение D01 fixture сохраняет complete dist layout и прежние behavioral assertions; Q01 проверяет установочный пакет отдельно.
 - S2 экспорты закреплены в _shared/interfaces.md. Ready config с ключом — только память; D03/D06 не сериализуют config и не передают ключ в body/envelope/logs. AppConfig.decision optional только для программных конструкторов, loader всегда возвращает DecisionSetup. Применение mandatory provider rules к request — D03, MCP inventory — D06, actual Node20/full legacy/package/live — NOT_RUN.
 - dev перед D03 требуется новый cleanup/WIP → live idle → /clear → отдельная выдача 03-decision-core.md. D03 predecessor b5314e7c; один активный лист. Q00 r1 ожидает clean-slate test, не является зависимостью D03. Старый контроль D02/Q00 читает это актуальное состояние, не требует повторного D02 прогона.
+
+- test cleanup `412e2618-db8d-4f37-a26f-7b4b5bcef94c` подтвердил WIP=0/clean QA d108021/lease=0, дочерних сессий нет. Live get_status=idle и /clear выполнены перед Q00 r1. Финальная выдача текущего цикла: id e97427a6-55a1-4717-8213-df29f6e5483a / replyTo 412e2618; carrier 08-independent-test-plan.REWORK-r1.md; timebox 45–60 минут, сдача/контроль до 18:15 MSK. Receipt и новый SHA подтверждает ответ test; до него r1 не PASS.
+- Ответ dev по D02 `cf93f855-8920-4a23-9465-63b6690b70fb` подготовлен (component как вход D03, 528/528 author, независимая QA NOT_RUN, требуется cleanup/WIP). Доставить отдельным финальным send(to=dev, replyTo=cf93f855...) в ближайшем следующем цикле: текущий терминальный ответ принадлежит cleanup test 412e2618. Ни один peer reply не дублировать, inbox не менять. До cleanup/clear dev не начинает D03.
