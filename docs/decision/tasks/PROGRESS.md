@@ -11,7 +11,7 @@
 | Live scope Q02 | **GO, WAIT_DEPENDENCIES** | Аппрув полного дерева тем же поручением: до трёх синтетических платных POST без retries, только после Q01/G1 и отдельной выдачи Q02 |
 | npm release / activation | **NONE — HOLD** | Вне текущего этапа, отдельное поручение |
 
-Разрешение стартовать — прямое поручение владельца выше. Текущий статус эпика: **IN_PROGRESS / D04_COMPONENT_PASS / Q00_R3_REVIEW_PENDING**; runtime QA и live — **NOT_RUN**. Публикация npm, tag/GitHub Release, release workflow и активация MCP не разрешены.
+Разрешение стартовать — прямое поручение владельца выше. Текущий статус эпика: **IN_PROGRESS / D04_COMPONENT_PASS / Q00_PLAN_PASS**; runtime QA и live — **NOT_RUN**. Публикация npm, tag/GitHub Release, release workflow и активация MCP не разрешены.
 
 ## Листья
 
@@ -25,7 +25,7 @@
 | D05 | dev | WAIT_DEPENDENCIES | нет | — |
 | D06 | dev | WAIT_DEPENDENCIES | нет | — |
 | D07 | dev | WAIT_DEPENDENCIES | нет | — |
-| Q00 | test | R3_REVIEW_PENDING | `87fdb5bd-f497-47a6-bc1b-e7d7eabc5729`, receipt/сдача `f4e209b2-a0b0-42fe-b0a2-577f50f415e6` | QA `c102897315d6badcfb59fa583a48c1ab1f43c961`, parent0de2036; полный payload прочитан, actual bytes review следующий цикл; план ещё не PASS |
+| Q00 | test | PLAN_PASS | `87fdb5bd-f497-47a6-bc1b-e7d7eabc5729`, сдача `f4e209b2-a0b0-42fe-b0a2-577f50f415e6` | QA `c102897315d6badcfb59fa583a48c1ab1f43c961`, parent0de2036; TL actual bytes/static review закрывает оба r3 findings; independent runtime QA инструмента NOT_RUN |
 | Q01 | test | WAIT_DEPENDENCIES | нет | — |
 | G1 | tl | WAIT_DEPENDENCIES | нет | — |
 | Q02 | test | WAIT_DEPENDENCIES | нет | — |
@@ -35,9 +35,9 @@
 
 | Роль | Активный исполнительный лист | Очередь после GO |
 |---|---|---|
-| tl | D04 static review / Q00 r3 review | review/диспетч → G1 → G2 |
+| tl | Q00 r3 verdict / dev cleanup перед D05 | диспетч → G1 → G2 |
 | dev | D04 сдан, предзадачный cleanup перед D05 | D05 → D06 → D07 |
-| test | Q00 r3 сдан, ожидает TL review | Q01 после D07/Q00 PASS → Q02 после G1 |
+| test | Q00 план принят, резерв до D07 | Q01 после D07/отдельного dispatch → Q02 после G1 |
 
 При G0 MCP list_peers и закрывающие сообщения подтвердили dev/test idle в резерве; чужие задачи не вытесняются. dev подтвердил WIP=0 и cleanup сообщением `c52f5ee6-197c-487f-a54d-85c706e208dd` (служебные дочерние удалены, основная/чужие сохранены, checkout чистый, аренды отсутствуют). Live get_status=idle и /clear перед D01 выполнены, rc=0. Актуальные исполнительные листы — в раскладке выше.
 
@@ -100,3 +100,6 @@ Re-resolve G0: локальный main и live origin/main совпадают �
 
 - 19:02 MSK: D04 сдача dev01e83da0 получена; TL сверил exact source f2e00ed81fbf7582ce75ea94399297e2af8bd8c7/parent79819d6b/clean и 22 новых owned paths, лично прочитал полный client.ts, 94 focused controls и D04-TRANSPORT.md/final logs. Component принят как вход D05/D06, S5 закреплён. Final author build/typecheck/lint/focused671/671/testTS/secretlint rc=0; первый Retry-After overflow RED и исправление сохранены. Runtime проверки TL не запускал. Native fetch/Node20/package/full legacy/mutations/Q01/live — NOT_RUN. Следующий dev шаг cleanup/WIP=0, затем отдельный idle/clear/D05 dispatch; код в main не объединён.
 - Q00 r3 сдан testf4e209b2: QAc102897315d6badcfb59fa583a48c1ab1f43c961, parent0de2036, четыре owned QA paths; полный payload прочитан. Review actual setup/per-canary oracle/Noul reason и один ответ test — следующий отдельный цикл, не runtime QA.
+
+- 19:07 MSK: TL завершил Q00 r3 actual bytes/static review: exact QA c102897315d6badcfb59fa583a48c1ab1f43c961/parent0de2036/clean, четыре owned paths, diff whitespace rc=0. Лично прочитаны changed PLAN/fixtures и полный checker; F-Q00-R3-SETUP закрыт decision-only S2 input/full injected opts, separate legacy setup, per-canary surfaces и конкретными transport/sink phases с одним POST/valid Noul response. F-Q00-R3-NOUL-REASON закрыт uncertain/null/ambiguous_probability при прежних .5/.2/.8. PLAN_PASS готовности Q01, не ACCEPT инструмента. Checker final rc=0 по test report; первый matcher failure rc=1 отмечен в сдаче. 26 AC/14 fields/146 slugs/M1–M6/18 responses и прежние accepted corrections/history сохранены. TL runtime/checker не запускал; Q01/package/Node/mutations/live NOT_RUN. test в резерве до D07, Q01 только отдельным clean-slate dispatch.
+- D04 component review reply dev dc07f2ae-e68e-42f9-97e2-f9562bb75751 доставлен (history), replyTo01e83da0; dev делает предзадачный cleanup D05, повторной квитанции нет.
