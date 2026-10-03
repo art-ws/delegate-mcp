@@ -11,7 +11,7 @@
 | Live scope Q02 | **GO, WAIT_DEPENDENCIES** | Аппрув полного дерева тем же поручением: до трёх синтетических платных POST без retries, только после Q01/G1 и отдельной выдачи Q02 |
 | npm release / activation | **NONE — HOLD** | Вне текущего этапа, отдельное поручение |
 
-Разрешение стартовать — прямое поручение владельца выше. Текущий статус эпика: **IN_PROGRESS / D01–D07_COMPONENT_PASS / Q01_REWORK_REQUIRED / Q00_PLAN_PASS**; Q01 r1 runtime evidence сдано, TL не принял PASS: шесть author logs отсутствуют в commit tree, AC map содержит planned labels вместо actual oracle names; live — **NOT_RUN**. Публикация npm, tag/GitHub Release, release workflow и активация MCP не разрешены.
+Разрешение стартовать — прямое поручение владельца выше. Текущий статус эпика: **IN_PROGRESS / LOCAL_IMPLEMENTATION_DONE / Q01_PASS / G1_PASS / Q00_PLAN_PASS**; независимая локальная приёмка принята и проверенный runtime parked в main; live — **NOT_RUN**, Q02 следующий лист после clean-slate. Публикация npm, tag/GitHub Release, release workflow и активация MCP не разрешены.
 
 ## Листья
 
@@ -26,18 +26,18 @@
 | D06 | dev | COMPONENT_PASS | `decision-d06-go-20261003-1945`, сдача `014621e8-45d7-4fab-a23d-65833ab540a9` | source `42734c1412a7d24d62e427d49301db86fd7f8255`, parent0d0ade5f; TL static review принят/S7 закреплён; author865/865 с fixture preparation; D07 artifacts/portability followup, independent QA NOT_RUN |
 | D07 | dev | COMPONENT_PASS; F-D07-PUBLISH-VERSION OPEN | `decision-d07-go-20261003-2040`, сдача `46273e67-97de-42ba-b3a7-4029ee99f27b` | source489b6aad6061e4e0161c125066ea3b79374beddd, parent42734c14; TL static bytes/source/evidence review принят; author865/865+isolated865/865, installedNode24/26, actualNode20 NOT_RUN → Q01; default registry dry-run FAIL, forced inventory PASS, release eligibility OPEN |
 | Q00 | test | PLAN_PASS | `87fdb5bd-f497-47a6-bc1b-e7d7eabc5729`, сдача `f4e209b2-a0b0-42fe-b0a2-577f50f415e6` | QA `c102897315d6badcfb59fa583a48c1ab1f43c961`, parent0de2036; TL actual bytes/static review закрывает оба r3 findings; independent runtime QA инструмента NOT_RUN |
-| Q01 | test | REWORK_R2_DELIVERY_PREPARED | `decision-q01-r2-go-20261003-2255`, receipt сверяется history | source489; integration0c3bfde/tree7957755 от main83ca347; 886/886+21/21 и Node20/current evidence; main preservation/M2/M3/key scans приняты; six author logs only ignored worktree, absent Git blobs; accurate map остаток; carrier09-local-acceptance.REWORK-r2.md |
-| G1 | tl | WAIT_DEPENDENCIES | нет | — |
-| Q02 | test | WAIT_DEPENDENCIES | нет | — |
+| Q01 | test | PASS | r2 `decision-q01-r2-go-20261003-2255`, сдача `49a68e67-735e-4f52-a183-9374e7d93b06` | exactf77656c7fddddda029f66659db8fba5e3964a2fb/treed44ee39b521376284cbd9d0b85fa1b3de528c8fd, parentfreshmain6db572b; all six tracked logs/source blobs and accurate map verified; full886/886+independent21/21, validM1–M6, installedNode20.20.2/current26.3.1; archiveSHA0ed018ca |
+| G1 | tl | PASS | 2026-10-03 23:15 MSK | exact reviewedf77656c/tree d44ee39b fast-forwarded and pushed; freshmain6db572b matched local/remote under lockctl, no foreign staged paths; status-only docs below do not claim a separate runtime gate |
+| Q02 | test | READY_AFTER_CLEANUP | нет | Q01/G1 dependencies PASS; limited live≤3POST/no retries authorized; future separate dispatch and private ENV launch pointer, liveNOT_RUN |
 | G2 | tl | WAIT_DEPENDENCIES | нет | — |
 
 ## Раскладка ролей
 
 | Роль | Активный исполнительный лист | Очередь после GO |
 |---|---|---|
-| tl | Q01 r2 контроль / review | review r2 → G1 → G2 |
+| tl | Q02 clean-slate / постановка | live evidence review → G2 |
 | dev | Резерв после D07; WIP=0, source/artifact сохранены | адресный rework при findings Q01 |
-| test | Q01 r2 clean-slate завершён; выдача подготовлена | Q01 r2 → Q02 после G1 |
+| test | Q01 принят; cleanup перед отдельным Q02 | Q02 → G2 handoff |
 
 При G0 MCP list_peers и закрывающие сообщения подтвердили dev/test idle в резерве; чужие задачи не вытесняются. dev подтвердил WIP=0 и cleanup сообщением `c52f5ee6-197c-487f-a54d-85c706e208dd` (служебные дочерние удалены, основная/чужие сохранены, checkout чистый, аренды отсутствуют). Live get_status=idle и /clear перед D01 выполнены, rc=0. Актуальные исполнительные листы — в раскладке выше.
 
@@ -143,3 +143,6 @@ Re-resolve G0: локальный main и live origin/main совпадают �
 - 2026-10-03 22:48 MSK: Q01 r1 пакет7a716d8a заявил PASS exact0c3bfde6709a440102a5aeb2ec26387be6649a23/tree7957755a2623c9699513a1e8735b4bc13c7b4989, freshmain83ca347. TL static review лично подтвердил main management Git bytes, producer runtime unchanged, real M2 RED decision/POST1 при separate legacy GREEN, M3 AND RED, M6 обе фазы/fullkeyscans, FINAL exactSHA evidence886/886+21/21 и package/Node20current. Verdict **REWORK_REQUIRED**: все шесть source logs cmp совпадают физически, но git show final:path rc128 у каждого и producer→final diff показывает D; ignored files не вошли в commit. Также PLAN называет три отсутствующих actual oracle labels. Узкий [r2 carrier](09-local-acceptance.REWORK-r2.md): tracked byte restore + accurate map, затем новый exactSHA fullgate; valid unchanged semantic/package/mutation evidence сохраняется. Test cleanup/WIP0→idleclear→отдельныйr2, devreserve; G1/Q02/G2WAIT, no TL runtime/live/publish.
 
 - 2026-10-03 22:52 MSK: test cleanup notification146a3163 подтвердил WIP0/QA0c3bfde clean/tree7957755/no ownchildren/leases0. TL history исключил дубль выдачи; actualHEAD/status, main/remote c4342fc и liveidle/status+screen проверены. /clear выполнен rc0. Подготовлен отдельный новый work-order decision-q01-r2-go-20261003-2255 (не квитанция на notification): predecessor0c3bfde плюс freshmain после этой записи; review/decision-q01-r2/test-decision-q01-r2; scope r2tracked6logs/accurateACmap/newexactfullgate; timebox30–45мин, контроль23:25/цель23:40 MSK. Фактическая доставка/старт — history/пакетtest; prepared не PASS. Unchanged valid mutation/package evidence reuse допустим с точной identity; старыеworktrees/evidenceсохранить, devreserve, G1WAIT/noTLruntime/no publishlive.
+
+- 2026-10-03 23:15 MSK: Q01r2 message49a68e67 принят **PASS** после личного TL static review exactf77656c/tree d44ee39b/parent6db572b/clean status. Git blobs всех sixauthorlogs совпадают source489, management tree совпадает main6db572b, producer delta внеQA/management пуст. Map реальныеprovider/body/groupedstdio assertions, QA runtime/vector bytes неизменны r1; corrected namedM2/M3/M6 и validM1/M4/M5b evidence reuse обоснован. FINAL before/after exactSHA/tree/clean, full886/886+independent21/21, allgatesrc0; own/retained archivesSHA0ed018ca и ordinaryentryb9942bf повторно совпали, retained/owninstalledstdio наactualNode20/currentrc0. First incomplete triale3ddcaba сохранён/исключён. TL runtime/build/tests не выполнял.
+- G1 **PASS**: под lockctl gen71 проверены live origin/main/localmain6db572b/clean/indexempty/candidateparent/tree; git merge --ff-only exactf77656c rc0 → git push originmain rc0 → ls-remote=f77656c, tree d44ee39b. Source/runtime проверенного QA commit parked без промежуточного изменения main. Эта последующая запись только status docs, не новая runtime QA; QA SHA остаётся f77656c. Local implementation DONE, Q02/liveNOT_RUN; limited scope≤3syntheticPOST/no retries уже GO, но Q02 выдаётся отдельно после fresh testcleanup/idleclear и private launch pointer. ReleaseversionfindingOPEN/no npm/tag/activation. Devreserve.
