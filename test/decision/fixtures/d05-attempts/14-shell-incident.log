@@ -1,0 +1,13 @@
+First staging wrapper rc=2: nested inline bash quoting was malformed.
+The lockctl subprocess executed bash -c set and printed inherited environment.
+Sensitive variable names observed: GEMINI_API_KEY and MUXEON_WEB_PASSWORD.
+No values or raw output retained in repository evidence.
+The intended git stage ran after the short main-checkout lease had released.
+Component build/typecheck/lint/focused/secretlint/whitespace gates remain green.
+Execution/security incident is reported separately to TL, with rotation pending.
+Correction: standalone local script passed as argv to lockctl run -- bash.
+The dsh wrapper automatically removed the output log/rc file; absence verified
+value-blind from the exact dev-d05git pane's log-path references.
+Tool transcript may retain exposure; no claim of complete erasure.
+First value-blind verification rc=1: tmux target =dev-d05git did not resolve.
+Corrected target dev-d05git: rc=0; referenced output logs/rc files absent.
