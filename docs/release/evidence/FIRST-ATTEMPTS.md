@@ -18,3 +18,9 @@
   and GitHub, without credentials. It does not expose publisher settings.
 
 No npm publish command (including dry-run) or real Release workflow was invoked.
+
+- Evidence commit staging whitespace check returned rc=2 for trailing empty
+  lines in npm typecheck/lint logs. They were committed before the red result
+  was handled; commit2359c974 preserves those original bytes. A subsequent
+  evidence-only correction removes trailing empty lines and reruns the check;
+  runtime/config/artifact bytes are unaffected. No history was amended.

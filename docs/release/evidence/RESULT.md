@@ -83,6 +83,7 @@ The verification tarball is not the future prepared/published versioned tarball.
 | node --check (all four helpers) | 0 |
 | secretlint owned workflow/config/manifest/helpers/docs/JSON/logs | 0 |
 | git diff --check / staged diff --check | 0 |
+| First evidence-commit staged whitespace check | 2; blank EOF in typecheck/lint logs, preserved in2359c974 then normalized |
 | node preview.mjs --controls --output candidate-preview.json | 0 |
 | sha256 historical/new/first-attempt archives | 0; identities above |
 
