@@ -11,7 +11,7 @@
 | Live scope Q02 | **GO, WAIT_DEPENDENCIES** | Аппрув полного дерева тем же поручением: до трёх синтетических платных POST без retries, только после Q01/G1 и отдельной выдачи Q02 |
 | npm release / activation | **NONE — HOLD** | Вне текущего этапа, отдельное поручение |
 
-Разрешение стартовать — прямое поручение владельца выше. Текущий статус эпика: **IN_PROGRESS / D03 / Q00_R1_REVIEW_PENDING**; runtime QA и live — **NOT_RUN**. Публикация npm, tag/GitHub Release, release workflow и активация MCP не разрешены.
+Разрешение стартовать — прямое поручение владельца выше. Текущий статус эпика: **IN_PROGRESS / D03 / Q00_R2_CLEANUP_PENDING**; runtime QA и live — **NOT_RUN**. Публикация npm, tag/GitHub Release, release workflow и активация MCP не разрешены.
 
 ## Листья
 
@@ -25,7 +25,7 @@
 | D05 | dev | WAIT_DEPENDENCIES | нет | — |
 | D06 | dev | WAIT_DEPENDENCIES | нет | — |
 | D07 | dev | WAIT_DEPENDENCIES | нет | — |
-| Q00 | test | R1_REVIEW_PENDING | r1 2026-10-03 17:21 MSK; `e97427a6-55a1-4717-8213-df29f6e5483a` | test сдал `93e54d9db217150bd51e20ccc64a8d512c0c084a` / message `43e3c481`; TL actual bytes review ещё ожидается; [REWORK r1](08-independent-test-plan.REWORK-r1.md) |
+| Q00 | test | REWORK_REQUIRED / R2_CLEANUP_PENDING | r1 `e97427a6-55a1-4717-8213-df29f6e5483a`; r2 ещё не выдан | QA `93e54d9db217150bd51e20ccc64a8d512c0c084a`, parent d108021; TL actual review: AND/required usage исправлены, response baseline/policy-ID/canary oracle требуют [REWORK r2](08-independent-test-plan.REWORK-r2.md) |
 | Q01 | test | WAIT_DEPENDENCIES | нет | — |
 | G1 | tl | WAIT_DEPENDENCIES | нет | — |
 | Q02 | test | WAIT_DEPENDENCIES | нет | — |
@@ -35,9 +35,9 @@
 
 | Роль | Активный исполнительный лист | Очередь после GO |
 |---|---|---|
-| tl | review Q00 r1 / контроль D03 | review/диспетч → G1 → G2 |
+| tl | Q00 r2 cleanup/диспетч / контроль D03 | review/диспетч → G1 → G2 |
 | dev | D03, focused vectors для границ и семантики ответа | D04 → D05 → D06 → D07 |
-| test | сдал Q00 r1, ожидает review TL | Q00 r1 → Q01 после D07 → Q02 после G1 |
+| test | предзадачный cleanup перед Q00 r2 | Q00 r2 → Q01 после D07 → Q02 после G1 |
 
 При G0 MCP list_peers и закрывающие сообщения подтвердили dev/test idle в резерве; чужие задачи не вытесняются. dev подтвердил WIP=0 и cleanup сообщением `c52f5ee6-197c-487f-a54d-85c706e208dd` (служебные дочерние удалены, основная/чужие сохранены, checkout чистый, аренды отсутствуют). Live get_status=idle и /clear перед D01 выполнены, rc=0. Актуальные исполнительные листы — в раскладке выше.
 
@@ -83,3 +83,5 @@ Re-resolve G0: локальный main и live origin/main совпадают �
 - 2026-10-03 18:05 MSK: D03 dispatch подтверждён history dev (`aa29ed09`, 17:33 MSK) и начатой работой в screen. На текущей консоли dev — «Selected model is at capacity» и меню выбора модели; get_status=idle не доказывает продолжение D03. Это наблюдаемая инфраструктурная остановка, новый component verdict не получен. TL организует возобновление без потери WIP; активный лист не clear. Контроль 18:55 и цель 21:30 пока плановые, зависят от возобновления.
 - test сдал Q00 r1 в 17:27 MSK и сейчас idle, ожидает TL review. Автоматический quiet-trigger review истёк, не выполнившись; TL повторно назначает отдельный review/финальный ответ test. Q00 план не принят до проверки actual bytes; runtime QA, Q01 и live NOT_RUN. Ответ оператору о текущем статусе идёт отдельным финальным send.
 - 18:07 MSK: повторный screen dev показывает смену модели на gpt-6-sol high, команду try again и Working: D03 продолжен, добавляются focused vectors границ/семантики ответа, затем build/checks. TL модель не переключал. Наблюдаемая остановка снята, вмешательство в работающую сессию не требуется; component verdict ещё отсутствует.
+- Q00 r1 actual review: QA HEAD 93e54d9db217150bd51e20ccc64a8d512c0c084a, parent d108021b2b4e62f28a4c80394b4022d887fb63bc, review/decision-q00, clean worktree; ровно PLAN.md/contract-vectors.json/semantic-vectors.json. AND arithmetic исправлена (.50 < .60), required usage присутствует. TL лично прочитал полный PLAN, все assessment/response cases и materialized contract inputs (255/256 criteria просмотрены по count/keys/types). Findings F-Q00-R2-RESPONSE: все 14 JSON response cases выбирают отсутствующий вариант yes/no/maybe при criteria a/b, включая два expected valid; negatives загрязнены тем же дефектом. F-Q00-R2-POLICY-ID: вложенная malformed policy вместо неизвестного внешнего ID. F-Q00-R2-CANARY: обе canaries запрещены в body, хотя context должен передаваться; raw literal key невалиден. Carrier 08-independent-test-plan.REWORK-r2.md. План REWORK_REQUIRED, QA инструмента NOT_RUN.
+- Проверки review TL: read-only git identity/diff/status и whitespace rc=0; static JSON projection/arithmetic rc=0, 26 AC сохранены, provider fixtures не изменены. Это статический review данных, не runtime QA. При попытке повторного чтения прежнего inbox message.json файл отсутствовал (rc=1); полный payload восстановлен из MUXEON history, дубль ответа не обнаружен. TL inbox не изменял. Следующий шаг test — новый WIP=0/узкий cleanup, затем idle/clear и отдельный r2 dispatch; текущий финальный ответ относится к сдаче 43e3c481.
