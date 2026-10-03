@@ -28,22 +28,24 @@
 | Q00 | test | PLAN_PASS | `87fdb5bd-f497-47a6-bc1b-e7d7eabc5729`, сдача `f4e209b2-a0b0-42fe-b0a2-577f50f415e6` | QA `c102897315d6badcfb59fa583a48c1ab1f43c961`, parent0de2036; TL actual bytes/static review закрывает оба r3 findings; independent runtime QA инструмента NOT_RUN |
 | Q01 | test | PASS | r2 `decision-q01-r2-go-20261003-2255`, сдача `49a68e67-735e-4f52-a183-9374e7d93b06` | exactf77656c7fddddda029f66659db8fba5e3964a2fb/treed44ee39b521376284cbd9d0b85fa1b3de528c8fd, parentfreshmain6db572b; all six tracked logs/source blobs and accurate map verified; full886/886+independent21/21, validM1–M6, installedNode20.20.2/current26.3.1; archiveSHA0ed018ca |
 | G1 | tl | PASS | 2026-10-03 23:15 MSK | exact reviewedf77656c/tree d44ee39b fast-forwarded and pushed; freshmain6db572b matched local/remote under lockctl, no foreign staged paths; status-only docs below do not claim a separate runtime gate |
-| Q02 | test | FAIL_STOP / WAIT_TL_PLAN | `decision-q02-go-20261003-2330`, сдача `df0113f0-7a28-415a-9b32-37b05bb49540` | QA6b5f503cd15a6fbbda112604192b09eb2e6029e7/tree3277f33b288e67d553d2f466137dd9156fd80b38, parentc812463; installed archiveSHA0ed018ca/entryb9942bf сверены TL; dry-run545/9983bytes/0POST PASS; alias403/UPSTREAM_FORBIDDEN/attempts1/POST1/737ms/billing_uncertainfalse, retries0; pinned/primitives/boundaries liveNOT_RUN; ledgerSTOPPED, remaining1 не переиспользуется этим нарядом |
+| Q02 | test | FAIL_STOP / DIAGNOSTIC_ACTIVE | `decision-q02-go-20261003-2330`, сдача `df0113f0-7a28-415a-9b32-37b05bb49540` | QA6b5f503cd15a6fbbda112604192b09eb2e6029e7/tree3277f33b288e67d553d2f466137dd9156fd80b38, parentc812463; installed archiveSHA0ed018ca/entryb9942bf сверены TL; dry-run545/9983bytes/0POST PASS; alias403/UPSTREAM_FORBIDDEN/attempts1/POST1/737ms/billing_uncertainfalse, retries0; pinned/primitives/boundaries liveNOT_RUN; ledgerSTOPPED, remaining1 не переиспользуется этим нарядом |
 | G2 | tl | RELEASE_HOLD | нет | Q02 FAIL_STOP требует дальнейшего плана; выпуск с непроверенным live — только с предусмотренным решением владельца; Release automation preparation отдельно, READY не заявлен |
 
 ## Раскладка ролей
 
 | Роль | Активный исполнительный лист | Очередь после GO |
 |---|---|---|
-| tl | Q02 FAIL_STOP review завершён; план диагностики и подготовка Release | clean-slate → отдельные наряды → G2/уведомление владельца |
-| dev | Резерв после D07; source/artifact сохранены | fresh cleanup → отдельная подготовка Release по уточнению оператора |
-| test | Q02 завершён, ожидает узкий cleanup | отдельная диагностика без новых POST; QA Release после готовности dev |
+| tl | Контроль D-ACCESS/R01, static review после сдачи | R02 → G2/уведомление владельца |
+| dev | R01 Release preparation ACTIVE; decision source/artifact сохранены | R02 independent QA после component review |
+| test | D-ACCESS ACTIVE, два bounded metadata GET без POST | R02 Release QA после сдачи R01 и нового clean-slate |
 
 При G0 MCP list_peers и закрывающие сообщения подтвердили dev/test idle в резерве; чужие задачи не вытесняются. dev подтвердил WIP=0 и cleanup сообщением `c52f5ee6-197c-487f-a54d-85c706e208dd` (служебные дочерние удалены, основная/чужие сохранены, checkout чистый, аренды отсутствуют). Live get_status=idle и /clear перед D01 выполнены, rc=0. Актуальные исполнительные листы — в раскладке выше.
 
 Re-resolve G0: локальный main и live origin/main совпадают — `595dce8f280045d0134e49060282b13c6293c0a0`; baseline `d622cba5644b844344baac5a6f17a84ab43a9a9e` является предком. Все 13 SHA256 baseline совпали; дельта — только docs/README.md и docs/decision/tasks/. SPEC v0.2 и input/output schema не менялись.
 
 ## Журнал
+
+- 2026-10-04 00:40 MSK: history и live screens подтверждают доставку/начало отдельных нарядов после fresh cleanup/idle/clear. R01 dev `decision-r01-go-20261004-0040`, replyTo a253ff1d: isolated release preparation от a6ac09cb, контроль01:25/сдача02:40. D-ACCESS test `decision-q02-access-go-20261004-0040`: isolated QA от6b5f503, два metadata GET/noPOST, контроль01:05/сдача01:40. Carriers в TL docs/delegate-mcp-release-automation.md и docs/delegate-mcp-access-diagnostic.md; это выдача, не component/QA PASS. Следующие R02/G2 отдельно; READY/HOLD и stopped paid ledger сохраняются. Этот commit только статусы; runtime/artifact не меняются.
 
 - 2026-10-03: создано дерево из 13 clean-slate листьев, baseline и S1–S7, локальная матрица приёмки и ограниченный live-план. Код и конфигурация не изменялись. Подготовлен пакет на аппрув владельцу; до его явного решения HOLD.
 - Проверки подготовки документов: 13 узлов DAG без циклов, владельцы 7 dev / 3 test / 3 tl, 126 относительных ссылок, 13 SHA256 baseline, все листы HOLD; secretlint только новых документов и diff whitespace — PASS. Это не runtime QA инструмента; build/test/live — NOT_RUN.
