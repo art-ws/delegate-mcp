@@ -1,0 +1,504 @@
+command=["npm","test"]
+rc=1
+
+> delegate-mcp@1.0.0 pretest
+> node test/decision/fixtures/d06-component-artifacts.mjs
+
+CLI Building entry: {"decision/schemas":"src/decision/schemas.ts","decision/config":"src/decision/config.ts","decision/request":"src/decision/request.ts","decision/response":"src/decision/response.ts","decision/assessment":"src/decision/assessment.ts","decision/client":"src/decision/client.ts","decision/metrics":"src/decision/metrics.ts"}
+CLI Using tsconfig: tsconfig.json
+CLI tsup v8.5.1
+CLI Target: node20
+ESM Build start
+ESM dist/decision/response.js   4.27 KB
+ESM dist/decision/assessment.js 2.12 KB
+ESM dist/decision/request.js    3.35 KB
+ESM dist/decision/metrics.js    1.70 KB
+ESM dist/decision/client.js     10.82 KB
+ESM dist/chunk-EYNSNJVF.js      35.75 KB
+ESM dist/decision/schemas.js    976.00 B
+ESM dist/decision/config.js     7.10 KB
+ESM ⚡️ Build success in 12ms
+PASS ordinary dist/index.js unchanged sha256=b9942bf84d5a309867bbc8397ea4f5d9d2443ddcdba292b528bf0864314eeb47
+
+> delegate-mcp@1.0.0 test
+> vitest run
+
+
+ RUN  v3.2.7 /private<scratch>/isolated
+
+ ✓ test/scaffold.test.ts (5 tests) 2ms
+ ✓ test/metrics.test.ts (8 tests) 9ms
+ ✓ test/sessions.test.ts (11 tests) 9ms
+ ✓ test/files.test.ts (39 tests) 23ms
+ ✓ test/providers.test.ts (26 tests) 18ms
+ ✓ test/config.test.ts (21 tests) 16ms
+ ✓ test/decision/metrics.test.ts (28 tests) 171ms
+ ✓ test/tools.test.ts (14 tests) 53ms
+ ❯ test/decision/schemas.test.ts (295 tests | 2 failed) 462ms
+   × D01 AC-CANON: embedded declarations and independently authored expectations > input is exactly the canonical JSON schema 5ms
+     → External schema oracle is forbidden in isolated suite
+   × D01 AC-CANON: embedded declarations and independently authored expectations > output is exactly the canonical JSON schema 0ms
+     → External schema oracle is forbidden in isolated suite
+   ✓ D01 AC-CANON: embedded declarations and independently authored expectations > pins canonical boundaries and optionality independently of runtime construction 1ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Choice options=0 accepted=false 2ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Choice options=1 accepted=true 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Choice options=255 accepted=true 1ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Choice options=256 accepted=false 3ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Score levels=0 accepted=false 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Score levels=1 accepted=true 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Score levels=10 accepted=true 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Score levels=11 accepted=false 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > accepts all three mixed types and preserves full nested payloads 1ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > leaves all optional fields absent and injects no defaults 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > rejects missing root state 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > rejects missing root questions 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > rejects empty questions 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Choice rejects absent type 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Choice rejects absent instructions 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Choice rejects absent criteria 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Score rejects absent type 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Score rejects absent instructions 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Score rejects absent criteria 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Noul rejects absent type 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Noul rejects absent instructions 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Noul criteria 0 expected=undefined 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Noul criteria 1 expected={ true: [], false: {} } 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Noul criteria 2 expected={ true: 'yes', false: 'no' } 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Noul criteria 3 expected={ true: 'yes' } 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Noul criteria 4 expected={ false: 'no' } 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Noul criteria 5 expected={ true: null, false: 'no' } 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Noul criteria 6 expected={ true: 'yes', false: 'no', extra: {} } 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > accepts structured state/instructions 0 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > accepts structured state/instructions 1 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > accepts structured state/instructions 2 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > rejects scalar state/instructions 0 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > rejects scalar state/instructions 1 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > rejects scalar state/instructions 2 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > rejects null Score descriptions and nonstructured Choice descriptions 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > rejects unrecognized question types 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > rejects reserved names as unknown contract fields 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > rejects empty model but permits absence 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > bounds user at 256 Unicode code points 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > bounds session_id at 256 Unicode code points 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > pins exactly 14 provider fields 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > allow_fallbacks accepts every documented form and optional omission 1ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > require_parameters accepts every documented form and optional omission 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > data_collection accepts every documented form and optional omission 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > zdr accepts every documented form and optional omission 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > enforce_distillable_text accepts every documented form and optional omission 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > only accepts every documented form and optional omission 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > ignore accepts every documented form and optional omission 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > order accepts every documented form and optional omission 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > sort accepts every documented form and optional omission 1ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > max_price accepts every documented form and optional omission 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > preferred_max_latency accepts every documented form and optional omission 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > preferred_min_throughput accepts every documented form and optional omission 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > quantizations accepts every documented form and optional omission 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > options accepts every documented form and optional omission 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts provider 0 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts provider 1 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > pins all 146 slugs independently of runtime schema constants 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug 01ai and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug ai21 and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug aion-labs and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug akashml and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug alibaba and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug amazon-bedrock and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug amazon-bedrock/claude-on-aws and retains its nested JSON 3ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug amazon-nova and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug ambient and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug anthropic and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug anthropic/2 and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug anyscale and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug arcee-ai and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug assemblyai and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug atlas-cloud and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug atoma and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug avian and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug azure and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug baidu and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug baseten and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug black-forest-labs and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug byteplus and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug centml and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug cerebras and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug chutes and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug cirrascale and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug clarifai and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug claude-on-aws and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug cloudflare and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug cohere and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug coreweave and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug cosine and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug crofai and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug crucible and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug crusoe and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug darkbloom and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug databricks and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug decart and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug deepgram and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug deepinfra and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug deepseek and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug dekallm and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug digitalocean and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug elevenlabs and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug enfer and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug fake-provider and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug featherless and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug fireworks and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug fish-audio and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug friendli and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug gmicloud and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug google-ai-studio and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug google-vertex and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug gopomelo and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug groq and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug heygen and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug huggingface and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug hyperbolic and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug hyperbolic-quantized and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug inception and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug inceptron and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug inferact-vllm and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug inference-net and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug infermatic and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug inflection and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug inocloud and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug io-net and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug ionstream and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug klusterai and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug krea and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug lambda and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug lepton and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug liquid and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug lynn and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug lynn-private and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug makora and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug mancer and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug mancer-old and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug mara and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug meta and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug minimax and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug mistral and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug modal and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug modelrun and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug modular and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug moonshotai and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug morph and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug ncompass and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug near-ai and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug nebius and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug nex-agi and retains its nested JSON 1ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug nextbit and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug nineteen and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug novita and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug nvidia and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug octoai and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug ollama and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug open-inference and retains its nested JSON 1ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug openai and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug parasail and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug perceptron and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug perplexity and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug phala and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug poolside and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug primeintellect and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug quiver and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug recraft and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug recursal and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug reflection and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug reka and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug relace and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug replicate and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug respan and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug runway and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug sail-research and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug sakana and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug sakana-ai and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug sambanova and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug sambanova-cloaked and retains its nested JSON 1ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug scaledown and retains its nested JSON 4ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug seed and retains its nested JSON 1ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug sf-compute and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug siliconflow and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug sourceful and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug stealth and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug stepfun and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug streamlake and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug switchpoint and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug targon and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug tencent and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug tenstorrent and retains its nested JSON 6ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug thinkingmachines and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug together and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug together-lite and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug typesafe and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug ubicloud and retains its nested JSON 1ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug unbiased and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug upstage and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug venice and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug voyageai and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug wafer and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug wandb and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug wandb-legacy and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug xai and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug xiaomi and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug z-ai and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > rejects invalid provider form 0 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > rejects invalid provider form 1 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > rejects invalid provider form 2 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > rejects invalid provider form 3 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > rejects invalid provider form 4 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > rejects invalid provider form 5 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > rejects invalid provider form 6 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > rejects invalid provider form 7 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > rejects invalid provider form 8 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > rejects invalid provider form 9 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > rejects invalid provider form 10 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > rejects invalid provider form 11 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > rejects invalid provider form 12 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > rejects invalid provider form 13 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > rejects invalid provider form 14 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > rejects invalid provider form 15 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > rejects invalid provider form 16 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > rejects invalid provider form 17 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > rejects invalid provider form 18 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > rejects invalid provider form 19 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > execution 0 expected={} 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > execution 1 expected={ timeout_ms: 1000, max_retries: +0, dry_run: false } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > execution 2 expected={ timeout_ms: 120000, max_retries: 2, dry_run: true } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > execution 3 expected={ timeout_ms: 999 } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > execution 4 expected={ timeout_ms: 120001 } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > execution 5 expected={ timeout_ms: 1000.5 } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > execution 6 expected={ max_retries: -1 } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > execution 7 expected={ max_retries: 3 } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > execution 8 expected={ max_retries: 0.5 } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > execution 9 expected={ dry_run: 1 } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > execution 10 expected={ extra: 1 } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > execution 11 expected=null 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > policy rule 0 expected={ type: 'choice', min_confidence: +0 } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > policy rule 1 expected={ type: 'choice', min_probability: 1 } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > policy rule 2 expected={ type: 'choice', min_margin: 0.5 } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > policy rule 3 expected={ type: 'choice' } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > policy rule 4 expected={ type: 'choice', min_confidence: -0.01 } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > policy rule 5 expected={ type: 'choice', min_probability: 1.01 } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > policy rule 6 expected={ type: 'choice', min_margin: null } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > policy rule 7 expected={ type: 'noul', false_max: +0, true_min: 1 } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > policy rule 8 expected={ type: 'noul', false_max: +0 } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > policy rule 9 expected={ type: 'noul', true_min: 1 } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > policy rule 10 expected={ type: 'score', min_confidence: +0 } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > policy rule 11 expected={ type: 'score', min_confidence: 1 } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > policy rule 12 expected={ type: 'score' } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > policy rule 13 expected={ type: 'score', min_confidence: 2 } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > policy rule 14 expected={ type: 'choice', min_margin: +0, extra: true } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > permits empty execution/policy and preserves optional omission 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > trace trace_id is optional, but must be a string when present 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > trace trace_name is optional, but must be a string when present 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > trace span_name is optional, but must be a string when present 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > trace generation_name is optional, but must be a string when present 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > trace parent_span_id is optional, but must be a string when present 2ms
+   ✓ D01 AC-STRICT-JSON: unknown contract keys, preserved JSON and safe errors > rejects unknown contract fields 0 0ms
+   ✓ D01 AC-STRICT-JSON: unknown contract keys, preserved JSON and safe errors > rejects unknown contract fields 1 1ms
+   ✓ D01 AC-STRICT-JSON: unknown contract keys, preserved JSON and safe errors > rejects unknown contract fields 2 0ms
+   ✓ D01 AC-STRICT-JSON: unknown contract keys, preserved JSON and safe errors > rejects unknown contract fields 3 0ms
+   ✓ D01 AC-STRICT-JSON: unknown contract keys, preserved JSON and safe errors > rejects unknown contract fields 4 0ms
+   ✓ D01 AC-STRICT-JSON: unknown contract keys, preserved JSON and safe errors > preserves reserved keys inside arbitrary JSON, criteria maps and question IDs 0ms
+   ✓ D01 AC-STRICT-JSON: unknown contract keys, preserved JSON and safe errors > rejects non-JSON nested value 0 0ms
+   ✓ D01 AC-STRICT-JSON: unknown contract keys, preserved JSON and safe errors > rejects non-JSON nested value 1 0ms
+   ✓ D01 AC-STRICT-JSON: unknown contract keys, preserved JSON and safe errors > rejects non-JSON nested value 2 0ms
+   ✓ D01 AC-STRICT-JSON: unknown contract keys, preserved JSON and safe errors > rejects non-JSON nested value 3 0ms
+   ✓ D01 AC-STRICT-JSON: unknown contract keys, preserved JSON and safe errors > rejects non-JSON nested value 4 0ms
+   ✓ D01 AC-STRICT-JSON: unknown contract keys, preserved JSON and safe errors > rejects non-JSON nested value 5 0ms
+   ✓ D01 AC-STRICT-JSON: unknown contract keys, preserved JSON and safe errors > rejects non-JSON nested value 6 0ms
+   ✓ D01 AC-STRICT-JSON: unknown contract keys, preserved JSON and safe errors > rejects non-JSON nested value 7 0ms
+   ✓ D01 AC-STRICT-JSON: unknown contract keys, preserved JSON and safe errors > rejects non-JSON nested value 8 0ms
+   ✓ D01 AC-STRICT-JSON: unknown contract keys, preserved JSON and safe errors > rejects cycles, sparse arrays, accessors and explicit undefined without invoking getters 0ms
+   ✓ D01 AC-STRICT-JSON: unknown contract keys, preserved JSON and safe errors > does not leak invalid field names or values in public validation errors 2ms
+   ✓ D01 AC-OUTPUT: all variants, required/optional fields and open upstream objects > accepts envelope 0 1ms
+   ✓ D01 AC-OUTPUT: all variants, required/optional fields and open upstream objects > accepts envelope 1 0ms
+   ✓ D01 AC-OUTPUT: all variants, required/optional fields and open upstream objects > accepts envelope 2 0ms
+   ✓ D01 AC-OUTPUT: all variants, required/optional fields and open upstream objects > preserves missing optional upstream metrics and identifiers 0ms
+   ✓ D01 AC-OUTPUT: all variants, required/optional fields and open upstream objects > accepts all optional response metrics and structured legend 0ms
+   ✓ D01 AC-OUTPUT: all variants, required/optional fields and open upstream objects > accepts upstream unknown JSON fields as declared by canonical output schema 0ms
+   ✓ D01 AC-OUTPUT: all variants, required/optional fields and open upstream objects > rejects extra envelope/meta fields 0 1ms
+   ✓ D01 AC-OUTPUT: all variants, required/optional fields and open upstream objects > rejects extra envelope/meta fields 1 1ms
+   ✓ D01 AC-OUTPUT: all variants, required/optional fields and open upstream objects > rejects extra envelope/meta fields 2 1ms
+   ✓ D01 AC-OUTPUT: all variants, required/optional fields and open upstream objects > rejects missing required response/answer/usage fields 1ms
+   ✓ D01 AC-OUTPUT: all variants, required/optional fields and open upstream objects > requires model in dry-run and rejects local execution/policy in request 0ms
+   ✓ D01 AC-OUTPUT: all variants, required/optional fields and open upstream objects > accepts a full dry-run request with all upstream metadata and no local fields 0ms
+   ✓ D01 AC-OUTPUT: all variants, required/optional fields and open upstream objects > bounds output meta and rejects invalid assessment/error shapes 1ms
+   ✓ D01 AC-OUTPUT: all variants, required/optional fields and open upstream objects > does not add a safe-integer bound absent from the canonical schema 0ms
+   ✓ D01 AC-S1: exported types and explicitly deferred semantic checks > provides discriminated typed validator results and envelope variants 0ms
+   ✓ D01 AC-S1: exported types and explicitly deferred semantic checks > leaves policy relations/interval ordering to D03, without adding canonical restrictions 0ms
+   ✓ D01 AC-S1: exported types and explicitly deferred semantic checks > leaves response ranges, IDs, probability relations and usage sign to D03 0ms
+   ✓ D01 AC-DIST: runtime component without checkout source/docs > loads built schemas and validators from a standalone dist copy  380ms
+ ❯ test/decision/core.test.ts (70 tests | 1 failed) 433ms
+   ✓ D03 AC-S3 request assembly > uses configured default/whitelist and execution defaults without serializing local fields or key 3ms
+   ✓ D03 AC-S3 request assembly > accepts whitelisted model override and rejects outside it 1ms
+   ✓ D03 AC-S3 request assembly > replaces top-level provider lists and objects whole; null provider means no override 1ms
+   ✓ D03 AC-S3 request assembly > preserves nullable provider defaults and never reads the resolved key 0ms
+   ✓ D03 AC-S3 request assembly > fills mandatory constraints after overrides and does not mutate config or args 0ms
+   ✓ D03 AC-S3 request assembly > rejects explicit weakening of data_collection 0ms
+   ✓ D03 AC-S3 request assembly > rejects explicit weakening of zdr 0ms
+   ✓ D03 AC-S3 request assembly > rejects explicit weakening of allow_fallbacks 0ms
+   ✓ D03 AC-S3 request assembly > rejects explicit weakening of require_parameters 0ms
+   ✓ D03 AC-S3 request assembly > rejects explicit weakening of only 0ms
+   ✓ D03 AC-S3 request assembly > rejects explicit weakening of only 0ms
+   ✓ D03 AC-S3 request assembly > checks configured defaults against mandatory provider; request may repair a default 0ms
+   ✓ D03 AC-S3 request assembly > rejects policy relation: missing 0ms
+   ✓ D03 AC-S3 request assembly > rejects policy relation: wrong-type 0ms
+   ✓ D03 AC-S3 request assembly > rejects policy relation: bad-interval 0ms
+   ✓ D03 AC-S3 request assembly > accepts execution endpoint 1000/0 0ms
+   ✓ D03 AC-S3 request assembly > accepts execution endpoint 120000/2 0ms
+   ✓ D03 AC-S3 request assembly > rejects timeout 999 0ms
+   ✓ D03 AC-S3 request assembly > rejects timeout 120001 0ms
+   ✓ D03 AC-S3 request assembly > rejects timeout 1.5 0ms
+   ✓ D03 AC-S3 request assembly > rejects retries -1 0ms
+   ✓ D03 AC-S3 request assembly > rejects retries 3 0ms
+   ✓ D03 AC-S3 request assembly > rejects retries 0.5 0ms
+   ✓ D03 AC-S3 request assembly > measures exact final UTF-8 JSON, allowing equality and rejecting one byte beyond 0ms
+   ✓ D03 AC-S3 request assembly > warns once per degenerate type and retains exact options 0ms
+   ✓ D03 AC-S4 upstream response > preserves actual model and optional absence while stripping all upstream extras 2ms
+   ✓ D03 AC-S4 upstream response > rejects absent answer c 0ms
+   ✓ D03 AC-S4 upstream response > rejects absent answer n 0ms
+   ✓ D03 AC-S4 upstream response > rejects absent answer s 0ms
+   ✓ D03 AC-S4 upstream response > rejects extra ID and mismatched answer type 0ms
+   ✓ D03 AC-S4 upstream response > accepts tied maxima but rejects unknown or non-max choice 0ms
+   ✓ D03 AC-S4 upstream response > rejects malformed Choice distribution 0 0ms
+   ✓ D03 AC-S4 upstream response > rejects malformed Choice distribution 1 0ms
+   ✓ D03 AC-S4 upstream response > rejects malformed Choice distribution 2 0ms
+   ✓ D03 AC-S4 upstream response > rejects malformed Choice distribution 3 0ms
+   ✓ D03 AC-S4 upstream response > rejects malformed Choice distribution 4 0ms
+   ✓ D03 AC-S4 upstream response > rejects malformed Choice distribution 5 0ms
+   ✓ D03 AC-S4 upstream response > accepts inclusive sum tolerance 0 0ms
+   ✓ D03 AC-S4 upstream response > accepts inclusive sum tolerance 1 0ms
+   ✓ D03 AC-S4 upstream response > rejects malformed Score distribution 0 0ms
+   ✓ D03 AC-S4 upstream response > rejects malformed Score distribution 1 0ms
+   ✓ D03 AC-S4 upstream response > rejects malformed Score distribution 2 0ms
+   ✓ D03 AC-S4 upstream response > rejects malformed Score distribution 3 0ms
+   ✓ D03 AC-S4 upstream response > checks Score range, expectation tolerance, exact legend and structured descriptions 1ms
+   ✓ D03 AC-S4 upstream response > rejects out-of-range noul 0ms
+   ✓ D03 AC-S4 upstream response > rejects out-of-range confidence 0ms
+   ✓ D03 AC-S4 upstream response > requires nonnegative integer input_tokens 0ms
+   ✓ D03 AC-S4 upstream response > requires nonnegative integer output_tokens 0ms
+   ✓ D03 AC-S4 upstream response > requires usage; optional cost must be finite nonnegative 1ms
+   ✓ D03 AC-S4 upstream response > rejects invalid whole response without returning partial answers or raw canary 0ms
+   × D03 AC-S4 upstream response > produces a success envelope matching the canonical output schema 4ms
+     → External schema oracle is forbidden in isolated suite
+   ✓ D03 AC-DIST compiled component > runs S3/S4 exports in a standalone dist copy without source or docs  408ms
+   ✓ D03 AC-S4 local assessment > returns unassessed and empty reasons without policy 0ms
+   ✓ D03 AC-S4 local assessment > Choice AND 0 => { min_confidence: 0.8, min_probability: 0.8, min_margin: 0.6 } 0ms
+   ✓ D03 AC-S4 local assessment > Choice AND 1 => { min_confidence: 0.801, min_probability: 0.8, min_margin: 0.6 } 0ms
+   ✓ D03 AC-S4 local assessment > Choice AND 2 => { min_confidence: 0.8, min_probability: 0.801, min_margin: 0.6 } 0ms
+   ✓ D03 AC-S4 local assessment > Choice AND 3 => { min_confidence: 0.8, min_probability: 0.8, min_margin: 0.601 } 0ms
+   ✓ D03 AC-S4 local assessment > treats tied maxima as uncertain for any policy, including zero threshold 0ms
+   ✓ D03 AC-S4 local assessment > keeps missing probability, margin or confidence uncertain 1ms
+   ✓ D03 AC-S4 local assessment > accepts an inclusive margin endpoint despite binary subtraction error 0ms
+   ✓ D03 AC-S4 local assessment > has no margin for one option 0ms
+   ✓ D03 AC-S4 local assessment > Noul p=0.099 => accepted 1ms
+   ✓ D03 AC-S4 local assessment > Noul p=0.1 => accepted 0ms
+   ✓ D03 AC-S4 local assessment > Noul p=0.5 => uncertain 0ms
+   ✓ D03 AC-S4 local assessment > Noul p=0.9 => accepted 0ms
+   ✓ D03 AC-S4 local assessment > Noul p=0.901 => accepted 0ms
+   ✓ D03 AC-S4 local assessment > Score confidence 0.799 => uncertain without rounding 0ms
+   ✓ D03 AC-S4 local assessment > Score confidence 0.8 => accepted without rounding 0ms
+   ✓ D03 AC-S4 local assessment > Score confidence 0.801 => accepted without rounding 0ms
+   ✓ D03 AC-S4 local assessment > missing Score confidence remains uncertain at a zero threshold 0ms
+ ✓ test/decision/config.test.ts (212 tests) 487ms
+   ✓ AC-S2 exports / AC-DIST > loads built S2 in a fresh directory without checkout source/docs  400ms
+ ✓ test/decision/client.test.ts (94 tests) 503ms
+   ✓ AC-DIST compiled S5 > runs built transport with S3/S4 in a standalone dist copy  415ms
+ ❯ test/decision/integration.test.ts (42 tests | 2 failed) 8273ms
+   × D06 real stdio inventory, schemas and configuration > D06-INVENTORY/D06-SCHEMAS absent 193ms
+     → External schema oracle is forbidden in isolated suite
+   ✓ D06 real stdio inventory, schemas and configuration > D06-INVENTORY/D06-SCHEMAS disabled 148ms
+   × D06 real stdio inventory, schemas and configuration > D06-INVENTORY/D06-SCHEMAS ready 155ms
+     → External schema oracle is forbidden in isolated suite
+   ✓ D06 real stdio inventory, schemas and configuration > D06-STARTUP invalid enabled config fails loud 127ms
+   ✓ D06 real stdio inventory, schemas and configuration > D06-STARTUP invalid enabled config fails loud 121ms
+   ✓ D06 stdio pipeline and isolation > D06-PIPELINE/D06-DRY all primitives/full provider body, exact bytes and local fields 182ms
+   ✓ D06 stdio pipeline and isolation > D06-ERROR semantic safe INVALID_ARGUMENT and recovery 163ms
+   ✓ D06 stdio pipeline and isolation > D06-ERROR semantic safe INVALID_ARGUMENT and recovery 169ms
+   ✓ D06 stdio pipeline and isolation > D06-ERROR semantic safe INVALID_ARGUMENT and recovery 166ms
+   ✓ D06 stdio pipeline and isolation > D06-ERROR JSON prototype keys are not lost by SDK preprocessing 153ms
+   ✓ D06 stdio pipeline and isolation > D06-ERROR invalid upstream bad preserves billing and recovers 178ms
+   ✓ D06 stdio pipeline and isolation > D06-ERROR invalid upstream missing preserves billing and recovers 180ms
+   ✓ D06 stdio pipeline and isolation > D06-ERROR invalid upstream html preserves billing and recovers 179ms
+   ✓ D06 stdio pipeline and isolation > D06-ERROR HTTP 400 safe classification 177ms
+   ✓ D06 stdio pipeline and isolation > D06-ERROR HTTP 401 safe classification 177ms
+   ✓ D06 stdio pipeline and isolation > D06-ERROR HTTP 402 safe classification 176ms
+   ✓ D06 stdio pipeline and isolation > D06-ERROR HTTP 403 safe classification 179ms
+   ✓ D06 stdio pipeline and isolation > D06-ERROR HTTP 404 safe classification 177ms
+   ✓ D06 stdio pipeline and isolation > D06-ERROR HTTP 413 safe classification 175ms
+   ✓ D06 stdio pipeline and isolation > D06-ERROR HTTP 429 safe classification 177ms
+   ✓ D06 stdio pipeline and isolation > D06-ERROR HTTP 503 safe classification 177ms
+   ✓ D06 stdio pipeline and isolation > D06-ERROR HTTP 524 safe classification 175ms
+   ✓ D06 stdio pipeline and isolation > D06-METRICS best effort IO and optional sink, uncertain/unassessed normal 278ms
+   ✓ D06 stdio pipeline and isolation > D06-META combines S3/S4 warnings without inventing optional metrics 153ms
+   ✓ D06 stdio pipeline and isolation > D06-ERROR preserves attempts and uncertain billing across network retry  513ms
+   ✓ D06 stdio pipeline and isolation > D06-ERROR final transport error retains prior uncertain billing  552ms
+   ✓ D06 stdio pipeline and isolation > D06-SCHEMAS forbidden task request and malformed RPC do not reach transport 180ms
+   ✓ D06 stdio pipeline and isolation > D06-DRY mandatory provider/defaults and policy conflict stay local 128ms
+   ✓ D06 actual SDK cancellation and legacy stdio > D06-CANCEL persistent queue/overflow/queued cancellation and recovery 185ms
+   ✓ D06 actual SDK cancellation and legacy stdio > D06-CANCEL during body forbids retry and releases slot 254ms
+   ✓ D06 actual SDK cancellation and legacy stdio > D06-CANCEL during retry forbids retry and releases slot 249ms
+   ✓ D06 actual SDK cancellation and legacy stdio > D06-CLOSE EOF cancels shared queued/in-flight work before process termination 178ms
+   ✓ D06 actual SDK cancellation and legacy stdio > D06-CANCEL deadline includes queued time and slots recover  1215ms
+   ✓ D06 actual SDK cancellation and legacy stdio > D06-LEGACY ready headers/session/pool/metrics preserved 193ms
+   ✓ D06 actual SDK cancellation and legacy stdio > D06-LEGACY absent headers/session/pool/metrics preserved 175ms
+   ✓ D06 actual SDK cancellation and legacy stdio > D06-LEGACY disabled headers/session/pool/metrics preserved 169ms
+   ✓ D06 internal injection contracts > D06-SCHEMAS standalone S7 registrar publishes canonical declarations 8ms
+   ✓ D06 internal injection contracts > D06-CANCEL pre-aborted signal returns a canonical safe envelope with zero attempts 1ms
+   ✓ D06 internal injection contracts > D06-META local ID/monotonic elapsed/warnings and S6 minimal projection 3ms
+   ✓ D06 internal injection contracts > D06-META local injection failures cannot reflect raw values or break the envelope 0ms
+   ✓ D06 internal injection contracts > D06-META preparation errors report only allowed requested models 127ms
+   ✓ D06 internal injection contracts > D06-INVENTORY undefined programmatic setup never uses legacy pool 7ms
+
+ Test Files  3 failed | 10 passed (13)
+      Tests  5 failed | 860 passed (865)
+   Start at  20:49:50
+   Duration  8.73s (transform 722ms, setup 0ms, collect 1.75s, tests 10.46s, environment 1ms, prepare 604ms)
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  test/decision/core.test.ts > D03 AC-S4 upstream response > produces a success envelope matching the canonical output schema
+Error: External schema oracle is forbidden in isolated suite
+ ❯ fs.readFileSync test/package/oracle-guard.cjs:11:11
+ ❯ test/decision/core.test.ts:258:31
+    256|         attempts: 1, api_version: "alpha-decisions", warnings: [...p.w…
+    257|     expect(validateDecisionEnvelope(envelope).success).toBe(true);
+    258|     const schema = JSON.parse(readFileSync(new URL("../../docs/decisio…
+       |                               ^
+    259|     expect(schema.oneOf[0].required).toEqual(["kind", "result", "asses…
+    260|     expect(schema.$defs.DecisionsResponse.required).toEqual(["model", …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  test/decision/integration.test.ts > D06 real stdio inventory, schemas and configuration > D06-INVENTORY/D06-SCHEMAS absent
+ FAIL  test/decision/integration.test.ts > D06 real stdio inventory, schemas and configuration > D06-INVENTORY/D06-SCHEMAS ready
+Error: External schema oracle is forbidden in isolated suite
+ ❯ fs.readFileSync test/package/oracle-guard.cjs:11:11
+ ❯ test/decision/integration.test.ts:145:51
+    143|       expect(tool.inputSchema).toEqual(decisionInputJsonSchema);
+    144|       expect(tool.outputSchema).toEqual(decisionOutputJsonSchema);
+    145|       expect(tool.inputSchema).toEqual(JSON.parse(readFileSync(new URL…
+       |                                                   ^
+    146|       expect(tool.outputSchema).toEqual(JSON.parse(readFileSync(new UR…
+    147|       expect(tool.annotations).toEqual({ readOnlyHint: true, destructi…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  test/decision/schemas.test.ts > D01 AC-CANON: embedded declarations and independently authored expectations > input is exactly the canonical JSON schema
+ FAIL  test/decision/schemas.test.ts > D01 AC-CANON: embedded declarations and independently authored expectations > output is exactly the canonical JSON schema
+Error: External schema oracle is forbidden in isolated suite
+ ❯ fs.readFileSync test/package/oracle-guard.cjs:11:11
+ ❯ test/decision/schemas.test.ts:43:34
+     41|     ["input", decisionInputJsonSchema], ["output", decisionOutputJsonS…
+     42|   ])("%s is exactly the canonical JSON schema", (name, schema) => {
+     43|     const canonical = JSON.parse(readFileSync(new URL(`../../docs/deci…
+       |                                  ^
+     44|     expect(schema).toEqual(canonical);
+     45|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯

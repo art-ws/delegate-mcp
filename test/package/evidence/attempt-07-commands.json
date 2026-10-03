@@ -1,0 +1,27 @@
+[
+  {
+    "name": "package-versions",
+    "command": "[\"/opt/homebrew/Cellar/node/26.3.1/bin/node\",\"--version\"]",
+    "rc": 0
+  },
+  {
+    "name": "package-npm-version",
+    "command": "[\"npm\",\"--version\"]",
+    "rc": 0
+  },
+  {
+    "name": "production-build",
+    "command": "[\"npm\",\"run\",\"build\"]",
+    "rc": 0
+  },
+  {
+    "name": "pack",
+    "command": "[\"npm\",\"pack\",\"--json\",\"--ignore-scripts\",\"--pack-destination\",\"<source>/test/package/evidence\"]",
+    "rc": 0
+  },
+  {
+    "name": "publish-dry-run",
+    "command": "[\"npm\",\"publish\",\"--dry-run\",\"--json\",\"--ignore-scripts\",\"<source>/test/package/evidence/delegate-mcp-1.0.0.tgz\"]",
+    "rc": 1
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "name": "isolated-versions",
+    "command": "[\"/opt/homebrew/Cellar/node/26.3.1/bin/node\",\"--version\"]",
+    "rc": 0
+  },
+  {
+    "name": "isolated-npm-version",
+    "command": "[\"npm\",\"--version\"]",
+    "rc": 0
+  },
+  {
+    "name": "isolated-build",
+    "command": "[\"npm\",\"run\",\"build\"]",
+    "rc": 0
+  },
+  {
+    "name": "isolated-test",
+    "command": "[\"npm\",\"test\"]",
+    "rc": 1
+  }
+]

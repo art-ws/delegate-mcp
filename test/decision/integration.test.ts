@@ -142,8 +142,8 @@ describe("D06 real stdio inventory, schemas and configuration", () => {
       const tool = listed.tools.find((t) => t.name === "decision")!;
       expect(tool.inputSchema).toEqual(decisionInputJsonSchema);
       expect(tool.outputSchema).toEqual(decisionOutputJsonSchema);
-      expect(tool.inputSchema).toEqual(JSON.parse(readFileSync("/opt/art/p/delegate-mcp/docs/decision/input.schema.json", "utf8")));
-      expect(tool.outputSchema).toEqual(JSON.parse(readFileSync("/opt/art/p/delegate-mcp/docs/decision/output.schema.json", "utf8")));
+      expect(tool.inputSchema).toEqual(JSON.parse(readFileSync(new URL("../../docs/decision/input.schema.json", import.meta.url), "utf8")));
+      expect(tool.outputSchema).toEqual(JSON.parse(readFileSync(new URL("../../docs/decision/output.schema.json", import.meta.url), "utf8")));
       expect(tool.annotations).toEqual({ readOnlyHint: true, destructiveHint: false, idempotentHint: false, openWorldHint: true });
       expect(tool.execution).toEqual({ taskSupport: "forbidden" });
       expect(tool.description).toMatch(/external API/);

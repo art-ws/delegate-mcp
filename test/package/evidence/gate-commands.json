@@ -1,0 +1,37 @@
+[
+  {
+    "name": "gate-versions",
+    "command": "[\"/opt/homebrew/Cellar/node/26.3.1/bin/node\",\"--version\"]",
+    "rc": 0
+  },
+  {
+    "name": "gate-npm-version",
+    "command": "[\"npm\",\"--version\"]",
+    "rc": 0
+  },
+  {
+    "name": "final-build",
+    "command": "[\"npm\",\"run\",\"build\"]",
+    "rc": 0
+  },
+  {
+    "name": "final-typecheck",
+    "command": "[\"npm\",\"run\",\"typecheck\"]",
+    "rc": 0
+  },
+  {
+    "name": "final-lint",
+    "command": "[\"npm\",\"run\",\"lint\"]",
+    "rc": 0
+  },
+  {
+    "name": "final-test",
+    "command": "[\"npm\",\"test\"]",
+    "rc": 0
+  },
+  {
+    "name": "final-secretlint",
+    "command": "[\"npm\",\"run\",\"secretlint\"]",
+    "rc": 0
+  }
+]
