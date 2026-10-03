@@ -11,7 +11,7 @@
 | Live scope Q02 | **GO, WAIT_DEPENDENCIES** | Аппрув полного дерева тем же поручением: до трёх синтетических платных POST без retries, только после Q01/G1 и отдельной выдачи Q02 |
 | npm release / activation | **NONE — HOLD** | Вне текущего этапа, отдельное поручение |
 
-Разрешение стартовать — прямое поручение владельца выше. Текущий статус эпика: **IN_PROGRESS / D01–D07_COMPONENT_PASS / Q01_IN_PROGRESS / Q00_PLAN_PASS**; независимая runtime QA выполняется, итоговый ACCEPT и live — **NOT_RUN**. Публикация npm, tag/GitHub Release, release workflow и активация MCP не разрешены.
+Разрешение стартовать — прямое поручение владельца выше. Текущий статус эпика: **IN_PROGRESS / D01–D07_COMPONENT_PASS / Q01_REWORK_REQUIRED / Q00_PLAN_PASS**; Q01 runtime evidence сдано, TL не принял ACCEPT из-за findings integration/QA controls; live — **NOT_RUN**. Публикация npm, tag/GitHub Release, release workflow и активация MCP не разрешены.
 
 ## Листья
 
@@ -26,7 +26,7 @@
 | D06 | dev | COMPONENT_PASS | `decision-d06-go-20261003-1945`, сдача `014621e8-45d7-4fab-a23d-65833ab540a9` | source `42734c1412a7d24d62e427d49301db86fd7f8255`, parent0d0ade5f; TL static review принят/S7 закреплён; author865/865 с fixture preparation; D07 artifacts/portability followup, independent QA NOT_RUN |
 | D07 | dev | COMPONENT_PASS; F-D07-PUBLISH-VERSION OPEN | `decision-d07-go-20261003-2040`, сдача `46273e67-97de-42ba-b3a7-4029ee99f27b` | source489b6aad6061e4e0161c125066ea3b79374beddd, parent42734c14; TL static bytes/source/evidence review принят; author865/865+isolated865/865, installedNode24/26, actualNode20 NOT_RUN → Q01; default registry dry-run FAIL, forced inventory PASS, release eligibility OPEN |
 | Q00 | test | PLAN_PASS | `87fdb5bd-f497-47a6-bc1b-e7d7eabc5729`, сдача `f4e209b2-a0b0-42fe-b0a2-577f50f415e6` | QA `c102897315d6badcfb59fa583a48c1ab1f43c961`, parent0de2036; TL actual bytes/static review закрывает оба r3 findings; independent runtime QA инструмента NOT_RUN |
-| Q01 | test | IN_PROGRESS | `decision-q01-go-20261003-2110`, доставка/начало подтверждены history+live screen21:32 MSK | review/decision-q01, /opt/art/p/delegate-mcp-wt/test-decision-q01; fresh main trial integration WIP на c78d8a0 + runtime489b6aa, independent harness/focused runs; source/tgz/Node20/current/mutations/final gate verdict ещё не сдан |
+| Q01 | test | REWORK_REQUIRED | `decision-q01-go-20261003-2110`, сдача `0f3f4357-f0bc-4867-b328-9fbc9013cb0f` | integration116280f/tree39b0abf от main7ee1021, source489b6aa; claimed884/884+19/19/installedNode20+26, TL static review: main carriers/S1–S7 regression, six author logs lost, M2/M3 scope and missing key scans; carrier09-local-acceptance.REWORK-r1.md; G1 WAIT |
 | G1 | tl | WAIT_DEPENDENCIES | нет | — |
 | Q02 | test | WAIT_DEPENDENCIES | нет | — |
 | G2 | tl | WAIT_DEPENDENCIES | нет | — |
@@ -35,9 +35,9 @@
 
 | Роль | Активный исполнительный лист | Очередь после GO |
 |---|---|---|
-| tl | Q01 контроль / review | review → G1 → G2 |
+| tl | Q01 r1 clean-slate / постановка | review r1 → G1 → G2 |
 | dev | Резерв после D07; WIP=0, source/artifact сохранены | адресный rework при findings Q01 |
-| test | Независимая Q01 active, trial integration/harness | Q01 сдача/review → Q02 после G1 |
+| test | Q01 REWORK_REQUIRED; ожидается cleanup перед отдельным r1 | Q01 r1 → Q02 после G1 |
 
 При G0 MCP list_peers и закрывающие сообщения подтвердили dev/test idle в резерве; чужие задачи не вытесняются. dev подтвердил WIP=0 и cleanup сообщением `c52f5ee6-197c-487f-a54d-85c706e208dd` (служебные дочерние удалены, основная/чужие сохранены, checkout чистый, аренды отсутствуют). Live get_status=idle и /clear перед D01 выполнены, rc=0. Актуальные исполнительные листы — в раскладке выше.
 
@@ -135,3 +135,5 @@ Re-resolve G0: локальный main и live origin/main совпадают �
 - Q01 подготовлен к финальной единственной выдаче decision-q01-go-20261003-2110 / replyTo907e05ca. Immutable source489b6aad6061e4e0161c125066ea3b79374beddd + Q00c1028973; новый isolated review/decision-q01 / /opt/art/p/delegate-mcp-wt/test-decision-q01, исходный QAworktree сохранить. Fresh main trial integration делает test, фиксирует exact commit для G1/full gate, retained author tgzSHA0ed018ca65ccd85585acdfa9b46ef41294389d66170f144f595e2396955c1619 проверяет отдельно от own clean pack. Scope leaf09+FOLLOWUP-package, полный26ACplan/6mutations/Node20current/nativeinstalledstdio/legacy; no runtimeTL/publish/live. Timebox4–6ч, контрольдо22:30 MSK03.10, целевая сдачадо03:10 MSK04.10. Prepared не receipt/PASS; подтвердить history/screen/пакетомtest. Во время QA избегать ненужного изменения main; fresh-tip перед final test gate/G1 обязателен.
 
 - 2026-10-03 21:33 MSK: ранний контроль подтверждает Q01 dispatch через history и active Working screen (MCP idle отстаёт). Создан отдельный review/decision-q01 / test-decision-q01; HEADc78d8a0, staged runtime совпадает source489b6aa, delta к source только management docs, QA harness ещё untracked WIP. Test выполняет independent focused suite и дорабатывает fixtures; не clear. Итоговый source/artifact/Node20/mutations/package/final integration evidence ещё не получен, PASS не заявлен. Это последнее необходимое подтверждение состояния до финальной QA; дальнейшие ненужные main mutations избегать. Test обязан re-resolve свежий main для final immutable integration gate. Контроль22:30 и цель03:10 сохраняются.
+
+- 2026-10-03 22:06 MSK: Q01 сдача0f3f4357 заявила ACCEPT на clean integration116280f77ae5230ce87066c5a903277103427c19/tree39b0abf86e3656fb93aa34bb47c4f76881496a4a от main7ee10211b0b32d03ea489cf95821fc173f33825c, source489b6aa. TL лично сверил identity/diffs/evidence и вынес **REWORK_REQUIRED**: пять main carriers удалены, frozen interfaces потерял61строку; шесть tracked author secretlint logs удалены; M2 not-configured→disabled не доказывает ENV activation и legacy GREEN при мутанте; M3 margin bypass не заявленный OR/inclusive-boundary; AC-SECRET не сканирует key в body/dry-run/unknown-key result. Конкретный [r1 carrier](09-local-acceptance.REWORK-r1.md). Runtime/package producer delta отсутствует; известные tarball/index hashes совпадают. Лог accept-full-test после exact commit содержит884/884+19/19; Node20.20.2/current26.3.1 и M5b/M6c evidence сохранены, это не закрывает findings. TL runtime checks не выполнял. Test нужен узкий cleanup/WIP0 → live idle/clear → отдельный r1; dev резерв. Main теперь меняется только carrier/status, поэтому r1 обязан снова разрешить fresh tip и пройти final gate на исправленном integration SHA. G1/Q02/G2 WAIT, liveNOT_RUN, F-D07-PUBLISH-VERSION OPEN; release/activation не разрешены.
