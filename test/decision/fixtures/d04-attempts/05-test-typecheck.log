@@ -1,0 +1,5 @@
+test/decision/client.test.ts(351,91): error TS2322: Type '{ "Content-Length"?: undefined; } | { "Content-Length": string; }' is not assignable to type 'HeadersInit | undefined'.
+  Type '{ "Content-Length"?: undefined; }' is not assignable to type 'HeadersInit | undefined'.
+    Type '{ "Content-Length"?: undefined; }' is not assignable to type 'Record<string, string>'.
+      Property '"Content-Length"' is incompatible with index signature.
+        Type 'undefined' is not assignable to type 'string'.

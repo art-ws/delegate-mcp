@@ -1,0 +1,3 @@
+command=["/opt/homebrew/opt/node@24/bin/node","--version"]
+rc=0
+v24.18.0

@@ -1,0 +1,36 @@
+command=["git","diff","--cached","--check"]
+rc=2
+test/decision/fixtures/d06-attempts/09-full.log:221: trailing whitespace.
++     → Command failed: /opt/homebrew/Cellar/node/26.3.1/bin/node --input-type=module -e
+test/decision/fixtures/d06-attempts/09-full.log:246: trailing whitespace.
++
+test/decision/fixtures/d06-attempts/09-full.log:321: trailing whitespace.
++     → Command failed: /opt/homebrew/Cellar/node/26.3.1/bin/node --input-type=module -e
+test/decision/fixtures/d06-attempts/09-full.log:337: trailing whitespace.
++
+test/decision/fixtures/d06-attempts/09-full.log:673: trailing whitespace.
++     → Command failed: /opt/homebrew/Cellar/node/26.3.1/bin/node --input-type=module -e
+test/decision/fixtures/d06-attempts/09-full.log:681: trailing whitespace.
++
+test/decision/fixtures/d06-attempts/09-full.log:911: trailing whitespace.
++     → Command failed: /opt/homebrew/Cellar/node/26.3.1/bin/node --input-type=module -e
+test/decision/fixtures/d06-attempts/09-full.log:923: trailing whitespace.
++
+test/decision/fixtures/d06-attempts/09-full.log:957: trailing whitespace.
++Error: Command failed: /opt/homebrew/Cellar/node/26.3.1/bin/node --input-type=module -e
+test/decision/fixtures/d06-attempts/09-full.log:982: trailing whitespace.
++
+test/decision/fixtures/d06-attempts/09-full.log:1015: trailing whitespace.
++Error: Command failed: /opt/homebrew/Cellar/node/26.3.1/bin/node --input-type=module -e
+test/decision/fixtures/d06-attempts/09-full.log:1027: trailing whitespace.
++
+test/decision/fixtures/d06-attempts/09-full.log:1060: trailing whitespace.
++Error: Command failed: /opt/homebrew/Cellar/node/26.3.1/bin/node --input-type=module -e
+test/decision/fixtures/d06-attempts/09-full.log:1076: trailing whitespace.
++
+test/decision/fixtures/d06-attempts/09-full.log:1147: trailing whitespace.
++Error: Command failed: /opt/homebrew/Cellar/node/26.3.1/bin/node --input-type=module -e
+test/decision/fixtures/d06-attempts/09-full.log:1155: trailing whitespace.
++
+test/decision/fixtures/d06-attempts/12-full.log:70: trailing whitespace.
++    116|

@@ -12,6 +12,20 @@
     }
   ],
   "disabled_providers": [],
+  "decision": {
+    "enabled": false,
+    "api_key": "env:OPENROUTER_API_KEY",
+    "default_model": "~typesafe/jev-latest",
+    "allowed_models": ["~typesafe/jev-latest", "typesafe/jev-1.13"],
+    "provider_defaults": {},
+    "required_provider": {},
+    "timeout_ms": 30000,
+    "max_retries": 0,
+    "max_request_bytes": 262144,
+    "max_response_bytes": 1048576,
+    "max_concurrency": 4,
+    "max_queue": 16
+  },
   "_disabled_note": "List provider names here to keep their config in this file but out of the active pool.",
   "session_dir": "~/.delegate-mcp/state/sessions",
   "metrics_file": "~/.delegate-mcp/state/metrics.jsonl",

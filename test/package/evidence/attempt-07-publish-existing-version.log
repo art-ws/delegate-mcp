@@ -1,0 +1,11 @@
+command=["npm","publish","--dry-run","--json","--ignore-scripts","<source>/test/package/evidence/delegate-mcp-1.0.0.tgz"]
+rc=1
+{
+  "error": {
+    "summary": "You cannot publish over the previously published versions: 1.0.0.",
+    "detail": ""
+  }
+}
+npm warn publish This command requires you to be logged in to https://registry.npmjs.org/ (dry-run)
+npm error You cannot publish over the previously published versions: 1.0.0.
+npm error A complete log of this run can be found in: <scratch>/npm-cache/_logs/2026-10-03T17_48_02_962Z-debug-0.log

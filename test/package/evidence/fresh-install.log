@@ -1,0 +1,4 @@
+command=["npm","install","--omit=dev","--ignore-scripts","--no-audit","--no-fund","--package-lock=false","<source>/test/package/evidence/delegate-mcp-1.0.0.tgz"]
+rc=0
+
+added 96 packages in 4s

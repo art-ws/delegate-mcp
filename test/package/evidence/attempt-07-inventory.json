@@ -1,0 +1,33 @@
+{
+  "tarball": "delegate-mcp-1.0.0.tgz",
+  "sha256": "0ed018ca65ccd85585acdfa9b46ef41294389d66170f144f595e2396955c1619",
+  "indexSha256": "b9942bf84d5a309867bbc8397ea4f5d9d2443ddcdba292b528bf0864314eeb47",
+  "npmIntegrity": "sha512-/+JAo6Val5eVlwsenpKxsZfrgOIyAg2lxXIJ6A6qPr/bBQu+VR6HpHn492yhKq561U6WOL6XBC0VhCCHNhwy3w==",
+  "files": [
+    {
+      "path": "LICENSE",
+      "size": 1067,
+      "mode": 420
+    },
+    {
+      "path": "README.md",
+      "size": 27956,
+      "mode": 420
+    },
+    {
+      "path": "delegate-config.example.json",
+      "size": 1592,
+      "mode": 420
+    },
+    {
+      "path": "dist/index.js",
+      "size": 102802,
+      "mode": 493
+    },
+    {
+      "path": "package.json",
+      "size": 1801,
+      "mode": 420
+    }
+  ]
+}

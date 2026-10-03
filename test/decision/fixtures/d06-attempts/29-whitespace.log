@@ -1,0 +1,2 @@
+command=["git","diff","--cached","--check"]
+rc=0

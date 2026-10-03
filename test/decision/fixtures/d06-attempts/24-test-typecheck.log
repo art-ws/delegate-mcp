@@ -1,0 +1,2 @@
+command=["./node_modules/.bin/tsc","--noEmit","--target","ES2022","--module","NodeNext","--moduleResolution","NodeNext","--strict","--esModuleInterop","--skipLibCheck","test/decision/integration.test.ts"]
+rc=0

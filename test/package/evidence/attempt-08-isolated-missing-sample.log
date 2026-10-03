@@ -1,0 +1,91 @@
+command=["npm","test"]
+rc=1
+
+> delegate-mcp@1.0.0 pretest
+> node test/decision/fixtures/d06-component-artifacts.mjs
+
+CLI Building entry: {"decision/schemas":"src/decision/schemas.ts","decision/config":"src/decision/config.ts","decision/request":"src/decision/request.ts","decision/response":"src/decision/response.ts","decision/assessment":"src/decision/assessment.ts","decision/client":"src/decision/client.ts","decision/metrics":"src/decision/metrics.ts"}
+CLI Using tsconfig: tsconfig.json
+CLI tsup v8.5.1
+CLI Target: node20
+ESM Build start
+ESM dist/chunk-EYNSNJVF.js      35.75 KB
+ESM dist/decision/client.js     10.82 KB
+ESM dist/decision/config.js     7.10 KB
+ESM dist/decision/schemas.js    976.00 B
+ESM dist/decision/assessment.js 2.12 KB
+ESM dist/decision/metrics.js    1.70 KB
+ESM dist/decision/response.js   4.27 KB
+ESM dist/decision/request.js    3.35 KB
+ESM ⚡️ Build success in 13ms
+PASS ordinary dist/index.js unchanged sha256=b9942bf84d5a309867bbc8397ea4f5d9d2443ddcdba292b528bf0864314eeb47
+
+> delegate-mcp@1.0.0 test
+> vitest run
+
+
+ RUN  v3.2.7 /private<scratch>/isolated
+
+ ✓ test/scaffold.test.ts (5 tests) 2ms
+ ✓ test/metrics.test.ts (8 tests) 10ms
+ ✓ test/sessions.test.ts (11 tests) 10ms
+ ✓ test/files.test.ts (39 tests) 24ms
+ ❯ test/config.test.ts (21 tests | 1 failed) 16ms
+   ✓ resolveConfigPath — 3-source cascade (S-CONFIG) > honours priority CLI > ENV > home when all three exist 2ms
+   ✓ resolveConfigPath — 3-source cascade (S-CONFIG) > accepts the -c short flag and --config=<path> form 0ms
+   ✓ resolveConfigPath — 3-source cascade (S-CONFIG) > resolves the XDG_CONFIG_HOME override and the ~/.delegate-mcp.json fallback 1ms
+   ✓ resolveConfigPath — 3-source cascade (S-CONFIG) > fails loud (home tier) and lists every checked home path when no explicit source is set 0ms
+   ✓ resolveConfigPath — explicit set-but-missing fails loud (S-CONFIG L02b) > --config <missing> throws ConfigError naming --config + the path (no home fall-through) 1ms
+   ✓ resolveConfigPath — explicit set-but-missing fails loud (S-CONFIG L02b) > DELEGATE_MCP_CONFIG set-but-missing throws ConfigError naming the ENV var + the path 1ms
+   ✓ resolveConfigPath — explicit set-but-missing fails loud (S-CONFIG L02b) > keeps the happy path: valid --config / valid ENV / valid home each still resolve 1ms
+   ✓ loadConfig — mandatory provider fields (S-CONFIG) > refuses a provider missing a required field, naming provider + field 1ms
+   ✓ loadConfig — mandatory provider fields (S-CONFIG) > NEVER prints the api_key value in a validation error (redaction) 0ms
+   ✓ loadConfig — mandatory provider fields (S-CONFIG) > refuses an empty providers array 0ms
+   ✓ loadConfig — env:VAR secret resolution (S-SECRET) > resolves env:VAR from the environment 1ms
+   ✓ loadConfig — env:VAR secret resolution (S-SECRET) > fails loud on a missing env var — names the VAR, not a value 0ms
+   ✓ loadConfig — env:VAR secret resolution (S-SECRET) > accepts a literal key with a warning that omits the value 1ms
+   ✓ loadConfig — disabled pool + unknown keys (S-CONFIG conventions) > excludes disabled_providers from the active pool 0ms
+   ✓ loadConfig — disabled pool + unknown keys (S-CONFIG conventions) > fails when every provider is disabled 0ms
+   ✓ loadConfig — disabled pool + unknown keys (S-CONFIG conventions) > silently ignores unknown top-level keys (forward-compat) 0ms
+   × loadConfig — example config shape (AC5) + defaults > loads delegate-config.example.json with fake env into a typed AppConfig 3ms
+     → cannot read config at /private<scratch>/isolated/delegate-config.example.json: ENOENT: no such file or directory, open '/private<scratch>/isolated/delegate-config.example.json'
+   ✓ loadConfig — example config shape (AC5) + defaults > defaults session_dir, metrics_file and file_walker when absent 1ms
+   ✓ loadConfig — example config shape (AC5) + defaults > expands ~ in session_dir and metrics_file to os home (no literal '~' dir) 1ms
+   ✓ resolveAndLoadConfig — end to end > resolves via cascade then loads the file 1ms
+   ✓ resolveAndLoadConfig — end to end > fails loud with a clear message when JSON is malformed 0ms
+ ✓ test/providers.test.ts (26 tests) 15ms
+ ✓ test/decision/metrics.test.ts (28 tests) 173ms
+ ✓ test/tools.test.ts (14 tests) 48ms
+ ✓ test/decision/schemas.test.ts (295 tests) 480ms
+   ✓ D01 AC-DIST: runtime component without checkout source/docs > loads built schemas and validators from a standalone dist copy  399ms
+ ✓ test/decision/core.test.ts (70 tests) 468ms
+   ✓ D03 AC-DIST compiled component > runs S3/S4 exports in a standalone dist copy without source or docs  396ms
+ ✓ test/decision/config.test.ts (212 tests) 505ms
+   ✓ AC-S2 exports / AC-DIST > loads built S2 in a fresh directory without checkout source/docs  424ms
+ ✓ test/decision/client.test.ts (94 tests) 524ms
+   ✓ AC-DIST compiled S5 > runs built transport with S3/S4 in a standalone dist copy  403ms
+ ✓ test/decision/integration.test.ts (42 tests) 8557ms
+   ✓ D06 stdio pipeline and isolation > D06-ERROR preserves attempts and uncertain billing across network retry  442ms
+   ✓ D06 stdio pipeline and isolation > D06-ERROR final transport error retains prior uncertain billing  662ms
+   ✓ D06 actual SDK cancellation and legacy stdio > D06-CANCEL deadline includes queued time and slots recover  1217ms
+
+ Test Files  1 failed | 12 passed (13)
+      Tests  1 failed | 864 passed (865)
+   Start at  20:48:15
+   Duration  9.05s (transform 739ms, setup 0ms, collect 1.87s, tests 10.83s, environment 1ms, prepare 638ms)
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  test/config.test.ts > loadConfig — example config shape (AC5) + defaults > loads delegate-config.example.json with fake env into a typed AppConfig
+ConfigError: cannot read config at /private<scratch>/isolated/delegate-config.example.json: ENOENT: no such file or directory, open '/private<scratch>/isolated/delegate-config.example.json'
+ ❯ loadConfig src/config.ts:197:11
+    195|     text = readFileSync(configPath, "utf8");
+    196|   } catch (e) {
+    197|     throw new ConfigError(`cannot read config at ${configPath}: ${errM…
+       |           ^
+    198|   }
+    199|
+ ❯ test/config.test.ts:276:28
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
