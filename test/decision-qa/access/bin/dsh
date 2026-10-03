@@ -1,0 +1,15 @@
+#!/usr/bin/python3
+"""Launch the D-ACCESS runner with a one-variable child environment."""
+
+import os
+import sys
+from pathlib import Path
+
+
+key_value = os.environ.get("OPENROUTER_API_KEY")
+if not key_value:
+    sys.stderr.write("D-ACCESS child key environment absent.\n")
+    raise SystemExit(2)
+runner = Path(__file__).resolve().parents[1] / "runner.py"
+python = "/usr/bin/python3"
+os.execve(python, [python, str(runner), *sys.argv[1:]], {"OPENROUTER_API_KEY": key_value})
