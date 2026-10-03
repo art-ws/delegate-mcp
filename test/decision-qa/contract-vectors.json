@@ -15,6 +15,9 @@
               "no": null
             }
           }
+        },
+        "state": {
+          "record_id": "synthetic-record-01"
         }
       },
       "expected": "valid; known answer key and nullable description retained",
@@ -31,6 +34,9 @@
               "question": "verified?"
             }
           }
+        },
+        "state": {
+          "record_id": "synthetic-record-01"
         }
       },
       "expected": "valid; criteria absent",
@@ -59,6 +65,9 @@
               ]
             ]
           }
+        },
+        "state": {
+          "record_id": "synthetic-record-01"
         }
       },
       "expected": "valid; score order defines indices",
@@ -81,6 +90,9 @@
               ]
             }
           }
+        },
+        "state": {
+          "record_id": "synthetic-record-01"
         }
       },
       "expected": "valid; both keys and structured forms retained",
@@ -101,10 +113,13 @@
             }
           }
         },
-        "expected_form_valid": true
+        "state": {
+          "record_id": "synthetic-record-01"
+        }
       },
       "expected": "valid; single_option warning",
-      "oracle": "exact criteria count/key assertion"
+      "oracle": "exact criteria count/key assertion",
+      "expected_form_valid": true
     },
     {
       "id": "V-CHOICE-255",
@@ -629,10 +644,13 @@
             }
           }
         },
-        "expected_form_valid": true
+        "state": {
+          "record_id": "synthetic-record-01"
+        }
       },
       "expected": "valid",
-      "oracle": "exact criteria count/key assertion"
+      "oracle": "exact criteria count/key assertion",
+      "expected_form_valid": true
     },
     {
       "id": "V-CHOICE-256",
@@ -1158,10 +1176,13 @@
             }
           }
         },
-        "expected_form_valid": false
+        "state": {
+          "record_id": "synthetic-record-01"
+        }
       },
       "expected": "INVALID_ARGUMENT; 256 exceeds maximum",
-      "oracle": "exact criteria count/key assertion"
+      "oracle": "exact criteria count/key assertion",
+      "expected_form_valid": false
     },
     {
       "id": "V-SCORE-1",
@@ -1176,10 +1197,13 @@
             ]
           }
         },
-        "expected_form_valid": true
+        "state": {
+          "record_id": "synthetic-record-01"
+        }
       },
       "expected": "valid; degenerate_scale warning",
-      "oracle": "criteria count and index-order assertion"
+      "oracle": "criteria count and index-order assertion",
+      "expected_form_valid": true
     },
     {
       "id": "V-SCORE-10",
@@ -1213,10 +1237,13 @@
             ]
           }
         },
-        "expected_form_valid": true
+        "state": {
+          "record_id": "synthetic-record-01"
+        }
       },
       "expected": "valid",
-      "oracle": "criteria count and index-order assertion"
+      "oracle": "criteria count and index-order assertion",
+      "expected_form_valid": true
     },
     {
       "id": "V-SCORE-11",
@@ -1251,10 +1278,13 @@
             ]
           }
         },
-        "expected_form_valid": false
+        "state": {
+          "record_id": "synthetic-record-01"
+        }
       },
       "expected": "INVALID_ARGUMENT; 11 exceeds maximum",
-      "oracle": "criteria count and index-order assertion"
+      "oracle": "criteria count and index-order assertion",
+      "expected_form_valid": false
     },
     {
       "id": "V-STRUCTURED-NULL-OPTIONAL",
@@ -1274,7 +1304,13 @@
             "reserved": "kept"
           }
         },
-        "provider": null
+        "provider": null,
+        "questions": {
+          "q": {
+            "type": "noul",
+            "instructions": "Is the synthetic record verified?"
+          }
+        }
       },
       "expected": "valid; optional and structured values preserved; null provider is no override",
       "oracle": "deep-equal serialized DecisionsRequest"
@@ -1364,10 +1400,79 @@
         "state": {
           "value": "SYNTHETIC_Q00_CONTEXT_CANARY"
         },
-        "api_key": "SYNTHETIC_Q00_KEY_CANARY_DO_NOT_USE"
+        "questions": {
+          "q": {
+            "type": "noul",
+            "instructions": "Is the synthetic record verified?"
+          }
+        }
       },
       "expected": "synthetic canary only; key never sent or logged; context not logged",
-      "oracle": "captured output/stderr/error/sink scans"
+      "oracle": "captured output/stderr/error/sink scans",
+      "fixture_setup": {
+        "config": {
+          "decision": {
+            "api_key": "SYNTHETIC_Q00_KEY_CANARY_DO_NOT_USE"
+          }
+        },
+        "args": {
+          "state": {
+            "value": "SYNTHETIC_Q00_CONTEXT_CANARY"
+          },
+          "questions": {
+            "q": {
+              "type": "noul",
+              "instructions": "Is the synthetic record verified?"
+            }
+          }
+        },
+        "failure": {
+          "phase": "synthetic transport then synthetic event-sink write",
+          "transport_error": {
+            "name": "TypeError",
+            "message": "failed with SYNTHETIC_Q00_KEY_CANARY_DO_NOT_USE and SYNTHETIC_Q00_CONTEXT_CANARY"
+          },
+          "sink_error": {
+            "message": "sink rejected SYNTHETIC_Q00_KEY_CANARY_DO_NOT_USE and SYNTHETIC_Q00_CONTEXT_CANARY"
+          }
+        },
+        "expected_surfaces": {
+          "allowed": [
+            "request Authorization header in isolated in-memory transport capture only"
+          ],
+          "forbidden": [
+            "DecisionRequest body",
+            "stdout",
+            "stderr",
+            "tool error message",
+            "structured result",
+            "JSON text result",
+            "decision log row",
+            "legacy metrics",
+            "legacy session store"
+          ]
+        },
+        "oracle": "scan every forbidden surface for both exact canary strings; assert transport capture has the key only in Authorization and args preserve state/questions"
+      }
+    },
+    {
+      "id": "V-UNKNOWN-API-KEY-ARG",
+      "area": "unknown-contract-fields",
+      "input": {
+        "state": {
+          "record_id": "synthetic-record-01"
+        },
+        "questions": {
+          "q": {
+            "type": "noul",
+            "instructions": "Is the synthetic record verified?"
+          }
+        },
+        "api_key": "SYNTHETIC_Q00_KEY_CANARY_DO_NOT_USE"
+      },
+      "expected_form_valid": false,
+      "expected": "INVALID_ARGUMENT before config/transport; this does not satisfy downstream secret-leak oracle",
+      "oracle": "assert fixed safe INVALID_ARGUMENT and zero injected transport/sink calls"
     }
   ]
 }
