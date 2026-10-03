@@ -3,7 +3,7 @@
 **Ответственный:** test. **Приоритет:** P1 после GO в очереди этого эпика. **Зависимости:** [D01](01-contracts.md).
 **Срок:** 1–2 часа; первая контрольная точка ≤90 минут после выдачи, если timebox короче — сдача в его пределах. Календарный срок назначает tl при диспетче.
 
-**HOLD до аппрува владельца. Этот лист не выдан.** Полный clean-slate контекст: [SPEC v0.2](../SPEC.md), [контекст](_shared/context.md), [швы](_shared/interfaces.md), [приёмка](_shared/acceptance.md), [состояние/аппрув](PROGRESS.md), [baseline](baseline.json).
+**Разрешения и факт выдачи — только в [PROGRESS.md](PROGRESS.md); сам файл не является диспетчем.** Полный clean-slate контекст: [SPEC v0.2](../SPEC.md), [контекст](_shared/context.md), [швы](_shared/interfaces.md), [приёмка](_shared/acceptance.md), [состояние/аппрув](PROGRESS.md), [baseline](baseline.json).
 
 ## Цель / вход
 SPEC, канонические schemas, D01 SHA, shared acceptance. Подготовить независимые expected outcomes для всего контракта и именованные oracle/fixtures для Q01; работа может идти параллельно с D02–D07 после GO.

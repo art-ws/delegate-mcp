@@ -3,7 +3,7 @@
 **Ответственный:** dev. **Приоритет:** P1 после GO в очереди этого эпика. **Зависимости:** [D01](01-contracts.md), [D02](02-config.md), [D03](03-decision-core.md), [D04](04-http-client.md), [D05](05-observability.md).
 **Срок:** 3–4 часа; первая контрольная точка ≤90 минут после выдачи, если timebox короче — сдача в его пределах. Календарный срок назначает tl при диспетче.
 
-**HOLD до аппрува владельца. Этот лист не выдан.** Полный clean-slate контекст: [SPEC v0.2](../SPEC.md), [контекст](_shared/context.md), [швы](_shared/interfaces.md), [приёмка](_shared/acceptance.md), [состояние/аппрув](PROGRESS.md), [baseline](baseline.json).
+**Разрешения и факт выдачи — только в [PROGRESS.md](PROGRESS.md); сам файл не является диспетчем.** Полный clean-slate контекст: [SPEC v0.2](../SPEC.md), [контекст](_shared/context.md), [швы](_shared/interfaces.md), [приёмка](_shared/acceptance.md), [состояние/аппрув](PROGRESS.md), [baseline](baseline.json).
 
 ## Цель / вход
 SPEC §1/§3/§7 и S1–S7. Подключить src/decision/tool.ts в src/tools.ts ToolContext/createServer, lifecycle в src/index.ts только при необходимости отмены/cleanup. Единственный existing bin/stdio transport.

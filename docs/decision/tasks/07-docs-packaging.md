@@ -3,7 +3,7 @@
 **Ответственный:** dev. **Приоритет:** P1 после GO в очереди этого эпика. **Зависимости:** [D06](06-mcp-integration.md).
 **Срок:** 2–3 часа; первая контрольная точка ≤90 минут после выдачи, если timebox короче — сдача в его пределах. Календарный срок назначает tl при диспетче.
 
-**HOLD до аппрува владельца. Этот лист не выдан.** Полный clean-slate контекст: [SPEC v0.2](../SPEC.md), [контекст](_shared/context.md), [швы](_shared/interfaces.md), [приёмка](_shared/acceptance.md), [состояние/аппрув](PROGRESS.md), [baseline](baseline.json).
+**Разрешения и факт выдачи — только в [PROGRESS.md](PROGRESS.md); сам файл не является диспетчем.** Полный clean-slate контекст: [SPEC v0.2](../SPEC.md), [контекст](_shared/context.md), [швы](_shared/interfaces.md), [приёмка](_shared/acceptance.md), [состояние/аппрув](PROGRESS.md), [baseline](baseline.json).
 
 ## Цель / вход
 SPEC §8/§10.9, functioning candidate D06. Владение: README.md (English), delegate-config.example.json, package files/build config при доказанной необходимости; tests/package fixtures. Подготовить existing delegate-mcp для обновления, не выполнять release.
