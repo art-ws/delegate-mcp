@@ -1,6 +1,6 @@
 # Decision — состояние работ и разрешений
 
-Обновлено: 2026-10-03. Владелец состояния: tl. **Единственный источник текущих статусов.**
+Обновлено: 2026-10-04. Владелец состояния: tl. **Единственный источник текущих статусов.**
 
 ## Разрешения
 
@@ -11,7 +11,7 @@
 | Live scope Q02 | **GO, DEPENDENCIES_PASS** | Аппрув полного дерева тем же поручением: до трёх синтетических платных POST без retries, только после Q01/G1 и отдельной выдачи Q02 |
 | npm release / activation | **NONE — HOLD** | Вне текущего этапа, отдельное поручение |
 
-Разрешение стартовать — прямое поручение владельца выше. Текущий статус эпика: **IN_PROGRESS / LOCAL_IMPLEMENTATION_DONE / Q01_PASS / G1_PASS / Q00_PLAN_PASS**; независимая локальная приёмка принята и проверенный runtime parked в main; live — **NOT_RUN**, Q02 clean-slate выполнен, выдача подготовлена. Публикация npm, tag/GitHub Release, release workflow и активация MCP не разрешены.
+Разрешение стартовать — прямое поручение владельца выше. Текущий статус эпика: **IN_PROGRESS / LOCAL_IMPLEMENTATION_DONE / Q01_PASS / G1_PASS / Q00_PLAN_PASS / Q02_FAIL_STOP / RELEASE_HOLD**. Независимая локальная приёмка принята и проверенный runtime parked в main. Первый live POST вернул HTTP403/UPSTREAM_FORBIDDEN; повторов нет, второй остановлен. Ответы primitives/pinned/live boundaries NOT_RUN, причина отказа не установлена. Публикация npm, tag/GitHub Release, release workflow и активация MCP командой не разрешены; оператор просит отдельный сигнал готовности к своему запуску.
 
 ## Листья
 
@@ -28,16 +28,16 @@
 | Q00 | test | PLAN_PASS | `87fdb5bd-f497-47a6-bc1b-e7d7eabc5729`, сдача `f4e209b2-a0b0-42fe-b0a2-577f50f415e6` | QA `c102897315d6badcfb59fa583a48c1ab1f43c961`, parent0de2036; TL actual bytes/static review закрывает оба r3 findings; independent runtime QA инструмента NOT_RUN |
 | Q01 | test | PASS | r2 `decision-q01-r2-go-20261003-2255`, сдача `49a68e67-735e-4f52-a183-9374e7d93b06` | exactf77656c7fddddda029f66659db8fba5e3964a2fb/treed44ee39b521376284cbd9d0b85fa1b3de528c8fd, parentfreshmain6db572b; all six tracked logs/source blobs and accurate map verified; full886/886+independent21/21, validM1–M6, installedNode20.20.2/current26.3.1; archiveSHA0ed018ca |
 | G1 | tl | PASS | 2026-10-03 23:15 MSK | exact reviewedf77656c/tree d44ee39b fast-forwarded and pushed; freshmain6db572b matched local/remote under lockctl, no foreign staged paths; status-only docs below do not claim a separate runtime gate |
-| Q02 | test | DELIVERY_PREPARED | `decision-q02-go-20261003-2330`, replyTo cleanupb8b76261; receipt сверяется history | Q01/G1 PASS; installed artifactSHA0ed018ca; two synthetic POST alias+pinned, no retries/≤32KiB/≤30s; third only separately configured required privacy; private child-ENV launch pointer metadata verified without values; liveNOT_RUN |
-| G2 | tl | WAIT_DEPENDENCIES | нет | — |
+| Q02 | test | FAIL_STOP / WAIT_TL_PLAN | `decision-q02-go-20261003-2330`, сдача `df0113f0-7a28-415a-9b32-37b05bb49540` | QA6b5f503cd15a6fbbda112604192b09eb2e6029e7/tree3277f33b288e67d553d2f466137dd9156fd80b38, parentc812463; installed archiveSHA0ed018ca/entryb9942bf сверены TL; dry-run545/9983bytes/0POST PASS; alias403/UPSTREAM_FORBIDDEN/attempts1/POST1/737ms/billing_uncertainfalse, retries0; pinned/primitives/boundaries liveNOT_RUN; ledgerSTOPPED, remaining1 не переиспользуется этим нарядом |
+| G2 | tl | RELEASE_HOLD | нет | Q02 FAIL_STOP требует дальнейшего плана; выпуск с непроверенным live — только с предусмотренным решением владельца; Release automation preparation отдельно, READY не заявлен |
 
 ## Раскладка ролей
 
 | Роль | Активный исполнительный лист | Очередь после GO |
 |---|---|---|
-| tl | Q02 контроль / live evidence review | review → G2 |
-| dev | Резерв после D07; WIP=0, source/artifact сохранены | адресный rework при findings Q01 |
-| test | Q02 выдача подготовлена после cleanup/idle/clear | Q02 → G2 handoff |
+| tl | Q02 FAIL_STOP review завершён; план диагностики и подготовка Release | clean-slate → отдельные наряды → G2/уведомление владельца |
+| dev | Резерв после D07; source/artifact сохранены | fresh cleanup → отдельная подготовка Release по уточнению оператора |
+| test | Q02 завершён, ожидает узкий cleanup | отдельная диагностика без новых POST; QA Release после готовности dev |
 
 При G0 MCP list_peers и закрывающие сообщения подтвердили dev/test idle в резерве; чужие задачи не вытесняются. dev подтвердил WIP=0 и cleanup сообщением `c52f5ee6-197c-487f-a54d-85c706e208dd` (служебные дочерние удалены, основная/чужие сохранены, checkout чистый, аренды отсутствуют). Live get_status=idle и /clear перед D01 выполнены, rc=0. Актуальные исполнительные листы — в раскладке выше.
 
@@ -148,3 +148,8 @@ Re-resolve G0: локальный main и live origin/main совпадают �
 - G1 **PASS**: под lockctl gen71 проверены live origin/main/localmain6db572b/clean/indexempty/candidateparent/tree; git merge --ff-only exactf77656c rc0 → git push originmain rc0 → ls-remote=f77656c, tree d44ee39b. Source/runtime проверенного QA commit parked без промежуточного изменения main. Эта последующая запись только status docs, не новая runtime QA; QA SHA остаётся f77656c. Local implementation DONE, Q02/liveNOT_RUN; limited scope≤3syntheticPOST/no retries уже GO, но Q02 выдаётся отдельно после fresh testcleanup/idleclear и private launch pointer. ReleaseversionfindingOPEN/no npm/tag/activation. Devreserve.
 
 - 2026-10-03 23:23 MSK: fresh testcleanup b8b76261 подтвердил WIP0/QA f77656c clean/leases0/no ownchildren, evidence/artifacts сохранены. TL actualHEAD/tree/status/hash/liveidle+screen проверил, /clear rc0. Private child-ENV launcher по локальной KB найден; metadata-only check зарегистрирован/запись существует, значение ключа TL не читал и не запускал API. Q02 work-order подготовлен iddecision-q02-go-20261003-2330/replyTob8b76261: exactQAf776/runtime/retainedartifact0ed018ca плюс fresh status-onlymain после этой записи; review/decision-q02-live/test-decision-q02-live. Allowed two POST alias+threeprimitives и pinnedboundary; cap≤3 onlyifexplicitrequiredprivacy, no retries/32KiB/30s. Control00:15/target01:30MSK04.10, timebox1–2ч. Delivery/actualstart по history/пакетуtest, liveNOT_RUN доobservations. Keychain/private launcher details не входят в public repo/evidence. Devreserve, G2WAIT, no release/activation.
+
+- 2026-10-04 00:23 MSK: получен Q02 df0113f0 и принят как фактический FAIL_STOP, не live PASS. TL лично прочитал полный пакет, exact HEAD/tree/parent/clean status, ровно пять owned QA paths, RESULT/runner/guard и sanitized prepare/live/counter/ledger evidence. Artifact SHA2560ed018ca и installed ordinary entry b9942bf совпали. Guard передаёт оригинальные аргументы native fetch на фиксированный /api/alpha/decisions; тела545/9983bytes, preflight0POST/attempts0, предупреждения границ подтверждены. Сохранены две предыдущие preflight stop-попытки0POST.
+- Первый alias POST: HTTP403/UPSTREAM_FORBIDDEN, attempts1/localPOST1,545bytes,737ms,billing_uncertain=false; no model/provider/usage, no retries. Второй pinned остановлен. Primitives/boundary responses NOT_RUN, privacy не настроена/NOT_RUN. Final stopped evidence secret_scanPASS; промежуточный live-partial secret_scanPENDING не выдаётся за финальный scan. Причина403 не определяется по safe code; дефект реализации/доступа/географии не утверждён. Новый paid POST/replay данным нарядом не разрешён, remaining1 сохранён в ledger STOPPED_AFTER_ERROR.
+- TL runtime/API/key-value tests NOT_RUN. QA6b5f503/ветка/evidence сохранены, failed live QA не merged в main; эта запись меняет только статусы. test получает concrete verdict и narrow cleanup/WIP0 перед отдельным дальнейшим листом. Live timers отменяются после сдачи; следующий план — безопасная диагностика без дополнительных POST.
+- Оператор уточнил подготовку Release по подходу muxeon (aea4c4c3 и follow-up), затем c542aac0 попросил уведомить, когда он может сам запустить Release/npm. Core semantic-release уже настроен, ручной bump не нужен. Открыты release-visible feature commit (текущий main содержит test/docs/ci послеv1.0.0), dry-run defaultfalse, packed-artifact checks и действительный provenance/auth configuration. Подготовка обратимых изменений разрешена; сам запуск/publish/tag/activation командой не разрешены. Private management carrier: agent-tl/docs/delegate-mcp-release-automation.md. R01dev → R02test выдаются отдельно после fresh cleanup/idle/clear; approved Q01 history и retained archive не переписываются. G2/READY FOR RELEASE ожидают concrete verified handoff и разрешение live finding согласно G2.
