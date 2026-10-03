@@ -1,0 +1,5 @@
+
+> delegate-mcp@1.0.0 typecheck
+> tsc --noEmit
+
+src/tools.ts(425,9): error TS2367: This comparison appears to be unintentional because the types 'T' and 'ZodObject<{ params: ZodOptional<ZodObject<{ _meta: ZodOptional<ZodObject<{ progressToken: ZodOptional<ZodUnion<readonly [ZodString, ZodNumber]>>; "io.modelcontextprotocol/related-task": ZodOptional<...>; }, $loose>>; cursor: ZodOptional<...>; }, $strip>>; method: ZodLiteral<...>; }, $strip>' have no overlap.

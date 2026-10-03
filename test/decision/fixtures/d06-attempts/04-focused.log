@@ -1,0 +1,9 @@
+
+ RUN  v3.2.7 /opt/art/p/delegate-mcp-wt/dev-decision
+
+ ✓ test/decision/integration.test.ts (28 tests) 4647ms
+
+ Test Files  1 passed (1)
+      Tests  28 passed (28)
+   Start at  19:57:27
+   Duration  5.02s (transform 67ms, setup 0ms, collect 187ms, tests 4.65s, environment 0ms, prepare 36ms)

@@ -1,0 +1,34 @@
+{
+  "state": {"facts": [null, true, 0, {"messages": ["synthetic"]}]},
+  "questions": {
+    "pick": {"type": "choice", "instructions": {"prompt": "Choose"}, "criteria": {"a": null, "b": ["Alternative"], "c": {"when": "ready"}, "d": "Plain description"}},
+    "flag": {"type": "noul", "instructions": ["Check"], "criteria": {"true": {"meaning": true}, "false": ["No"]}},
+    "level": {"type": "score", "instructions": "Rate", "criteria": ["Low", {"meaning": "medium"}, ["High"]]}
+  },
+  "model": "typesafe/jev-1.13",
+  "provider": {
+    "allow_fallbacks": false,
+    "require_parameters": true,
+    "data_collection": "deny",
+    "zdr": true,
+    "enforce_distillable_text": false,
+    "only": ["typesafe"],
+    "ignore": ["future-provider"],
+    "order": ["typesafe", "future-provider"],
+    "sort": {"by": "exacto", "partition": "none"},
+    "max_price": {"prompt": "0.1", "completion": "0", "request": "1", "image": "2", "audio": "3"},
+    "preferred_max_latency": {"p50": 1, "p75": null, "p90": 3, "p99": 4},
+    "preferred_min_throughput": {"p50": null, "p75": 2, "p90": 3, "p99": 4},
+    "quantizations": ["int4", "int8", "fp4", "mxfp4", "nvfp4", "fp6", "fp8", "mxfp8", "fp16", "bf16", "fp32", "unknown"],
+    "options": {"typesafe": {"temperature": 0.2, "nested": [true, null, {"arbitrary": "value"}]}}
+  },
+  "trace": {"trace_id": "synthetic-trace", "trace_name": "fixture", "span_name": "decision", "generation_name": "unit", "parent_span_id": "parent", "metadata": {"tags": [null, 1, false]}},
+  "user": "synthetic-user",
+  "session_id": "synthetic-session",
+  "policy": {
+    "pick": {"type": "choice", "min_confidence": 0, "min_probability": 1, "min_margin": 0.5},
+    "flag": {"type": "noul", "false_max": 0.1, "true_min": 0.9},
+    "level": {"type": "score", "min_confidence": 0.5}
+  },
+  "execution": {"timeout_ms": 1000, "max_retries": 0, "dry_run": true}
+}

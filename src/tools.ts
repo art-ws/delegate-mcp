@@ -14,6 +14,7 @@ import { loadSession, saveSession } from "./sessions.js";
 import type { Session, SessionMessage } from "./sessions.js";
 import { appendMetric } from "./metrics.js";
 import type { Metric } from "./metrics.js";
+import { registerDecisionTool, type DecisionToolContext } from "./decision/tool.js";
 
 /**
  * The three delegate tools + server wiring (leaf 06, seam S-TOOLS — the integration node).
@@ -59,6 +60,8 @@ export interface ToolContext {
   uuid?: () => string;
   /** Sink for non-fatal warnings (default `console.warn` → stderr). */
   warn?: (message: string) => void;
+  /** Isolated decision injection; setup always comes from config.decision. */
+  decision?: Omit<DecisionToolContext, "setup">;
 }
 
 // ---- Public argument shapes (mirrored by the zod inputSchemas below) ---------
@@ -409,9 +412,10 @@ export function resolveContext(
   return { config, pool, warn };
 }
 
-/** Build an McpServer with the three delegate tools registered over `ctx`. */
+/** Build the existing server with legacy tools and optional decision setup. */
 export function createServer(ctx: ToolContext): McpServer {
   const server = new McpServer({ name: SERVER_NAME, version: SERVER_VERSION });
+  registerDecisionTool(server, { ...ctx.decision, setup: ctx.config.decision });
   registerDelegateTools(server, ctx);
   return server;
 }

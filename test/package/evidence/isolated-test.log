@@ -1,0 +1,52 @@
+command=["npm","test"]
+rc=0
+
+> delegate-mcp@1.0.0 pretest
+> node test/decision/fixtures/d06-component-artifacts.mjs
+
+CLI Building entry: {"decision/schemas":"src/decision/schemas.ts","decision/config":"src/decision/config.ts","decision/request":"src/decision/request.ts","decision/response":"src/decision/response.ts","decision/assessment":"src/decision/assessment.ts","decision/client":"src/decision/client.ts","decision/metrics":"src/decision/metrics.ts"}
+CLI Using tsconfig: tsconfig.json
+CLI tsup v8.5.1
+CLI Target: node20
+ESM Build start
+ESM dist/chunk-EYNSNJVF.js      35.75 KB
+ESM dist/decision/metrics.js    1.70 KB
+ESM dist/decision/config.js     7.10 KB
+ESM dist/decision/client.js     10.82 KB
+ESM dist/decision/request.js    3.35 KB
+ESM dist/decision/schemas.js    976.00 B
+ESM dist/decision/response.js   4.27 KB
+ESM dist/decision/assessment.js 2.12 KB
+ESM ⚡️ Build success in 12ms
+PASS ordinary dist/index.js unchanged sha256=b9942bf84d5a309867bbc8397ea4f5d9d2443ddcdba292b528bf0864314eeb47
+
+> delegate-mcp@1.0.0 test
+> vitest run
+
+
+ RUN  v3.2.7 /private<scratch>/isolated
+
+ ✓ test/scaffold.test.ts (5 tests) 1ms
+ ✓ test/sessions.test.ts (11 tests) 8ms
+ ✓ test/metrics.test.ts (8 tests) 7ms
+ ✓ test/files.test.ts (39 tests) 25ms
+ ✓ test/providers.test.ts (26 tests) 11ms
+ ✓ test/config.test.ts (21 tests) 20ms
+ ✓ test/decision/metrics.test.ts (28 tests) 177ms
+ ✓ test/tools.test.ts (14 tests) 59ms
+ ✓ test/decision/schemas.test.ts (295 tests) 360ms
+ ✓ test/decision/config.test.ts (212 tests) 379ms
+   ✓ AC-S2 exports / AC-DIST > loads built S2 in a fresh directory without checkout source/docs  304ms
+ ✓ test/decision/core.test.ts (70 tests) 382ms
+ ✓ test/decision/client.test.ts (94 tests) 418ms
+   ✓ AC-DIST compiled S5 > runs built transport with S3/S4 in a standalone dist copy  316ms
+ ✓ test/decision/integration.test.ts (42 tests) 8557ms
+   ✓ D06 stdio pipeline and isolation > D06-METRICS best effort IO and optional sink, uncertain/unassessed normal  315ms
+   ✓ D06 stdio pipeline and isolation > D06-ERROR preserves attempts and uncertain billing across network retry  463ms
+   ✓ D06 stdio pipeline and isolation > D06-ERROR final transport error retains prior uncertain billing  610ms
+   ✓ D06 actual SDK cancellation and legacy stdio > D06-CANCEL deadline includes queued time and slots recover  1220ms
+
+ Test Files  13 passed (13)
+      Tests  865 passed (865)
+   Start at  20:50:42
+   Duration  8.99s (transform 607ms, setup 0ms, collect 1.63s, tests 10.40s, environment 1ms, prepare 545ms)

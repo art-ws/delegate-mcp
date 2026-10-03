@@ -1,0 +1,5 @@
+command=["npm","run","typecheck"]
+rc=0
+
+> delegate-mcp@1.0.0 typecheck
+> tsc --noEmit

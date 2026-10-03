@@ -363,13 +363,13 @@ describe("MCP server integration (S-TOOLS)", () => {
     return client;
   }
 
-  it("AC1 tools/list returns exactly analyze, query, resume with the right arg schemas", async () => {
+  it("AC1 tools/list preserves analyze, query, resume schemas alongside absent-config decision", async () => {
     const { pool } = makePool({ solo: () => completion() });
     const h = harness(pool);
     const client = await connect(h.ctx);
 
     const { tools } = await client.listTools();
-    expect(tools.map((t) => t.name).sort()).toEqual(["analyze", "query", "resume"]);
+    expect(tools.map((t) => t.name).sort()).toEqual(["analyze", "decision", "query", "resume"]);
 
     const byName = Object.fromEntries(tools.map((t) => [t.name, t]));
     expect(Object.keys(byName.analyze.inputSchema.properties ?? {}).sort()).toEqual([

@@ -1,0 +1,13 @@
+
+ RUN  v3.2.7 /opt/art/p/delegate-mcp-wt/dev-decision
+
+ ✓ test/tools.test.ts (14 tests) 40ms
+ ✓ test/decision/integration.test.ts (38 tests) 7968ms
+   ✓ D06 stdio pipeline and isolation > D06-ERROR preserves attempts and uncertain billing across network retry  467ms
+   ✓ D06 stdio pipeline and isolation > D06-ERROR final transport error retains prior uncertain billing  541ms
+   ✓ D06 actual SDK cancellation and legacy stdio > D06-CANCEL deadline includes queued time and slots recover  1214ms
+
+ Test Files  2 passed (2)
+      Tests  52 passed (52)
+   Start at  20:05:33
+   Duration  8.32s (transform 93ms, setup 0ms, collect 306ms, tests 8.01s, environment 0ms, prepare 56ms)

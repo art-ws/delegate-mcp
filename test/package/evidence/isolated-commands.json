@@ -1,0 +1,27 @@
+[
+  {
+    "name": "isolated-versions",
+    "command": "[\"/opt/homebrew/Cellar/node/26.3.1/bin/node\",\"--version\"]",
+    "rc": 0
+  },
+  {
+    "name": "isolated-npm-version",
+    "command": "[\"npm\",\"--version\"]",
+    "rc": 0
+  },
+  {
+    "name": "isolated-build",
+    "command": "[\"npm\",\"run\",\"build\"]",
+    "rc": 0
+  },
+  {
+    "name": "isolated-oracle-guard-self-check",
+    "command": "[\"/opt/homebrew/Cellar/node/26.3.1/bin/node\",\"-e\",\"const fs=require(\\\"node:fs\\\"),a=require(\\\"node:assert/strict\\\"); fs.readFileSync(process.argv[1]); a.throws(()=>fs.readFileSync(process.argv[2]),/External schema oracle/); console.log(\\\"PASS local canonical oracle allowed; external checkout forbidden\\\");\",\"<scratch>/isolated/docs/decision/input.schema.json\",\"<source>/docs/decision/input.schema.json\"]",
+    "rc": 0
+  },
+  {
+    "name": "isolated-test",
+    "command": "[\"npm\",\"test\"]",
+    "rc": 0
+  }
+]

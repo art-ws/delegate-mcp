@@ -1,0 +1,10 @@
+test/decision/fixtures/d04-attempts/02-typecheck.log:4: new blank line at EOF.
+test/decision/fixtures/d04-attempts/03-focused.log:128: new blank line at EOF.
+test/decision/fixtures/d04-attempts/04-lint.log:4: new blank line at EOF.
+test/decision/fixtures/d04-attempts/07-focused.log:20: new blank line at EOF.
+test/decision/fixtures/d04-attempts/08-typecheck.log:4: new blank line at EOF.
+test/decision/fixtures/d04-attempts/09-lint.log:4: new blank line at EOF.
+test/decision/fixtures/d04-attempts/12-focused.log:21: new blank line at EOF.
+test/decision/fixtures/d04-attempts/14-focused.log:18: new blank line at EOF.
+test/decision/fixtures/d04-attempts/15-typecheck.log:4: new blank line at EOF.
+test/decision/fixtures/d04-attempts/16-lint.log:4: new blank line at EOF.

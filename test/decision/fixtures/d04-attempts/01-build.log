@@ -1,0 +1,21 @@
+
+> delegate-mcp@1.0.0 build
+> tsup src/index.ts src/decision/config.ts src/decision/schemas.ts src/decision/request.ts src/decision/response.ts src/decision/assessment.ts src/decision/client.ts
+
+CLI Building entry: src/index.ts, src/decision/assessment.ts, src/decision/client.ts, src/decision/config.ts, src/decision/request.ts, src/decision/response.ts, src/decision/schemas.ts
+CLI Using tsconfig: tsconfig.json
+CLI tsup v8.5.1
+CLI Using tsup config: /opt/art/p/delegate-mcp-wt/dev-decision/tsup.config.ts
+CLI Target: node20
+CLI Cleaning output folder
+ESM Build start
+ESM dist/decision/config.js     143.00 B
+ESM dist/decision/request.js    3.37 KB
+ESM dist/decision/client.js     10.59 KB
+ESM dist/index.js               21.14 KB
+ESM dist/chunk-FGPBCFFT.js      14.98 KB
+ESM dist/decision/response.js   4.29 KB
+ESM dist/decision/schemas.js    996.00 B
+ESM dist/decision/assessment.js 2.14 KB
+ESM dist/chunk-7NPYESYT.js      35.77 KB
+ESM ⚡️ Build success in 8ms
