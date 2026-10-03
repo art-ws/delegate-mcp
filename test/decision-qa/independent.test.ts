@@ -477,31 +477,66 @@ describe("Q01 native loopback transport and safe result path", () => {
     const fixture = await loopbackFixture();
     const key = "synthetic-key-canary";
     const context = "synthetic-context-canary";
-    const logs: string[] = [];
-    const appendFile = async () => { throw new Error(`${key} ${context}`); };
-    const handler = createDecisionHandler({
-      setup: { status: "ready", config: { ...config, api_key: key, metrics_file: "/tmp/q01-decision.jsonl" } },
-      transport: { fetch: fixture.fetch },
-      requestId: () => "synthetic-q01-id",
-      metrics: { writeStderr: (line) => { logs.push(line); }, appendFile },
+    const rawConfig = {
+      providers: [{ name: "synthetic-reader", base_url: fixture.origin + "/v1", api_key: "env:Q01_LEGACY_KEY", default_model: "synthetic-reader-model" }],
+      decision: { api_key: "env:Q01_SYNTHETIC_KEY" },
+    };
+    const env = { Q01_SYNTHETIC_KEY: key, Q01_LEGACY_KEY: "synthetic-legacy-key-canary" };
+    const setup = loadDecisionSetup(rawConfig.decision, {
+      env: { Q01_SYNTHETIC_KEY: env.Q01_SYNTHETIC_KEY },
+      home: "/tmp/q01-synthetic-home",
+      legacyMetricsFile: "/tmp/q01-synthetic-legacy-metrics.jsonl",
     });
-    const dry = await handler({ ...baseArgs, state: { context }, execution: { dry_run: true } });
+    expect(setup.status).toBe("ready");
+    if (setup.status !== "ready") return;
+    expect(rawConfig.providers[0].api_key).toBe("env:Q01_LEGACY_KEY");
+    expect(env.Q01_LEGACY_KEY).toBe("synthetic-legacy-key-canary");
+
+    const transportLogs: string[] = [];
+    let sinkWrites = 0;
+    const reflectingFetch: typeof globalThis.fetch = async (input, init) => {
+      const response = await fixture.fetch(input, init);
+      await response.body?.cancel();
+      throw new Error(`synthetic transport reflection ${key} ${context}`);
+    };
+    const networkHandler = createDecisionHandler({
+      setup, transport: { fetch: reflectingFetch }, requestId: () => "synthetic-q01-network",
+      metrics: { writeStderr: (line) => { transportLogs.push(line); }, appendFile: async () => { sinkWrites += 1; } },
+    });
+    const dry = await networkHandler({ ...baseArgs, state: { context }, execution: { dry_run: true } });
     expect(dry.structuredContent).toMatchObject({ kind: "dry_run", request: { state: { context } }, meta: { attempts: 0 } });
     expect(fixture.requests).toHaveLength(0);
-    const failed = await handler({ ...baseArgs, state: { route: "reflect-failure", context } });
+    const failed = await networkHandler({ ...baseArgs, state: { context } });
     expect(failed.isError).toBe(true);
-    expect(failed.structuredContent).toMatchObject({ kind: "error", error: { code: "UPSTREAM_UNAVAILABLE" }, meta: { attempts: 1 } });
-    const successful = await handler({ ...baseArgs, state: { context } });
+    expect(failed.structuredContent).toMatchObject({ kind: "error", error: { code: "NETWORK_ERROR" }, meta: { attempts: 1 } });
+    expect(fixture.requests).toHaveLength(1);
+    expect(fixture.requests[0].authorization).toBe(`Bearer ${key}`);
+    expect(JSON.stringify(fixture.requests[0].body)).toContain(context);
+    expect(sinkWrites).toBe(0);
+    expect(JSON.stringify([failed, transportLogs])).not.toContain(key);
+    expect(JSON.stringify([failed, transportLogs])).not.toContain(context);
+
+    const sinkLogs: string[] = [];
+    const sinkSetup = { status: "ready" as const, config: { ...setup.config, metrics_file: "/tmp/q01-synthetic-decision-metrics.jsonl" } };
+    const sinkHandler = createDecisionHandler({
+      setup: sinkSetup, transport: { fetch: fixture.fetch }, requestId: () => "synthetic-q01-sink",
+      metrics: {
+        writeStderr: (line) => { sinkLogs.push(line); },
+        appendFile: async () => { throw new Error(`${key} ${context}`); },
+      },
+    });
+    const successful = await sinkHandler({ ...baseArgs, state: { context } });
     expect(successful.isError).toBe(false);
     expect(successful.structuredContent).toMatchObject({ kind: "decision", result: { answers: { q: { type: "noul", noul: 0.5 } } } });
-    const publicText = JSON.stringify([failed, successful, logs]);
-    expect(JSON.stringify(dry.structuredContent)).toContain(context);
-    expect(publicText).not.toContain(key);
-    expect(publicText).not.toContain(context);
     expect(fixture.requests).toHaveLength(2);
-    expect(fixture.requests.every((request) => request.authorization === `Bearer ${key}`)).toBe(true);
-    expect(fixture.requests.every((request) => JSON.stringify(request.body).includes(context))).toBe(true);
-    const unknownKey = await handler({ ...baseArgs, api_key: key });
+    expect(fixture.requests[1].authorization).toBe(`Bearer ${key}`);
+    expect(JSON.stringify(fixture.requests[1].body)).toContain(context);
+    expect(JSON.stringify([successful, sinkLogs])).not.toContain(key);
+    expect(JSON.stringify([successful, sinkLogs])).not.toContain(context);
+    expect(sinkLogs.join("\n")).toContain("Metrics file write failed.");
+    expect(fixture.legacyRequests).toHaveLength(0);
+
+    const unknownKey = await sinkHandler({ ...baseArgs, api_key: key });
     expect(unknownKey.structuredContent).toMatchObject({ kind: "error", error: { code: "INVALID_ARGUMENT" }, meta: { attempts: 0 } });
     expect(fixture.requests).toHaveLength(2);
   });
