@@ -14,6 +14,7 @@ const releaseConfig = JSON.parse(readFileSync(join(root, ".releaserc.json"), "ut
 const results = [];
 
 function pass(name, fn) { fn(); results.push({ name, result: "PASS" }); }
+const findings = [];
 function assertWorkflow(wf) {
   const triggerKey = Object.hasOwn(wf, "on") ? "on" : true; // js-yaml 4 uses YAML 1.1 and parses GitHub's key as a boolean.
   assert.deepEqual(Object.keys(wf[triggerKey]), ["workflow_dispatch"]);
@@ -44,6 +45,10 @@ function assertWorkflow(wf) {
   const realJob = JSON.stringify(wf.jobs.release);
   assert(realJob.includes("NPM_TOKEN"));
   assert(realJob.includes("npx --no-install semantic-release"));
+  if (!/github\.actor/.test(wf.jobs.release.if ?? "") && !wf.jobs.release.environment) {
+    findings.push({ id: "F-RELEASE-OWNER-GATE", priority: "P1", verdict: "REWORK",
+      detail: "release job has no workflow actor restriction or protected environment reference; owner-only dispatch is not established by this workflow" });
+  }
 }
 
 pass("workflow trigger, boolean default, job dependencies, main/ref guard, timeouts, scopes, credentials", () => assertWorkflow(workflow));
@@ -95,4 +100,4 @@ try {
   results.push({ name: "NC2 forbidden local lifecycle/ref/asset side effect", result: "RED (expected): independent snapshot/lifecycle oracle detected mutated fixture" });
 } finally { rmSync(scratch, { recursive: true, force: true }); }
 
-console.log(JSON.stringify({ status: "PASS", scope: "independent static YAML and local Git control assertions; no external network", results }, null, 2));
+console.log(JSON.stringify({ status: findings.length ? "REWORK" : "PASS", scope: "independent static YAML and local Git control assertions; no external network", results, findings }, null, 2));
