@@ -1411,7 +1411,7 @@
         "key": "Authorization-only synthetic transport capture; absent from body/results/errors/logs",
         "context": "preserved in state body and normal dry_run request envelope; absent from reflected safe errors/logs/stderr"
       },
-      "oracle": "captured output/stderr/error/sink scans",
+      "oracle": "Apply fixture_setup.oracle per canary and per explicitly listed surface; do not scan every surface indiscriminately.",
       "fixture_setup": {
         "config": {
           "decision": {
@@ -1439,16 +1439,48 @@
         },
         "failure": {
           "transport": {
-            "recipe": "Resolve env-reference config via injected mapping; capture Authorization in isolated memory; then throw a synthetic TypeError reflecting both canaries",
+            "recipe": "First resolve the decision-only block through S2; then capture one POST and its Bearer authorization in isolated memory before the injected transport throws the configured synthetic TypeError.",
             "error": {
               "name": "TypeError",
               "message": "failed with SYNTHETIC_Q00_KEY_CANARY_DO_NOT_USE and SYNTHETIC_Q00_CONTEXT_CANARY"
+            },
+            "expected_outcome": {
+              "code": "NETWORK_ERROR",
+              "isError": true
+            },
+            "capture": {
+              "post_count": 1,
+              "authorization": "Bearer SYNTHETIC_Q00_KEY_CANARY_DO_NOT_USE",
+              "key_location": "Authorization header in isolated in-memory capture only"
             }
           },
           "event_sink": {
-            "recipe": "Independent successful synthetic transport followed by injected sink write error reflecting both canaries",
+            "recipe": "In an independent phase, perform a successful synthetic transport with one captured POST and Bearer authorization, then inject the configured event-sink write error.",
             "error": {
               "message": "sink rejected SYNTHETIC_Q00_KEY_CANARY_DO_NOT_USE and SYNTHETIC_Q00_CONTEXT_CANARY"
+            },
+            "expected_outcome": {
+              "result": "decision",
+              "isError": false,
+              "stderr": "safe warning; neither canary reflected"
+            },
+            "capture": {
+              "post_count": 1,
+              "authorization": "Bearer SYNTHETIC_Q00_KEY_CANARY_DO_NOT_USE",
+              "key_location": "Authorization header in isolated in-memory capture only"
+            },
+            "successful_response": {
+              "model": "typesafe/jev-1.13",
+              "answers": {
+                "q": {
+                  "type": "noul",
+                  "noul": 0.9
+                }
+              },
+              "usage": {
+                "input_tokens": 1,
+                "output_tokens": 0
+              }
             }
           }
         },
@@ -1456,22 +1488,37 @@
           "allowed": [
             "resolved key in harness memory",
             "key in Authorization of isolated in-memory transport capture only",
-            "context in DecisionsRequest state body and normal dry_run MCP request body"
+            "context in DecisionsRequest state body and normal dry_run request body"
           ],
           "forbidden": [
-            "key in request body, stdout, stderr, errors, results, logs or sinks",
-            "reflected context in safe errors/logs/stderr",
+            "key in request body, public outputs, or sinks",
+            "key and context absent from reflected safe errors, normal logs, and stderr",
             "legacy metrics",
             "legacy session store",
             "legacy provider transport call"
           ]
         },
-        "oracle": "Run transport failure and event-sink failure independently; scan every forbidden surface for both exact canaries; key is present only in Authorization capture and context is preserved in request body/dry_run envelope. Assert legacy provider transport spy has zero calls.",
+        "oracle": "For each canary, inspect only its explicitly forbidden surfaces: key is absent from request body/public outputs/sinks and context is preserved in state body and normal dry_run request; both are absent from reflected safe errors, normal logs, and stderr. Run transport and sink phases independently, each with exactly one captured POST and Bearer canary only in Authorization; assert NETWORK_ERROR/isError=true for transport failure and a decision result/isError=false with safe warning for sink failure. Assert zero legacy calls.",
         "env_mapping": {
           "Q00_SYNTHETIC_KEY": "SYNTHETIC_Q00_KEY_CANARY_DO_NOT_USE",
           "Q00_SYNTHETIC_LEGACY_KEY": "SYNTHETIC_Q00_LEGACY_KEY"
         },
-        "resolver": "Construct raw synthetic config with this valid providers[] and decision env-reference; call S2 loadDecisionSetup(raw, {env: env_mapping}) to produce ready in-memory decision config; never read process ENV/files or contact either endpoint."
+        "resolver": "Call loadDecisionSetup(fixture_setup.config.decision, {env: fixture_setup.env_mapping, home: \"/tmp/q00-synthetic-home\", legacyMetricsFile: \"/tmp/q00-synthetic-legacy-metrics.jsonl\"}); assert status === \"ready\" and pass setup.config to the harness. This S2 call resolves only the decision block. Configure fixture_setup.config.providers[] and its synthetic spy separately as legacy startup setup. decision.metrics_file is absent. Never read process ENV or real files and never contact either endpoint.",
+        "s2_setup": {
+          "input": "fixture_setup.config.decision",
+          "options": {
+            "env": "fixture_setup.env_mapping",
+            "home": "/tmp/q00-synthetic-home",
+            "legacyMetricsFile": "/tmp/q00-synthetic-legacy-metrics.jsonl"
+          },
+          "expected": "status=ready; pass returned setup.config to the decision harness",
+          "decision_metrics_file": "absent"
+        },
+        "legacy_startup": {
+          "config": "fixture_setup.config with synthetic providers[] and decision block",
+          "purpose": "separate synthetic startup/legacy provider spy setup; do not use loadDecisionSetup to resolve providers[] or its key",
+          "expected_legacy_transport_calls": 0
+        }
       }
     },
     {

@@ -361,7 +361,9 @@
       "expected": {
         "status": "uncertain",
         "value": null,
-        "reasons": []
+        "reasons": [
+          "ambiguous_probability"
+        ]
       }
     },
     {

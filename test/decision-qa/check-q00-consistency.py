@@ -91,10 +91,37 @@ need(can['config']['decision']['api_key']=='env:Q00_SYNTHETIC_KEY', 'canary setu
 need(can['env_mapping']['Q00_SYNTHETIC_KEY']=='SYNTHETIC_Q00_KEY_CANARY_DO_NOT_USE', 'canary mapping injected synthetically')
 need(set(can['failure'])=={'transport','event_sink'}, 'transport and sink failures are separate')
 need(any('context in DecisionsRequest state body' in x for x in can['expected_surfaces']['allowed']), 'context is allowed in request surfaces')
+need(can['s2_setup']['input']=='fixture_setup.config.decision', 'S2 receives decision block only')
+need(can['s2_setup']['options']=={'env':'fixture_setup.env_mapping','home':'/tmp/q00-synthetic-home','legacyMetricsFile':'/tmp/q00-synthetic-legacy-metrics.jsonl'}, 'S2 receives exact injected options and synthetic absolute paths')
+need(can['s2_setup']['expected']=='status=ready; pass returned setup.config to the decision harness', 'S2 ready config is passed to harness')
+need(can['s2_setup']['decision_metrics_file']=='absent', 'decision.metrics_file remains absent')
+need('loadDecisionSetup(fixture_setup.config.decision, {env: fixture_setup.env_mapping, home: \"/tmp/q00-synthetic-home\", legacyMetricsFile: \"/tmp/q00-synthetic-legacy-metrics.jsonl\"})' in can['resolver'], 'resolver states the exact S2 call')
+need('separate synthetic startup/legacy provider spy setup' in can['legacy_startup']['purpose'], 'legacy providers are resolved in separate startup setup')
+need(can['legacy_startup']['expected_legacy_transport_calls']==0, 'legacy provider spy expects zero calls')
+need(can['failure']['transport']['expected_outcome']=={'code':'NETWORK_ERROR','isError':True}, 'transport failure has NETWORK_ERROR error outcome')
+need(can['failure']['event_sink']['expected_outcome']=={'result':'decision','isError':False,'stderr':'safe warning; neither canary reflected'}, 'sink failure preserves decision with safe warning')
+for phase in ('transport','event_sink'):
+    failure=can['failure'][phase]
+    need(failure['capture']['post_count']==1, f'{phase}: exactly one captured POST')
+    need(failure['capture']['authorization']=='Bearer SYNTHETIC_Q00_KEY_CANARY_DO_NOT_USE', f'{phase}: Bearer canary is captured in Authorization')
+    need('isolated in-memory' in failure['capture']['key_location'], f'{phase}: Authorization capture is isolated in memory')
+need(can['failure']['event_sink']['successful_response']=={'model':'typesafe/jev-1.13','answers':{'q':{'type':'noul','noul':0.9}},'usage':{'input_tokens':1,'output_tokens':0}}, 'sink-failure phase has a concrete valid Noul response')
+need('For each canary' in can['oracle'] and 'only its explicitly forbidden surfaces' in can['oracle'], 'canary scans are per-canary and surface-specific')
+need('key in request body, public outputs, or sinks' in can['expected_surfaces']['forbidden'], 'key forbidden surfaces are explicit')
+need('key and context absent from reflected safe errors, normal logs, and stderr' in can['expected_surfaces']['forbidden'], 'both canaries forbidden in reflected safe errors/logs/stderr')
+need('scan every forbidden surface for both exact canaries' not in can['oracle'], 'oracle does not over-scan allowed context surfaces')
+middle=assess['A-NOUL-BETWEEN']['expected']
+need(middle=={'status':'uncertain','value':None,'reasons':['ambiguous_probability']}, 'Noul middle assessment has the S4 ambiguous_probability reason')
+need(assess['A-NOUL-BETWEEN']['assessment_input']['answer']['noul']==0.5, 'Noul middle value remains 0.5')
+need(assess['A-NOUL-BETWEEN']['prepared_args']['policy']['q-noul']=={'type':'noul','false_max':0.2,'true_min':0.8}, 'Noul interval boundaries remain unchanged')
 need(cases['V-UNKNOWN-API-KEY-ARG']['expected'].startswith('INVALID_ARGUMENT'), 'unknown api_key remains separate invalid-argument control')
 need(plan.count('| AC-') == 26, 'acceptance map retains 26 AC rows')
 need('14 entries' in plan and '146 entries' in plan, 'provider coverage retains 14 fields and 146 slugs')
 need(all(f'| M{i} |' in plan for i in range(1,7)), 'M1-M6 are retained')
+need(len(responses)==18, '18 response cases are retained')
+and_fail=assess['A-CHOICE-AND-FAIL']
+need(and_fail['expected']=={'status':'uncertain','value':'a','reasons':['below_margin']}, 'corrected Choice AND fixture remains intact')
+need(bool(semantic['superseded_attempts']), 'historical attempts are retained')
 
 if errors:
     print('FAIL')
