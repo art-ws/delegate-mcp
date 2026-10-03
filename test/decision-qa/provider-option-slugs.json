@@ -1,0 +1,1320 @@
+{
+  "source_schema": "docs/decision/input.schema.json#/$defs/ProviderOptions/propertyNames/enum",
+  "count": 146,
+  "cases": [
+    {
+      "slug": "01ai",
+      "provider": {
+        "options": {
+          "01ai": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "ai21",
+      "provider": {
+        "options": {
+          "ai21": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "aion-labs",
+      "provider": {
+        "options": {
+          "aion-labs": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "akashml",
+      "provider": {
+        "options": {
+          "akashml": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "alibaba",
+      "provider": {
+        "options": {
+          "alibaba": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "amazon-bedrock",
+      "provider": {
+        "options": {
+          "amazon-bedrock": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "amazon-bedrock/claude-on-aws",
+      "provider": {
+        "options": {
+          "amazon-bedrock/claude-on-aws": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "amazon-nova",
+      "provider": {
+        "options": {
+          "amazon-nova": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "ambient",
+      "provider": {
+        "options": {
+          "ambient": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "anthropic",
+      "provider": {
+        "options": {
+          "anthropic": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "anthropic/2",
+      "provider": {
+        "options": {
+          "anthropic/2": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "anyscale",
+      "provider": {
+        "options": {
+          "anyscale": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "arcee-ai",
+      "provider": {
+        "options": {
+          "arcee-ai": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "assemblyai",
+      "provider": {
+        "options": {
+          "assemblyai": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "atlas-cloud",
+      "provider": {
+        "options": {
+          "atlas-cloud": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "atoma",
+      "provider": {
+        "options": {
+          "atoma": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "avian",
+      "provider": {
+        "options": {
+          "avian": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "azure",
+      "provider": {
+        "options": {
+          "azure": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "baidu",
+      "provider": {
+        "options": {
+          "baidu": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "baseten",
+      "provider": {
+        "options": {
+          "baseten": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "black-forest-labs",
+      "provider": {
+        "options": {
+          "black-forest-labs": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "byteplus",
+      "provider": {
+        "options": {
+          "byteplus": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "centml",
+      "provider": {
+        "options": {
+          "centml": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "cerebras",
+      "provider": {
+        "options": {
+          "cerebras": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "chutes",
+      "provider": {
+        "options": {
+          "chutes": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "cirrascale",
+      "provider": {
+        "options": {
+          "cirrascale": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "clarifai",
+      "provider": {
+        "options": {
+          "clarifai": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "claude-on-aws",
+      "provider": {
+        "options": {
+          "claude-on-aws": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "cloudflare",
+      "provider": {
+        "options": {
+          "cloudflare": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "cohere",
+      "provider": {
+        "options": {
+          "cohere": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "coreweave",
+      "provider": {
+        "options": {
+          "coreweave": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "cosine",
+      "provider": {
+        "options": {
+          "cosine": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "crofai",
+      "provider": {
+        "options": {
+          "crofai": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "crucible",
+      "provider": {
+        "options": {
+          "crucible": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "crusoe",
+      "provider": {
+        "options": {
+          "crusoe": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "darkbloom",
+      "provider": {
+        "options": {
+          "darkbloom": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "databricks",
+      "provider": {
+        "options": {
+          "databricks": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "decart",
+      "provider": {
+        "options": {
+          "decart": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "deepgram",
+      "provider": {
+        "options": {
+          "deepgram": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "deepinfra",
+      "provider": {
+        "options": {
+          "deepinfra": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "deepseek",
+      "provider": {
+        "options": {
+          "deepseek": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "dekallm",
+      "provider": {
+        "options": {
+          "dekallm": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "digitalocean",
+      "provider": {
+        "options": {
+          "digitalocean": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "elevenlabs",
+      "provider": {
+        "options": {
+          "elevenlabs": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "enfer",
+      "provider": {
+        "options": {
+          "enfer": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "fake-provider",
+      "provider": {
+        "options": {
+          "fake-provider": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "featherless",
+      "provider": {
+        "options": {
+          "featherless": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "fireworks",
+      "provider": {
+        "options": {
+          "fireworks": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "fish-audio",
+      "provider": {
+        "options": {
+          "fish-audio": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "friendli",
+      "provider": {
+        "options": {
+          "friendli": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "gmicloud",
+      "provider": {
+        "options": {
+          "gmicloud": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "google-ai-studio",
+      "provider": {
+        "options": {
+          "google-ai-studio": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "google-vertex",
+      "provider": {
+        "options": {
+          "google-vertex": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "gopomelo",
+      "provider": {
+        "options": {
+          "gopomelo": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "groq",
+      "provider": {
+        "options": {
+          "groq": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "heygen",
+      "provider": {
+        "options": {
+          "heygen": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "huggingface",
+      "provider": {
+        "options": {
+          "huggingface": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "hyperbolic",
+      "provider": {
+        "options": {
+          "hyperbolic": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "hyperbolic-quantized",
+      "provider": {
+        "options": {
+          "hyperbolic-quantized": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "inception",
+      "provider": {
+        "options": {
+          "inception": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "inceptron",
+      "provider": {
+        "options": {
+          "inceptron": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "inferact-vllm",
+      "provider": {
+        "options": {
+          "inferact-vllm": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "inference-net",
+      "provider": {
+        "options": {
+          "inference-net": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "infermatic",
+      "provider": {
+        "options": {
+          "infermatic": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "inflection",
+      "provider": {
+        "options": {
+          "inflection": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "inocloud",
+      "provider": {
+        "options": {
+          "inocloud": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "io-net",
+      "provider": {
+        "options": {
+          "io-net": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "ionstream",
+      "provider": {
+        "options": {
+          "ionstream": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "klusterai",
+      "provider": {
+        "options": {
+          "klusterai": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "krea",
+      "provider": {
+        "options": {
+          "krea": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "lambda",
+      "provider": {
+        "options": {
+          "lambda": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "lepton",
+      "provider": {
+        "options": {
+          "lepton": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "liquid",
+      "provider": {
+        "options": {
+          "liquid": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "lynn",
+      "provider": {
+        "options": {
+          "lynn": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "lynn-private",
+      "provider": {
+        "options": {
+          "lynn-private": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "makora",
+      "provider": {
+        "options": {
+          "makora": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "mancer",
+      "provider": {
+        "options": {
+          "mancer": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "mancer-old",
+      "provider": {
+        "options": {
+          "mancer-old": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "mara",
+      "provider": {
+        "options": {
+          "mara": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "meta",
+      "provider": {
+        "options": {
+          "meta": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "minimax",
+      "provider": {
+        "options": {
+          "minimax": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "mistral",
+      "provider": {
+        "options": {
+          "mistral": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "modal",
+      "provider": {
+        "options": {
+          "modal": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "modelrun",
+      "provider": {
+        "options": {
+          "modelrun": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "modular",
+      "provider": {
+        "options": {
+          "modular": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "moonshotai",
+      "provider": {
+        "options": {
+          "moonshotai": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "morph",
+      "provider": {
+        "options": {
+          "morph": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "ncompass",
+      "provider": {
+        "options": {
+          "ncompass": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "near-ai",
+      "provider": {
+        "options": {
+          "near-ai": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "nebius",
+      "provider": {
+        "options": {
+          "nebius": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "nex-agi",
+      "provider": {
+        "options": {
+          "nex-agi": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "nextbit",
+      "provider": {
+        "options": {
+          "nextbit": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "nineteen",
+      "provider": {
+        "options": {
+          "nineteen": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "novita",
+      "provider": {
+        "options": {
+          "novita": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "nvidia",
+      "provider": {
+        "options": {
+          "nvidia": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "octoai",
+      "provider": {
+        "options": {
+          "octoai": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "ollama",
+      "provider": {
+        "options": {
+          "ollama": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "open-inference",
+      "provider": {
+        "options": {
+          "open-inference": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "openai",
+      "provider": {
+        "options": {
+          "openai": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "parasail",
+      "provider": {
+        "options": {
+          "parasail": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "perceptron",
+      "provider": {
+        "options": {
+          "perceptron": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "perplexity",
+      "provider": {
+        "options": {
+          "perplexity": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "phala",
+      "provider": {
+        "options": {
+          "phala": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "poolside",
+      "provider": {
+        "options": {
+          "poolside": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "primeintellect",
+      "provider": {
+        "options": {
+          "primeintellect": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "quiver",
+      "provider": {
+        "options": {
+          "quiver": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "recraft",
+      "provider": {
+        "options": {
+          "recraft": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "recursal",
+      "provider": {
+        "options": {
+          "recursal": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "reflection",
+      "provider": {
+        "options": {
+          "reflection": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "reka",
+      "provider": {
+        "options": {
+          "reka": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "relace",
+      "provider": {
+        "options": {
+          "relace": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "replicate",
+      "provider": {
+        "options": {
+          "replicate": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "respan",
+      "provider": {
+        "options": {
+          "respan": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "runway",
+      "provider": {
+        "options": {
+          "runway": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "sail-research",
+      "provider": {
+        "options": {
+          "sail-research": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "sakana",
+      "provider": {
+        "options": {
+          "sakana": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "sakana-ai",
+      "provider": {
+        "options": {
+          "sakana-ai": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "sambanova",
+      "provider": {
+        "options": {
+          "sambanova": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "sambanova-cloaked",
+      "provider": {
+        "options": {
+          "sambanova-cloaked": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "scaledown",
+      "provider": {
+        "options": {
+          "scaledown": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "seed",
+      "provider": {
+        "options": {
+          "seed": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "sf-compute",
+      "provider": {
+        "options": {
+          "sf-compute": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "siliconflow",
+      "provider": {
+        "options": {
+          "siliconflow": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "sourceful",
+      "provider": {
+        "options": {
+          "sourceful": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "stealth",
+      "provider": {
+        "options": {
+          "stealth": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "stepfun",
+      "provider": {
+        "options": {
+          "stepfun": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "streamlake",
+      "provider": {
+        "options": {
+          "streamlake": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "switchpoint",
+      "provider": {
+        "options": {
+          "switchpoint": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "targon",
+      "provider": {
+        "options": {
+          "targon": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "tencent",
+      "provider": {
+        "options": {
+          "tencent": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "tenstorrent",
+      "provider": {
+        "options": {
+          "tenstorrent": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "thinkingmachines",
+      "provider": {
+        "options": {
+          "thinkingmachines": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "together",
+      "provider": {
+        "options": {
+          "together": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "together-lite",
+      "provider": {
+        "options": {
+          "together-lite": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "typesafe",
+      "provider": {
+        "options": {
+          "typesafe": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "ubicloud",
+      "provider": {
+        "options": {
+          "ubicloud": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "unbiased",
+      "provider": {
+        "options": {
+          "unbiased": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "upstage",
+      "provider": {
+        "options": {
+          "upstage": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "venice",
+      "provider": {
+        "options": {
+          "venice": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "voyageai",
+      "provider": {
+        "options": {
+          "voyageai": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "wafer",
+      "provider": {
+        "options": {
+          "wafer": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "wandb",
+      "provider": {
+        "options": {
+          "wandb": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "wandb-legacy",
+      "provider": {
+        "options": {
+          "wandb-legacy": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "xai",
+      "provider": {
+        "options": {
+          "xai": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "xiaomi",
+      "provider": {
+        "options": {
+          "xiaomi": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    },
+    {
+      "slug": "z-ai",
+      "provider": {
+        "options": {
+          "z-ai": {}
+        }
+      },
+      "expected": "accept and preserve known slug/object"
+    }
+  ]
+}

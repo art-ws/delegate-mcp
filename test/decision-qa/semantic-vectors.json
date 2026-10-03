@@ -1,0 +1,207 @@
+{
+  "source": "SPEC v0.2 §§6-8 and canonical output schema; synthetic only.",
+  "assessment": [
+    {
+      "id": "A-CHOICE-AND-PASS",
+      "policy": {
+        "type": "choice",
+        "min_confidence": 0.8,
+        "min_probability": 0.7,
+        "min_margin": 0.2
+      },
+      "answer": {
+        "choice": "a",
+        "confidence": 0.8,
+        "probabilities": {
+          "a": 0.8,
+          "b": 0.2
+        }
+      },
+      "expected": "accepted a; all >= thresholds"
+    },
+    {
+      "id": "A-CHOICE-AND-FAIL",
+      "policy": {
+        "type": "choice",
+        "min_confidence": 0.8,
+        "min_probability": 0.7,
+        "min_margin": 0.2
+      },
+      "answer": {
+        "choice": "a",
+        "confidence": 0.8,
+        "probabilities": {
+          "a": 0.75,
+          "b": 0.25
+        }
+      },
+      "expected": "uncertain a, below_margin; AND semantics"
+    },
+    {
+      "id": "A-CHOICE-TIE",
+      "policy": {
+        "type": "choice",
+        "min_probability": 0.5
+      },
+      "answer": {
+        "choice": "a",
+        "probabilities": {
+          "a": 0.5,
+          "b": 0.5
+        }
+      },
+      "expected": "uncertain a, tie"
+    },
+    {
+      "id": "A-CHOICE-MISSING",
+      "policy": {
+        "type": "choice",
+        "min_confidence": 0.5
+      },
+      "answer": {
+        "choice": "a"
+      },
+      "expected": "uncertain a, missing_metric"
+    },
+    {
+      "id": "A-NOUL-LOW-EQUAL",
+      "policy": {
+        "type": "noul",
+        "false_max": 0.2,
+        "true_min": 0.8
+      },
+      "answer": {
+        "noul": 0.2
+      },
+      "expected": "accepted false at inclusive lower boundary"
+    },
+    {
+      "id": "A-NOUL-HIGH-EQUAL",
+      "policy": {
+        "type": "noul",
+        "false_max": 0.2,
+        "true_min": 0.8
+      },
+      "answer": {
+        "noul": 0.8
+      },
+      "expected": "accepted true at inclusive upper boundary"
+    },
+    {
+      "id": "A-NOUL-BETWEEN",
+      "policy": {
+        "type": "noul",
+        "false_max": 0.2,
+        "true_min": 0.8
+      },
+      "answer": {
+        "noul": 0.5
+      },
+      "expected": "uncertain null"
+    },
+    {
+      "id": "A-NOUL-INVALID",
+      "policy": {
+        "type": "noul",
+        "false_max": 0.8,
+        "true_min": 0.8
+      },
+      "expected": "INVALID_ARGUMENT because false_max < true_min"
+    },
+    {
+      "id": "A-POLICY-ID-TYPE",
+      "expected": "INVALID_ARGUMENT on absent question ID or mismatched policy type"
+    },
+    {
+      "id": "A-NO-POLICY",
+      "expected": "unassessed, original value, reasons=[]"
+    },
+    {
+      "id": "A-SCORE-EQUALITY",
+      "policy": {
+        "type": "score",
+        "min_confidence": 0.75
+      },
+      "answer": {
+        "score": 2,
+        "confidence": 0.75
+      },
+      "expected": "accepted, value remains numeric 2"
+    }
+  ],
+  "responses": [
+    {
+      "id": "R-MINIMAL-OPTIONAL-OMITTED",
+      "response": {
+        "model": "synthetic-model",
+        "answers": {
+          "q-choice": {
+            "type": "choice",
+            "choice": "yes"
+          },
+          "q-noul": {
+            "type": "noul",
+            "noul": 0.5
+          },
+          "q-score": {
+            "type": "score",
+            "score": 1
+          }
+        }
+      },
+      "expected": "valid; absent id/provider/usage/cost/optional confidence/probabilities/legend remain absent; warning missing_optional_metrics; required metric policy uncertain"
+    },
+    {
+      "id": "R-UNKNOWN-UPSTREAM-KEY",
+      "expected": "accepted known fields; unknown additions removed from surfaced result"
+    },
+    {
+      "id": "R-WRONG-ID",
+      "expected": "UPSTREAM_PROTOCOL, all-or-error"
+    },
+    {
+      "id": "R-WRONG-TYPE",
+      "expected": "UPSTREAM_PROTOCOL"
+    },
+    {
+      "id": "R-UNKNOWN-CHOICE",
+      "expected": "UPSTREAM_PROTOCOL"
+    },
+    {
+      "id": "R-CHOICE-PROBABILITY-KEYS",
+      "expected": "UPSTREAM_PROTOCOL if key set differs from requested choices"
+    },
+    {
+      "id": "R-CHOICE-MAXIMUM",
+      "expected": "reject selected option below maximum; ties allowed absent policy"
+    },
+    {
+      "id": "R-OUT-OF-RANGE-NONFINITE",
+      "expected": "UPSTREAM_PROTOCOL for non-finite/out-of-range Noul/confidence/probability/Score"
+    },
+    {
+      "id": "R-SCORE-LEGEND",
+      "expected": "UPSTREAM_PROTOCOL if legend differs from requested criteria"
+    },
+    {
+      "id": "R-SCORE-PROBABILITY-KEYS",
+      "expected": "exact string indices 0..N-1"
+    },
+    {
+      "id": "R-PROB-SUM",
+      "expected": "accept abs(sum-1)<=.02, otherwise reject; no renormalization"
+    },
+    {
+      "id": "R-SCORE-EXPECTATION",
+      "expected": "accept abs(score-sum(i*p_i))<=.02*(N-1)+.02, else reject"
+    },
+    {
+      "id": "R-USAGE",
+      "expected": "usage tokens nonnegative integers; cost finite nonnegative"
+    },
+    {
+      "id": "R-HTML-NOT-JSON",
+      "expected": "UPSTREAM_PROTOCOL; fixed safe message, no raw body"
+    }
+  ]
+}
