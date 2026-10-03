@@ -29,16 +29,16 @@
 | Q01 | test | PASS | r2 `decision-q01-r2-go-20261003-2255`, сдача `49a68e67-735e-4f52-a183-9374e7d93b06` | exactf77656c7fddddda029f66659db8fba5e3964a2fb/treed44ee39b521376284cbd9d0b85fa1b3de528c8fd, parentfreshmain6db572b; all six tracked logs/source blobs and accurate map verified; full886/886+independent21/21, validM1–M6, installedNode20.20.2/current26.3.1; archiveSHA0ed018ca |
 | G1 | tl | PASS | 2026-10-03 23:15 MSK | exact reviewedf77656c/tree d44ee39b fast-forwarded and pushed; freshmain6db572b matched local/remote under lockctl, no foreign staged paths; status-only docs below do not claim a separate runtime gate |
 | Q02 | test | FAIL_STOP / ACCESS_UNKNOWN | `decision-q02-go-20261003-2330`, сдача `df0113f0-7a28-415a-9b32-37b05bb49540` | QA6b5f503cd15a6fbbda112604192b09eb2e6029e7/tree3277f33b288e67d553d2f466137dd9156fd80b38, parentc812463; installed archiveSHA0ed018ca/entryb9942bf сверены TL; dry-run545/9983bytes/0POST PASS; alias403/UPSTREAM_FORBIDDEN/attempts1/POST1/737ms/billing_uncertainfalse, retries0; pinned/primitives/boundaries liveNOT_RUN; ledgerSTOPPED, remaining1 не переиспользуется этим нарядом |
-| D-ACCESS | test | OBSERVATIONS_REVIEWED / UNKNOWN; CONFORMANCE_FAIL | `decision-q02-access-go-20261004-0040`, сдача969deeeb | QA5c97c90ac9eeb21d635d0f85f964d55dac675740/tree fec532f6d71fa6fc8ad0f3d97082db6be2372993, parent6b5f503; owned3paths/clean сверены TL; modelsGET403/15400ms/66bytes и keyGET403/15216ms/66bytes, POST0/retry0/redirect0; причина403 UNKNOWN. Strict15s wall bound FAIL; nullable remaining projection требует offline исправления перед reuse, не искажает эти HTTP403 observations. Runtime TL NOT_RUN; reply review ещё ожидает отдельного delivery. |
+| D-ACCESS | test | OBSERVATIONS_REVIEWED / UNKNOWN; CONFORMANCE_FAIL | `decision-q02-access-go-20261004-0040`, сдача969deeeb | QA5c97c90ac9eeb21d635d0f85f964d55dac675740/tree fec532f6d71fa6fc8ad0f3d97082db6be2372993, parent6b5f503; owned3paths/clean сверены TL; modelsGET403/15400ms/66bytes и keyGET403/15216ms/66bytes, POST0/retry0/redirect0; причина403 UNKNOWN. Strict15s wall bound FAIL; nullable remaining projection требует offline исправления перед reuse, не искажает эти HTTP403 observations. Runtime TL NOT_RUN; reviewreply decision-access-review-20261004 доставлен, cleanup8f2bb30b принятWIP0/clean/noownleases; harness findings DEFERRED before reuse. |
 | G2 | tl | RELEASE_HOLD | нет | Q02 FAIL_STOP требует дальнейшего плана; выпуск с непроверенным live — только с предусмотренным решением владельца; Release automation preparation отдельно, READY не заявлен |
 
 ## Раскладка ролей
 
 | Роль | Активный исполнительный лист | Очередь после GO |
 |---|---|---|
-| tl | Static review D-ACCESS завершён, delivery ответа test ожидает; контроль R01 | R02 → G2/уведомление владельца |
+| tl | D-ACCESS review закрыт, test cleanup принят; контроль R01 | R02 → G2/уведомление владельца |
 | dev | R01 Release preparation ACTIVE; decision source/artifact сохранены | R02 independent QA после component review |
-| test | D-ACCESS сдан; UNKNOWN/CONFORMANCE_FAIL, ожидает review reply и cleanup | R02 Release QA после сдачи R01 и нового clean-slate |
+| test | Резерв после D-ACCESS review/cleanup8f2bb30b; QA5c97c90 clean/WIP0/noownleases | R02 Release QA после сдачи R01 и нового clean-slate |
 
 При G0 MCP list_peers и закрывающие сообщения подтвердили dev/test idle в резерве; чужие задачи не вытесняются. dev подтвердил WIP=0 и cleanup сообщением `c52f5ee6-197c-487f-a54d-85c706e208dd` (служебные дочерние удалены, основная/чужие сохранены, checkout чистый, аренды отсутствуют). Live get_status=idle и /clear перед D01 выполнены, rc=0. Актуальные исполнительные листы — в раскладке выше.
 
