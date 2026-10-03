@@ -1,0 +1,31 @@
+{
+  "state": {
+    "scenario": "q02-alias",
+    "marker": "synthetic-only",
+    "status": "amber"
+  },
+  "questions": {
+    "route": {
+      "type": "choice",
+      "instructions": "Select the route matching the synthetic status.",
+      "criteria": {
+        "green": "Status is green",
+        "amber": "Status is amber",
+        "red": "Status is red"
+      }
+    },
+    "ready": {
+      "type": "noul",
+      "instructions": "Is the synthetic item ready?",
+      "criteria": {
+        "true": "Ready",
+        "false": "Not ready"
+      }
+    },
+    "quality": {
+      "type": "score",
+      "instructions": "Score the synthetic item quality.",
+      "criteria": ["low", "medium", "high"]
+    }
+  }
+}
