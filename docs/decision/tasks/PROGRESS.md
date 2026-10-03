@@ -8,10 +8,10 @@
 |---|---|---|
 | Подготовка дерева | DONE | Документация подготовлена по запросу владельца |
 | GO-IMPLEMENT / старт dev/test | **GO** | operator-web `14115228-44f6-4438-afe9-962178843ab8`, 2026-10-03: «Приступайте к реализации задачи /opt/art/p/delegate-mcp/docs/README.md - команда (tl, dev, test)»; полный scope дерева, включая S1–S7 и park main после Q01 PASS |
-| Live scope Q02 | **GO, WAIT_DEPENDENCIES** | Аппрув полного дерева тем же поручением: до трёх синтетических платных POST без retries, только после Q01/G1 и отдельной выдачи Q02 |
+| Live scope Q02 | **GO, DEPENDENCIES_PASS** | Аппрув полного дерева тем же поручением: до трёх синтетических платных POST без retries, только после Q01/G1 и отдельной выдачи Q02 |
 | npm release / activation | **NONE — HOLD** | Вне текущего этапа, отдельное поручение |
 
-Разрешение стартовать — прямое поручение владельца выше. Текущий статус эпика: **IN_PROGRESS / LOCAL_IMPLEMENTATION_DONE / Q01_PASS / G1_PASS / Q00_PLAN_PASS**; независимая локальная приёмка принята и проверенный runtime parked в main; live — **NOT_RUN**, Q02 следующий лист после clean-slate. Публикация npm, tag/GitHub Release, release workflow и активация MCP не разрешены.
+Разрешение стартовать — прямое поручение владельца выше. Текущий статус эпика: **IN_PROGRESS / LOCAL_IMPLEMENTATION_DONE / Q01_PASS / G1_PASS / Q00_PLAN_PASS**; независимая локальная приёмка принята и проверенный runtime parked в main; live — **NOT_RUN**, Q02 clean-slate выполнен, выдача подготовлена. Публикация npm, tag/GitHub Release, release workflow и активация MCP не разрешены.
 
 ## Листья
 
@@ -28,16 +28,16 @@
 | Q00 | test | PLAN_PASS | `87fdb5bd-f497-47a6-bc1b-e7d7eabc5729`, сдача `f4e209b2-a0b0-42fe-b0a2-577f50f415e6` | QA `c102897315d6badcfb59fa583a48c1ab1f43c961`, parent0de2036; TL actual bytes/static review закрывает оба r3 findings; independent runtime QA инструмента NOT_RUN |
 | Q01 | test | PASS | r2 `decision-q01-r2-go-20261003-2255`, сдача `49a68e67-735e-4f52-a183-9374e7d93b06` | exactf77656c7fddddda029f66659db8fba5e3964a2fb/treed44ee39b521376284cbd9d0b85fa1b3de528c8fd, parentfreshmain6db572b; all six tracked logs/source blobs and accurate map verified; full886/886+independent21/21, validM1–M6, installedNode20.20.2/current26.3.1; archiveSHA0ed018ca |
 | G1 | tl | PASS | 2026-10-03 23:15 MSK | exact reviewedf77656c/tree d44ee39b fast-forwarded and pushed; freshmain6db572b matched local/remote under lockctl, no foreign staged paths; status-only docs below do not claim a separate runtime gate |
-| Q02 | test | READY_AFTER_CLEANUP | нет | Q01/G1 dependencies PASS; limited live≤3POST/no retries authorized; future separate dispatch and private ENV launch pointer, liveNOT_RUN |
+| Q02 | test | DELIVERY_PREPARED | `decision-q02-go-20261003-2330`, replyTo cleanupb8b76261; receipt сверяется history | Q01/G1 PASS; installed artifactSHA0ed018ca; two synthetic POST alias+pinned, no retries/≤32KiB/≤30s; third only separately configured required privacy; private child-ENV launch pointer metadata verified without values; liveNOT_RUN |
 | G2 | tl | WAIT_DEPENDENCIES | нет | — |
 
 ## Раскладка ролей
 
 | Роль | Активный исполнительный лист | Очередь после GO |
 |---|---|---|
-| tl | Q02 clean-slate / постановка | live evidence review → G2 |
+| tl | Q02 контроль / live evidence review | review → G2 |
 | dev | Резерв после D07; WIP=0, source/artifact сохранены | адресный rework при findings Q01 |
-| test | Q01 принят; cleanup перед отдельным Q02 | Q02 → G2 handoff |
+| test | Q02 выдача подготовлена после cleanup/idle/clear | Q02 → G2 handoff |
 
 При G0 MCP list_peers и закрывающие сообщения подтвердили dev/test idle в резерве; чужие задачи не вытесняются. dev подтвердил WIP=0 и cleanup сообщением `c52f5ee6-197c-487f-a54d-85c706e208dd` (служебные дочерние удалены, основная/чужие сохранены, checkout чистый, аренды отсутствуют). Live get_status=idle и /clear перед D01 выполнены, rc=0. Актуальные исполнительные листы — в раскладке выше.
 
@@ -146,3 +146,5 @@ Re-resolve G0: локальный main и live origin/main совпадают �
 
 - 2026-10-03 23:15 MSK: Q01r2 message49a68e67 принят **PASS** после личного TL static review exactf77656c/tree d44ee39b/parent6db572b/clean status. Git blobs всех sixauthorlogs совпадают source489, management tree совпадает main6db572b, producer delta внеQA/management пуст. Map реальныеprovider/body/groupedstdio assertions, QA runtime/vector bytes неизменны r1; corrected namedM2/M3/M6 и validM1/M4/M5b evidence reuse обоснован. FINAL before/after exactSHA/tree/clean, full886/886+independent21/21, allgatesrc0; own/retained archivesSHA0ed018ca и ordinaryentryb9942bf повторно совпали, retained/owninstalledstdio наactualNode20/currentrc0. First incomplete triale3ddcaba сохранён/исключён. TL runtime/build/tests не выполнял.
 - G1 **PASS**: под lockctl gen71 проверены live origin/main/localmain6db572b/clean/indexempty/candidateparent/tree; git merge --ff-only exactf77656c rc0 → git push originmain rc0 → ls-remote=f77656c, tree d44ee39b. Source/runtime проверенного QA commit parked без промежуточного изменения main. Эта последующая запись только status docs, не новая runtime QA; QA SHA остаётся f77656c. Local implementation DONE, Q02/liveNOT_RUN; limited scope≤3syntheticPOST/no retries уже GO, но Q02 выдаётся отдельно после fresh testcleanup/idleclear и private launch pointer. ReleaseversionfindingOPEN/no npm/tag/activation. Devreserve.
+
+- 2026-10-03 23:23 MSK: fresh testcleanup b8b76261 подтвердил WIP0/QA f77656c clean/leases0/no ownchildren, evidence/artifacts сохранены. TL actualHEAD/tree/status/hash/liveidle+screen проверил, /clear rc0. Private child-ENV launcher по локальной KB найден; metadata-only check зарегистрирован/запись существует, значение ключа TL не читал и не запускал API. Q02 work-order подготовлен iddecision-q02-go-20261003-2330/replyTob8b76261: exactQAf776/runtime/retainedartifact0ed018ca плюс fresh status-onlymain после этой записи; review/decision-q02-live/test-decision-q02-live. Allowed two POST alias+threeprimitives и pinnedboundary; cap≤3 onlyifexplicitrequiredprivacy, no retries/32KiB/30s. Control00:15/target01:30MSK04.10, timebox1–2ч. Delivery/actualstart по history/пакетуtest, liveNOT_RUN доobservations. Keychain/private launcher details не входят в public repo/evidence. Devreserve, G2WAIT, no release/activation.
