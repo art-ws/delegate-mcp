@@ -11,14 +11,14 @@
 | Live scope Q02 | **GO, WAIT_DEPENDENCIES** | Аппрув полного дерева тем же поручением: до трёх синтетических платных POST без retries, только после Q01/G1 и отдельной выдачи Q02 |
 | npm release / activation | **NONE — HOLD** | Вне текущего этапа, отдельное поручение |
 
-Разрешение стартовать — прямое поручение владельца выше. Текущий статус эпика: **GO / READY_D01**; runtime QA и live — **NOT_RUN**. Публикация npm, tag/GitHub Release, release workflow и активация MCP не разрешены.
+Разрешение стартовать — прямое поручение владельца выше. Текущий статус эпика: **IN_PROGRESS / D01_DISPATCHED**; runtime QA и live — **NOT_RUN**. Публикация npm, tag/GitHub Release, release workflow и активация MCP не разрешены.
 
 ## Листья
 
 | ID | Роль | Статус | Выдан | Candidate / evidence |
 |---|---|---|---|---|
 | G0 | tl | PASS | 2026-10-03 | GO + 13/13 baseline bytes; dev WIP=0, cleanup `c52f5ee6-197c-487f-a54d-85c706e208dd`; idle и /clear подтверждены |
-| D01 | dev | READY | нет | predecessor main `595dce8f280045d0134e49060282b13c6293c0a0` |
+| D01 | dev | DISPATCHED | 2026-10-03 16:14 MSK; `c8b5c9e1-ae29-43fc-adda-8a7aaf299709` | predecessor G0 `9c268a425fbea852045c05f0ea19b86db37ba929`; candidate ожидается |
 | D02 | dev | WAIT_DEPENDENCIES | нет | — |
 | D03 | dev | WAIT_DEPENDENCIES | нет | — |
 | D04 | dev | WAIT_DEPENDENCIES | нет | — |
@@ -35,8 +35,8 @@
 
 | Роль | Активный исполнительный лист | Очередь после GO |
 |---|---|---|
-| tl | диспетч D01 | review/диспетч → G1 → G2 |
-| dev | нет; clean-slate готов | D01 → D02 → D03 → D04 → D05 → D06 → D07 |
+| tl | контроль D01 / чтение evidence | review/диспетч → G1 → G2 |
+| dev | D01 | D02 → D03 → D04 → D05 → D06 → D07 |
 | test | нет | Q00 после D01 → Q01 после D07 → Q02 после G1 |
 
 MCP list_peers и последние закрывающие сообщения подтверждают dev/test idle в резерве; чужие задачи не вытесняются. dev подтвердил WIP=0 и cleanup сообщением `c52f5ee6-197c-487f-a54d-85c706e208dd` (служебные дочерние удалены, основная/чужие сохранены, checkout чистый, аренды отсутствуют). Live get_status=idle и /clear перед D01 выполнены, rc=0. test получает Q00 после D01, до того исполнительного листа нет.
@@ -50,3 +50,4 @@ Re-resolve G0: локальный main и live origin/main совпадают �
 
 - 2026-10-03: прямое GO владельца `14115228-44f6-4438-afe9-962178843ab8` снимает approval HOLD полного дерева. main/remote и 13 baseline bytes проверены чтением, runtime прогоны TL не выполнялись. Убраны устаревшие копии текущего HOLD из листьев: статусы остаются только здесь.
 - G0 PASS: доступность/WIP и clean-slate dev подтверждены; test idle в резерве, Q00 ожидает D01. Первая контрольная точка D01 ≤90 минут после выдачи, timebox 2–3 часа активной работы.
+- 2026-10-03 16:14 MSK: D01 выдан dev через MCP `c8b5c9e1-ae29-43fc-adda-8a7aaf299709` (router queued=true), после idle/cleanup/clear. Predecessor G0 `9c268a425fbea852045c05f0ea19b86db37ba929`; worktree назначен /opt/art/p/delegate-mcp-wt/dev-decision, ветка feat/decision-v0.2 (создание подтверждает dev при сдаче). Контроль до 17:45 MSK, целевая сдача до 19:15 MSK; timebox 2–3 часа активной работы. Диспетч/очередь роутера не является component PASS или QA ACCEPT. Q00 выдаётся test после принятого пакета D01.
