@@ -513,9 +513,6 @@ describe("Q01 native loopback transport and safe result path", () => {
     expect(fixture.requests[0].authorization).toBe(`Bearer ${key}`);
     expect(JSON.stringify(fixture.requests[0].body)).toContain(context);
     expect(sinkWrites).toBe(0);
-    expect(JSON.stringify([failed, transportLogs])).not.toContain(key);
-    expect(JSON.stringify([failed, transportLogs])).not.toContain(context);
-
     const sinkLogs: string[] = [];
     const sinkSetup = { status: "ready" as const, config: { ...setup.config, metrics_file: "/tmp/q01-synthetic-decision-metrics.jsonl" } };
     const sinkHandler = createDecisionHandler({
@@ -531,9 +528,10 @@ describe("Q01 native loopback transport and safe result path", () => {
     expect(fixture.requests).toHaveLength(2);
     expect(fixture.requests[1].authorization).toBe(`Bearer ${key}`);
     expect(JSON.stringify(fixture.requests[1].body)).toContain(context);
-    expect(JSON.stringify([successful, sinkLogs])).not.toContain(key);
-    expect(JSON.stringify([successful, sinkLogs])).not.toContain(context);
     expect(sinkLogs.join("\n")).toContain("Metrics file write failed.");
+    const publicSurfaces = JSON.stringify([failed, transportLogs, successful, sinkLogs]);
+    expect(publicSurfaces).not.toContain(key);
+    expect(publicSurfaces).not.toContain(context);
     expect(fixture.legacyRequests).toHaveLength(0);
 
     const unknownKey = await sinkHandler({ ...baseArgs, api_key: key });
