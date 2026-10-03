@@ -1,0 +1,17 @@
+
+> delegate-mcp@1.0.0 test
+> vitest run test/decision/client.test.ts test/decision/core.test.ts test/decision/config.test.ts test/decision/schemas.test.ts
+
+
+ RUN  v3.2.7 /opt/art/p/delegate-mcp-wt/dev-decision
+
+ ✓ test/decision/schemas.test.ts (295 tests) 323ms
+ ✓ test/decision/core.test.ts (70 tests) 325ms
+ ✓ test/decision/config.test.ts (212 tests) 352ms
+ ✓ test/decision/client.test.ts (94 tests) 358ms
+   ✓ AC-DIST compiled S5 > runs built transport with S3/S4 in a standalone dist copy  312ms
+
+ Test Files  4 passed (4)
+      Tests  671 passed (671)
+   Start at  18:50:09
+   Duration  617ms (transform 163ms, setup 0ms, collect 339ms, tests 1.36s, environment 0ms, prepare 114ms)
