@@ -414,9 +414,11 @@ describe("Q01 native loopback transport and safe result path", () => {
           await client.connect(transport);
           const tools = (await client.listTools()).tools;
           if (mode === "absent") {
-            const result = await client.callTool({ name: "decision", arguments: { ...baseArgs, execution: { dry_run: true } } });
-            expect(result.structuredContent).toMatchObject({ kind: "error", error: { code: "CONFIG_ERROR" }, meta: { attempts: 0 } });
-            expect(fixture.requests).toHaveLength(0);
+            const result = await client.callTool({ name: "decision", arguments: { ...baseArgs, execution: { dry_run: false } } });
+            const envelope = result.structuredContent as Vector;
+            expect({ kind: envelope?.kind, code: envelope?.error?.code, attempts: envelope?.meta?.attempts, posts: fixture.requests.length }).toEqual({
+              kind: "error", code: "CONFIG_ERROR", attempts: 0, posts: 0,
+            });
           }
           expect(tools.map((tool) => tool.name).sort(), mode).toEqual(mode === "disabled" ? ["analyze", "query", "resume"] : ["analyze", "decision", "query", "resume"]);
           if (mode !== "disabled") {
