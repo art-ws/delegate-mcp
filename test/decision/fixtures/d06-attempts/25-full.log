@@ -1,0 +1,31 @@
+command=["npm","test"]
+rc=0
+
+> delegate-mcp@1.0.0 test
+> vitest run
+
+
+[1m[46m RUN [49m[22m [36mv3.2.7 [39m[90m/opt/art/p/delegate-mcp-wt/dev-decision[39m
+
+ [32m✓[39m test/scaffold.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 1[2mms[22m[39m
+ [32m✓[39m test/sessions.test.ts [2m([22m[2m11 tests[22m[2m)[22m[32m 8[2mms[22m[39m
+ [32m✓[39m test/metrics.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 10[2mms[22m[39m
+ [32m✓[39m test/files.test.ts [2m([22m[2m39 tests[22m[2m)[22m[32m 20[2mms[22m[39m
+ [32m✓[39m test/providers.test.ts [2m([22m[2m26 tests[22m[2m)[22m[32m 11[2mms[22m[39m
+ [32m✓[39m test/config.test.ts [2m([22m[2m21 tests[22m[2m)[22m[32m 15[2mms[22m[39m
+ [32m✓[39m test/decision/metrics.test.ts [2m([22m[2m28 tests[22m[2m)[22m[32m 169[2mms[22m[39m
+ [32m✓[39m test/tools.test.ts [2m([22m[2m14 tests[22m[2m)[22m[32m 57[2mms[22m[39m
+ [32m✓[39m test/decision/schemas.test.ts [2m([22m[2m295 tests[22m[2m)[22m[33m 366[2mms[22m[39m
+ [32m✓[39m test/decision/config.test.ts [2m([22m[2m212 tests[22m[2m)[22m[33m 374[2mms[22m[39m
+ [32m✓[39m test/decision/core.test.ts [2m([22m[2m70 tests[22m[2m)[22m[33m 362[2mms[22m[39m
+ [32m✓[39m test/decision/client.test.ts [2m([22m[2m94 tests[22m[2m)[22m[33m 406[2mms[22m[39m
+   [33m[2m✓[22m[39m AC-DIST compiled S5[2m > [22mruns built transport with S3/S4 in a standalone dist copy [33m 300[2mms[22m[39m
+ [32m✓[39m test/decision/integration.test.ts [2m([22m[2m42 tests[22m[2m)[22m[33m 8215[2mms[22m[39m
+   [33m[2m✓[22m[39m D06 stdio pipeline and isolation[2m > [22mD06-ERROR preserves attempts and uncertain billing across network retry [33m 529[2mms[22m[39m
+   [33m[2m✓[22m[39m D06 stdio pipeline and isolation[2m > [22mD06-ERROR final transport error retains prior uncertain billing [33m 533[2mms[22m[39m
+   [33m[2m✓[22m[39m D06 actual SDK cancellation and legacy stdio[2m > [22mD06-CANCEL deadline includes queued time and slots recover [33m 1218[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m13 passed[39m[22m[90m (13)[39m
+[2m      Tests [22m [1m[32m865 passed[39m[22m[90m (865)[39m
+[2m   Start at [22m 20:12:21
+[2m   Duration [22m 8.63s[2m (transform 613ms, setup 0ms, collect 1.67s, tests 10.02s, environment 1ms, prepare 476ms)[22m

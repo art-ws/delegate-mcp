@@ -1,0 +1,11 @@
+
+ RUN  v3.2.7 /opt/art/p/delegate-mcp-wt/dev-decision
+
+ ✓ test/decision/integration.test.ts (35 tests) 7105ms
+   ✓ D06 stdio pipeline and isolation > D06-ERROR preserves attempts and uncertain billing across network retry  492ms
+   ✓ D06 actual SDK cancellation and legacy stdio > D06-CANCEL deadline includes queued time and slots recover  1215ms
+
+ Test Files  1 passed (1)
+      Tests  35 passed (35)
+   Start at  20:00:44
+   Duration  7.42s (transform 63ms, setup 0ms, collect 138ms, tests 7.10s, environment 0ms, prepare 26ms)

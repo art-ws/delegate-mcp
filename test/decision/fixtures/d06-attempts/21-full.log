@@ -1,0 +1,34 @@
+command=["npm","test"]
+rc=0
+
+> delegate-mcp@1.0.0 test
+> vitest run
+
+
+[1m[46m RUN [49m[22m [36mv3.2.7 [39m[90m/opt/art/p/delegate-mcp-wt/dev-decision[39m
+
+ [32m✓[39m test/scaffold.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 2[2mms[22m[39m
+ [32m✓[39m test/metrics.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 10[2mms[22m[39m
+ [32m✓[39m test/sessions.test.ts [2m([22m[2m11 tests[22m[2m)[22m[32m 8[2mms[22m[39m
+ [32m✓[39m test/files.test.ts [2m([22m[2m39 tests[22m[2m)[22m[32m 16[2mms[22m[39m
+ [32m✓[39m test/providers.test.ts [2m([22m[2m26 tests[22m[2m)[22m[32m 11[2mms[22m[39m
+ [32m✓[39m test/config.test.ts [2m([22m[2m21 tests[22m[2m)[22m[32m 14[2mms[22m[39m
+ [32m✓[39m test/decision/metrics.test.ts [2m([22m[2m28 tests[22m[2m)[22m[32m 189[2mms[22m[39m
+ [32m✓[39m test/tools.test.ts [2m([22m[2m14 tests[22m[2m)[22m[32m 82[2mms[22m[39m
+ [32m✓[39m test/decision/config.test.ts [2m([22m[2m212 tests[22m[2m)[22m[33m 416[2mms[22m[39m
+   [33m[2m✓[22m[39m AC-S2 exports / AC-DIST[2m > [22mloads built S2 in a fresh directory without checkout source/docs [33m 342[2mms[22m[39m
+ [32m✓[39m test/decision/core.test.ts [2m([22m[2m70 tests[22m[2m)[22m[33m 394[2mms[22m[39m
+   [33m[2m✓[22m[39m D03 AC-DIST compiled component[2m > [22mruns S3/S4 exports in a standalone dist copy without source or docs [33m 331[2mms[22m[39m
+ [32m✓[39m test/decision/schemas.test.ts [2m([22m[2m295 tests[22m[2m)[22m[33m 438[2mms[22m[39m
+   [33m[2m✓[22m[39m D01 AC-DIST: runtime component without checkout source/docs[2m > [22mloads built schemas and validators from a standalone dist copy [33m 305[2mms[22m[39m
+ [32m✓[39m test/decision/client.test.ts [2m([22m[2m94 tests[22m[2m)[22m[33m 464[2mms[22m[39m
+   [33m[2m✓[22m[39m AC-DIST compiled S5[2m > [22mruns built transport with S3/S4 in a standalone dist copy [33m 326[2mms[22m[39m
+ [32m✓[39m test/decision/integration.test.ts [2m([22m[2m42 tests[22m[2m)[22m[33m 8325[2mms[22m[39m
+   [33m[2m✓[22m[39m D06 stdio pipeline and isolation[2m > [22mD06-ERROR preserves attempts and uncertain billing across network retry [33m 663[2mms[22m[39m
+   [33m[2m✓[22m[39m D06 stdio pipeline and isolation[2m > [22mD06-ERROR final transport error retains prior uncertain billing [33m 461[2mms[22m[39m
+   [33m[2m✓[22m[39m D06 actual SDK cancellation and legacy stdio[2m > [22mD06-CANCEL deadline includes queued time and slots recover [33m 1217[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m13 passed[39m[22m[90m (13)[39m
+[2m      Tests [22m [1m[32m865 passed[39m[22m[90m (865)[39m
+[2m   Start at [22m 20:10:44
+[2m   Duration [22m 8.86s[2m (transform 740ms, setup 0ms, collect 2.00s, tests 10.37s, environment 1ms, prepare 532ms)[22m
