@@ -1,0 +1,26 @@
+[
+  {
+    "kind": "decision",
+    "result": {
+      "model": "typesafe/jev-1.13",
+      "answers": {"pick": {"type": "choice", "choice": "a"}, "flag": {"type": "noul", "noul": 0.4}, "level": {"type": "score", "score": 0}},
+      "usage": {"input_tokens": 0, "output_tokens": 0}
+    },
+    "assessments": {
+      "pick": {"status": "unassessed", "value": "a", "reasons": []},
+      "flag": {"status": "uncertain", "value": null, "reasons": ["ambiguous_probability"]},
+      "level": {"status": "accepted", "value": 0, "reasons": []}
+    },
+    "meta": {"request_id": "synthetic-request", "requested_model": "~typesafe/jev-latest", "elapsed_ms": 0, "attempts": 1, "api_version": "alpha-decisions", "warnings": []}
+  },
+  {
+    "kind": "dry_run",
+    "request": {"model": "~typesafe/jev-latest", "state": [], "questions": {"flag": {"type": "noul", "instructions": "Check"}}},
+    "meta": {"request_id": "synthetic-dry", "requested_model": "~typesafe/jev-latest", "elapsed_ms": 0, "attempts": 0, "api_version": "alpha-decisions", "warnings": []}
+  },
+  {
+    "kind": "error",
+    "error": {"code": "INVALID_ARGUMENT", "message": "Invalid decision arguments.", "retryable": false, "billing_uncertain": false},
+    "meta": {"request_id": "synthetic-error", "requested_model": "~typesafe/jev-latest", "elapsed_ms": 0, "attempts": 0, "api_version": "alpha-decisions", "warnings": []}
+  }
+]
