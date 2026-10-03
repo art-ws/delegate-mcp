@@ -11,7 +11,7 @@
 | Live scope Q02 | **GO, WAIT_DEPENDENCIES** | Аппрув полного дерева тем же поручением: до трёх синтетических платных POST без retries, только после Q01/G1 и отдельной выдачи Q02 |
 | npm release / activation | **NONE — HOLD** | Вне текущего этапа, отдельное поручение |
 
-Разрешение стартовать — прямое поручение владельца выше. Текущий статус эпика: **IN_PROGRESS / D02 / Q00_REWORK**; runtime QA и live — **NOT_RUN**. Публикация npm, tag/GitHub Release, release workflow и активация MCP не разрешены.
+Разрешение стартовать — прямое поручение владельца выше. Текущий статус эпика: **IN_PROGRESS / D02_COMPONENT_PASS / Q00_REWORK**; runtime QA и live — **NOT_RUN**. Публикация npm, tag/GitHub Release, release workflow и активация MCP не разрешены.
 
 ## Листья
 
@@ -19,8 +19,8 @@
 |---|---|---|---|---|
 | G0 | tl | PASS | 2026-10-03 | GO + 13/13 baseline bytes; dev WIP=0, cleanup `c52f5ee6-197c-487f-a54d-85c706e208dd`; idle и /clear подтверждены |
 | D01 | dev | COMPONENT_PASS | 2026-10-03 16:14 MSK; `c8b5c9e1-ae29-43fc-adda-8a7aaf299709` | candidate `e4e68eb7d1f3a76752f3eaa03eccc42bf3749ad5`; author 295/295, component PASS, TL static review разрешает D02/Q00; independent QA NOT_RUN |
-| D02 | dev | DISPATCHED | 2026-10-03 17:00 MSK; `25045684-1d29-4e89-a62c-6a61a9113c67` | predecessor D01 `e4e68eb7`; candidate ожидается |
-| D03 | dev | WAIT_DEPENDENCIES | нет | — |
+| D02 | dev | COMPONENT_PASS | 2026-10-03 17:00 MSK; `25045684-1d29-4e89-a62c-6a61a9113c67` | candidate `b5314e7cf634bff703a9b1fddda33ccd3f6cf7b9`; author 528/528, TL static review разрешает D03; independent QA NOT_RUN |
+| D03 | dev | READY | нет | predecessor D02 `b5314e7c`; ожидает cleanup/idle/clear |
 | D04 | dev | WAIT_DEPENDENCIES | нет | — |
 | D05 | dev | WAIT_DEPENDENCIES | нет | — |
 | D06 | dev | WAIT_DEPENDENCIES | нет | — |
@@ -35,8 +35,8 @@
 
 | Роль | Активный исполнительный лист | Очередь после GO |
 |---|---|---|
-| tl | контроль D02 / доработка Q00 | review/диспетч → G1 → G2 |
-| dev | D02 | D03 → D04 → D05 → D06 → D07 |
+| tl | диспетч D03 / доработка Q00 | review/диспетч → G1 → G2 |
+| dev | предзадачный cleanup перед D03 | D03 → D04 → D05 → D06 → D07 |
 | test | предзадачный cleanup перед Q00 r1 | Q00 r1 → Q01 после D07 → Q02 после G1 |
 
 При G0 MCP list_peers и закрывающие сообщения подтвердили dev/test idle в резерве; чужие задачи не вытесняются. dev подтвердил WIP=0 и cleanup сообщением `c52f5ee6-197c-487f-a54d-85c706e208dd` (служебные дочерние удалены, основная/чужие сохранены, checkout чистый, аренды отсутствуют). Live get_status=idle и /clear перед D01 выполнены, rc=0. Актуальные исполнительные листы — в раскладке выше.
@@ -63,3 +63,8 @@ Re-resolve G0: локальный main и live origin/main совпадают �
 
 - 2026-10-03: Q00 выдача подтверждена фактической сдачей test `bf677b40-a4bf-48ce-9a0c-95c5d42ce53e`, replyTo 5f3bf707. QA d108021, parent e4e68eb7, review/decision-q00, isolated /opt/art/p/delegate-mcp-wt/test-decision-q00, чистый checkout, ровно пять test/decision-qa paths. Заявленная готовность плана не принята TL: статический review обнаружил F-Q00-AND (все три порога проходят при expected uncertain), F-Q00-USAGE (обязательный usage объявлен отсутствующим в valid response), F-Q00-FIXTURE (неполные input/response fragments и metadata внутри args без правил материализации). Carrier: 08-independent-test-plan.REWORK-r1.md. План — REWORK_REQUIRED; runtime/Q01/live — NOT_RUN. Собственные runtime прогоны TL не выполнялись.
 - test требуется новый предзадачный cleanup/WIP перед Q00 r1, затем idle/clear и отдельная выдача. D02 продолжается у dev; его активную работу не прерывать, blocker не сообщён. Контроль D02 до 18:25 MSK сохраняется.
+
+- D02 сдан dev `cf93f855-8920-4a23-9465-63b6690b70fb`: component PASS, source b5314e7cf634bff703a9b1fddda33ccd3f6cf7b9, parent e4e68eb7, clean feat/decision-v0.2 / dev-decision. TL сверил identity и пять owned paths, прочитал полный src/decision/config.ts, diff existing loader + D01 dist fixture, committed D02-CONFIG.md и именованные fixture controls. Конкретных blocking defects статическим review не выявлено. D02 принят как вход D03; independent QA ACCEPT/DONE не заявлен.
+- По авторскому evidence: build три entry, typecheck, focused D02+legacy-config+D01 528/528 (212+21+295), lint, focused test typecheck, secretlint/whitespace rc=0. Сохранены first focused rc=1 (D01 dist fixture копировал один файл при shared tsup chunks) и secretlint rc=1 (synthetic BasicAuth literal); final rc=0. Изменение D01 fixture сохраняет complete dist layout и прежние behavioral assertions; Q01 проверяет установочный пакет отдельно.
+- S2 экспорты закреплены в _shared/interfaces.md. Ready config с ключом — только память; D03/D06 не сериализуют config и не передают ключ в body/envelope/logs. AppConfig.decision optional только для программных конструкторов, loader всегда возвращает DecisionSetup. Применение mandatory provider rules к request — D03, MCP inventory — D06, actual Node20/full legacy/package/live — NOT_RUN.
+- dev перед D03 требуется новый cleanup/WIP → live idle → /clear → отдельная выдача 03-decision-core.md. D03 predecessor b5314e7c; один активный лист. Q00 r1 ожидает clean-slate test, не является зависимостью D03. Старый контроль D02/Q00 читает это актуальное состояние, не требует повторного D02 прогона.
