@@ -54,8 +54,13 @@ function install(tarball, name) {
   assert.deepEqual(walk(pkg).filter((path) => !path.startsWith("node_modules/")).sort(),
     ["LICENSE", "README.md", "delegate-config.example.json", "dist/index.js", "package.json"]);
   assert(!existsSync(join(pkg, "src")) && !existsSync(join(pkg, "docs")) && !existsSync(join(pkg, "test")));
-  const versions = JSON.parse(run(name + "-resolved-dependencies", "npm", ["ls", "--omit=dev", "--json"], target));
-  const dependencyVersions = Object.fromEntries(Object.entries(versions.dependencies ?? {}).map(([key, value]) => [key, value.version]));
+  const installedPackage = JSON.parse(readFileSync(join(pkg, "package.json"), "utf8"));
+  const dependencyVersions = Object.fromEntries(Object.keys(installedPackage.dependencies ?? {}).map((name) => {
+    const dependencyPackage = join(target, "node_modules", ...name.split("/"), "package.json");
+    assert(existsSync(dependencyPackage), name + " was not installed at the fresh install root");
+    return [name, JSON.parse(readFileSync(dependencyPackage, "utf8")).version];
+  }));
+  writeFileSync(join(evidence, name + "-resolved-dependencies.log"), JSON.stringify(dependencyVersions, null, 2) + "\n");
   return { target, pkg: realpathSync(pkg), bin: realpathSync(bin), indexSha: sha(bin), dependencyVersions };
 }
 
