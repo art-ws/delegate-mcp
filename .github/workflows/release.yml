@@ -53,6 +53,8 @@ jobs:
     timeout-minutes: 20
     permissions:
       contents: write # version/CHANGELOG commit, tag and GitHub Release
+      issues: write # existing GitHub plugin success/failure comments and labels
+      pull-requests: write # existing GitHub plugin comments on released PRs
       id-token: write # provenance; trusted-publisher migration remains external
     steps:
       - uses: actions/checkout@v4

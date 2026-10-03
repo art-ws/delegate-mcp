@@ -19,7 +19,7 @@ function check(w) {
   assert.equal(release["timeout-minutes"], 20);
   assert.equal(release.needs, "preview");
   assert.equal(release.if, "github.ref == 'refs/heads/main' && inputs.dry_run == false");
-  assert.deepEqual(release.permissions, { contents: "write", "id-token": "write" });
+  assert.deepEqual(release.permissions, { contents: "write", issues: "write", "pull-requests": "write", "id-token": "write" });
   assert(!preview.steps.some((step) => step.env));
   assert.equal(preview.steps.find((step) => step.uses === "actions/checkout@v4").with["persist-credentials"], false);
   for (const job of [preview, release]) {

@@ -5,8 +5,10 @@ Publication and activation remain **HOLD**.
 
 Authorized base: `a6ac09cb8b92555c48dc363acfbfa6e472c3f92c`.
 Feature source: `f7ed1f52a3e27a53d3c703b9e0725500abb5f00a`, parent = base,
-tree `7852c96eca9f12ed33e81d8ec760088881b3a1be`. Subsequent evidence-only commits
-do not change workflow/helpers/manifest/runtime. Final source/parent/tree and
+tree `7852c96eca9f12ed33e81d8ec760088881b3a1be`. Subsequent evidence commits retain
+that feature. A final permissions finding adds issues/pull-requests write only
+to the real job, matching existing GitHub plugin comment/label defaults; its
+checker/runbook are updated. Manifest/runtime/artifact remain unchanged. Final source/parent/tree and
 clean status are resolved in the handoff and rechecked against fresh main in QA.
 
 ## Behavior and controls
@@ -94,6 +96,13 @@ Only the unsupported provenance npm plugin option justified a release-config
 change; npm CLI11.16.0 `lib/commands/publish.js` consumes manifest.publishConfig
 via `flatten(filteredPublishConfig, opts)`, and libnpmpublish uses opts.provenance
 for generation. This source review did not invoke publish or auth.
+
+F-RELEASE-PERMISSIONS: the installed GitHub plugin README requires contents write
+for releases and issues/pull-requests write for its enabled default comments and
+labels. The final workflow grants those required scopes only to the explicit
+real-release job, preserving plugin behavior. Preview still has contents read
+and no GitHub plugin/auth. `13-config-final.log` supersedes the initial structural
+check for this final permission set; published comments/labels remain NOT_RUN.
 
 Next gates: independent exact candidate/fresh-main trial integration, full
 project gate and new installed artifact on Node20/current, then owner review

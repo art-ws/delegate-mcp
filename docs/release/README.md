@@ -22,6 +22,10 @@ real semantic-release pipeline. Both jobs are bounded to 20 minutes. Releases
 are serialized; feature branches cannot publish. The release job has the write
 permissions required for version/CHANGELOG assets, tags, GitHub Releases and npm
 provenance. It rebuilds and verifies its own ordinary artifact before publication.
+The existing GitHub plugin defaults also comment/label released issues and pull
+requests, and open an issue on failure; its documented `issues: write` and
+`pull-requests: write` permissions are confined to the real release job. Preview
+does not load that plugin or receive those permissions.
 
 ## Local reproduction
 
