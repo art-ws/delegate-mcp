@@ -1,0 +1,36 @@
+{
+  "status": "PASS",
+  "manualDefaultPreview": "PASS",
+  "previewPermissions": "read",
+  "releaseFalseOnly": "PASS",
+  "negativeControls": [
+    {
+      "name": "unsafe-default",
+      "expected": "REJECT",
+      "observed": "REJECT"
+    },
+    {
+      "name": "automatic-push",
+      "expected": "REJECT",
+      "observed": "REJECT"
+    },
+    {
+      "name": "preview-write",
+      "expected": "REJECT",
+      "observed": "REJECT"
+    },
+    {
+      "name": "unconditional-release",
+      "expected": "REJECT",
+      "observed": "REJECT"
+    },
+    {
+      "name": "preview-auth",
+      "expected": "REJECT",
+      "observed": "REJECT"
+    }
+  ],
+  "provenancePlacement": "PASS: publishConfig.provenance=true; undocumented plugin option removed",
+  "authRuntime": "NOT_RUN",
+  "actionsRuntime": "NOT_RUN"
+}

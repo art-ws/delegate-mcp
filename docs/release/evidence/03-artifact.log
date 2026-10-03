@@ -1,0 +1,21 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ '{"ts":"2026-10-03T21:46:45.458Z","request_id":"ab0387e2-77b8-49eb-8241-bf3ec30d267d","tool":"decision","requested_model":"~typesafe/jev-latest","status":"error","elapsed_ms":0,"attempts":0,"error_code":"CONFIG_ERROR"}\n'
+- ''
+
+    at file://<candidate>/docs/release/verify-artifact.mjs:83:12
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5) {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: '{"ts":"2026-10-03T21:46:45.458Z","request_id":"ab0387e2-77b8-49eb-8241-bf3ec30d267d","tool":"decision","requested_model":"~typesafe/jev-latest","status":"error","elapsed_ms":0,"attempts":0,"error_code":"CONFIG_ERROR"}\n',
+  expected: '',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v26.3.1
