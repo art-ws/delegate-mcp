@@ -11,7 +11,7 @@
 | Live scope Q02 | **GO, WAIT_DEPENDENCIES** | Аппрув полного дерева тем же поручением: до трёх синтетических платных POST без retries, только после Q01/G1 и отдельной выдачи Q02 |
 | npm release / activation | **NONE — HOLD** | Вне текущего этапа, отдельное поручение |
 
-Разрешение стартовать — прямое поручение владельца выше. Текущий статус эпика: **IN_PROGRESS / D05_DISPATCH_PREPARED / Q00_PLAN_PASS**; runtime QA и live — **NOT_RUN**. Публикация npm, tag/GitHub Release, release workflow и активация MCP не разрешены.
+Разрешение стартовать — прямое поручение владельца выше. Текущий статус эпика: **IN_PROGRESS / D05 / Q00_PLAN_PASS**; runtime QA и live — **NOT_RUN**. Публикация npm, tag/GitHub Release, release workflow и активация MCP не разрешены.
 
 ## Листья
 
@@ -22,7 +22,7 @@
 | D02 | dev | COMPONENT_PASS | 2026-10-03 17:00 MSK; `25045684-1d29-4e89-a62c-6a61a9113c67` | candidate `b5314e7cf634bff703a9b1fddda33ccd3f6cf7b9`; author 528/528, TL static review разрешает D03; independent QA NOT_RUN |
 | D03 | dev | COMPONENT_PASS | 2026-10-03 17:33 MSK; `aa29ed09-f8ca-41a4-b0f6-eba0122d5c39` | source `79819d6b5606efd2de6f5fb8faa0e1138e40b46d`, parent b5314e7c; TL static review принят, S3/S4 закреплены, author 577/577; independent QA NOT_RUN |
 | D04 | dev | COMPONENT_PASS | 2026-10-03 18:33 MSK; `b39e2617-9f6d-4bcd-bd6a-c58c77259488` | source `f2e00ed81fbf7582ce75ea94399297e2af8bd8c7`, parent79819d6b; TL static review принят, S5 закреплён, author671/671 (94D04); independent QA NOT_RUN |
-| D05 | dev | DISPATCH_PREPARED | финальная выдача текущего цикла `decision-d05-go-20261003-1910`, replyTo cleanup2c2bd1c1 | predecessor f2e00ed81fbf7582ce75ea94399297e2af8bd8c7; metrics.ts/safe sinks/S6, timebox1–2ч, контроль20:00/цель21:15 MSK |
+| D05 | dev | IN_PROGRESS | 2026-10-03 19:11 MSK; `decision-d05-go-20261003-1910`, receipt history/screen Working | predecessor f2e00ed81fbf7582ce75ea94399297e2af8bd8c7; metrics.ts/safe sinks/S6, timebox1–2ч, контроль20:00/цель21:15 MSK |
 | D06 | dev | WAIT_DEPENDENCIES | нет | — |
 | D07 | dev | WAIT_DEPENDENCIES | нет | — |
 | Q00 | test | PLAN_PASS | `87fdb5bd-f497-47a6-bc1b-e7d7eabc5729`, сдача `f4e209b2-a0b0-42fe-b0a2-577f50f415e6` | QA `c102897315d6badcfb59fa583a48c1ab1f43c961`, parent0de2036; TL actual bytes/static review закрывает оба r3 findings; independent runtime QA инструмента NOT_RUN |
@@ -36,7 +36,7 @@
 | Роль | Активный исполнительный лист | Очередь после GO |
 |---|---|---|
 | tl | D05 диспетч/контроль | review → D06/D07 → G1 → G2 |
-| dev | D05 подготовлен после cleanup/live idle/clear | D05 → D06 → D07 |
+| dev | D05 safe observability | D05 → D06 → D07 |
 | test | Q00 план принят, резерв до D07 | Q01 после D07/отдельного dispatch → Q02 после G1 |
 
 При G0 MCP list_peers и закрывающие сообщения подтвердили dev/test idle в резерве; чужие задачи не вытесняются. dev подтвердил WIP=0 и cleanup сообщением `c52f5ee6-197c-487f-a54d-85c706e208dd` (служебные дочерние удалены, основная/чужие сохранены, checkout чистый, аренды отсутствуют). Live get_status=idle и /clear перед D01 выполнены, rc=0. Актуальные исполнительные листы — в раскладке выше.
@@ -106,3 +106,5 @@ Re-resolve G0: локальный main и live origin/main совпадают �
 
 - 19:10 MSK: dev cleanup2c2bd1c1-e2ec-4baf-9842-654b2ca4b52e прочитан; WIP=0/no leases, 37 собственных dev-d04 idle детей удалены, основные/чужие сохранены. TL повторно сверил clean feat/decision-v0.2 HEADf2e00ed81fbf7582ce75ea94399297e2af8bd8c7, live status/screen idle; /clear выполнен. Свежий main/origin fa0f243 совпадают, 13 baseline bytes совпали.
 - D05 подготовлен к единственной финальной выдаче текущего цикла iddecision-d05-go-20261003-1910 / replyTo2c2bd1c1; только metrics.ts/focused synthetic sinks/evidence, S6 proposal. PredecessorD04f2e00ed8; timebox1–2 активных часа, контрольдо20:00 и цельсдачидо21:15 MSK 03.10.2026. Receipt/работу подтвердить последующим history/screen; prepared не component PASS. Q00 PLAN_PASS, test резерв доD07; QAtool/live NOT_RUN.
+
+- 19:12 MSK: D05 dispatch decision-d05-go-20261003-1910 подтверждён history и live screen Working над чтением канона; активный dev не clear. Q00 acceptance reply988abad0 доставлен; test cleanup439767eb прочитан: WIP=0/no own children/leases, QA c1028973 clean повторно сверён TL. test резерв до D07, future clear/отдельный Q01 dispatch, runtime QA/live NOT_RUN. Ответ cleanup — единственная закрывающая квитанция без запроса ответа.
