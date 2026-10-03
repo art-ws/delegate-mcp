@@ -11,7 +11,7 @@
 | Live scope Q02 | **GO, WAIT_DEPENDENCIES** | Аппрув полного дерева тем же поручением: до трёх синтетических платных POST без retries, только после Q01/G1 и отдельной выдачи Q02 |
 | npm release / activation | **NONE — HOLD** | Вне текущего этапа, отдельное поручение |
 
-Разрешение стартовать — прямое поручение владельца выше. Текущий статус эпика: **IN_PROGRESS / D04 / Q00_R3_CLEANUP_PENDING**; runtime QA и live — **NOT_RUN**. Публикация npm, tag/GitHub Release, release workflow и активация MCP не разрешены.
+Разрешение стартовать — прямое поручение владельца выше. Текущий статус эпика: **IN_PROGRESS / D04 / Q00_R3_DISPATCH_PREPARED**; runtime QA и live — **NOT_RUN**. Публикация npm, tag/GitHub Release, release workflow и активация MCP не разрешены.
 
 ## Листья
 
@@ -25,7 +25,7 @@
 | D05 | dev | WAIT_DEPENDENCIES | нет | — |
 | D06 | dev | WAIT_DEPENDENCIES | нет | — |
 | D07 | dev | WAIT_DEPENDENCIES | нет | — |
-| Q00 | test | REWORK_REQUIRED / R3_CLEANUP_PENDING | r2 `d2cc049f`; r3 ещё не выдан | QA `0de2036ccb1664fe43052dd93908342f595e7b6c`, parent93e54d9; response/ID fixes приняты, S2 canary recipe и Noul reason требуют [узкого r3](08-independent-test-plan.REWORK-r3.md) |
+| Q00 | test | R3_DISPATCH_PREPARED | финальная выдача текущего цикла; id `87fdb5bd-f497-47a6-bc1b-e7d7eabc5729` | predecessor QA `0de2036ccb1664fe43052dd93908342f595e7b6c`; cleanup161442ea/live idle/clear подтверждены; [узкий r3](08-independent-test-plan.REWORK-r3.md), контроль/сдачадо19:20 MSK |
 | Q01 | test | WAIT_DEPENDENCIES | нет | — |
 | G1 | tl | WAIT_DEPENDENCIES | нет | — |
 | Q02 | test | WAIT_DEPENDENCIES | нет | — |
@@ -35,9 +35,9 @@
 
 | Роль | Активный исполнительный лист | Очередь после GO |
 |---|---|---|
-| tl | Q00 r3 cleanup/диспетч / контроль D04 | review/диспетч → G1 → G2 |
+| tl | Q00 r3 диспетч/контроль / контроль D04 | review/диспетч → G1 → G2 |
 | dev | D04 transport/bounded scheduler | D04 → D05 → D06 → D07 |
-| test | предзадачный cleanup перед узким Q00 r3 | Q00 r3 → Q01 после D07 → Q02 после G1 |
+| test | узкий Q00 r3 подготовлен после idle/clear | Q00 r3 → Q01 после D07 → Q02 после G1 |
 
 При G0 MCP list_peers и закрывающие сообщения подтвердили dev/test idle в резерве; чужие задачи не вытесняются. dev подтвердил WIP=0 и cleanup сообщением `c52f5ee6-197c-487f-a54d-85c706e208dd` (служебные дочерние удалены, основная/чужие сохранены, checkout чистый, аренды отсутствуют). Live get_status=idle и /clear перед D01 выполнены, rc=0. Актуальные исполнительные листы — в раскладке выше.
 
@@ -95,3 +95,5 @@ Re-resolve G0: локальный main и live origin/main совпадают �
 - Q00 r2 сдан test 967760c4-4e11-4780-9e88-770861b0e248; полный message.json прочитан. TL live проверил SHA0de2036ccb1664fe43052dd93908342f595e7b6c/parent93e54d9/clean review/decision-q00, четыре owned files, whitespace rc=0. Лично прочитаны static checker, changed PLAN/canary recipe и все response/changed-path/critical assessment values. Response baseline/isolated negatives/usage controls и semantic policy-ID исправлены; три positive valid responses согласованы. Статический checker rc=0 по author report, production runtime NOT_RUN.
 - Q00 r2 остаётся REWORK: F-Q00-R3-SETUP — resolver вызывает S2 с полным raw AppConfig вместо raw.decision и неполными opts, а PLAN ошибочно резолвит legacy reference через decision-only loader; в oracle осталось общее scan both canaries для surface, разрешённого context. F-Q00-R3-NOUL-REASON — expected Noul middle reasons=[] расходится с закреплённым S4 ambiguous_probability. Подготовлен узкий carrier r3 (15–25 минут после отдельной выдачи), без повторной переделки принятых response/ID частей. Следующий test шаг cleanup/WIP=0, затем idle/clear/dispatch. Runtime QA TL не выполнял.
 - 18:42 MSK: live screen dev подтверждает доставленный D04 work-order b39e2617 и Working над client.ts/bounded FIFO scheduler; нет component verdict. Активного dev не clear, контроль20:00 и цель23:30 сохраняются.
+- Test cleanup161442ea-d952-4079-99c9-2e51be55c1d9 получен: WIP=0/no own children/leases released, QA0de2036 clean, r3 edits NOT_RUN. TL live повторно сверил HEAD/parent/branch/status, history без ответа cleanup и idle status/screen; /clear выполнен успешно. Ответ r2 a120f70a подтверждён history, не дублируется.
+- Q00 r3 подготовлен к финальной выдаче id87fdb5bd-f497-47a6-bc1b-e7d7eabc5729 / replyTo161442ea. Только точный canary S2 setup/phase response/per-canary oracle и Noul middle reason, без переделки принятых response/ID controls; predecessorQA0de2036, timebox15–25мин, контроль/сдачадо19:20 MSK 03.10.2026. Receipt сверить последующим history/пакетом; prepared не PASS. Runtime QA TL и QAtool/live NOT_RUN, devD04 продолжает независимо.
