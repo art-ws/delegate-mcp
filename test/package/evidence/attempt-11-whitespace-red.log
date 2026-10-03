@@ -1,0 +1,46 @@
+test/package/evidence/02-baseline-test-red.log:422: trailing whitespace.
++     → Command failed: /opt/homebrew/Cellar/node/26.3.1/bin/node --input-type=module -e
+test/package/evidence/02-baseline-test-red.log:430: trailing whitespace.
++
+test/package/evidence/02-baseline-test-red.log:660: trailing whitespace.
++     → Command failed: /opt/homebrew/Cellar/node/26.3.1/bin/node --input-type=module -e
+test/package/evidence/02-baseline-test-red.log:672: trailing whitespace.
++
+test/package/evidence/02-baseline-test-red.log:794: trailing whitespace.
++     → Command failed: /opt/homebrew/Cellar/node/26.3.1/bin/node --input-type=module -e
+test/package/evidence/02-baseline-test-red.log:819: trailing whitespace.
++
+test/package/evidence/02-baseline-test-red.log:894: trailing whitespace.
++     → Command failed: /opt/homebrew/Cellar/node/26.3.1/bin/node --input-type=module -e
+test/package/evidence/02-baseline-test-red.log:910: trailing whitespace.
++
+test/package/evidence/02-baseline-test-red.log:958: trailing whitespace.
++Error: Command failed: /opt/homebrew/Cellar/node/26.3.1/bin/node --input-type=module -e
+test/package/evidence/02-baseline-test-red.log:983: trailing whitespace.
++
+test/package/evidence/02-baseline-test-red.log:1016: trailing whitespace.
++Error: Command failed: /opt/homebrew/Cellar/node/26.3.1/bin/node --input-type=module -e
+test/package/evidence/02-baseline-test-red.log:1028: trailing whitespace.
++
+test/package/evidence/02-baseline-test-red.log:1061: trailing whitespace.
++Error: Command failed: /opt/homebrew/Cellar/node/26.3.1/bin/node --input-type=module -e
+test/package/evidence/02-baseline-test-red.log:1077: trailing whitespace.
++
+test/package/evidence/02-baseline-test-red.log:1148: trailing whitespace.
++Error: Command failed: /opt/homebrew/Cellar/node/26.3.1/bin/node --input-type=module -e
+test/package/evidence/02-baseline-test-red.log:1156: trailing whitespace.
++
+test/package/evidence/02-baseline-test-red.log:1193: new blank line at EOF.
+test/package/evidence/04-typecheck.log:6: new blank line at EOF.
+test/package/evidence/05-lint.log:6: new blank line at EOF.
+test/package/evidence/06-test.log:95: new blank line at EOF.
+test/package/evidence/attempt-08-isolated-missing-sample.log:88: trailing whitespace.
++    199|
+test/package/evidence/attempt-08-isolated-missing-sample.log:92: new blank line at EOF.
+test/package/evidence/attempt-10-oracle-macos-path.log:505: new blank line at EOF.
+test/package/evidence/final-lint.log:6: new blank line at EOF.
+test/package/evidence/final-test.log:54: new blank line at EOF.
+test/package/evidence/final-typecheck.log:6: new blank line at EOF.
+test/package/evidence/isolated-test.log:53: new blank line at EOF.
+command=git diff --cached --check -- owned explicit paths
+rc=2

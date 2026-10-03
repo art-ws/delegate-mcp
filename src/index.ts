@@ -21,6 +21,15 @@ async function main(): Promise<void> {
   const ctx = resolveContext();
   const server = createServer(ctx);
   const transport = new StdioServerTransport();
+  // SDK stdio does not close on EOF. Closing the existing server aborts all
+  // handler signals, including decision's persistent queue/fetch/body waits.
+  const disconnect = () => { void server.close().catch(() => {}); };
+  process.stdin.once("end", disconnect);
+  const onclose = server.server.onclose;
+  server.server.onclose = () => {
+    process.stdin.off("end", disconnect);
+    onclose?.();
+  };
   await server.connect(transport);
 }
 

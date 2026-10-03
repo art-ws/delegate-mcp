@@ -1,0 +1,1192 @@
+
+> delegate-mcp@1.0.0 test
+> vitest run
+
+
+ RUN  v3.2.7 /opt/art/p/delegate-mcp-wt/dev-decision
+
+ ✓ test/scaffold.test.ts (5 tests) 2ms
+ ✓ test/metrics.test.ts (8 tests) 9ms
+ ✓ test/sessions.test.ts (11 tests) 11ms
+ ✓ test/files.test.ts (39 tests) 23ms
+ ✓ test/providers.test.ts (26 tests) 10ms
+ ✓ test/config.test.ts (21 tests) 18ms
+ ❯ test/decision/metrics.test.ts (28 tests | 2 failed) 165ms
+   ✓ D05 AC-SHAPE / AC-SINK / AC-IMMUTABLE > decision emits exact fields to both sinks 2ms
+   ✓ D05 AC-SHAPE / AC-SINK / AC-IMMUTABLE > dry_run emits exact fields to both sinks 0ms
+   ✓ D05 AC-SHAPE / AC-SINK / AC-IMMUTABLE > error emits exact fields to both sinks 0ms
+   ✓ D05 AC-SHAPE / AC-SINK / AC-IMMUTABLE > absent configured sink performs zero file calls 0ms
+   ✓ D05 AC-SHAPE / AC-SINK / AC-IMMUTABLE > uses production ISO timestamp when not injected 1ms
+   ✓ D05 AC-OPTIONALS > preserves presence exactly: {} 0ms
+   ✓ D05 AC-OPTIONALS > preserves presence exactly: {"actual_model":"typesafe/jev-1.13"} 0ms
+   ✓ D05 AC-OPTIONALS > preserves presence exactly: {"usage":{"input_tokens":0,"output_tokens":0}} 0ms
+   ✓ D05 AC-OPTIONALS > preserves presence exactly: {"usage":{"input_tokens":0,"output_tokens":0,"cost":0}} 0ms
+   ✓ D05 AC-SELECT / AC-ISOLATION > ignores forbidden fields and caller status for 'decision' 0ms
+   ✓ D05 AC-SELECT / AC-ISOLATION > ignores forbidden fields and caller status for 'dry_run' 0ms
+   ✓ D05 AC-SELECT / AC-ISOLATION > ignores forbidden fields and caller status for 'error' 0ms
+   ✓ D05 AC-SELECT / AC-ISOLATION > copies only usage tokens/cost, ignoring nested extras and toJSON 0ms
+   ✓ D05 AC-SELECT / AC-ISOLATION > dry_run cannot log success fields injected as extras 0ms
+   ✓ D05 AC-SELECT / AC-ISOLATION > error cannot log success fields injected as extras 0ms
+   ✓ D05 AC-IO / AC-LOGGER / AC-IMMUTABLE > EACCES with reflected context never changes 'decision' 0ms
+   ✓ D05 AC-IO / AC-LOGGER / AC-IMMUTABLE > EACCES with reflected context never changes 'dry_run' 0ms
+   ✓ D05 AC-IO / AC-LOGGER / AC-IMMUTABLE > EACCES with reflected context never changes 'error' 0ms
+   ✓ D05 AC-IO / AC-LOGGER / AC-IMMUTABLE > file throw warns with fixed text and leaves result intact 0ms
+   ✓ D05 AC-IO / AC-LOGGER / AC-IMMUTABLE > file reject warns with fixed text and leaves result intact 0ms
+   ✓ D05 AC-IO / AC-LOGGER / AC-IMMUTABLE > stderr throw cannot suppress an independent file write 0ms
+   ✓ D05 AC-IO / AC-LOGGER / AC-IMMUTABLE > stderr reject cannot suppress an independent file write 0ms
+   ✓ D05 AC-IO / AC-LOGGER / AC-IMMUTABLE > both sinks throw including the warning; no error escapes 0ms
+   ✓ D05 AC-IO / AC-LOGGER / AC-IMMUTABLE > both sinks reject including the warning; no error escapes 0ms
+   ✓ D05 AC-IO / AC-LOGGER / AC-IMMUTABLE > clock failure uses a safe warning with no file write 0ms
+   ✓ D05 AC-IO / AC-LOGGER / AC-IMMUTABLE > recovers on a subsequent call after IO failure 0ms
+   × D05 AC-DIST: real default sinks without checkout src/docs > exports S6, appends exact JSONL, separates stdout and handles reflected real FS errors 88ms
+     → expected 1 to be +0 // Object.is equality
+   × D05 AC-DIST: real default sinks without checkout src/docs > closed stderr does not throw and still writes the configured file 71ms
+     → expected 1 to be +0 // Object.is equality
+ ✓ test/tools.test.ts (14 tests) 51ms
+node:internal/modules/esm/resolve:271
+    throw new ERR_MODULE_NOT_FOUND(
+          ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/private/var/folders/d6/_mc3452n2dd__f8txsk98ptm0000gn/T/decision-d01-VAHEwj/dist/decision/schemas.js' imported from /private/var/folders/d6/_mc3452n2dd__f8txsk98ptm0000gn/T/decision-d01-VAHEwj/[eval1]
+    at finalizeResolution (node:internal/modules/esm/resolve:271:11)
+    at moduleResolve (node:internal/modules/esm/resolve:865:10)
+    at defaultResolve (node:internal/modules/esm/resolve:992:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:704:20)
+    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:724:38)
+    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:762:56)
+    at #resolve (node:internal/modules/esm/loader:686:17)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:606:35)
+    at ModuleJob.syncLink (node:internal/modules/esm/module_job:163:33)
+    at ModuleJob.link (node:internal/modules/esm/module_job:253:17) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///private/var/folders/d6/_mc3452n2dd__f8txsk98ptm0000gn/T/decision-d01-VAHEwj/dist/decision/schemas.js'
+}
+
+Node.js v26.3.1
+node:internal/modules/esm/resolve:271
+    throw new ERR_MODULE_NOT_FOUND(
+          ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/private/var/folders/d6/_mc3452n2dd__f8txsk98ptm0000gn/T/decision-config-12wqo4/dist/decision/config.js' imported from /private/var/folders/d6/_mc3452n2dd__f8txsk98ptm0000gn/T/decision-config-12wqo4/[eval1]
+    at finalizeResolution (node:internal/modules/esm/resolve:271:11)
+    at moduleResolve (node:internal/modules/esm/resolve:865:10)
+    at defaultResolve (node:internal/modules/esm/resolve:992:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:704:20)
+    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:724:38)
+    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:762:56)
+    at #resolve (node:internal/modules/esm/loader:686:17)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:606:35)
+    at ModuleJob.syncLink (node:internal/modules/esm/module_job:163:33)
+    at ModuleJob.link (node:internal/modules/esm/module_job:253:17) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///private/var/folders/d6/_mc3452n2dd__f8txsk98ptm0000gn/T/decision-config-12wqo4/dist/decision/config.js'
+}
+
+Node.js v26.3.1
+node:internal/modules/esm/resolve:271
+    throw new ERR_MODULE_NOT_FOUND(
+          ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/private/var/folders/d6/_mc3452n2dd__f8txsk98ptm0000gn/T/decision-d03-xAhnCN/dist/decision/request.js' imported from /private/var/folders/d6/_mc3452n2dd__f8txsk98ptm0000gn/T/decision-d03-xAhnCN/[eval1]
+    at finalizeResolution (node:internal/modules/esm/resolve:271:11)
+    at moduleResolve (node:internal/modules/esm/resolve:865:10)
+    at defaultResolve (node:internal/modules/esm/resolve:992:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:704:20)
+    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:724:38)
+    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:762:56)
+    at #resolve (node:internal/modules/esm/loader:686:17)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:606:35)
+    at ModuleJob.syncLink (node:internal/modules/esm/module_job:163:33)
+    at ModuleJob.link (node:internal/modules/esm/module_job:253:17) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///private/var/folders/d6/_mc3452n2dd__f8txsk98ptm0000gn/T/decision-d03-xAhnCN/dist/decision/request.js'
+}
+
+Node.js v26.3.1
+node:internal/modules/esm/resolve:271
+    throw new ERR_MODULE_NOT_FOUND(
+          ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/private/var/folders/d6/_mc3452n2dd__f8txsk98ptm0000gn/T/decision-d04-fKQvJL/dist/decision/client.js' imported from /private/var/folders/d6/_mc3452n2dd__f8txsk98ptm0000gn/T/decision-d04-fKQvJL/[eval1]
+    at finalizeResolution (node:internal/modules/esm/resolve:271:11)
+    at moduleResolve (node:internal/modules/esm/resolve:865:10)
+    at defaultResolve (node:internal/modules/esm/resolve:992:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:704:20)
+    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:724:38)
+    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:762:56)
+    at #resolve (node:internal/modules/esm/loader:686:17)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:606:35)
+    at ModuleJob.syncLink (node:internal/modules/esm/module_job:163:33)
+    at ModuleJob.link (node:internal/modules/esm/module_job:253:17) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///private/var/folders/d6/_mc3452n2dd__f8txsk98ptm0000gn/T/decision-d04-fKQvJL/dist/decision/client.js'
+}
+
+Node.js v26.3.1
+ ❯ test/decision/schemas.test.ts (295 tests | 1 failed) 359ms
+   ✓ D01 AC-CANON: embedded declarations and independently authored expectations > input is exactly the canonical JSON schema 2ms
+   ✓ D01 AC-CANON: embedded declarations and independently authored expectations > output is exactly the canonical JSON schema 1ms
+   ✓ D01 AC-CANON: embedded declarations and independently authored expectations > pins canonical boundaries and optionality independently of runtime construction 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Choice options=0 accepted=false 2ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Choice options=1 accepted=true 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Choice options=255 accepted=true 1ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Choice options=256 accepted=false 4ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Score levels=0 accepted=false 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Score levels=1 accepted=true 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Score levels=10 accepted=true 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Score levels=11 accepted=false 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > accepts all three mixed types and preserves full nested payloads 1ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > leaves all optional fields absent and injects no defaults 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > rejects missing root state 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > rejects missing root questions 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > rejects empty questions 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Choice rejects absent type 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Choice rejects absent instructions 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Choice rejects absent criteria 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Score rejects absent type 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Score rejects absent instructions 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Score rejects absent criteria 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Noul rejects absent type 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Noul rejects absent instructions 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Noul criteria 0 expected=undefined 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Noul criteria 1 expected={ true: [], false: {} } 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Noul criteria 2 expected={ true: 'yes', false: 'no' } 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Noul criteria 3 expected={ true: 'yes' } 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Noul criteria 4 expected={ false: 'no' } 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Noul criteria 5 expected={ true: null, false: 'no' } 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > Noul criteria 6 expected={ true: 'yes', false: 'no', extra: {} } 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > accepts structured state/instructions 0 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > accepts structured state/instructions 1 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > accepts structured state/instructions 2 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > rejects scalar state/instructions 0 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > rejects scalar state/instructions 1 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > rejects scalar state/instructions 2 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > rejects null Score descriptions and nonstructured Choice descriptions 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > rejects unrecognized question types 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > rejects reserved names as unknown contract fields 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > rejects empty model but permits absence 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > bounds user at 256 Unicode code points 0ms
+   ✓ D01 AC-INPUT: boundaries, mixed types and absent fields > bounds session_id at 256 Unicode code points 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > pins exactly 14 provider fields 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > allow_fallbacks accepts every documented form and optional omission 1ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > require_parameters accepts every documented form and optional omission 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > data_collection accepts every documented form and optional omission 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > zdr accepts every documented form and optional omission 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > enforce_distillable_text accepts every documented form and optional omission 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > only accepts every documented form and optional omission 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > ignore accepts every documented form and optional omission 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > order accepts every documented form and optional omission 1ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > sort accepts every documented form and optional omission 1ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > max_price accepts every documented form and optional omission 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > preferred_max_latency accepts every documented form and optional omission 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > preferred_min_throughput accepts every documented form and optional omission 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > quantizations accepts every documented form and optional omission 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > options accepts every documented form and optional omission 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts provider 0 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts provider 1 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > pins all 146 slugs independently of runtime schema constants 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug 01ai and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug ai21 and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug aion-labs and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug akashml and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug alibaba and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug amazon-bedrock and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug amazon-bedrock/claude-on-aws and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug amazon-nova and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug ambient and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug anthropic and retains its nested JSON 2ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug anthropic/2 and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug anyscale and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug arcee-ai and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug assemblyai and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug atlas-cloud and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug atoma and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug avian and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug azure and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug baidu and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug baseten and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug black-forest-labs and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug byteplus and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug centml and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug cerebras and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug chutes and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug cirrascale and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug clarifai and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug claude-on-aws and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug cloudflare and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug cohere and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug coreweave and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug cosine and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug crofai and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug crucible and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug crusoe and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug darkbloom and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug databricks and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug decart and retains its nested JSON 1ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug deepgram and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug deepinfra and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug deepseek and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug dekallm and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug digitalocean and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug elevenlabs and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug enfer and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug fake-provider and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug featherless and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug fireworks and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug fish-audio and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug friendli and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug gmicloud and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug google-ai-studio and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug google-vertex and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug gopomelo and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug groq and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug heygen and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug huggingface and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug hyperbolic and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug hyperbolic-quantized and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug inception and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug inceptron and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug inferact-vllm and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug inference-net and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug infermatic and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug inflection and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug inocloud and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug io-net and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug ionstream and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug klusterai and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug krea and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug lambda and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug lepton and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug liquid and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug lynn and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug lynn-private and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug makora and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug mancer and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug mancer-old and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug mara and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug meta and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug minimax and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug mistral and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug modal and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug modelrun and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug modular and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug moonshotai and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug morph and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug ncompass and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug near-ai and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug nebius and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug nex-agi and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug nextbit and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug nineteen and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug novita and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug nvidia and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug octoai and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug ollama and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug open-inference and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug openai and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug parasail and retains its nested JSON 2ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug perceptron and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug perplexity and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug phala and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug poolside and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug primeintellect and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug quiver and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug recraft and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug recursal and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug reflection and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug reka and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug relace and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug replicate and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug respan and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug runway and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug sail-research and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug sakana and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug sakana-ai and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug sambanova and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug sambanova-cloaked and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug scaledown and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug seed and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug sf-compute and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug siliconflow and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug sourceful and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug stealth and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug stepfun and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug streamlake and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug switchpoint and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug targon and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug tencent and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug tenstorrent and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug thinkingmachines and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug together and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug together-lite and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug typesafe and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug ubicloud and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug unbiased and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug upstage and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug venice and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug voyageai and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug wafer and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug wandb and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug wandb-legacy and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug xai and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug xiaomi and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > accepts options slug z-ai and retains its nested JSON 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > rejects invalid provider form 0 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > rejects invalid provider form 1 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > rejects invalid provider form 2 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > rejects invalid provider form 3 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > rejects invalid provider form 4 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > rejects invalid provider form 5 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > rejects invalid provider form 6 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > rejects invalid provider form 7 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > rejects invalid provider form 8 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > rejects invalid provider form 9 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > rejects invalid provider form 10 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > rejects invalid provider form 11 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > rejects invalid provider form 12 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > rejects invalid provider form 13 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > rejects invalid provider form 14 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > rejects invalid provider form 15 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > rejects invalid provider form 16 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > rejects invalid provider form 17 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > rejects invalid provider form 18 0ms
+   ✓ D01 AC-PROVIDER: 14 fields, nullable forms and 146 known option slugs > rejects invalid provider form 19 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > execution 0 expected={} 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > execution 1 expected={ timeout_ms: 1000, max_retries: +0, dry_run: false } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > execution 2 expected={ timeout_ms: 120000, max_retries: 2, dry_run: true } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > execution 3 expected={ timeout_ms: 999 } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > execution 4 expected={ timeout_ms: 120001 } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > execution 5 expected={ timeout_ms: 1000.5 } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > execution 6 expected={ max_retries: -1 } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > execution 7 expected={ max_retries: 3 } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > execution 8 expected={ max_retries: 0.5 } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > execution 9 expected={ dry_run: 1 } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > execution 10 expected={ extra: 1 } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > execution 11 expected=null 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > policy rule 0 expected={ type: 'choice', min_confidence: +0 } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > policy rule 1 expected={ type: 'choice', min_probability: 1 } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > policy rule 2 expected={ type: 'choice', min_margin: 0.5 } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > policy rule 3 expected={ type: 'choice' } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > policy rule 4 expected={ type: 'choice', min_confidence: -0.01 } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > policy rule 5 expected={ type: 'choice', min_probability: 1.01 } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > policy rule 6 expected={ type: 'choice', min_margin: null } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > policy rule 7 expected={ type: 'noul', false_max: +0, true_min: 1 } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > policy rule 8 expected={ type: 'noul', false_max: +0 } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > policy rule 9 expected={ type: 'noul', true_min: 1 } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > policy rule 10 expected={ type: 'score', min_confidence: +0 } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > policy rule 11 expected={ type: 'score', min_confidence: 1 } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > policy rule 12 expected={ type: 'score' } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > policy rule 13 expected={ type: 'score', min_confidence: 2 } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > policy rule 14 expected={ type: 'choice', min_margin: +0, extra: true } 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > permits empty execution/policy and preserves optional omission 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > trace trace_id is optional, but must be a string when present 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > trace trace_name is optional, but must be a string when present 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > trace span_name is optional, but must be a string when present 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > trace generation_name is optional, but must be a string when present 0ms
+   ✓ D01 AC-LOCAL: execution/policy forms and trace metadata > trace parent_span_id is optional, but must be a string when present 0ms
+   ✓ D01 AC-STRICT-JSON: unknown contract keys, preserved JSON and safe errors > rejects unknown contract fields 0 0ms
+   ✓ D01 AC-STRICT-JSON: unknown contract keys, preserved JSON and safe errors > rejects unknown contract fields 1 0ms
+   ✓ D01 AC-STRICT-JSON: unknown contract keys, preserved JSON and safe errors > rejects unknown contract fields 2 0ms
+   ✓ D01 AC-STRICT-JSON: unknown contract keys, preserved JSON and safe errors > rejects unknown contract fields 3 0ms
+   ✓ D01 AC-STRICT-JSON: unknown contract keys, preserved JSON and safe errors > rejects unknown contract fields 4 0ms
+   ✓ D01 AC-STRICT-JSON: unknown contract keys, preserved JSON and safe errors > preserves reserved keys inside arbitrary JSON, criteria maps and question IDs 0ms
+   ✓ D01 AC-STRICT-JSON: unknown contract keys, preserved JSON and safe errors > rejects non-JSON nested value 0 0ms
+   ✓ D01 AC-STRICT-JSON: unknown contract keys, preserved JSON and safe errors > rejects non-JSON nested value 1 0ms
+   ✓ D01 AC-STRICT-JSON: unknown contract keys, preserved JSON and safe errors > rejects non-JSON nested value 2 0ms
+   ✓ D01 AC-STRICT-JSON: unknown contract keys, preserved JSON and safe errors > rejects non-JSON nested value 3 0ms
+   ✓ D01 AC-STRICT-JSON: unknown contract keys, preserved JSON and safe errors > rejects non-JSON nested value 4 0ms
+   ✓ D01 AC-STRICT-JSON: unknown contract keys, preserved JSON and safe errors > rejects non-JSON nested value 5 0ms
+   ✓ D01 AC-STRICT-JSON: unknown contract keys, preserved JSON and safe errors > rejects non-JSON nested value 6 0ms
+   ✓ D01 AC-STRICT-JSON: unknown contract keys, preserved JSON and safe errors > rejects non-JSON nested value 7 0ms
+   ✓ D01 AC-STRICT-JSON: unknown contract keys, preserved JSON and safe errors > rejects non-JSON nested value 8 0ms
+   ✓ D01 AC-STRICT-JSON: unknown contract keys, preserved JSON and safe errors > rejects cycles, sparse arrays, accessors and explicit undefined without invoking getters 0ms
+   ✓ D01 AC-STRICT-JSON: unknown contract keys, preserved JSON and safe errors > does not leak invalid field names or values in public validation errors 1ms
+   ✓ D01 AC-OUTPUT: all variants, required/optional fields and open upstream objects > accepts envelope 0 3ms
+   ✓ D01 AC-OUTPUT: all variants, required/optional fields and open upstream objects > accepts envelope 1 0ms
+   ✓ D01 AC-OUTPUT: all variants, required/optional fields and open upstream objects > accepts envelope 2 0ms
+   ✓ D01 AC-OUTPUT: all variants, required/optional fields and open upstream objects > preserves missing optional upstream metrics and identifiers 0ms
+   ✓ D01 AC-OUTPUT: all variants, required/optional fields and open upstream objects > accepts all optional response metrics and structured legend 0ms
+   ✓ D01 AC-OUTPUT: all variants, required/optional fields and open upstream objects > accepts upstream unknown JSON fields as declared by canonical output schema 0ms
+   ✓ D01 AC-OUTPUT: all variants, required/optional fields and open upstream objects > rejects extra envelope/meta fields 0 1ms
+   ✓ D01 AC-OUTPUT: all variants, required/optional fields and open upstream objects > rejects extra envelope/meta fields 1 1ms
+   ✓ D01 AC-OUTPUT: all variants, required/optional fields and open upstream objects > rejects extra envelope/meta fields 2 1ms
+   ✓ D01 AC-OUTPUT: all variants, required/optional fields and open upstream objects > rejects missing required response/answer/usage fields 1ms
+   ✓ D01 AC-OUTPUT: all variants, required/optional fields and open upstream objects > requires model in dry-run and rejects local execution/policy in request 0ms
+   ✓ D01 AC-OUTPUT: all variants, required/optional fields and open upstream objects > accepts a full dry-run request with all upstream metadata and no local fields 0ms
+   ✓ D01 AC-OUTPUT: all variants, required/optional fields and open upstream objects > bounds output meta and rejects invalid assessment/error shapes 1ms
+   ✓ D01 AC-OUTPUT: all variants, required/optional fields and open upstream objects > does not add a safe-integer bound absent from the canonical schema 0ms
+   ✓ D01 AC-S1: exported types and explicitly deferred semantic checks > provides discriminated typed validator results and envelope variants 0ms
+   ✓ D01 AC-S1: exported types and explicitly deferred semantic checks > leaves policy relations/interval ordering to D03, without adding canonical restrictions 0ms
+   ✓ D01 AC-S1: exported types and explicitly deferred semantic checks > leaves response ranges, IDs, probability relations and usage sign to D03 0ms
+   × D01 AC-DIST: runtime component without checkout source/docs > loads built schemas and validators from a standalone dist copy 298ms
+     → Command failed: /opt/homebrew/Cellar/node/26.3.1/bin/node --input-type=module -e
+        import assert from "node:assert/strict";
+        import { decisionInputJsonSchema, decisionOutputJsonSchema, validateDecisionArgs, validateDecisionEnvelope } from "./dist/decision/schemas.js";
+        assert.equal(decisionInputJsonSchema.$defs.ProviderOptions.propertyNames.enum.length, 146);
+        assert.equal(decisionOutputJsonSchema.oneOf.length, 3);
+        assert.equal(validateDecisionArgs({state: [], questions: {q: {type: "noul", instructions: ""}}}).success, true);
+        assert.equal(validateDecisionEnvelope({kind: "error"}).success, false);
+        console.log("D01_DIST_PASS");
+
+node:internal/modules/esm/resolve:271
+    throw new ERR_MODULE_NOT_FOUND(
+          ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/private/var/folders/d6/_mc3452n2dd__f8txsk98ptm0000gn/T/decision-d01-VAHEwj/dist/decision/schemas.js' imported from /private/var/folders/d6/_mc3452n2dd__f8txsk98ptm0000gn/T/decision-d01-VAHEwj/[eval1]
+    at finalizeResolution (node:internal/modules/esm/resolve:271:11)
+    at moduleResolve (node:internal/modules/esm/resolve:865:10)
+    at defaultResolve (node:internal/modules/esm/resolve:992:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:704:20)
+    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:724:38)
+    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:762:56)
+    at #resolve (node:internal/modules/esm/loader:686:17)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:606:35)
+    at ModuleJob.syncLink (node:internal/modules/esm/module_job:163:33)
+    at ModuleJob.link (node:internal/modules/esm/module_job:253:17) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///private/var/folders/d6/_mc3452n2dd__f8txsk98ptm0000gn/T/decision-d01-VAHEwj/dist/decision/schemas.js'
+}
+
+Node.js v26.3.1
+
+ ❯ test/decision/config.test.ts (212 tests | 1 failed) 375ms
+   ✓ AC-S2 absent and disabled > absent block does not read any ENV 1ms
+   ✓ AC-S2 absent and disabled > disabled ignores key and all settings 0 0ms
+   ✓ AC-S2 absent and disabled > disabled ignores key and all settings 1 0ms
+   ✓ AC-S2 absent and disabled > disabled ignores key and all settings 2 0ms
+   ✓ AC-S2 absent and disabled > disabled ignores key and all settings 3 0ms
+   ✓ AC-S2 absent and disabled > disabled ignores key and all settings 4 0ms
+   ✓ AC-S2 absent and disabled > old loader config works without any OpenRouter key and cannot implicitly activate 1ms
+   ✓ AC-S2 absent and disabled > disabled loader block ignores invalid settings and missing key 0ms
+   ✓ AC-KEY / AC-STRICT enabled fail-loud > rejects nonobject block 0 0ms
+   ✓ AC-KEY / AC-STRICT enabled fail-loud > rejects nonobject block 1 0ms
+   ✓ AC-KEY / AC-STRICT enabled fail-loud > rejects nonobject block 2 1ms
+   ✓ AC-KEY / AC-STRICT enabled fail-loud > rejects nonobject block 3 1ms
+   ✓ AC-KEY / AC-STRICT enabled fail-loud > rejects nonobject block 4 0ms
+   ✓ AC-KEY / AC-STRICT enabled fail-loud > rejects nonobject block 5 0ms
+   ✓ AC-KEY / AC-STRICT enabled fail-loud > rejects nonboolean enabled 0 0ms
+   ✓ AC-KEY / AC-STRICT enabled fail-loud > rejects nonboolean enabled 1 0ms
+   ✓ AC-KEY / AC-STRICT enabled fail-loud > rejects nonboolean enabled 2 0ms
+   ✓ AC-KEY / AC-STRICT enabled fail-loud > rejects nonboolean enabled 3 0ms
+   ✓ AC-KEY / AC-STRICT enabled fail-loud > rejects nonboolean enabled 4 0ms
+   ✓ AC-KEY / AC-STRICT enabled fail-loud > rejects nonboolean enabled 5 0ms
+   ✓ AC-KEY / AC-STRICT enabled fail-loud > rejects invalid key reference 0 2ms
+   ✓ AC-KEY / AC-STRICT enabled fail-loud > rejects invalid key reference 1 0ms
+   ✓ AC-KEY / AC-STRICT enabled fail-loud > rejects invalid key reference 2 0ms
+   ✓ AC-KEY / AC-STRICT enabled fail-loud > rejects invalid key reference 3 0ms
+   ✓ AC-KEY / AC-STRICT enabled fail-loud > rejects invalid key reference 4 0ms
+   ✓ AC-KEY / AC-STRICT enabled fail-loud > rejects invalid key reference 5 0ms
+   ✓ AC-KEY / AC-STRICT enabled fail-loud > rejects invalid key reference 6 0ms
+   ✓ AC-KEY / AC-STRICT enabled fail-loud > rejects invalid key reference 7 0ms
+   ✓ AC-KEY / AC-STRICT enabled fail-loud > rejects invalid key reference 8 0ms
+   ✓ AC-KEY / AC-STRICT enabled fail-loud > rejects invalid key reference 9 0ms
+   ✓ AC-KEY / AC-STRICT enabled fail-loud > rejects missing/empty resolution 0 0ms
+   ✓ AC-KEY / AC-STRICT enabled fail-loud > rejects missing/empty resolution 1 0ms
+   ✓ AC-KEY / AC-STRICT enabled fail-loud > rejects missing/empty resolution 2 0ms
+   ✓ AC-KEY / AC-STRICT enabled fail-loud > rejects unknown field base_url without echo 0ms
+   ✓ AC-KEY / AC-STRICT enabled fail-loud > rejects unknown field headers without echo 0ms
+   ✓ AC-KEY / AC-STRICT enabled fail-loud > rejects unknown field max_timeout_ms without echo 0ms
+   ✓ AC-KEY / AC-STRICT enabled fail-loud > rejects unknown field max_retry_limit without echo 0ms
+   ✓ AC-KEY / AC-STRICT enabled fail-loud > rejects unknown field synthetic-invalid-canary without echo 0ms
+   ✓ AC-KEY / AC-STRICT enabled fail-loud > rejects unknown field __proto__ without echo 0ms
+   ✓ AC-KEY / AC-STRICT enabled fail-loud > rejects unknown field constructor without echo 0ms
+   ✓ AC-KEY / AC-STRICT enabled fail-loud > loader surfaces enabled errors as ConfigError 1ms
+   ✓ AC-KEY / AC-STRICT enabled fail-loud > accepts valid ENV identifiers and preserves resolved key in memory 0ms
+   ✓ AC-DEFAULTS / AC-MODEL > matches all SPEC factory defaults; optional headers and metrics remain absent 1ms
+   ✓ AC-DEFAULTS / AC-MODEL > allows explicit models with default membership; does not trim or replace them 0ms
+   ✓ AC-DEFAULTS / AC-MODEL > rejects invalid default_model 0 2ms
+   ✓ AC-DEFAULTS / AC-MODEL > rejects invalid default_model 1 1ms
+   ✓ AC-DEFAULTS / AC-MODEL > rejects invalid default_model 2 1ms
+   ✓ AC-DEFAULTS / AC-MODEL > rejects invalid default_model 3 1ms
+   ✓ AC-DEFAULTS / AC-MODEL > rejects invalid default_model 4 0ms
+   ✓ AC-DEFAULTS / AC-MODEL > rejects invalid default_model 5 0ms
+   ✓ AC-DEFAULTS / AC-MODEL > rejects invalid allowed_models/member 0 0ms
+   ✓ AC-DEFAULTS / AC-MODEL > rejects invalid allowed_models/member 1 0ms
+   ✓ AC-DEFAULTS / AC-MODEL > rejects invalid allowed_models/member 2 0ms
+   ✓ AC-DEFAULTS / AC-MODEL > rejects invalid allowed_models/member 3 0ms
+   ✓ AC-DEFAULTS / AC-MODEL > rejects invalid allowed_models/member 4 0ms
+   ✓ AC-DEFAULTS / AC-MODEL > rejects invalid allowed_models/member 5 0ms
+   ✓ AC-DEFAULTS / AC-MODEL > rejects invalid allowed_models/member 6 0ms
+   ✓ AC-LIMITS > accepts timeout_ms boundary 1000 0ms
+   ✓ AC-LIMITS > accepts timeout_ms boundary 120000 0ms
+   ✓ AC-LIMITS > rejects timeout_ms invalid 0 0ms
+   ✓ AC-LIMITS > rejects timeout_ms invalid 1 0ms
+   ✓ AC-LIMITS > rejects timeout_ms invalid 2 0ms
+   ✓ AC-LIMITS > rejects timeout_ms invalid 3 0ms
+   ✓ AC-LIMITS > rejects timeout_ms invalid 4 0ms
+   ✓ AC-LIMITS > rejects timeout_ms invalid 5 0ms
+   ✓ AC-LIMITS > rejects timeout_ms invalid 6 0ms
+   ✓ AC-LIMITS > rejects timeout_ms invalid 7 0ms
+   ✓ AC-LIMITS > accepts max_retries boundary 0 0ms
+   ✓ AC-LIMITS > accepts max_retries boundary 2 0ms
+   ✓ AC-LIMITS > rejects max_retries invalid 0 0ms
+   ✓ AC-LIMITS > rejects max_retries invalid 1 0ms
+   ✓ AC-LIMITS > rejects max_retries invalid 2 0ms
+   ✓ AC-LIMITS > rejects max_retries invalid 3 0ms
+   ✓ AC-LIMITS > rejects max_retries invalid 4 0ms
+   ✓ AC-LIMITS > rejects max_retries invalid 5 0ms
+   ✓ AC-LIMITS > rejects max_retries invalid 6 0ms
+   ✓ AC-LIMITS > rejects max_retries invalid 7 0ms
+   ✓ AC-LIMITS > accepts max_request_bytes valid 1 0ms
+   ✓ AC-LIMITS > accepts max_request_bytes valid 4096 0ms
+   ✓ AC-LIMITS > rejects max_request_bytes invalid 0 0ms
+   ✓ AC-LIMITS > rejects max_request_bytes invalid 1 0ms
+   ✓ AC-LIMITS > rejects max_request_bytes invalid 2 0ms
+   ✓ AC-LIMITS > rejects max_request_bytes invalid 3 0ms
+   ✓ AC-LIMITS > rejects max_request_bytes invalid 4 0ms
+   ✓ AC-LIMITS > rejects max_request_bytes invalid 5 0ms
+   ✓ AC-LIMITS > rejects max_request_bytes invalid 6 0ms
+   ✓ AC-LIMITS > accepts max_response_bytes valid 1 0ms
+   ✓ AC-LIMITS > accepts max_response_bytes valid 4096 0ms
+   ✓ AC-LIMITS > rejects max_response_bytes invalid 0 0ms
+   ✓ AC-LIMITS > rejects max_response_bytes invalid 1 0ms
+   ✓ AC-LIMITS > rejects max_response_bytes invalid 2 0ms
+   ✓ AC-LIMITS > rejects max_response_bytes invalid 3 0ms
+   ✓ AC-LIMITS > rejects max_response_bytes invalid 4 0ms
+   ✓ AC-LIMITS > rejects max_response_bytes invalid 5 2ms
+   ✓ AC-LIMITS > rejects max_response_bytes invalid 6 0ms
+   ✓ AC-LIMITS > accepts max_concurrency valid 1 0ms
+   ✓ AC-LIMITS > accepts max_concurrency valid 4096 0ms
+   ✓ AC-LIMITS > rejects max_concurrency invalid 0 0ms
+   ✓ AC-LIMITS > rejects max_concurrency invalid 1 0ms
+   ✓ AC-LIMITS > rejects max_concurrency invalid 2 0ms
+   ✓ AC-LIMITS > rejects max_concurrency invalid 3 0ms
+   ✓ AC-LIMITS > rejects max_concurrency invalid 4 0ms
+   ✓ AC-LIMITS > rejects max_concurrency invalid 5 0ms
+   ✓ AC-LIMITS > rejects max_concurrency invalid 6 0ms
+   ✓ AC-LIMITS > accepts max_queue valid 0 0ms
+   ✓ AC-LIMITS > accepts max_queue valid 4096 0ms
+   ✓ AC-LIMITS > rejects max_queue invalid 0 0ms
+   ✓ AC-LIMITS > rejects max_queue invalid 1 0ms
+   ✓ AC-LIMITS > rejects max_queue invalid 2 0ms
+   ✓ AC-LIMITS > rejects max_queue invalid 3 0ms
+   ✓ AC-LIMITS > rejects max_queue invalid 4 0ms
+   ✓ AC-LIMITS > rejects max_queue invalid 5 0ms
+   ✓ AC-LIMITS > rejects max_queue invalid 6 0ms
+   ✓ AC-PROVIDER > preserves all 14 ProviderPreferences fields and nested JSON without normalization 1ms
+   ✓ AC-PROVIDER > preserves ProviderPreferences null as allowed by canonical schema 0ms
+   ✓ AC-PROVIDER > rejects invalid provider defaults safely 0 0ms
+   ✓ AC-PROVIDER > rejects invalid provider defaults safely 1 0ms
+   ✓ AC-PROVIDER > rejects invalid provider defaults safely 2 0ms
+   ✓ AC-PROVIDER > rejects invalid provider defaults safely 3 0ms
+   ✓ AC-PROVIDER > rejects invalid provider defaults safely 4 0ms
+   ✓ AC-PROVIDER > rejects invalid provider defaults safely 5 1ms
+   ✓ AC-PROVIDER > rejects invalid provider defaults safely 6 0ms
+   ✓ AC-PROVIDER > rejects invalid provider defaults safely 7 0ms
+   ✓ AC-PROVIDER > accepts all and individual mandatory constraints 2ms
+   ✓ AC-PROVIDER > rejects weak/unknown mandatory constraints 0 0ms
+   ✓ AC-PROVIDER > rejects weak/unknown mandatory constraints 1 0ms
+   ✓ AC-PROVIDER > rejects weak/unknown mandatory constraints 2 0ms
+   ✓ AC-PROVIDER > rejects weak/unknown mandatory constraints 3 0ms
+   ✓ AC-PROVIDER > rejects weak/unknown mandatory constraints 4 0ms
+   ✓ AC-PROVIDER > rejects weak/unknown mandatory constraints 5 0ms
+   ✓ AC-PROVIDER > rejects weak/unknown mandatory constraints 6 0ms
+   ✓ AC-PROVIDER > rejects weak/unknown mandatory constraints 7 0ms
+   ✓ AC-PROVIDER > rejects weak/unknown mandatory constraints 8 0ms
+   ✓ AC-PROVIDER > rejects weak/unknown mandatory constraints 9 0ms
+   ✓ AC-PROVIDER > rejects weak/unknown mandatory constraints 10 0ms
+   ✓ AC-PROVIDER > rejects weak/unknown mandatory constraints 11 0ms
+   ✓ AC-PROVIDER > rejects weak/unknown mandatory constraints 12 0ms
+   ✓ AC-PROVIDER > rejects weak/unknown mandatory constraints 13 0ms
+   ✓ AC-PROVIDER > rejects weak/unknown mandatory constraints 14 0ms
+   ✓ AC-PROVIDER > rejects weak/unknown mandatory constraints 15 0ms
+   ✓ AC-PROVIDER > rejects weak/unknown mandatory constraints 16 0ms
+   ✓ AC-PROVIDER > rejects weak/unknown mandatory constraints 17 0ms
+   ✓ AC-PROVIDER > rejects weak/unknown mandatory constraints 18 0ms
+   ✓ AC-PROVIDER > rejects weak/unknown mandatory constraints 19 0ms
+   ✓ AC-HEADERS > accepts public HTTPS https://example.org 3ms
+   ✓ AC-HEADERS > accepts public HTTPS https://example.org:8443/path?q=x#part 2ms
+   ✓ AC-HEADERS > accepts public HTTPS https://8.8.8.8 0ms
+   ✓ AC-HEADERS > accepts public HTTPS https://192.2.0.1 0ms
+   ✓ AC-HEADERS > accepts public HTTPS https://192.0.0.9 0ms
+   ✓ AC-HEADERS > accepts public HTTPS https://[2606:4700:4700::1111] 0ms
+   ✓ AC-HEADERS > accepts public HTTPS https://пример.рф 0ms
+   ✓ AC-HEADERS > rejects nonpublic/invalid/header-injection referer 0 0ms
+   ✓ AC-HEADERS > rejects nonpublic/invalid/header-injection referer 1 0ms
+   ✓ AC-HEADERS > rejects nonpublic/invalid/header-injection referer 2 0ms
+   ✓ AC-HEADERS > rejects nonpublic/invalid/header-injection referer 3 0ms
+   ✓ AC-HEADERS > rejects nonpublic/invalid/header-injection referer 4 0ms
+   ✓ AC-HEADERS > rejects nonpublic/invalid/header-injection referer 5 0ms
+   ✓ AC-HEADERS > rejects nonpublic/invalid/header-injection referer 6 0ms
+   ✓ AC-HEADERS > rejects nonpublic/invalid/header-injection referer 7 0ms
+   ✓ AC-HEADERS > rejects nonpublic/invalid/header-injection referer 8 0ms
+   ✓ AC-HEADERS > rejects nonpublic/invalid/header-injection referer 9 0ms
+   ✓ AC-HEADERS > rejects nonpublic/invalid/header-injection referer 10 0ms
+   ✓ AC-HEADERS > rejects nonpublic/invalid/header-injection referer 11 0ms
+   ✓ AC-HEADERS > rejects nonpublic/invalid/header-injection referer 12 0ms
+   ✓ AC-HEADERS > rejects nonpublic/invalid/header-injection referer 13 0ms
+   ✓ AC-HEADERS > rejects nonpublic/invalid/header-injection referer 14 0ms
+   ✓ AC-HEADERS > rejects nonpublic/invalid/header-injection referer 15 0ms
+   ✓ AC-HEADERS > rejects nonpublic/invalid/header-injection referer 16 0ms
+   ✓ AC-HEADERS > rejects nonpublic/invalid/header-injection referer 17 0ms
+   ✓ AC-HEADERS > rejects nonpublic/invalid/header-injection referer 18 0ms
+   ✓ AC-HEADERS > rejects nonpublic/invalid/header-injection referer 19 0ms
+   ✓ AC-HEADERS > rejects nonpublic/invalid/header-injection referer 20 0ms
+   ✓ AC-HEADERS > rejects nonpublic/invalid/header-injection referer 21 0ms
+   ✓ AC-HEADERS > rejects nonpublic/invalid/header-injection referer 22 0ms
+   ✓ AC-HEADERS > rejects nonpublic/invalid/header-injection referer 23 0ms
+   ✓ AC-HEADERS > rejects nonpublic/invalid/header-injection referer 24 0ms
+   ✓ AC-HEADERS > rejects nonpublic/invalid/header-injection referer 25 0ms
+   ✓ AC-HEADERS > rejects nonpublic/invalid/header-injection referer 26 0ms
+   ✓ AC-HEADERS > rejects nonpublic/invalid/header-injection referer 27 0ms
+   ✓ AC-HEADERS > rejects nonpublic/invalid/header-injection referer 28 0ms
+   ✓ AC-HEADERS > rejects nonpublic/invalid/header-injection referer 29 0ms
+   ✓ AC-HEADERS > rejects nonpublic/invalid/header-injection referer 30 0ms
+   ✓ AC-HEADERS > rejects nonpublic/invalid/header-injection referer 31 0ms
+   ✓ AC-HEADERS > rejects nonpublic/invalid/header-injection referer 32 0ms
+   ✓ AC-HEADERS > rejects nonpublic/invalid/header-injection referer 33 0ms
+   ✓ AC-HEADERS > preserves a nonempty app title 0ms
+   ✓ AC-HEADERS > rejects invalid title 0 0ms
+   ✓ AC-HEADERS > rejects invalid title 1 1ms
+   ✓ AC-HEADERS > rejects invalid title 2 0ms
+   ✓ AC-HEADERS > rejects invalid title 3 0ms
+   ✓ AC-HEADERS > rejects invalid title 4 0ms
+   ✓ AC-HEADERS > rejects invalid title 5 0ms
+   ✓ AC-METRICS > expands home and resolves relative decision metrics from cwd, not config directory 1ms
+   ✓ AC-METRICS > rejects invalid metrics path 0 1ms
+   ✓ AC-METRICS > rejects invalid metrics path 1 0ms
+   ✓ AC-METRICS > rejects invalid metrics path 2 0ms
+   ✓ AC-METRICS > rejects invalid metrics path 3 0ms
+   ✓ AC-METRICS > rejects invalid metrics path 4 0ms
+   ✓ AC-METRICS > rejects normalized collision for nonexistent paths 0ms
+   ✓ AC-METRICS > rejects collision with legacy default after home expansion 1ms
+   ✓ AC-METRICS > rejects existing realpath collision decision-link 1ms
+   ✓ AC-METRICS > rejects existing realpath collision legacy-link 1ms
+   ✓ AC-METRICS > rejects existing realpath collision both-links 1ms
+   ✓ AC-METRICS > rejects existing realpath collision directory-link 1ms
+   ✓ AC-METRICS > accepts separate existing files and neither reads nor writes metrics 1ms
+   ✓ AC-S2 exports / AC-DIST > discriminates ready config and exports S2 through the existing loader module 0ms
+   × AC-S2 exports / AC-DIST > loads built S2 in a fresh directory without checkout source/docs 293ms
+     → Command failed: /opt/homebrew/Cellar/node/26.3.1/bin/node --input-type=module -e
+      import assert from "node:assert/strict";
+      import { loadDecisionSetup } from "./dist/decision/config.js";
+      const opts = { env: { FIXTURE_KEY: "synthetic-dist-key" }, home: process.cwd(), legacyMetricsFile: "legacy.jsonl" };
+      assert.equal(loadDecisionSetup(undefined, opts).status, "not-configured");
+      assert.equal(loadDecisionSetup({enabled: false, api_key: "literal"}, opts).status, "disabled");
+      const ready = loadDecisionSetup({api_key: "env:FIXTURE_KEY"}, opts);
+      assert.equal(ready.status, "ready");
+      assert.equal(ready.config.max_retries, 0);
+      assert.equal(ready.config.api_key, "synthetic-dist-key");
+      assert.throws(() => loadDecisionSetup({api_key: "literal"}, opts), {name: "ConfigError"});
+      console.log("D02_DIST_PASS");
+
+node:internal/modules/esm/resolve:271
+    throw new ERR_MODULE_NOT_FOUND(
+          ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/private/var/folders/d6/_mc3452n2dd__f8txsk98ptm0000gn/T/decision-config-12wqo4/dist/decision/config.js' imported from /private/var/folders/d6/_mc3452n2dd__f8txsk98ptm0000gn/T/decision-config-12wqo4/[eval1]
+    at finalizeResolution (node:internal/modules/esm/resolve:271:11)
+    at moduleResolve (node:internal/modules/esm/resolve:865:10)
+    at defaultResolve (node:internal/modules/esm/resolve:992:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:704:20)
+    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:724:38)
+    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:762:56)
+    at #resolve (node:internal/modules/esm/loader:686:17)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:606:35)
+    at ModuleJob.syncLink (node:internal/modules/esm/module_job:163:33)
+    at ModuleJob.link (node:internal/modules/esm/module_job:253:17) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///private/var/folders/d6/_mc3452n2dd__f8txsk98ptm0000gn/T/decision-config-12wqo4/dist/decision/config.js'
+}
+
+Node.js v26.3.1
+
+   ✓ AC-CASCADE / AC-LEGACY > uses unchanged CLI > ENV > home cascade with distinct S2 states 2ms
+   ✓ AC-CASCADE / AC-LEGACY > still requires nonempty active providers 0 1ms
+   ✓ AC-CASCADE / AC-LEGACY > still requires nonempty active providers 1 1ms
+   ✓ AC-CASCADE / AC-LEGACY > still requires nonempty active providers 2 1ms
+   ✓ AC-CASCADE / AC-LEGACY > preserves legacy literal-key warning while resolving decision key strictly 1ms
+ ❯ test/decision/client.test.ts (94 tests | 1 failed) 405ms
+   ✓ AC-WIRE exact S3 bytes and isolated endpoint > sends only fixed POST/body and ready-config headers 13ms
+   ✓ AC-WIRE exact S3 bytes and isolated endpoint > omits optional headers; passes decoded JSON to S4 without semantic work 1ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > status 400 -> UPSTREAM_REQUEST 1ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > status 401 -> UPSTREAM_AUTH 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > status 402 -> UPSTREAM_PAYMENT 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > status 403 -> UPSTREAM_FORBIDDEN 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > status 404 -> UPSTREAM_NOT_FOUND 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > status 413 -> INPUT_TOO_LARGE 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > status 429 -> UPSTREAM_RATE_LIMIT 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > status 500 -> UPSTREAM_UNAVAILABLE 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > status 502 -> UPSTREAM_UNAVAILABLE 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > status 503 -> UPSTREAM_UNAVAILABLE 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > status 524 -> UPSTREAM_TIMEOUT 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > status 529 -> UPSTREAM_UNAVAILABLE 3ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > status 501 -> UPSTREAM_UNAVAILABLE 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > status 599 -> UPSTREAM_UNAVAILABLE 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > status 418 -> UPSTREAM_REQUEST 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > status 408 -> UPSTREAM_REQUEST 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > status 300 -> UPSTREAM_PROTOCOL 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > status 302 -> UPSTREAM_PROTOCOL 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > status 304 -> UPSTREAM_PROTOCOL 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > explicit retries do not repeat status 400 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > explicit retries do not repeat status 401 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > explicit retries do not repeat status 402 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > explicit retries do not repeat status 403 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > explicit retries do not repeat status 404 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > explicit retries do not repeat status 413 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > explicit retries do not repeat status 408 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > explicit retries do not repeat status 418 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > explicit retries do not repeat status 501 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > explicit retries do not repeat status 599 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > explicit retries do not repeat status 302 0ms
+   ✓ AC-ATTEMPTS and AC-RETRY-AFTER > network failures with retries=0 have exact attempt bound 1ms
+   ✓ AC-ATTEMPTS and AC-RETRY-AFTER > network failures with retries=1 have exact attempt bound 1ms
+   ✓ AC-ATTEMPTS and AC-RETRY-AFTER > network failures with retries=2 have exact attempt bound 1ms
+   ✓ AC-ATTEMPTS and AC-RETRY-AFTER > explicit retries repeat only allowed HTTP 429 5ms
+   ✓ AC-ATTEMPTS and AC-RETRY-AFTER > explicit retries repeat only allowed HTTP 500 3ms
+   ✓ AC-ATTEMPTS and AC-RETRY-AFTER > explicit retries repeat only allowed HTTP 502 10ms
+   ✓ AC-ATTEMPTS and AC-RETRY-AFTER > explicit retries repeat only allowed HTTP 503 4ms
+   ✓ AC-ATTEMPTS and AC-RETRY-AFTER > explicit retries repeat only allowed HTTP 524 5ms
+   ✓ AC-ATTEMPTS and AC-RETRY-AFTER > explicit retries repeat only allowed HTTP 529 3ms
+   ✓ AC-ATTEMPTS and AC-RETRY-AFTER > exponential delays include bounded deterministic jitter 3ms
+   ✓ AC-ATTEMPTS and AC-RETRY-AFTER > Retry-After 1 inside budget 5ms
+   ✓ AC-ATTEMPTS and AC-RETRY-AFTER > Retry-After Thu, 01 Jan 2026 00:00:01 GMT inside budget 2ms
+   ✓ AC-ATTEMPTS and AC-RETRY-AFTER > Retry-After 2 reaches deadline without retry 2ms
+   ✓ AC-ATTEMPTS and AC-RETRY-AFTER > Retry-After 1 reaches deadline without retry 2ms
+   ✓ AC-ATTEMPTS and AC-RETRY-AFTER > Retry-After 999999999999999999999999999999999999 reaches deadline without retry 5ms
+   ✓ AC-ATTEMPTS and AC-RETRY-AFTER > invalid/past Retry-After uses backoff: invalid 4ms
+   ✓ AC-ATTEMPTS and AC-RETRY-AFTER > invalid/past Retry-After uses backoff: -1 2ms
+   ✓ AC-ATTEMPTS and AC-RETRY-AFTER > invalid/past Retry-After uses backoff: Thu, 01 Jan 2020 00:00:00 GMT 8ms
+   ✓ AC-ATTEMPTS and AC-RETRY-AFTER > uncertain billing survives a later success or known rejection 3ms
+   ✓ AC-ATTEMPTS and AC-RETRY-AFTER > cancel in rate-limit backoff retains a known billing result 2ms
+   ✓ AC-QUEUE persistent bounded FIFO across calls > shares concurrency, rejects overflow before send and transfers slots FIFO 3ms
+   ✓ AC-QUEUE persistent bounded FIFO across calls > queue deadline has attempts=0 and removes waiter 3ms
+   ✓ AC-QUEUE persistent bounded FIFO across calls > zero queue permits active concurrency but rejects waiting requests 1ms
+   ✓ AC-DEADLINE total queue/backoff/headers/body budget > successful delayed headers and body report total monotonic elapsed 2ms
+   ✓ AC-DEADLINE total queue/backoff/headers/body budget > monotonic clock enforces expiry before send without resetting phase budget 1ms
+   ✓ AC-DEADLINE total queue/backoff/headers/body budget > wall-clock jumps do not change monotonic elapsed or deadline 0ms
+   ✓ AC-DEADLINE total queue/backoff/headers/body budget > queue time is not reset on acquiring a slot 1ms
+   ✓ AC-DEADLINE total queue/backoff/headers/body budget > retry consumes the original budget including delayed body 1ms
+   ✓ AC-DEADLINE total queue/backoff/headers/body budget > header timeout aborts fetch and cancels a late response 1ms
+   ✓ AC-CANCEL and AC-CLEANUP > abort after slot grant but before fetch keeps attempts=0 and releases slot 0ms
+   ✓ AC-CANCEL and AC-CLEANUP > preabort sends nothing and never leaks caller reason 3ms
+   ✓ AC-CANCEL and AC-CLEANUP > queued abort removes waiter and frees queue capacity 1ms
+   ✓ AC-CANCEL and AC-CLEANUP > cancel during headers stops retry and recovers slot 1ms
+   ✓ AC-CANCEL and AC-CLEANUP > cancel during body stops retry and recovers slot 1ms
+   ✓ AC-CANCEL and AC-CLEANUP > cancel during backoff stops retry and recovers slot 1ms
+   ✓ AC-CANCEL and AC-CLEANUP > releases timers, listeners and slot after success 0ms
+   ✓ AC-CANCEL and AC-CLEANUP > releases timers, listeners and slot after http 0ms
+   ✓ AC-CANCEL and AC-CLEANUP > releases timers, listeners and slot after protocol 0ms
+   ✓ AC-CANCEL and AC-CLEANUP > releases timers, listeners and slot after network 0ms
+   ✓ AC-BYTES actual bounded response and AC-REDACTION > non-JSON html is safe protocol error without retry 1ms
+   ✓ AC-BYTES actual bounded response and AC-REDACTION > non-JSON broken-json is safe protocol error without retry 1ms
+   ✓ AC-BYTES actual bounded response and AC-REDACTION > non-JSON empty is safe protocol error without retry 0ms
+   ✓ AC-BYTES actual bounded response and AC-REDACTION > non-JSON invalid-utf8 is safe protocol error without retry 0ms
+   ✓ AC-BYTES actual bounded response and AC-REDACTION > chunk bytes enforce limit regardless of Content-Length=undefined 0ms
+   ✓ AC-BYTES actual bounded response and AC-REDACTION > chunk bytes enforce limit regardless of Content-Length=1 0ms
+   ✓ AC-BYTES actual bounded response and AC-REDACTION > chunk bytes enforce limit regardless of Content-Length=999999 0ms
+   ✓ AC-BYTES actual bounded response and AC-REDACTION > accepts exact byte limit and split multibyte UTF-8 0ms
+   ✓ AC-BYTES actual bounded response and AC-REDACTION > body network failure is classified safely and may retry explicitly 2ms
+   ✓ AC-BYTES actual bounded response and AC-REDACTION > reflected transport/body errors never log or expose raw material 1ms
+   ✓ AC-BYTES actual bounded response and AC-REDACTION > AC-REDIRECT denies Location without a second fetch 0ms
+   ✓ AC-BYTES actual bounded response and AC-REDACTION > rejects already-redirected injected response 0ms
+   ✓ AC-BYTES actual bounded response and AC-REDACTION > successful JSON bypasses HTTP Content-Type and preserves unknowns for S4 0ms
+   ✓ AC-OVERRIDES effective execution > config defaults do not cap valid explicit execution 1ms
+   ✓ AC-OVERRIDES effective execution > invalid/direct dry-run execution never sends: {"timeout_ms":999} 0ms
+   ✓ AC-OVERRIDES effective execution > invalid/direct dry-run execution never sends: {"timeout_ms":120001} 0ms
+   ✓ AC-OVERRIDES effective execution > invalid/direct dry-run execution never sends: {"timeout_ms":null} 0ms
+   ✓ AC-OVERRIDES effective execution > invalid/direct dry-run execution never sends: {"timeout_ms":1000.5} 0ms
+   ✓ AC-OVERRIDES effective execution > invalid/direct dry-run execution never sends: {"max_retries":-1} 0ms
+   ✓ AC-OVERRIDES effective execution > invalid/direct dry-run execution never sends: {"max_retries":3} 0ms
+   ✓ AC-OVERRIDES effective execution > invalid/direct dry-run execution never sends: {"max_retries":0.5} 0ms
+   ✓ AC-OVERRIDES effective execution > invalid/direct dry-run execution never sends: {"dry_run":true} 0ms
+   × AC-DIST compiled S5 > runs built transport with S3/S4 in a standalone dist copy 278ms
+     → Command failed: /opt/homebrew/Cellar/node/26.3.1/bin/node --input-type=module -e
+        import assert from "node:assert/strict";
+        import { createDecisionClient } from "./dist/decision/client.js";
+        import { prepareDecision } from "./dist/decision/request.js";
+        import { validateResponse } from "./dist/decision/response.js";
+        const key = ["SYNTHETIC", "ONLY"].join("_");
+        const config = { api_key:key, default_model:"m", allowed_models:["m"],
+          provider_defaults:{}, required_provider:{zdr:true}, timeout_ms:1000,max_retries:0,
+          max_request_bytes:2000,max_response_bytes:2000,max_concurrency:1,max_queue:0 };
+        const p = prepareDecision({state:"synthetic",questions:{q:{type:"noul",instructions:"check"}}},config);
+        assert.equal(p.success,true);
+        let calls = 0;
+        const client = createDecisionClient(config, { fetch: async (url, init) => {
+          calls++;
+          assert.equal(url,"https://openrouter.ai/api/alpha/decisions");
+          assert.equal(init.method,"POST"); assert.equal(init.redirect,"manual");
+          assert.ok(init.body === p.data.bodyJson);
+          assert.ok(new Headers(init.headers).get("Authorization") === "Bearer " + key);
+          assert.equal(JSON.parse(init.body).provider.zdr,true);
+          return new Response(JSON.stringify({model:"actual",answers:{q:{type:"noul",noul:0.9}},usage:{input_tokens:1,output_tokens:0}}));
+        } });
+        const r = await client.request(p.data,p.data.effectiveExecution);
+        assert.equal(r.success,true); assert.equal(r.attempts,1); assert.equal(calls,1);
+        assert.equal(validateResponse(r.body,p.data).success,true);
+        console.log("D04_DIST_PASS");
+
+node:internal/modules/esm/resolve:271
+    throw new ERR_MODULE_NOT_FOUND(
+          ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/private/var/folders/d6/_mc3452n2dd__f8txsk98ptm0000gn/T/decision-d04-fKQvJL/dist/decision/client.js' imported from /private/var/folders/d6/_mc3452n2dd__f8txsk98ptm0000gn/T/decision-d04-fKQvJL/[eval1]
+    at finalizeResolution (node:internal/modules/esm/resolve:271:11)
+    at moduleResolve (node:internal/modules/esm/resolve:865:10)
+    at defaultResolve (node:internal/modules/esm/resolve:992:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:704:20)
+    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:724:38)
+    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:762:56)
+    at #resolve (node:internal/modules/esm/loader:686:17)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:606:35)
+    at ModuleJob.syncLink (node:internal/modules/esm/module_job:163:33)
+    at ModuleJob.link (node:internal/modules/esm/module_job:253:17) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///private/var/folders/d6/_mc3452n2dd__f8txsk98ptm0000gn/T/decision-d04-fKQvJL/dist/decision/client.js'
+}
+
+Node.js v26.3.1
+
+ ❯ test/decision/core.test.ts (70 tests | 1 failed) 382ms
+   ✓ D03 AC-S3 request assembly > uses configured default/whitelist and execution defaults without serializing local fields or key 3ms
+   ✓ D03 AC-S3 request assembly > accepts whitelisted model override and rejects outside it 1ms
+   ✓ D03 AC-S3 request assembly > replaces top-level provider lists and objects whole; null provider means no override 1ms
+   ✓ D03 AC-S3 request assembly > preserves nullable provider defaults and never reads the resolved key 0ms
+   ✓ D03 AC-S3 request assembly > fills mandatory constraints after overrides and does not mutate config or args 0ms
+   ✓ D03 AC-S3 request assembly > rejects explicit weakening of data_collection 0ms
+   ✓ D03 AC-S3 request assembly > rejects explicit weakening of zdr 0ms
+   ✓ D03 AC-S3 request assembly > rejects explicit weakening of allow_fallbacks 0ms
+   ✓ D03 AC-S3 request assembly > rejects explicit weakening of require_parameters 0ms
+   ✓ D03 AC-S3 request assembly > rejects explicit weakening of only 0ms
+   ✓ D03 AC-S3 request assembly > rejects explicit weakening of only 0ms
+   ✓ D03 AC-S3 request assembly > checks configured defaults against mandatory provider; request may repair a default 0ms
+   ✓ D03 AC-S3 request assembly > rejects policy relation: missing 0ms
+   ✓ D03 AC-S3 request assembly > rejects policy relation: wrong-type 3ms
+   ✓ D03 AC-S3 request assembly > rejects policy relation: bad-interval 1ms
+   ✓ D03 AC-S3 request assembly > accepts execution endpoint 1000/0 0ms
+   ✓ D03 AC-S3 request assembly > accepts execution endpoint 120000/2 0ms
+   ✓ D03 AC-S3 request assembly > rejects timeout 999 0ms
+   ✓ D03 AC-S3 request assembly > rejects timeout 120001 0ms
+   ✓ D03 AC-S3 request assembly > rejects timeout 1.5 0ms
+   ✓ D03 AC-S3 request assembly > rejects retries -1 0ms
+   ✓ D03 AC-S3 request assembly > rejects retries 3 0ms
+   ✓ D03 AC-S3 request assembly > rejects retries 0.5 0ms
+   ✓ D03 AC-S3 request assembly > measures exact final UTF-8 JSON, allowing equality and rejecting one byte beyond 1ms
+   ✓ D03 AC-S3 request assembly > warns once per degenerate type and retains exact options 0ms
+   ✓ D03 AC-S4 upstream response > preserves actual model and optional absence while stripping all upstream extras 2ms
+   ✓ D03 AC-S4 upstream response > rejects absent answer c 0ms
+   ✓ D03 AC-S4 upstream response > rejects absent answer n 0ms
+   ✓ D03 AC-S4 upstream response > rejects absent answer s 0ms
+   ✓ D03 AC-S4 upstream response > rejects extra ID and mismatched answer type 0ms
+   ✓ D03 AC-S4 upstream response > accepts tied maxima but rejects unknown or non-max choice 0ms
+   ✓ D03 AC-S4 upstream response > rejects malformed Choice distribution 0 0ms
+   ✓ D03 AC-S4 upstream response > rejects malformed Choice distribution 1 0ms
+   ✓ D03 AC-S4 upstream response > rejects malformed Choice distribution 2 0ms
+   ✓ D03 AC-S4 upstream response > rejects malformed Choice distribution 3 0ms
+   ✓ D03 AC-S4 upstream response > rejects malformed Choice distribution 4 0ms
+   ✓ D03 AC-S4 upstream response > rejects malformed Choice distribution 5 0ms
+   ✓ D03 AC-S4 upstream response > accepts inclusive sum tolerance 0 0ms
+   ✓ D03 AC-S4 upstream response > accepts inclusive sum tolerance 1 0ms
+   ✓ D03 AC-S4 upstream response > rejects malformed Score distribution 0 0ms
+   ✓ D03 AC-S4 upstream response > rejects malformed Score distribution 1 0ms
+   ✓ D03 AC-S4 upstream response > rejects malformed Score distribution 2 0ms
+   ✓ D03 AC-S4 upstream response > rejects malformed Score distribution 3 0ms
+   ✓ D03 AC-S4 upstream response > checks Score range, expectation tolerance, exact legend and structured descriptions 1ms
+   ✓ D03 AC-S4 upstream response > rejects out-of-range noul 0ms
+   ✓ D03 AC-S4 upstream response > rejects out-of-range confidence 0ms
+   ✓ D03 AC-S4 upstream response > requires nonnegative integer input_tokens 0ms
+   ✓ D03 AC-S4 upstream response > requires nonnegative integer output_tokens 0ms
+   ✓ D03 AC-S4 upstream response > requires usage; optional cost must be finite nonnegative 1ms
+   ✓ D03 AC-S4 upstream response > rejects invalid whole response without returning partial answers or raw canary 0ms
+   ✓ D03 AC-S4 upstream response > produces a success envelope matching the canonical output schema 53ms
+   × D03 AC-DIST compiled component > runs S3/S4 exports in a standalone dist copy without source or docs 305ms
+     → Command failed: /opt/homebrew/Cellar/node/26.3.1/bin/node --input-type=module -e
+        import assert from "node:assert/strict";
+        import { prepareDecision } from "./dist/decision/request.js";
+        import { validateResponse } from "./dist/decision/response.js";
+        import { assess } from "./dist/decision/assessment.js";
+        const config = { api_key:"SYNTHETIC_ONLY", default_model:"m", allowed_models:["m"],
+          provider_defaults:{}, required_provider:{}, timeout_ms:30000, max_retries:0,
+          max_request_bytes:2000, max_response_bytes:2000, max_concurrency:1, max_queue:0 };
+        const p = prepareDecision({state:"x",questions:{q:{type:"noul",instructions:"check"}},
+          policy:{q:{type:"noul",false_max:0.1,true_min:0.9}}}, config);
+        assert.equal(p.success, true);
+        const r = validateResponse({model:"actual",answers:{q:{type:"noul",noul:0.9}},
+          usage:{input_tokens:1,output_tokens:0}}, p.data);
+        assert.equal(r.success, true);
+        assert.equal(assess(r.data.result,p.data.localPolicy).q.value, true);
+        console.log("D03_DIST_PASS");
+
+node:internal/modules/esm/resolve:271
+    throw new ERR_MODULE_NOT_FOUND(
+          ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/private/var/folders/d6/_mc3452n2dd__f8txsk98ptm0000gn/T/decision-d03-xAhnCN/dist/decision/request.js' imported from /private/var/folders/d6/_mc3452n2dd__f8txsk98ptm0000gn/T/decision-d03-xAhnCN/[eval1]
+    at finalizeResolution (node:internal/modules/esm/resolve:271:11)
+    at moduleResolve (node:internal/modules/esm/resolve:865:10)
+    at defaultResolve (node:internal/modules/esm/resolve:992:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:704:20)
+    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:724:38)
+    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:762:56)
+    at #resolve (node:internal/modules/esm/loader:686:17)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:606:35)
+    at ModuleJob.syncLink (node:internal/modules/esm/module_job:163:33)
+    at ModuleJob.link (node:internal/modules/esm/module_job:253:17) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///private/var/folders/d6/_mc3452n2dd__f8txsk98ptm0000gn/T/decision-d03-xAhnCN/dist/decision/request.js'
+}
+
+Node.js v26.3.1
+
+   ✓ D03 AC-S4 local assessment > returns unassessed and empty reasons without policy 0ms
+   ✓ D03 AC-S4 local assessment > Choice AND 0 => { min_confidence: 0.8, min_probability: 0.8, min_margin: 0.6 } 0ms
+   ✓ D03 AC-S4 local assessment > Choice AND 1 => { min_confidence: 0.801, min_probability: 0.8, min_margin: 0.6 } 0ms
+   ✓ D03 AC-S4 local assessment > Choice AND 2 => { min_confidence: 0.8, min_probability: 0.801, min_margin: 0.6 } 0ms
+   ✓ D03 AC-S4 local assessment > Choice AND 3 => { min_confidence: 0.8, min_probability: 0.8, min_margin: 0.601 } 0ms
+   ✓ D03 AC-S4 local assessment > treats tied maxima as uncertain for any policy, including zero threshold 0ms
+   ✓ D03 AC-S4 local assessment > keeps missing probability, margin or confidence uncertain 1ms
+   ✓ D03 AC-S4 local assessment > accepts an inclusive margin endpoint despite binary subtraction error 0ms
+   ✓ D03 AC-S4 local assessment > has no margin for one option 0ms
+   ✓ D03 AC-S4 local assessment > Noul p=0.099 => accepted 0ms
+   ✓ D03 AC-S4 local assessment > Noul p=0.1 => accepted 0ms
+   ✓ D03 AC-S4 local assessment > Noul p=0.5 => uncertain 0ms
+   ✓ D03 AC-S4 local assessment > Noul p=0.9 => accepted 0ms
+   ✓ D03 AC-S4 local assessment > Noul p=0.901 => accepted 0ms
+   ✓ D03 AC-S4 local assessment > Score confidence 0.799 => uncertain without rounding 0ms
+   ✓ D03 AC-S4 local assessment > Score confidence 0.8 => accepted without rounding 0ms
+   ✓ D03 AC-S4 local assessment > Score confidence 0.801 => accepted without rounding 0ms
+   ✓ D03 AC-S4 local assessment > missing Score confidence remains uncertain at a zero threshold 0ms
+ ✓ test/decision/integration.test.ts (42 tests) 8281ms
+   ✓ D06 stdio pipeline and isolation > D06-ERROR preserves attempts and uncertain billing across network retry  602ms
+   ✓ D06 stdio pipeline and isolation > D06-ERROR final transport error retains prior uncertain billing  513ms
+   ✓ D06 actual SDK cancellation and legacy stdio > D06-CANCEL deadline includes queued time and slots recover  1197ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 6 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  test/decision/client.test.ts > AC-DIST compiled S5 > runs built transport with S3/S4 in a standalone dist copy
+Error: Command failed: /opt/homebrew/Cellar/node/26.3.1/bin/node --input-type=module -e
+        import assert from "node:assert/strict";
+        import { createDecisionClient } from "./dist/decision/client.js";
+        import { prepareDecision } from "./dist/decision/request.js";
+        import { validateResponse } from "./dist/decision/response.js";
+        const key = ["SYNTHETIC", "ONLY"].join("_");
+        const config = { api_key:key, default_model:"m", allowed_models:["m"],
+          provider_defaults:{}, required_provider:{zdr:true}, timeout_ms:1000,max_retries:0,
+          max_request_bytes:2000,max_response_bytes:2000,max_concurrency:1,max_queue:0 };
+        const p = prepareDecision({state:"synthetic",questions:{q:{type:"noul",instructions:"check"}}},config);
+        assert.equal(p.success,true);
+        let calls = 0;
+        const client = createDecisionClient(config, { fetch: async (url, init) => {
+          calls++;
+          assert.equal(url,"https://openrouter.ai/api/alpha/decisions");
+          assert.equal(init.method,"POST"); assert.equal(init.redirect,"manual");
+          assert.ok(init.body === p.data.bodyJson);
+          assert.ok(new Headers(init.headers).get("Authorization") === "Bearer " + key);
+          assert.equal(JSON.parse(init.body).provider.zdr,true);
+          return new Response(JSON.stringify({model:"actual",answers:{q:{type:"noul",noul:0.9}},usage:{input_tokens:1,output_tokens:0}}));
+        } });
+        const r = await client.request(p.data,p.data.effectiveExecution);
+        assert.equal(r.success,true); assert.equal(r.attempts,1); assert.equal(calls,1);
+        assert.equal(validateResponse(r.body,p.data).success,true);
+        console.log("D04_DIST_PASS");
+
+node:internal/modules/esm/resolve:271
+    throw new ERR_MODULE_NOT_FOUND(
+          ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/private/var/folders/d6/_mc3452n2dd__f8txsk98ptm0000gn/T/decision-d04-fKQvJL/dist/decision/client.js' imported from /private/var/folders/d6/_mc3452n2dd__f8txsk98ptm0000gn/T/decision-d04-fKQvJL/[eval1]
+    at finalizeResolution (node:internal/modules/esm/resolve:271:11)
+    at moduleResolve (node:internal/modules/esm/resolve:865:10)
+    at defaultResolve (node:internal/modules/esm/resolve:992:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:704:20)
+    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:724:38)
+    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:762:56)
+    at #resolve (node:internal/modules/esm/loader:686:17)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:606:35)
+    at ModuleJob.syncLink (node:internal/modules/esm/module_job:163:33)
+    at ModuleJob.link (node:internal/modules/esm/module_job:253:17) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///private/var/folders/d6/_mc3452n2dd__f8txsk98ptm0000gn/T/decision-d04-fKQvJL/dist/decision/client.js'
+}
+
+Node.js v26.3.1
+
+ ❯ test/decision/client.test.ts:511:14
+    509|         console.log("D04_DIST_PASS");
+    510|       `;
+    511|       expect(execFileSync(process.execPath, ["--input-type=module", "-…
+       |              ^
+    512|     } finally { rmSync(dir, { recursive: true, force: true }); }
+    513|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯
+
+ FAIL  test/decision/config.test.ts > AC-S2 exports / AC-DIST > loads built S2 in a fresh directory without checkout source/docs
+Error: Command failed: /opt/homebrew/Cellar/node/26.3.1/bin/node --input-type=module -e
+      import assert from "node:assert/strict";
+      import { loadDecisionSetup } from "./dist/decision/config.js";
+      const opts = { env: { FIXTURE_KEY: "synthetic-dist-key" }, home: process.cwd(), legacyMetricsFile: "legacy.jsonl" };
+      assert.equal(loadDecisionSetup(undefined, opts).status, "not-configured");
+      assert.equal(loadDecisionSetup({enabled: false, api_key: "literal"}, opts).status, "disabled");
+      const ready = loadDecisionSetup({api_key: "env:FIXTURE_KEY"}, opts);
+      assert.equal(ready.status, "ready");
+      assert.equal(ready.config.max_retries, 0);
+      assert.equal(ready.config.api_key, "synthetic-dist-key");
+      assert.throws(() => loadDecisionSetup({api_key: "literal"}, opts), {name: "ConfigError"});
+      console.log("D02_DIST_PASS");
+
+node:internal/modules/esm/resolve:271
+    throw new ERR_MODULE_NOT_FOUND(
+          ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/private/var/folders/d6/_mc3452n2dd__f8txsk98ptm0000gn/T/decision-config-12wqo4/dist/decision/config.js' imported from /private/var/folders/d6/_mc3452n2dd__f8txsk98ptm0000gn/T/decision-config-12wqo4/[eval1]
+    at finalizeResolution (node:internal/modules/esm/resolve:271:11)
+    at moduleResolve (node:internal/modules/esm/resolve:865:10)
+    at defaultResolve (node:internal/modules/esm/resolve:992:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:704:20)
+    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:724:38)
+    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:762:56)
+    at #resolve (node:internal/modules/esm/loader:686:17)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:606:35)
+    at ModuleJob.syncLink (node:internal/modules/esm/module_job:163:33)
+    at ModuleJob.link (node:internal/modules/esm/module_job:253:17) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///private/var/folders/d6/_mc3452n2dd__f8txsk98ptm0000gn/T/decision-config-12wqo4/dist/decision/config.js'
+}
+
+Node.js v26.3.1
+
+ ❯ test/decision/config.test.ts:297:12
+    295|       console.log("D02_DIST_PASS");
+    296|     `;
+    297|     expect(execFileSync(process.execPath, ["--input-type=module", "-e"…
+       |            ^
+    298|   });
+    299| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯
+
+ FAIL  test/decision/core.test.ts > D03 AC-DIST compiled component > runs S3/S4 exports in a standalone dist copy without source or docs
+Error: Command failed: /opt/homebrew/Cellar/node/26.3.1/bin/node --input-type=module -e
+        import assert from "node:assert/strict";
+        import { prepareDecision } from "./dist/decision/request.js";
+        import { validateResponse } from "./dist/decision/response.js";
+        import { assess } from "./dist/decision/assessment.js";
+        const config = { api_key:"SYNTHETIC_ONLY", default_model:"m", allowed_models:["m"],
+          provider_defaults:{}, required_provider:{}, timeout_ms:30000, max_retries:0,
+          max_request_bytes:2000, max_response_bytes:2000, max_concurrency:1, max_queue:0 };
+        const p = prepareDecision({state:"x",questions:{q:{type:"noul",instructions:"check"}},
+          policy:{q:{type:"noul",false_max:0.1,true_min:0.9}}}, config);
+        assert.equal(p.success, true);
+        const r = validateResponse({model:"actual",answers:{q:{type:"noul",noul:0.9}},
+          usage:{input_tokens:1,output_tokens:0}}, p.data);
+        assert.equal(r.success, true);
+        assert.equal(assess(r.data.result,p.data.localPolicy).q.value, true);
+        console.log("D03_DIST_PASS");
+
+node:internal/modules/esm/resolve:271
+    throw new ERR_MODULE_NOT_FOUND(
+          ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/private/var/folders/d6/_mc3452n2dd__f8txsk98ptm0000gn/T/decision-d03-xAhnCN/dist/decision/request.js' imported from /private/var/folders/d6/_mc3452n2dd__f8txsk98ptm0000gn/T/decision-d03-xAhnCN/[eval1]
+    at finalizeResolution (node:internal/modules/esm/resolve:271:11)
+    at moduleResolve (node:internal/modules/esm/resolve:865:10)
+    at defaultResolve (node:internal/modules/esm/resolve:992:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:704:20)
+    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:724:38)
+    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:762:56)
+    at #resolve (node:internal/modules/esm/loader:686:17)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:606:35)
+    at ModuleJob.syncLink (node:internal/modules/esm/module_job:163:33)
+    at ModuleJob.link (node:internal/modules/esm/module_job:253:17) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///private/var/folders/d6/_mc3452n2dd__f8txsk98ptm0000gn/T/decision-d03-xAhnCN/dist/decision/request.js'
+}
+
+Node.js v26.3.1
+
+ ❯ test/decision/core.test.ts:295:14
+    293|         console.log("D03_DIST_PASS");
+    294|       `;
+    295|       expect(execFileSync(process.execPath, ["--input-type=module", "-…
+       |              ^
+    296|         .toBe("D03_DIST_PASS");
+    297|     } finally {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/6]⎯
+
+ FAIL  test/decision/metrics.test.ts > D05 AC-DIST: real default sinks without checkout src/docs > exports S6, appends exact JSONL, separates stdout and handles reflected real FS errors
+AssertionError: expected 1 to be +0 // Object.is equality
+
+- Expected
++ Received
+
+- 0
++ 1
+
+ ❯ test/decision/metrics.test.ts:218:28
+    216|       const child = spawnSync(process.execPath, ["--input-type=module"…
+    217|       expect(child.error).toBeUndefined();
+    218|       expect(child.status).toBe(0);
+       |                            ^
+    219|       expect(child.stdout).toBe("");
+    220|       const lines = child.stderr.trim().split("\n");
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/6]⎯
+
+ FAIL  test/decision/metrics.test.ts > D05 AC-DIST: real default sinks without checkout src/docs > closed stderr does not throw and still writes the configured file
+AssertionError: expected 1 to be +0 // Object.is equality
+
+- Expected
++ Received
+
+- 0
++ 1
+
+ ❯ test/decision/metrics.test.ts:241:28
+    239|       const child = spawnSync(process.execPath, ["--input-type=module"…
+    240|       expect(child.error).toBeUndefined();
+    241|       expect(child.status).toBe(0);
+       |                            ^
+    242|       expect(child.stdout).toBe("");
+    243|       expect(child.stderr).toBe("");
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/6]⎯
+
+ FAIL  test/decision/schemas.test.ts > D01 AC-DIST: runtime component without checkout source/docs > loads built schemas and validators from a standalone dist copy
+Error: Command failed: /opt/homebrew/Cellar/node/26.3.1/bin/node --input-type=module -e
+        import assert from "node:assert/strict";
+        import { decisionInputJsonSchema, decisionOutputJsonSchema, validateDecisionArgs, validateDecisionEnvelope } from "./dist/decision/schemas.js";
+        assert.equal(decisionInputJsonSchema.$defs.ProviderOptions.propertyNames.enum.length, 146);
+        assert.equal(decisionOutputJsonSchema.oneOf.length, 3);
+        assert.equal(validateDecisionArgs({state: [], questions: {q: {type: "noul", instructions: ""}}}).success, true);
+        assert.equal(validateDecisionEnvelope({kind: "error"}).success, false);
+        console.log("D01_DIST_PASS");
+
+node:internal/modules/esm/resolve:271
+    throw new ERR_MODULE_NOT_FOUND(
+          ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/private/var/folders/d6/_mc3452n2dd__f8txsk98ptm0000gn/T/decision-d01-VAHEwj/dist/decision/schemas.js' imported from /private/var/folders/d6/_mc3452n2dd__f8txsk98ptm0000gn/T/decision-d01-VAHEwj/[eval1]
+    at finalizeResolution (node:internal/modules/esm/resolve:271:11)
+    at moduleResolve (node:internal/modules/esm/resolve:865:10)
+    at defaultResolve (node:internal/modules/esm/resolve:992:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:704:20)
+    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:724:38)
+    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:762:56)
+    at #resolve (node:internal/modules/esm/loader:686:17)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:606:35)
+    at ModuleJob.syncLink (node:internal/modules/esm/module_job:163:33)
+    at ModuleJob.link (node:internal/modules/esm/module_job:253:17) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///private/var/folders/d6/_mc3452n2dd__f8txsk98ptm0000gn/T/decision-d01-VAHEwj/dist/decision/schemas.js'
+}
+
+Node.js v26.3.1
+
+ ❯ test/decision/schemas.test.ts:417:14
+    415|         console.log("D01_DIST_PASS");
+    416|       `;
+    417|       expect(execFileSync(process.execPath, ["--input-type=module", "-…
+       |              ^
+    418|     } finally {
+    419|       rmSync(dir, { recursive: true, force: true });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/6]⎯
+
+
+ Test Files  5 failed | 8 passed (13)
+      Tests  6 failed | 859 passed (865)
+   Start at  20:39:56
+   Duration  8.71s (transform 459ms, setup 0ms, collect 1.46s, tests 10.09s, environment 1ms, prepare 535ms)

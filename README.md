@@ -8,21 +8,26 @@
 
 ## What it does
 
-`delegate-mcp` exposes three [Model Context Protocol](https://modelcontextprotocol.io) tools —
+`delegate-mcp` includes three reader [Model Context Protocol](https://modelcontextprotocol.io) tools —
 `analyze`, `query`, and `resume` — that hand a reading task to a cheap, high-context
 "reader" model behind an OpenAI-compatible API. Point `analyze` at a directory and it packs
 the files, asks the reader your question, and returns a short structured answer. The
 orchestrator never sees the raw files; it sees the conclusion.
 
-## Proposed `decision` tool (draft)
+## Typed decisions
 
-The [decision specification](docs/decision/SPEC.md) describes a planned fourth tool in
-this same MCP server, using Jev through OpenRouter for typed choices, yes/no
-probabilities, and rubric scores. Its [input](docs/decision/input.schema.json) and
-[output](docs/decision/output.schema.json) schemas are part of this repository.
-The proposal extends the existing configuration with a `decision` block and preserves
-the three reader tools. This is a design document; `decision` is not implemented or
-included in the current published version.
+The fourth tool, `decision`, sends the context you supply to Jev through the external
+OpenRouter Decisions API and returns Choice, Noul (yes/no probability), and Score answers.
+It runs in the same `delegate-mcp` package, bin, config, and stdio process. Add a
+`decision` block to your existing config; keep the same MCP client registration.
+The source includes this tool; publishing and activation are separate steps. The npm
+installation command below retrieves the published version, which may differ from this source.
+
+The complete [input schema](docs/decision/input.schema.json),
+[output schema](docs/decision/output.schema.json), and [specification](docs/decision/SPEC.md)
+define all options. Schemas are bundled in the executable; an installed server does not
+need the repository's `src/` or `docs/`. Local mock checks do not establish live API
+availability, answer quality, efficiency, latency, or calibrated thresholds.
 
 ## Why
 
@@ -62,7 +67,7 @@ with an MCP client and the client launches it. Register it like any stdio MCP se
 
 (Works with any MCP-capable client — Claude Code, Claude Desktop, or your own host. Use an
 **absolute** config path, since the client sets its own working directory.) Once connected,
-the client lists three tools: `analyze`, `query`, `resume`.
+the client lists `analyze`, `query`, `resume`, and `decision` unless decision is disabled.
 
 On startup the server is **fail-loud**: a missing or invalid config, or a provider whose
 `api_key` env var is unset, aborts the launch with a clear message on stderr and a non-zero
@@ -83,7 +88,12 @@ The config is a single JSON file. Its path is resolved from **three sources, fir
 If none is found, the server exits and prints every path it checked, in priority order.
 A leading `~` in any path field is expanded to your home directory.
 
-### `config.example.json`
+### `delegate-config.example.json`
+
+The [complete example](delegate-config.example.json) preserves the reader configuration
+and adds a disabled decision block. It works with the reader variable alone. Inject
+`OPENROUTER_API_KEY` and set `decision.enabled` to true to enable the fourth tool.
+Omit the block to list decision without resolving a key; calls then return `CONFIG_ERROR`.
 
 ```json
 {
@@ -148,6 +158,7 @@ blocks startup. If every provider ends up disabled, startup fails.
 | `metrics_file` | string | no | `~/.delegate-mcp/state/metrics.jsonl` | Append-only JSONL metrics path. |
 | `default_max_output_tokens` | number | no | — | Output-token cap used when a tool call omits `max_output_tokens`. Every call is floored to **200** tokens (thinking models need headroom). |
 | `file_walker` | object | no | see below | File-packer caps and excludes for `analyze`. |
+| `decision` | object | no | absent | Independent Decisions API configuration; see below. `providers[]` remains required. |
 
 **`providers[]`**
 
@@ -172,13 +183,13 @@ blocks startup. If every provider ends up disabled, startup fails.
 
 ## Tools reference
 
-Every tool returns a text result whose **first line is a fixed header**:
+The reader tools (`analyze`, `query`, `resume`) return a text result whose **first line is a fixed header**:
 
 ```
 [delegate <tool>] provider=<name> model=<model> in=<input_tokens> out=<output_tokens> session=<id>
 ```
 
-followed by the reader's answer. Every call also appends one line to the metrics file
+followed by the reader's answer. Every reader call also appends one line to the metrics file
 (success or failure). A failure — all providers down, unreadable `work_dir`, unknown session
 — comes back as an MCP error result (`isError`), never as a crash.
 
@@ -255,6 +266,159 @@ configured — is returned as an error result.
 Rule of thumb: optimistic when conflicts are rare, pessimistic when they're the norm.
 ```
 
+### `decision`
+
+Pass `state` (string, JSON object, or array) and a nonempty `questions` map. Each question
+requires `type` and `instructions` (string, object, or array):
+
+| Type | Criteria | Answer |
+| --- | --- | --- |
+| `choice` | 1–255 named options; descriptions can be strings, objects, arrays, or null | One option ID; optional confidence and probabilities |
+| `noul` | Optional; if present, both `true` and `false` descriptions | Probability in [0,1] |
+| `score` | 1–10 ordered descriptions | Number in [0,N−1]; optional confidence, probabilities, and legend |
+
+One Choice option or one Score level is allowed with a warning. Questions are independent;
+dependent questions require another call with a new state. Include an explicit `other` or
+`needs_review` option when the alternatives are incomplete. The tool adds no options.
+
+```json
+{
+  "state": {"task": "Export a report", "facts": ["Build passed", "Export check pending"]},
+  "questions": {
+    "next": {
+      "type": "choice",
+      "instructions": "Choose the next step using the facts.",
+      "criteria": {"verify": "Check the export", "release": "Release after verification", "other": null}
+    },
+    "verified": {"type": "noul", "instructions": "Has the export been verified?"},
+    "readiness": {"type": "score", "instructions": "Rate readiness", "criteria": ["Not built", "Needs verification", "Verified"]}
+  },
+  "execution": {"dry_run": true}
+}
+```
+
+With a ready config, `dry_run` validates the input and returns the exact prepared request,
+`kind="dry_run"`, and `meta.attempts=0`: no POST or API charge. An absent decision config
+returns `CONFIG_ERROR` even for dry-run. Remove dry-run only when you intend to send the
+context to the external API.
+
+Optional input fields are `model`, `provider`, `session_id`, `trace`, `user`, `policy`, and
+`execution`; their complete definitions, including all 14 provider routing fields and
+provider-specific options, are in the [input schema](docs/decision/input.schema.json) and
+[SPEC §§3–6](docs/decision/SPEC.md). `model` must be administrator-allowed; `session_id`
+is upstream correlation, carries no history, and cannot be resumed with `resume`.
+Unknown contract fields and chat parameters such as `messages` or `temperature` are rejected.
+
+Optional local `policy` is keyed by question ID with matching types. Choice thresholds
+(`min_confidence`, `min_probability`, `min_margin`) use inclusive comparisons and AND;
+a tie or missing required metric is `uncertain`. Noul requires `false_max < true_min`:
+at or below the first boundary the assessment is accepted/false, at or above the second
+it is accepted/true, and between them it is uncertain/null. Score can require
+`min_confidence`; its numeric value is preserved. Without policy, assessments are
+`unassessed`. These thresholds need calibration for your task and model; neither
+`accepted` nor `uncertain` grants permission to act.
+
+Success is `{kind:"decision", result, assessments, meta}`. Each result has the same JSON
+in `structuredContent` and one text content block. `meta` carries the request ID, requested
+model, elapsed milliseconds, actual attempts, API version, and warnings. `result.model`
+is the actual returned model; optional confidence, probabilities, legend, IDs, provider,
+and usage cost remain absent when upstream omits them. Missing optional metrics are not
+invented as zero. Required token usage is validated. Invalid upstream answers return
+`UPSTREAM_PROTOCOL` without a partial decision.
+
+Operational errors return `kind="error"`, `isError=true`, and safe fixed
+`code`, `message`, `retryable`, `billing_uncertain`, plus an observed `http_status` when
+available. Raw upstream errors and credentials are not echoed. Standard MCP protocol
+errors can occur before the handler. See [SPEC §8](docs/decision/SPEC.md) for error codes.
+
+#### Decision configuration and limits
+
+Merge this fragment into your existing config with active `providers[]`; it is not a
+standalone server config or a separate `mcpServers.decision` entry:
+
+```json
+{
+  "decision": {
+    "enabled": true,
+    "api_key": "env:OPENROUTER_API_KEY",
+    "default_model": "~typesafe/jev-latest",
+    "allowed_models": ["~typesafe/jev-latest", "typesafe/jev-1.13"],
+    "provider_defaults": {},
+    "required_provider": {},
+    "timeout_ms": 30000,
+    "max_retries": 0,
+    "max_request_bytes": 262144,
+    "max_response_bytes": 1048576,
+    "max_concurrency": 4,
+    "max_queue": 16
+  }
+}
+```
+
+| Startup configuration | Tools listed | Decision key resolution |
+| --- | --- | --- |
+| Decision block absent | Four; decision calls return `CONFIG_ERROR` | None; no implicit activation from ENV |
+| `enabled:false` | Three reader tools | None; other decision fields are ignored |
+| Valid enabled block (enabled defaults to true) | Four | Required at startup |
+| Invalid enabled block or missing/empty referenced key | Startup fails loudly | Safe diagnostic; no hidden disabling |
+
+`decision.api_key` accepts only `env:VAR`, never a literal key. This rule does not change
+the existing `providers[]` key semantics. Have your MCP host securely inject the variable
+into its child environment; this generic registration illustrates the field, without a key:
+
+```json
+{
+  "mcpServers": {
+    "delegate": {
+      "command": "npx",
+      "args": ["-y", "delegate-mcp", "--config", "/absolute/path/to/config.json"],
+      "env": {"OPENROUTER_API_KEY": "<securely injected by your host>"}
+    }
+  }
+}
+```
+
+Also inject the reader provider's referenced variables. The placeholder is illustrative;
+do not use it as a credential. Config discovery remains CLI → `DELEGATE_MCP_CONFIG` →
+the existing home conventions above. Missing the entire config or active reader pool
+still fails startup.
+
+Defaults are shown in the fragment. Timeout is an integer 1,000–120,000 ms; retries 0–2;
+byte limits and concurrency are positive integers; queue capacity is an integer ≥0.
+Per-call `execution.timeout_ms` and `max_retries` override their configured defaults
+within the declared bounds. Request size measures UTF-8 bytes of final JSON, not tokens;
+there is no automatic context truncation. Response bytes are bounded independently.
+One deadline covers queue, backoff, HTTP, and response reading. Client cancellation
+cancels queued or active work; a full queue returns `UPSTREAM_UNAVAILABLE` with attempts=0.
+
+Zero retries means at most one POST. Explicit 1–2 retries allow network failures, 429,
+500/502/503/524/529 only, with 250ms exponential backoff plus 0–250ms jitter and
+Retry-After within the same deadline. Invalid responses, cancellation, and other 4xx
+are not retried. Retries can incur another charge and do not provide exactly-once billing;
+an uncertain send outcome is reflected by `billing_uncertain` in errors. Deadline expiry
+returns `UPSTREAM_TIMEOUT`. There is no fallback to the reader pool. `max_price` limits
+routing prices, not total spending; the wrapper does not predict a precise charge.
+
+`provider_defaults` supplies routing defaults; request `provider` overrides top-level
+fields without merging arrays, and null supplies no overrides. Administrator
+`required_provider` can require `data_collection:"deny"`, `zdr:true`,
+`allow_fallbacks:false`, `require_parameters:true`, or a nonempty `only` list.
+Missing/null fields inherit these requirements; weaker explicit values or an `only`
+list outside the required subset return `POLICY_CONFLICT`. An unavailable compatible
+provider produces an error without weakening those requirements. Privacy depends on
+the configured mandatory rules and the provider's compliance; the empty defaults do
+not promise ZDR or non-collection. Optional `http_referer` is public HTTPS without
+credentials, and optional `app_title` cannot contain CR/LF; request arguments cannot
+set headers or a custom API endpoint.
+
+Decision emits minimal metrics to stderr and optionally a separate `decision.metrics_file`
+JSONL (with `~` expansion and relative paths from the server's working directory). That
+path must differ from legacy `metrics_file`, including existing realpath aliases. Logging
+is best effort; state, questions, policy, trace, and upstream error bodies are not logged.
+Decision does not write reader sessions or legacy metrics, read files/environment/history/
+keychains to gather context, generate reasoning, or execute the chosen action. Its
+configured ENV credential resolution is separate from user-supplied context.
+
 ## Agent usage
 
 ### Delegate large reads to save tokens
@@ -276,14 +440,16 @@ Prompting: state the output shape (table/bullets/JSON); cap `max_output_tokens`;
 
 ```
    MCP client (your orchestrator)
-        │  analyze / query / resume
+        │  analyze / query / resume / decision
         ▼
    delegate-mcp
         │
         ├─ files ····· pack work_dir → prompt (exclude · cap · skipped list)
         ├─ providers · weighted-random order → sequential failover
         ├─ sessions ·· one JSON per session (pin provider + model on resume)
-        └─ metrics ··· append one JSONL line per call (ok or error)
+        ├─ metrics ··· append reader JSONL (ok or error)
+        └─ decision ·· supplied context → external Decisions API
+                       validated answers + local assessments; separate metrics
         │
         ▼
    cheap reader model (OpenAI-compatible)  ──►  tight answer + header
@@ -326,7 +492,7 @@ validated to contain no path separators (traversal-safe).
 
 ### Metrics
 
-Every call appends one JSON line to `metrics_file`. Recording **never throws**: an I/O
+Every reader call appends one JSON line to `metrics_file`. Recording **never throws**: an I/O
 failure is swallowed (with a stderr warning) so a metrics problem can't take down the call
 it describes. Each line carries:
 
@@ -376,11 +542,17 @@ Issues and pull requests are welcome. Development:
 
 ```bash
 npm ci
-npm run lint       # eslint
 npm run build      # tsup → dist/
-npm test           # vitest
 npm run typecheck  # tsc --noEmit
+npm run lint       # eslint
+npm test           # prepares test-only component exports, then vitest
+npm run secretlint
 ```
+
+`npm test` requires the preceding build and checks that component preparation preserves
+the SHA256 of the ordinary `dist/index.js`. Before packing, run `npm run build` again:
+its clean production build removes test-only exports. The reproducible package checks
+and fresh-install stdio smoke are described in [package evidence](test/package/D07-PACKAGING.md).
 
 Please keep changes typed, tested, and provider-agnostic (the pool depends only on the
 OpenAI-compatible chat-completions surface).

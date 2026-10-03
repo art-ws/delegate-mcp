@@ -1,0 +1,29 @@
+{
+  "build": "npm run build (tsup.config.ts; clean:true; only src/index.ts entry; node20 target)",
+  "buildNode": "v26.3.1",
+  "sourceInputs": {
+    "LICENSE": "310cfbd51bf67540cc3620a308dfad8898a9c6707bd0c925249660c8028f87e7",
+    "README.md": "a6fdc7f34ef1142c61bf7e7e11b8d10d333d8f7855643fd97877fe5f9075b4d5",
+    "delegate-config.example.json": "0324c3d781efe1d97e9310f3a5f53357035f774ab40d199ee814cfa7f6f80f13",
+    "package-lock.json": "fab6bae167188fd3bf1c824e2cc7afda787b65c9e17c94e66645ba2be41c2ecb",
+    "package.json": "cb4a509157133601b7e82a1b9ddbcea047d201dc78a97ef6c2956909e5a8b42b",
+    "src/config.ts": "1a26e2d75e6cb91dbbab3ac62f3f62b65f4b98499567eac8ef5d4744a3567f88",
+    "src/decision/assessment.ts": "8587bcd9a727ba7574aacde19547cbc521fdb30a2de7a668801a31cfc04223c0",
+    "src/decision/client.ts": "72c516666196601d2d8b1d9db9bce145d10c48e47879e1b836685664a7f0ef52",
+    "src/decision/config.ts": "158b65ad7eee3c010600969c4702ccec50c4e094b39e8a8143dedf1181911c50",
+    "src/decision/metrics.ts": "a4d4ac0dc4334998c1f841b5b43f46ae1ef0a141f3ba5cb2011031c12e6a3447",
+    "src/decision/registration.ts": "4dde49f8891b297edadac18f3a6e2eb50991a437f73ec3736e131facfe61972f",
+    "src/decision/request.ts": "b666e9f1c1eec8f890658fc5ac43fb94dfdea9d40cc173e35d795dd3ef46a832",
+    "src/decision/response.ts": "ac1c5f62e0975191016376f36c3a15086616e16774be71add7252d5a326254c0",
+    "src/decision/schemas.ts": "e091096f716a572fe891e973e46d917fb9dff53fbd35ae202a00b2c4f5a54b88",
+    "src/decision/tool.ts": "3e9f7c6bac80211745d59b3a75d1c725627b3642dad22ba2bacf638a91061b7a",
+    "src/files.ts": "f1b8a4a1b6fd6bd20d9e157a505fc92c3523de7fdf69416d3575c28f1f7b1cba",
+    "src/index.ts": "55893a766c9d125a1f1b9126ec223a2efaf6884cba7de71ccec590c8693af59c",
+    "src/metrics.ts": "618ee4aa83984b2d6932aa1f43f19f61c50fe33bd185e2af5aba46aaa6b247e3",
+    "src/providers.ts": "056897866dbaaeb0d0729cd69fefcd26918173494da3df7c7f906cb4d1ce1108",
+    "src/sessions.ts": "2e6e9ff6f0bec17a66e74c344f16123f381caf2230ad5e7117363d77723c2b78",
+    "src/tools.ts": "7ff6d304ee1d2b12c6da798e2bf6ae780cb64877df97781c4c23c54b4d0fc725",
+    "tsconfig.json": "6792eb96f1a2d1cd583b564c9749d75434b5900fea2992b5b5fbea1e6d105118",
+    "tsup.config.ts": "37e546392006df2102c5987ff6231ad665b86a64b06b48b751b69f846f911192"
+  }
+}

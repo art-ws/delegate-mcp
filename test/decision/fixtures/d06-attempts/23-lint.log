@@ -1,0 +1,5 @@
+command=["npm","run","lint"]
+rc=0
+
+> delegate-mcp@1.0.0 lint
+> eslint src test

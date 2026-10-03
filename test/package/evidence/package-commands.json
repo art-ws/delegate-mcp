@@ -1,0 +1,52 @@
+[
+  {
+    "name": "package-versions",
+    "command": "[\"/opt/homebrew/Cellar/node/26.3.1/bin/node\",\"--version\"]",
+    "rc": 0
+  },
+  {
+    "name": "package-npm-version",
+    "command": "[\"npm\",\"--version\"]",
+    "rc": 0
+  },
+  {
+    "name": "production-build",
+    "command": "[\"npm\",\"run\",\"build\"]",
+    "rc": 0
+  },
+  {
+    "name": "pack",
+    "command": "[\"npm\",\"pack\",\"--json\",\"--ignore-scripts\",\"--pack-destination\",\"<source>/test/package/evidence\"]",
+    "rc": 0
+  },
+  {
+    "name": "publish-inventory-dry-run",
+    "command": "[\"npm\",\"publish\",\"--dry-run\",\"--force\",\"--json\",\"--ignore-scripts\",\"<source>/test/package/evidence/delegate-mcp-1.0.0.tgz\"]",
+    "rc": 0
+  },
+  {
+    "name": "fresh-install",
+    "command": "[\"npm\",\"install\",\"--omit=dev\",\"--ignore-scripts\",\"--no-audit\",\"--no-fund\",\"--package-lock=false\",\"<source>/test/package/evidence/delegate-mcp-1.0.0.tgz\"]",
+    "rc": 0
+  },
+  {
+    "name": "installed-node-0-version",
+    "command": "[\"/opt/homebrew/bin/node\",\"--version\"]",
+    "rc": 0
+  },
+  {
+    "name": "installed-node-0-smoke",
+    "command": "[\"/opt/homebrew/Cellar/node/26.3.1/bin/node\",\"<source>/test/package/installed-smoke.mjs\",\"<scratch>/installed\",\"/opt/homebrew/bin/node\"]",
+    "rc": 0
+  },
+  {
+    "name": "installed-node-1-version",
+    "command": "[\"/opt/homebrew/opt/node@24/bin/node\",\"--version\"]",
+    "rc": 0
+  },
+  {
+    "name": "installed-node-1-smoke",
+    "command": "[\"/opt/homebrew/Cellar/node/26.3.1/bin/node\",\"<source>/test/package/installed-smoke.mjs\",\"<scratch>/installed\",\"/opt/homebrew/opt/node@24/bin/node\"]",
+    "rc": 0
+  }
+]

@@ -1,0 +1,15 @@
+command=["npm","run","build"]
+rc=0
+
+> delegate-mcp@1.0.0 build
+> tsup
+
+[34mCLI[39m Building entry: src/index.ts
+[34mCLI[39m Using tsconfig: tsconfig.json
+[34mCLI[39m tsup v8.5.1
+[34mCLI[39m Using tsup config: /opt/art/p/delegate-mcp-wt/dev-decision/tsup.config.ts
+[34mCLI[39m Target: node20
+[34mCLI[39m Cleaning output folder
+[34mESM[39m Build start
+[32mESM[39m [1mdist/index.js [22m[32m100.05 KB[39m
+[32mESM[39m ⚡️ Build success in 8ms

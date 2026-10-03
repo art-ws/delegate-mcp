@@ -1,0 +1,127 @@
+
+> delegate-mcp@1.0.0 test
+> vitest run test/decision/client.test.ts
+
+
+ RUN  v3.2.7 /opt/art/p/delegate-mcp-wt/dev-decision
+
+ ❯ test/decision/client.test.ts (86 tests | 1 failed) 38ms
+   ✓ AC-WIRE exact S3 bytes and isolated endpoint > sends only fixed POST/body and ready-config headers 9ms
+   ✓ AC-WIRE exact S3 bytes and isolated endpoint > omits optional headers; passes decoded JSON to S4 without semantic work 1ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > status 400 -> UPSTREAM_REQUEST 1ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > status 401 -> UPSTREAM_AUTH 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > status 402 -> UPSTREAM_PAYMENT 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > status 403 -> UPSTREAM_FORBIDDEN 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > status 404 -> UPSTREAM_NOT_FOUND 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > status 413 -> INPUT_TOO_LARGE 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > status 429 -> UPSTREAM_RATE_LIMIT 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > status 500 -> UPSTREAM_UNAVAILABLE 1ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > status 502 -> UPSTREAM_UNAVAILABLE 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > status 503 -> UPSTREAM_UNAVAILABLE 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > status 524 -> UPSTREAM_TIMEOUT 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > status 529 -> UPSTREAM_UNAVAILABLE 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > status 501 -> UPSTREAM_UNAVAILABLE 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > status 599 -> UPSTREAM_UNAVAILABLE 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > status 418 -> UPSTREAM_REQUEST 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > status 408 -> UPSTREAM_REQUEST 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > status 300 -> UPSTREAM_PROTOCOL 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > status 302 -> UPSTREAM_PROTOCOL 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > status 304 -> UPSTREAM_PROTOCOL 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > explicit retries do not repeat status 400 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > explicit retries do not repeat status 401 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > explicit retries do not repeat status 402 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > explicit retries do not repeat status 403 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > explicit retries do not repeat status 404 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > explicit retries do not repeat status 413 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > explicit retries do not repeat status 408 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > explicit retries do not repeat status 418 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > explicit retries do not repeat status 501 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > explicit retries do not repeat status 599 0ms
+   ✓ AC-STATUS safe HTTP classification and no implicit retry > explicit retries do not repeat status 302 0ms
+   ✓ AC-ATTEMPTS and AC-RETRY-AFTER > network failures with retries=0 have exact attempt bound 0ms
+   ✓ AC-ATTEMPTS and AC-RETRY-AFTER > network failures with retries=1 have exact attempt bound 0ms
+   ✓ AC-ATTEMPTS and AC-RETRY-AFTER > network failures with retries=2 have exact attempt bound 0ms
+   ✓ AC-ATTEMPTS and AC-RETRY-AFTER > explicit retries repeat only allowed HTTP 429 0ms
+   ✓ AC-ATTEMPTS and AC-RETRY-AFTER > explicit retries repeat only allowed HTTP 500 0ms
+   ✓ AC-ATTEMPTS and AC-RETRY-AFTER > explicit retries repeat only allowed HTTP 502 0ms
+   ✓ AC-ATTEMPTS and AC-RETRY-AFTER > explicit retries repeat only allowed HTTP 503 0ms
+   ✓ AC-ATTEMPTS and AC-RETRY-AFTER > explicit retries repeat only allowed HTTP 524 0ms
+   ✓ AC-ATTEMPTS and AC-RETRY-AFTER > explicit retries repeat only allowed HTTP 529 0ms
+   ✓ AC-ATTEMPTS and AC-RETRY-AFTER > exponential delays include bounded deterministic jitter 0ms
+   ✓ AC-ATTEMPTS and AC-RETRY-AFTER > Retry-After 1 inside budget 1ms
+   ✓ AC-ATTEMPTS and AC-RETRY-AFTER > Retry-After Thu, 01 Jan 2026 00:00:01 GMT inside budget 0ms
+   ✓ AC-ATTEMPTS and AC-RETRY-AFTER > Retry-After 2 reaches deadline without retry 0ms
+   ✓ AC-ATTEMPTS and AC-RETRY-AFTER > Retry-After 1 reaches deadline without retry 0ms
+   × AC-ATTEMPTS and AC-RETRY-AFTER > Retry-After 999999999999999999999999999999999999 reaches deadline without retry 3ms
+     → expected { code: 'UPSTREAM_RATE_LIMIT', …(4) } to match object { code: 'UPSTREAM_TIMEOUT', …(1) }
+(3 matching properties omitted from actual)
+   ✓ AC-ATTEMPTS and AC-RETRY-AFTER > invalid/past Retry-After uses backoff: invalid 0ms
+   ✓ AC-ATTEMPTS and AC-RETRY-AFTER > invalid/past Retry-After uses backoff: -1 0ms
+   ✓ AC-ATTEMPTS and AC-RETRY-AFTER > invalid/past Retry-After uses backoff: Thu, 01 Jan 2020 00:00:00 GMT 0ms
+   ✓ AC-ATTEMPTS and AC-RETRY-AFTER > uncertain billing survives a later success or known rejection 0ms
+   ✓ AC-QUEUE persistent bounded FIFO across calls > shares concurrency, rejects overflow before send and transfers slots FIFO 1ms
+   ✓ AC-QUEUE persistent bounded FIFO across calls > queue deadline has attempts=0 and removes waiter 0ms
+   ✓ AC-QUEUE persistent bounded FIFO across calls > zero queue permits active concurrency but rejects waiting requests 0ms
+   ✓ AC-DEADLINE total queue/backoff/headers/body budget > queue time is not reset on acquiring a slot 1ms
+   ✓ AC-DEADLINE total queue/backoff/headers/body budget > retry consumes the original budget including delayed body 1ms
+   ✓ AC-DEADLINE total queue/backoff/headers/body budget > header timeout aborts fetch and cancels a late response 0ms
+   ✓ AC-CANCEL and AC-CLEANUP > preabort sends nothing and never leaks caller reason 0ms
+   ✓ AC-CANCEL and AC-CLEANUP > queued abort removes waiter and frees queue capacity 0ms
+   ✓ AC-CANCEL and AC-CLEANUP > cancel during headers stops retry and recovers slot 0ms
+   ✓ AC-CANCEL and AC-CLEANUP > cancel during body stops retry and recovers slot 0ms
+   ✓ AC-CANCEL and AC-CLEANUP > cancel during backoff stops retry and recovers slot 0ms
+   ✓ AC-CANCEL and AC-CLEANUP > releases timers, listeners and slot after success 0ms
+   ✓ AC-CANCEL and AC-CLEANUP > releases timers, listeners and slot after http 0ms
+   ✓ AC-CANCEL and AC-CLEANUP > releases timers, listeners and slot after protocol 0ms
+   ✓ AC-CANCEL and AC-CLEANUP > releases timers, listeners and slot after network 0ms
+   ✓ AC-BYTES actual bounded response and AC-REDACTION > non-JSON html is safe protocol error without retry 0ms
+   ✓ AC-BYTES actual bounded response and AC-REDACTION > non-JSON broken-json is safe protocol error without retry 0ms
+   ✓ AC-BYTES actual bounded response and AC-REDACTION > non-JSON empty is safe protocol error without retry 0ms
+   ✓ AC-BYTES actual bounded response and AC-REDACTION > non-JSON invalid-utf8 is safe protocol error without retry 0ms
+   ✓ AC-BYTES actual bounded response and AC-REDACTION > chunk bytes enforce limit regardless of Content-Length=undefined 0ms
+   ✓ AC-BYTES actual bounded response and AC-REDACTION > chunk bytes enforce limit regardless of Content-Length=1 0ms
+   ✓ AC-BYTES actual bounded response and AC-REDACTION > chunk bytes enforce limit regardless of Content-Length=999999 0ms
+   ✓ AC-BYTES actual bounded response and AC-REDACTION > accepts exact byte limit and split multibyte UTF-8 0ms
+   ✓ AC-BYTES actual bounded response and AC-REDACTION > body network failure is classified safely and may retry explicitly 1ms
+   ✓ AC-BYTES actual bounded response and AC-REDACTION > reflected transport/body errors never log or expose raw material 1ms
+   ✓ AC-BYTES actual bounded response and AC-REDACTION > AC-REDIRECT denies Location without a second fetch 0ms
+   ✓ AC-OVERRIDES effective execution > config defaults do not cap valid explicit execution 0ms
+   ✓ AC-OVERRIDES effective execution > invalid/direct dry-run execution never sends: {"timeout_ms":999} 0ms
+   ✓ AC-OVERRIDES effective execution > invalid/direct dry-run execution never sends: {"timeout_ms":120001} 0ms
+   ✓ AC-OVERRIDES effective execution > invalid/direct dry-run execution never sends: {"timeout_ms":null} 0ms
+   ✓ AC-OVERRIDES effective execution > invalid/direct dry-run execution never sends: {"timeout_ms":1000.5} 0ms
+   ✓ AC-OVERRIDES effective execution > invalid/direct dry-run execution never sends: {"max_retries":-1} 0ms
+   ✓ AC-OVERRIDES effective execution > invalid/direct dry-run execution never sends: {"max_retries":3} 0ms
+   ✓ AC-OVERRIDES effective execution > invalid/direct dry-run execution never sends: {"max_retries":0.5} 0ms
+   ✓ AC-OVERRIDES effective execution > invalid/direct dry-run execution never sends: {"dry_run":true} 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  test/decision/client.test.ts > AC-ATTEMPTS and AC-RETRY-AFTER > Retry-After 999999999999999999999999999999999999 reaches deadline without retry
+AssertionError: expected { code: 'UPSTREAM_RATE_LIMIT', …(4) } to match object { code: 'UPSTREAM_TIMEOUT', …(1) }
+(3 matching properties omitted from actual)
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[2m  {[22m
+[32m-   "code": "UPSTREAM_TIMEOUT",[39m
+[31m+   "code": "UPSTREAM_RATE_LIMIT",[39m
+[2m    "retryable": true,[22m
+[2m  }[22m
+
+ ❯ test/decision/client.test.ts:158:29
+    156|     await vi.advanceTimersByTimeAsync(1000);
+    157|     const result = await pending;
+    158|     expect(failure(result)).toMatchObject({ code: "UPSTREAM_TIMEOUT", …
+       |                             ^
+    159|     expect(result).toMatchObject({ attempts: 1, elapsed_ms: 1000 });
+    160|     expect(fetch).toHaveBeenCalledTimes(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 85 passed (86)
+   Start at  18:43:11
+   Duration  295ms (transform 44ms, setup 0ms, collect 72ms, tests 38ms, environment 0ms, prepare 38ms)

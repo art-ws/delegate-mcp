@@ -1,0 +1,12 @@
+Initial instruction/bootstrap reads before learning kb/shell.md used host shell.
+Governing /opt/art/p/agent-dev/CLAUDE.md: rc=0.
+PROGRESS.md personally read before D05 leaf.
+Exploratory cat D05 leaf plus product instructions: rc=1.
+cat: /opt/art/p/delegate-mcp/AGENTS.md: No such file or directory
+cat: /opt/art/p/delegate-mcp/CLAUDE.md: No such file or directory
+No instruction files were created; agent-dev/CLAUDE.md remains governing.
+Later exploratory combined read included:
+cat: eslint.config.js: No such file or directory
+That combined command's final status was rc=0; actual eslint.config.mjs
+was read subsequently and npm run lint used the existing configuration.
+No failed build/typecheck/lint/focused-test/secretlint gate at this point.

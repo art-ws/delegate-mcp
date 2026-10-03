@@ -1,0 +1,6 @@
+command=lockctl run delegate-mcp/main-checkout -- node standalone-commit-script worktree
+rc=1
+git add explicitly named owned paths failed because 28-secretlint.log matched gitignore.
+Other explicitly selected owned paths were staged; no commit was made.
+Lease auto-released. No environment or transcript read/dump occurred.
+Correction: validate staged paths against owned allowlist, force-add only the known safe secretlint rc=0 artifact, repeat whitespace and commit under lease.
