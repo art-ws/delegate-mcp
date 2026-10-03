@@ -11,7 +11,7 @@
 | Live scope Q02 | **GO, WAIT_DEPENDENCIES** | Аппрув полного дерева тем же поручением: до трёх синтетических платных POST без retries, только после Q01/G1 и отдельной выдачи Q02 |
 | npm release / activation | **NONE — HOLD** | Вне текущего этапа, отдельное поручение |
 
-Разрешение стартовать — прямое поручение владельца выше. Текущий статус эпика: **IN_PROGRESS / D02_COMPONENT_PASS / Q00_REWORK**; runtime QA и live — **NOT_RUN**. Публикация npm, tag/GitHub Release, release workflow и активация MCP не разрешены.
+Разрешение стартовать — прямое поручение владельца выше. Текущий статус эпика: **IN_PROGRESS / D03_DISPATCH_PREPARED / Q00_R1**; runtime QA и live — **NOT_RUN**. Публикация npm, tag/GitHub Release, release workflow и активация MCP не разрешены.
 
 ## Листья
 
@@ -20,7 +20,7 @@
 | G0 | tl | PASS | 2026-10-03 | GO + 13/13 baseline bytes; dev WIP=0, cleanup `c52f5ee6-197c-487f-a54d-85c706e208dd`; idle и /clear подтверждены |
 | D01 | dev | COMPONENT_PASS | 2026-10-03 16:14 MSK; `c8b5c9e1-ae29-43fc-adda-8a7aaf299709` | candidate `e4e68eb7d1f3a76752f3eaa03eccc42bf3749ad5`; author 295/295, component PASS, TL static review разрешает D02/Q00; independent QA NOT_RUN |
 | D02 | dev | COMPONENT_PASS | 2026-10-03 17:00 MSK; `25045684-1d29-4e89-a62c-6a61a9113c67` | candidate `b5314e7cf634bff703a9b1fddda33ccd3f6cf7b9`; author 528/528, TL static review разрешает D03; independent QA NOT_RUN |
-| D03 | dev | READY | нет | predecessor D02 `b5314e7c`; ожидает cleanup/idle/clear |
+| D03 | dev | DISPATCH_PREPARED | финальная выдача текущего цикла; id `aa29ed09-f8ca-41a4-b0f6-eba0122d5c39` | predecessor D02 `b5314e7cf634bff703a9b1fddda33ccd3f6cf7b9`; clean-slate подтверждён |
 | D04 | dev | WAIT_DEPENDENCIES | нет | — |
 | D05 | dev | WAIT_DEPENDENCIES | нет | — |
 | D06 | dev | WAIT_DEPENDENCIES | нет | — |
@@ -35,8 +35,8 @@
 
 | Роль | Активный исполнительный лист | Очередь после GO |
 |---|---|---|
-| tl | диспетч D03 / доработка Q00 | review/диспетч → G1 → G2 |
-| dev | cleanup перед D03 | D03 → D04 → D05 → D06 → D07 |
+| tl | контроль D03 / Q00 r1 | review/диспетч → G1 → G2 |
+| dev | D03 подготовлен после /clear | D04 → D05 → D06 → D07 |
 | test | Q00 r1 | Q00 r1 → Q01 после D07 → Q02 после G1 |
 
 При G0 MCP list_peers и закрывающие сообщения подтвердили dev/test idle в резерве; чужие задачи не вытесняются. dev подтвердил WIP=0 и cleanup сообщением `c52f5ee6-197c-487f-a54d-85c706e208dd` (служебные дочерние удалены, основная/чужие сохранены, checkout чистый, аренды отсутствуют). Live get_status=idle и /clear перед D01 выполнены, rc=0. Актуальные исполнительные листы — в раскладке выше.
@@ -73,3 +73,7 @@ Re-resolve G0: локальный main и live origin/main совпадают �
 - Ответ dev по D02 `cf93f855-8920-4a23-9465-63b6690b70fb` подготовлен (component как вход D03, 528/528 author, независимая QA NOT_RUN, требуется cleanup/WIP). Доставить отдельным финальным send(to=dev, replyTo=cf93f855...) в ближайшем следующем цикле: текущий терминальный ответ принадлежит cleanup test 412e2618. Ни один peer reply не дублировать, inbox не менять. До cleanup/clear dev не начинает D03.
 
 - 2026-10-03 17:24 MSK: статус освежён по живым history/screen. Ответ по D02 доставлен `fed9ba75-1bea-4e45-a78f-ed30231faa66`, replyTo cf93f855; dev выполняет назначенный предзадачный cleanup перед D03. Q00 r1 work-order `e97427a6-55a1-4717-8213-df29f6e5483a` доставлен, test работает над исправлением fixtures, контроль до 18:15 MSK. D03 ещё не выдан/не начат, QA verdict r1 ожидается. Дублирования D02 ответа нет.
+
+- 2026-10-03 17:26 MSK: cleanup dev `578447dd-7d4f-4bce-b890-ddf89a861f95` подтвердил WIP=0, clean feat/decision-v0.2 HEAD b5314e7c, своих lease=0, удалены только idle detached дочерние dev-decision/dev-decisionread, основные/чужие сохранены. TL повторно прочитал exact leaf/S1/S2/SPEC, сверил live worktree HEAD/status, get_status=idle и выполнил /clear.
+- D03 подготовлен к финальной выдаче текущего цикла: id aa29ed09-f8ca-41a4-b0f6-eba0122d5c39 / replyTo 578447dd. Ownership чистые request/response/assessment + focused tests, S3/S4; no IO/network/key. Predecessor b5314e7c; контроль до18:55 MSK, цель до21:30 MSK, 3–4 часа активной работы. Receipt/работу подтверждает history/screen или пакет dev, prepared не является PASS. Q00 r1 независим от D03, dev не ждёт test.
+- Старый D02/Q00 checkpoint отменён; поставлены ближайшие контроли Q00 r1 около18:12 и D03 около18:52 MSK. Q00 r1 остаётся с deadline18:15; Q01/live NOT_RUN.
