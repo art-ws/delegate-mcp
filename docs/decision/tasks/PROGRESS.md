@@ -11,7 +11,7 @@
 | Live scope Q02 | **GO, WAIT_DEPENDENCIES** | Аппрув полного дерева тем же поручением: до трёх синтетических платных POST без retries, только после Q01/G1 и отдельной выдачи Q02 |
 | npm release / activation | **NONE — HOLD** | Вне текущего этапа, отдельное поручение |
 
-Разрешение стартовать — прямое поручение владельца выше. Текущий статус эпика: **IN_PROGRESS / D03_REVIEW_PENDING / Q00_R2_CLEANUP_PENDING**; runtime QA и live — **NOT_RUN**. Публикация npm, tag/GitHub Release, release workflow и активация MCP не разрешены.
+Разрешение стартовать — прямое поручение владельца выше. Текущий статус эпика: **IN_PROGRESS / D03_COMPONENT_PASS / D04_CLEANUP_PENDING / Q00_R2_IDLE_CLEAR_PENDING**; runtime QA и live — **NOT_RUN**. Публикация npm, tag/GitHub Release, release workflow и активация MCP не разрешены.
 
 ## Листья
 
@@ -20,12 +20,12 @@
 | G0 | tl | PASS | 2026-10-03 | GO + 13/13 baseline bytes; dev WIP=0, cleanup `c52f5ee6-197c-487f-a54d-85c706e208dd`; idle и /clear подтверждены |
 | D01 | dev | COMPONENT_PASS | 2026-10-03 16:14 MSK; `c8b5c9e1-ae29-43fc-adda-8a7aaf299709` | candidate `e4e68eb7d1f3a76752f3eaa03eccc42bf3749ad5`; author 295/295, component PASS, TL static review разрешает D02/Q00; independent QA NOT_RUN |
 | D02 | dev | COMPONENT_PASS | 2026-10-03 17:00 MSK; `25045684-1d29-4e89-a62c-6a61a9113c67` | candidate `b5314e7cf634bff703a9b1fddda33ccd3f6cf7b9`; author 528/528, TL static review разрешает D03; independent QA NOT_RUN |
-| D03 | dev | COMPONENT_REVIEW_PENDING | 2026-10-03 17:33 MSK; `aa29ed09-f8ca-41a4-b0f6-eba0122d5c39` | dev сдал `79819d6b5606efd2de6f5fb8faa0e1138e40b46d`, parent b5314e7c, message `9264d89e`; заявлены component PASS/577 author tests; TL review ещё ожидается |
-| D04 | dev | WAIT_DEPENDENCIES | нет | — |
+| D03 | dev | COMPONENT_PASS | 2026-10-03 17:33 MSK; `aa29ed09-f8ca-41a4-b0f6-eba0122d5c39` | source `79819d6b5606efd2de6f5fb8faa0e1138e40b46d`, parent b5314e7c; TL static review принят, S3/S4 закреплены, author 577/577; independent QA NOT_RUN |
+| D04 | dev | CLEANUP_PENDING | нет | следующий dev leaf после cleanup/WIP=0/idle/clear, predecessor 79819d6b |
 | D05 | dev | WAIT_DEPENDENCIES | нет | — |
 | D06 | dev | WAIT_DEPENDENCIES | нет | — |
 | D07 | dev | WAIT_DEPENDENCIES | нет | — |
-| Q00 | test | REWORK_REQUIRED / R2_CLEANUP_PENDING | r1 `e97427a6-55a1-4717-8213-df29f6e5483a`; r2 ещё не выдан | QA `93e54d9db217150bd51e20ccc64a8d512c0c084a`, parent d108021; TL actual review: AND/required usage исправлены, response baseline/policy-ID/canary oracle требуют [REWORK r2](08-independent-test-plan.REWORK-r2.md) |
+| Q00 | test | REWORK_REQUIRED / R2_IDLE_CLEAR_PENDING | r1 `e97427a6-55a1-4717-8213-df29f6e5483a`; r2 ещё не выдан | QA `93e54d9db217150bd51e20ccc64a8d512c0c084a`; cleanup `b4380e90` получен, WIP=0; далее live idle/clear/выдача [REWORK r2](08-independent-test-plan.REWORK-r2.md) |
 | Q01 | test | WAIT_DEPENDENCIES | нет | — |
 | G1 | tl | WAIT_DEPENDENCIES | нет | — |
 | Q02 | test | WAIT_DEPENDENCIES | нет | — |
@@ -35,9 +35,9 @@
 
 | Роль | Активный исполнительный лист | Очередь после GO |
 |---|---|---|
-| tl | Q00 r2 cleanup/диспетч / review D03 | review/диспетч → G1 → G2 |
-| dev | сдал D03, ожидает component review TL | D04 → D05 → D06 → D07 |
-| test | предзадачный cleanup перед Q00 r2 | Q00 r2 → Q01 после D07 → Q02 после G1 |
+| tl | Q00 r2 idle/clear/диспетч / D04 cleanup | review/диспетч → G1 → G2 |
+| dev | предзадачный cleanup перед D04 | D04 → D05 → D06 → D07 |
+| test | cleanup завершён, готов к /clear и выдаче Q00 r2 | Q00 r2 → Q01 после D07 → Q02 после G1 |
 
 При G0 MCP list_peers и закрывающие сообщения подтвердили dev/test idle в резерве; чужие задачи не вытесняются. dev подтвердил WIP=0 и cleanup сообщением `c52f5ee6-197c-487f-a54d-85c706e208dd` (служебные дочерние удалены, основная/чужие сохранены, checkout чистый, аренды отсутствуют). Live get_status=idle и /clear перед D01 выполнены, rc=0. Актуальные исполнительные листы — в раскладке выше.
 
@@ -86,3 +86,6 @@ Re-resolve G0: локальный main и live origin/main совпадают �
 - Q00 r1 actual review: QA HEAD 93e54d9db217150bd51e20ccc64a8d512c0c084a, parent d108021b2b4e62f28a4c80394b4022d887fb63bc, review/decision-q00, clean worktree; ровно PLAN.md/contract-vectors.json/semantic-vectors.json. AND arithmetic исправлена (.50 < .60), required usage присутствует. TL лично прочитал полный PLAN, все assessment/response cases и materialized contract inputs (255/256 criteria просмотрены по count/keys/types). Findings F-Q00-R2-RESPONSE: все 14 JSON response cases выбирают отсутствующий вариант yes/no/maybe при criteria a/b, включая два expected valid; negatives загрязнены тем же дефектом. F-Q00-R2-POLICY-ID: вложенная malformed policy вместо неизвестного внешнего ID. F-Q00-R2-CANARY: обе canaries запрещены в body, хотя context должен передаваться; raw literal key невалиден. Carrier 08-independent-test-plan.REWORK-r2.md. План REWORK_REQUIRED, QA инструмента NOT_RUN.
 - Проверки review TL: read-only git identity/diff/status и whitespace rc=0; static JSON projection/arithmetic rc=0, 26 AC сохранены, provider fixtures не изменены. Это статический review данных, не runtime QA. При попытке повторного чтения прежнего inbox message.json файл отсутствовал (rc=1); полный payload восстановлен из MUXEON history, дубль ответа не обнаружен. TL inbox не изменял. Следующий шаг test — новый WIP=0/узкий cleanup, затем idle/clear и отдельный r2 dispatch; текущий финальный ответ относится к сдаче 43e3c481.
 - Получена сдача D03 dev `9264d89e-e32d-400b-8664-a741db764a3e` в 18:13 MSK; полный message.json прочитан. Заявлены source 79819d6b5606efd2de6f5fb8faa0e1138e40b46d, parent b5314e7c, пять owned paths, 577/577 author (70 D03 + 212 D02 + 295 D01), S3/S4, clean worktree/lease released. Actual identity/code/evidence review TL ещё не выполнен, component пока не принят. Отмечена неверная ссылка baseline в dispatch: действующий tasks/baseline.json. Следующий отдельный review/ответ dev назначается после терминального ответа test по Q00 r1. D04 не выдан; QA/live NOT_RUN.
+- D03 component review завершён: TL live проверил SHA 79819d6b5606efd2de6f5fb8faa0e1138e40b46d, parent b5314e7cf634bff703a9b1fddda33ccd3f6cf7b9, clean feat/decision-v0.2, пять owned files, whitespace rc=0. Лично прочитаны полностью три pure modules (266 lines), core.test.ts (370 lines), D03-CORE.md (106 lines), controlling leaf/SPEC §6–8 и S1/S2. Конкретных blocking defects static review не выявлено; own runtime прогоны TL NOT_RUN. Component принят как вход следующих листьев; S3/S4 закреплены в interfaces.md. Object.fromEntries/own-key checks и JSON snapshots сохраняют maps, strip/absence/whole-response behavior рассмотрены; independent boundary/mutation/runtime QA остаётся Q01.
+- По committed author evidence: build шесть entry/typecheck/focused 577/577 (70+212+295)/lint/focused test typecheck/secretlint/whitespace final rc=0; Node26.3.1, target node20. Сохранены first typecheck rc=2 (S3 narrow error union), test-typecheck rc=2 (AJV import), промежуточные 574/575 PASS. Полный legacy gate, actual Node20/installed package/MCP/transport/live NOT_RUN. D04: сначала новый cleanup/WIP, затем live idle/clear и отдельная выдача; текущий финальный ответ dev относится к D03 9264d89e.
+- Q00 r1 ответ REWORK r2 доставлен test `a3aa060a-5165-478c-8653-bda8d5893efc`, replyTo 43e3c481. Получен cleanup `b4380e90-4346-4423-ae7c-f24637bf6e03`, полный payload прочитан: reported WIP=0/clean QA93e54d9/no leases/no own idle children, готов к /clear. Следующий отдельный turn проверяет live idle, clear и выдаёт carrier r2; повторять REWORK reply не требуется. Inbox TL не менял.
