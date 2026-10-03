@@ -1,0 +1,51 @@
+{
+  "status": "PASS",
+  "node": "v26.3.1",
+  "npm": "11.16.0",
+  "package": "delegate-mcp",
+  "currentManifestVersion": "1.0.0",
+  "predictedSemanticVersion": "see separate preview evidence",
+  "tarball": "delegate-mcp-1.0.0.tgz",
+  "sha256": "b1868080421d5748b269e4822d9cb3c29c00b5058cc46a860bbdb906acb19f10",
+  "indexSha256": "b9942bf84d5a309867bbc8397ea4f5d9d2443ddcdba292b528bf0864314eeb47",
+  "inventory": [
+    "LICENSE",
+    "README.md",
+    "delegate-config.example.json",
+    "dist/index.js",
+    "package.json"
+  ],
+  "installedSmoke": "PASS: installed bin initialize/tools-list/decision CONFIG_ERROR attempts=0, networking denied",
+  "commands": [
+    {
+      "command": [
+        "npm",
+        "pack",
+        "--json",
+        "--pack-destination",
+        "<candidate>/docs/release/evidence/artifact-r01-a2"
+      ],
+      "rc": 0
+    },
+    {
+      "command": [
+        "npm",
+        "install",
+        "--omit=dev",
+        "--ignore-scripts",
+        "--no-audit",
+        "--no-fund",
+        "--package-lock=false",
+        "<candidate>/docs/release/evidence/artifact-r01-a2/delegate-mcp-1.0.0.tgz"
+      ],
+      "rc": 0
+    },
+    {
+      "command": [
+        "npm",
+        "--version"
+      ],
+      "rc": 0
+    }
+  ]
+}

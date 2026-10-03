@@ -1,0 +1,30 @@
+{
+  "evidenceLevel": "unauthenticated public metadata GET",
+  "requestedPublisher": {
+    "owner": "art-ws",
+    "repository": "delegate-mcp",
+    "workflow": "release.yml"
+  },
+  "results": [
+    {
+      "source": "npm",
+      "httpStatus": 200,
+      "package": "delegate-mcp",
+      "publishedVersion": "1.0.0",
+      "repository": "git+https://github.com/art-ws/delegate-mcp.git",
+      "existingAttestationMetadata": false,
+      "historicalPublisherMetadataPresent": false,
+      "currentTrustedPublisherConfiguration": "NOT_EXPOSED_BY_PUBLIC_VERSION_METADATA"
+    },
+    {
+      "source": "github",
+      "httpStatus": 200,
+      "repository": "art-ws/delegate-mcp",
+      "private": false,
+      "defaultBranch": "main"
+    }
+  ],
+  "trustedPublisherVerdict": "DEFERRED: current npm publisher settings not confirmed",
+  "tokenAuth": "PRESERVED; values never read",
+  "oidcRuntime": "NOT_RUN"
+}

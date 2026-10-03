@@ -1,0 +1,144 @@
+{
+  "status": "PASS",
+  "node": "v26.3.1",
+  "evidenceLevel": "semantic-release API, exact reachable history in local disposable clone; not Actions or publication",
+  "results": [
+    {
+      "name": "actual-history",
+      "status": "PASS",
+      "source": "a6ac09cb8b92555c48dc363acfbfa6e472c3f92c",
+      "releaseType": null,
+      "nextVersion": null,
+      "lastRelease": null,
+      "notes": "",
+      "commits": [],
+      "lifecycleCalls": {
+        "analyzeCommits": 1,
+        "generateNotes": 0,
+        "prepare": 0,
+        "publish": 0,
+        "addChannel": 0,
+        "success": 0,
+        "fail": 0
+      },
+      "unchanged": [
+        "local HEAD",
+        "local tags",
+        "local worktree/assets",
+        "bare remote refs"
+      ],
+      "auth": "NOT_RUN: npm/GitHub plugins excluded; only disposable local git push-permission check",
+      "log": "[12:46:36 AM] [semantic-release] › ℹ  Running semantic-release version 25.0.8\n[12:46:36 AM] [semantic-release] › ✔  Loaded plugin \"analyzeCommits\" from \"Inline plugin\"\n[12:46:36 AM] [semantic-release] › ✔  Loaded plugin \"generateNotes\" from \"Inline plugin\"\n[12:46:36 AM] [semantic-release] › ✔  Loaded plugin \"prepare\" from \"Inline plugin\"\n[12:46:36 AM] [semantic-release] › ✔  Loaded plugin \"publish\" from \"Inline plugin\"\n[12:46:36 AM] [semantic-release] › ✔  Loaded plugin \"addChannel\" from \"Inline plugin\"\n[12:46:36 AM] [semantic-release] › ✔  Loaded plugin \"success\" from \"Inline plugin\"\n[12:46:36 AM] [semantic-release] › ✔  Loaded plugin \"fail\" from \"Inline plugin\"\n[12:46:36 AM] [semantic-release] › ⚠  Run automated release from branch main on repository <scratch>/actual-history.git in dry-run mode\n[12:46:36 AM] [semantic-release] › ✔  Allowed to push to the Git repository\n[12:46:36 AM] [semantic-release] › ℹ  Found git tag v1.0.0 associated with version 1.0.0 on branch main\n[12:46:36 AM] [semantic-release] › ℹ  Found 48 commits since last release\n[12:46:36 AM] [semantic-release] › ℹ  Start step \"analyzeCommits\" of plugin \"Inline plugin\"\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs: record Q02 forbidden stop and release hold\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs: prepare bounded Q02 after accepted local gates\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs: accept Q01 and record exact G1 park\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: test: integrate approved Q01 candidate and r2 QA\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs: prepare narrow Q01 r2 after verified clean slate\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs: require tracked Q01 evidence and accurate oracle map\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs: prepare Q01 r1 after verified clean slate\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs: return Q01 integration and controls for rework\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs: confirm independent Q01 delivery and active work\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs: prepare independent Q01 clean-slate dispatch\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs: record developer reserve and fresh QA cleanup\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs: accept D07 component and route package findings to QA\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs: confirm D07 delivery and active work\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs: prepare D07 clean-slate dispatch\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs: accept D06 component and freeze MCP seam\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs: prepare D06 MCP integration dispatch\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs: accept D05 code and record execution incident\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs: confirm D05 delivery and QA reserve\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs: prepare D05 clean-slate observability dispatch\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs: accept independent Q00 r3 plan\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs: accept D04 component and freeze transport seam\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs: prepare narrow Q00 r3 after clean slate\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs: narrow Q00 follow-up to exact S2 setup and assessment reason\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs: prepare D04 transport dispatch and confirm Q00 r2\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs: prepare Q00 r2 dispatch after clean slate\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs: accept D03 component and freeze S3 S4 interfaces\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs: record D03 delivery awaiting component review\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs: return Q00 r1 for isolated semantic and canary corrections\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs: record D03 resumed after capacity error\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs: confirm D03 dispatch and current capacity interruption\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs: record Q00 r1 receipt pending static review\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs: prepare D03 after clean slate and set control deadlines\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs: refresh live D03 preparation and Q00 rework status\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs: prepare Q00 rework dispatch and preserve D03 handoff\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs: review D02 component and freeze S2 for decision core\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs: return Q00 plan for concrete oracle and fixture corrections\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs: record D02 dispatch and prepare independent Q00\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs: review D01 component and freeze S1 for D02 and Q00\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs: record D01 dispatch and control deadline\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs: record decision implementation approval and prepare D01\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs: plan decision implementation with approval gate\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs: specify decision tool integration in delegate-mcp\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: Merge pull request #5 from art-ws/docs/readme-love-to-art\n\ndocs(readme): dedicate footer — with Love to art\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: docs(readme): dedicate footer — with Love to art\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: Merge pull request #4 from art-ws/ci/restore-oidc-provenance\n\nci(release): restore npm provenance/OIDC for verified badge\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: ci(release): restore npm provenance/OIDC for verified badge\n\nReverts 63c265a. Operator wants OIDC KEPT ON so npm-provenance attaches\nand the package gets the 'verified' badge on the next release. PR #3 (drop\nOIDC) was merged before the clarification; this restores provenance:true +\nid-token:write on main.\n\nCo-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: Merge pull request #3 from art-ws/feat/mvp\n\nci(release): drop npm provenance/OIDC — publish via NPM_TOKEN only\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: ci(release): drop npm provenance/OIDC — publish via NPM_TOKEN only\n\nOperator decision: releases must NOT go through OIDC provenance. Trade-off\naccepted: no npm 'verified' provenance badge; no functional/install impact.\n\n- .releaserc.json: @semantic-release/npm provenance true -> false\n- release.yml: remove permissions.id-token (OIDC token no longer minted,\n  so npm CLI auto-provenance cannot trigger either)\n\nCo-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analysis of 48 commits complete: no release\n[12:46:36 AM] [semantic-release] › ✔  Completed step \"analyzeCommits\" of plugin \"Inline plugin\"\n[12:46:36 AM] [semantic-release] › ℹ  There are no relevant changes, so no new version is released.\n",
+      "reachableHistory": [
+        "a6ac09cb8b92555c48dc363acfbfa6e472c3f92c docs: record Q02 forbidden stop and release hold",
+        "c8124634b81037b11b89f0cd421174ed129aeb0a docs: prepare bounded Q02 after accepted local gates",
+        "d465e2f20c8d879457423184b377b682ac88abc0 docs: accept Q01 and record exact G1 park",
+        "f77656c7fddddda029f66659db8fba5e3964a2fb test: integrate approved Q01 candidate and r2 QA",
+        "6db572b8cf3db0d9d6d1ec547b6267a210fce194 docs: prepare narrow Q01 r2 after verified clean slate",
+        "c4342fcb73aa71838b35161fd997f9e978a54986 docs: require tracked Q01 evidence and accurate oracle map",
+        "83ca347b9590948dc52d1e6c498af8a8c15ce361 docs: prepare Q01 r1 after verified clean slate",
+        "f34826befd6a1c0ef069cf638d5c43f8293ccc31 docs: return Q01 integration and controls for rework",
+        "7ee10211b0b32d03ea489cf95821fc173f33825c docs: confirm independent Q01 delivery and active work",
+        "c78d8a00f91dc9c2337ed3465af48058d565ed5a docs: prepare independent Q01 clean-slate dispatch",
+        "81343942d3e87571fc5d026a17c6387b14f9da34 docs: record developer reserve and fresh QA cleanup",
+        "32dda8f4c41b83c0d4044cc4e4bfd8ca1bd6946d docs: accept D07 component and route package findings to QA",
+        "1bc2e5cb4b728bd09fba6b59ccdbc7a26a6cd8bd docs: confirm D07 delivery and active work",
+        "7493f259bf051f1d90d16bfeb26ece8bce173f2d docs: prepare D07 clean-slate dispatch",
+        "e3dc061487bb3abcaede481a4328052721a9a792 docs: accept D06 component and freeze MCP seam",
+        "4debc94050419d260c3d8a3b20f7cc960d8df4f1 docs: prepare D06 MCP integration dispatch",
+        "33f66ad5d142ec441ce5f7ac264396dbb9135402 docs: accept D05 code and record execution incident",
+        "7477572b10489696935f7124eec56fb59af1c511 docs: confirm D05 delivery and QA reserve",
+        "bf7dd684807801b57dcd39307b5a5db3970eb940 docs: prepare D05 clean-slate observability dispatch",
+        "fa0f24303fe743dc88f32eee51b4b8197e9f2abc docs: accept independent Q00 r3 plan",
+        "805b40b7b6911e13308f0c690cef52fe864953ba docs: accept D04 component and freeze transport seam",
+        "e6351ca1f6e4d63dcaf59271f16df95a1cafacc9 docs: prepare narrow Q00 r3 after clean slate",
+        "a82a4e8ee5c2e42d58a1e3070353ce6eafdb5327 docs: narrow Q00 follow-up to exact S2 setup and assessment reason",
+        "6a6fb7cd3cdca2febb2269fe6e8fb67ce0cac263 docs: prepare D04 transport dispatch and confirm Q00 r2",
+        "b8dca5f6afeea693b7b4057245d1274ce8dad2ef docs: prepare Q00 r2 dispatch after clean slate",
+        "942bbd32c93205dc88c203198b9a172ed2ee9e8a docs: accept D03 component and freeze S3 S4 interfaces",
+        "e170daaaade2165021f38eb1cea89d2d1068563b docs: record D03 delivery awaiting component review",
+        "b936f91e803cf0bebf256f8d9f743753a592f678 docs: return Q00 r1 for isolated semantic and canary corrections",
+        "b34f3ef4c182d1b0835e4f2e563f5262786e0995 docs: record D03 resumed after capacity error",
+        "84e9a7f2ea812db0a441db948684d037ccb276f7 docs: confirm D03 dispatch and current capacity interruption",
+        "740685065096ec28be359ef505fa9895acfd0beb docs: record Q00 r1 receipt pending static review",
+        "8ae566fb12851bc8cd4434ad2ce807b14c99c8c7 docs: prepare D03 after clean slate and set control deadlines",
+        "74428551e576f7615119a1a515be56074ed38755 docs: refresh live D03 preparation and Q00 rework status",
+        "d3da955de55f6028949e25d024d6c16431061c07 docs: prepare Q00 rework dispatch and preserve D03 handoff",
+        "16d2b5087edf29cf24a4b7e639acbefd1d2893ce docs: review D02 component and freeze S2 for decision core",
+        "40f7587cb4eb9340edc6a4c56a504d7ffed8037b docs: return Q00 plan for concrete oracle and fixture corrections",
+        "c943fae2a2ddfec7b8968bdc467f612221f5368d docs: record D02 dispatch and prepare independent Q00",
+        "d0e702939635191b65f4d9f603b751d7dbf0d716 docs: review D01 component and freeze S1 for D02 and Q00",
+        "ffddc4bca6e93b09a7ad3596974fe463efabe588 docs: record D01 dispatch and control deadline",
+        "9c268a425fbea852045c05f0ea19b86db37ba929 docs: record decision implementation approval and prepare D01",
+        "595dce8f280045d0134e49060282b13c6293c0a0 docs: plan decision implementation with approval gate",
+        "d622cba5644b844344baac5a6f17a84ab43a9a9e docs: specify decision tool integration in delegate-mcp",
+        "105cc6d017f7de7f6afd012b53b590b487436aad Merge pull request #5 from art-ws/docs/readme-love-to-art",
+        "5a752d11837dbda5046ce0aff2e4953de492db37 docs(readme): dedicate footer — with Love to art",
+        "96dc06c4deb9f651d522a56e7a2fdbe323672497 Merge pull request #4 from art-ws/ci/restore-oidc-provenance",
+        "76144b5f6ab0b0bcfa5648059af45459a449e0b9 ci(release): restore npm provenance/OIDC for verified badge",
+        "13469e8f88b846c085722c44369dd15a052b2182 Merge pull request #3 from art-ws/feat/mvp",
+        "63c265a50081569797ccdd25524af062ef4d9b33 ci(release): drop npm provenance/OIDC — publish via NPM_TOKEN only"
+      ]
+    },
+    {
+      "name": "test-only",
+      "status": "PASS",
+      "source": "8611a237259543a4667ba610080aa44dc36d545a",
+      "releaseType": null,
+      "nextVersion": null,
+      "lastRelease": null,
+      "notes": "",
+      "commits": [],
+      "lifecycleCalls": {
+        "analyzeCommits": 1,
+        "generateNotes": 0,
+        "prepare": 0,
+        "publish": 0,
+        "addChannel": 0,
+        "success": 0,
+        "fail": 0
+      },
+      "unchanged": [
+        "local HEAD",
+        "local tags",
+        "local worktree/assets",
+        "bare remote refs"
+      ],
+      "auth": "NOT_RUN: npm/GitHub plugins excluded; only disposable local git push-permission check",
+      "log": "[12:46:36 AM] [semantic-release] › ℹ  Running semantic-release version 25.0.8\n[12:46:36 AM] [semantic-release] › ✔  Loaded plugin \"analyzeCommits\" from \"Inline plugin\"\n[12:46:36 AM] [semantic-release] › ✔  Loaded plugin \"generateNotes\" from \"Inline plugin\"\n[12:46:36 AM] [semantic-release] › ✔  Loaded plugin \"prepare\" from \"Inline plugin\"\n[12:46:36 AM] [semantic-release] › ✔  Loaded plugin \"publish\" from \"Inline plugin\"\n[12:46:36 AM] [semantic-release] › ✔  Loaded plugin \"addChannel\" from \"Inline plugin\"\n[12:46:36 AM] [semantic-release] › ✔  Loaded plugin \"success\" from \"Inline plugin\"\n[12:46:36 AM] [semantic-release] › ✔  Loaded plugin \"fail\" from \"Inline plugin\"\n[12:46:36 AM] [semantic-release] › ⚠  Run automated release from branch main on repository <scratch>/test-only.git in dry-run mode\n[12:46:36 AM] [semantic-release] › ✔  Allowed to push to the Git repository\n[12:46:36 AM] [semantic-release] › ℹ  Found git tag v1.0.0 associated with version 1.0.0 on branch main\n[12:46:36 AM] [semantic-release] › ℹ  Found 1 commits since last release\n[12:46:36 AM] [semantic-release] › ℹ  Start step \"analyzeCommits\" of plugin \"Inline plugin\"\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: test: integrate approved Q01 candidate and r2 QA\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The commit should not trigger a release\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analysis of 1 commits complete: no release\n[12:46:36 AM] [semantic-release] › ✔  Completed step \"analyzeCommits\" of plugin \"Inline plugin\"\n[12:46:36 AM] [semantic-release] › ℹ  There are no relevant changes, so no new version is released.\n"
+    },
+    {
+      "name": "feature",
+      "status": "PASS",
+      "source": "3fb94dba60341f692b6ed95ed5cf267d2709c7e6",
+      "releaseType": "minor",
+      "nextVersion": "1.1.0",
+      "lastRelease": "1.0.0",
+      "notes": "# [1.1.0](https://github.com/art-ws/delegate-mcp/compare/v1.0.0...v1.1.0) (2026-10-03)\n\n\n### Features\n\n* **decision:** provide compatible decision tool with automated release preparation ([3fb94db](https://github.com/art-ws/delegate-mcp/commit/3fb94dba60341f692b6ed95ed5cf267d2709c7e6))\n",
+      "commits": [
+        {
+          "hash": "3fb94dba60341f692b6ed95ed5cf267d2709c7e6",
+          "subject": "feat(decision): provide compatible decision tool with automated release preparation",
+          "message": "feat(decision): provide compatible decision tool with automated release preparation"
+        }
+      ],
+      "lifecycleCalls": {
+        "analyzeCommits": 1,
+        "generateNotes": 1,
+        "prepare": 0,
+        "publish": 0,
+        "addChannel": 0,
+        "success": 0,
+        "fail": 0
+      },
+      "unchanged": [
+        "local HEAD",
+        "local tags",
+        "local worktree/assets",
+        "bare remote refs"
+      ],
+      "auth": "NOT_RUN: npm/GitHub plugins excluded; only disposable local git push-permission check",
+      "log": "[12:46:36 AM] [semantic-release] › ℹ  Running semantic-release version 25.0.8\n[12:46:36 AM] [semantic-release] › ✔  Loaded plugin \"analyzeCommits\" from \"Inline plugin\"\n[12:46:36 AM] [semantic-release] › ✔  Loaded plugin \"generateNotes\" from \"Inline plugin\"\n[12:46:36 AM] [semantic-release] › ✔  Loaded plugin \"prepare\" from \"Inline plugin\"\n[12:46:36 AM] [semantic-release] › ✔  Loaded plugin \"publish\" from \"Inline plugin\"\n[12:46:36 AM] [semantic-release] › ✔  Loaded plugin \"addChannel\" from \"Inline plugin\"\n[12:46:36 AM] [semantic-release] › ✔  Loaded plugin \"success\" from \"Inline plugin\"\n[12:46:36 AM] [semantic-release] › ✔  Loaded plugin \"fail\" from \"Inline plugin\"\n[12:46:36 AM] [semantic-release] › ⚠  Run automated release from branch main on repository <scratch>/feature.git in dry-run mode\n[12:46:36 AM] [semantic-release] › ✔  Allowed to push to the Git repository\n[12:46:36 AM] [semantic-release] › ℹ  Found git tag v1.0.0 associated with version 1.0.0 on branch main\n[12:46:36 AM] [semantic-release] › ℹ  Found 1 commits since last release\n[12:46:36 AM] [semantic-release] › ℹ  Start step \"analyzeCommits\" of plugin \"Inline plugin\"\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analyzing commit: feat(decision): provide compatible decision tool with automated release preparation\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  The release type for the commit is minor\n[12:46:36 AM] [semantic-release] [Inline plugin] › ℹ  Analysis of 1 commits complete: minor release\n[12:46:36 AM] [semantic-release] › ✔  Completed step \"analyzeCommits\" of plugin \"Inline plugin\"\n[12:46:36 AM] [semantic-release] › ℹ  The next release version is 1.1.0\n[12:46:36 AM] [semantic-release] › ℹ  Start step \"generateNotes\" of plugin \"Inline plugin\"\n[12:46:36 AM] [semantic-release] › ✔  Completed step \"generateNotes\" of plugin \"Inline plugin\"\n[12:46:36 AM] [semantic-release] › ⚠  Skip step \"prepare\" of plugin \"Inline plugin\" in dry-run mode\n[12:46:36 AM] [semantic-release] › ⚠  Skip v1.1.0 tag creation in dry-run mode\n[12:46:36 AM] [semantic-release] › ⚠  Skip step \"publish\" of plugin \"Inline plugin\" in dry-run mode\n[12:46:36 AM] [semantic-release] › ⚠  Skip step \"success\" of plugin \"Inline plugin\" in dry-run mode\n[12:46:36 AM] [semantic-release] › ✔  Published release 1.1.0 on default channel\n[12:46:36 AM] [semantic-release] › ℹ  Release note for version 1.1.0:\n# 1.1.0 (https://github.com/art-ws/delegate-mcp/compare/v1.0.0...v1.1.0) (2026-10-03)\n\n### Features\n\n    * **decision:** provide compatible decision tool with automated release preparation ([3fb94db](https://github.com/art-ws/delegate-mcp/commit/3fb94dba60341f692b6ed95ed5cf267d2709c7e6))\n\n"
+    }
+  ]
+}
