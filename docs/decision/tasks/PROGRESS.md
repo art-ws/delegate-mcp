@@ -11,7 +11,7 @@
 | Live scope Q02 | **GO, WAIT_DEPENDENCIES** | Аппрув полного дерева тем же поручением: до трёх синтетических платных POST без retries, только после Q01/G1 и отдельной выдачи Q02 |
 | npm release / activation | **NONE — HOLD** | Вне текущего этапа, отдельное поручение |
 
-Разрешение стартовать — прямое поручение владельца выше. Текущий статус эпика: **IN_PROGRESS / D01–D07_COMPONENT_PASS / Q01_READY / Q00_PLAN_PASS**; независимая runtime QA и live — **NOT_RUN**. Публикация npm, tag/GitHub Release, release workflow и активация MCP не разрешены.
+Разрешение стартовать — прямое поручение владельца выше. Текущий статус эпика: **IN_PROGRESS / D01–D07_COMPONENT_PASS / Q01_DISPATCH_PREPARED / Q00_PLAN_PASS**; независимая runtime QA и live — **NOT_RUN**. Публикация npm, tag/GitHub Release, release workflow и активация MCP не разрешены.
 
 ## Листья
 
@@ -26,7 +26,7 @@
 | D06 | dev | COMPONENT_PASS | `decision-d06-go-20261003-1945`, сдача `014621e8-45d7-4fab-a23d-65833ab540a9` | source `42734c1412a7d24d62e427d49301db86fd7f8255`, parent0d0ade5f; TL static review принят/S7 закреплён; author865/865 с fixture preparation; D07 artifacts/portability followup, independent QA NOT_RUN |
 | D07 | dev | COMPONENT_PASS; F-D07-PUBLISH-VERSION OPEN | `decision-d07-go-20261003-2040`, сдача `46273e67-97de-42ba-b3a7-4029ee99f27b` | source489b6aad6061e4e0161c125066ea3b79374beddd, parent42734c14; TL static bytes/source/evidence review принят; author865/865+isolated865/865, installedNode24/26, actualNode20 NOT_RUN → Q01; default registry dry-run FAIL, forced inventory PASS, release eligibility OPEN |
 | Q00 | test | PLAN_PASS | `87fdb5bd-f497-47a6-bc1b-e7d7eabc5729`, сдача `f4e209b2-a0b0-42fe-b0a2-577f50f415e6` | QA `c102897315d6badcfb59fa583a48c1ab1f43c961`, parent0de2036; TL actual bytes/static review закрывает оба r3 findings; independent runtime QA инструмента NOT_RUN |
-| Q01 | test | READY_FOR_DISPATCH | нет | D07 и Q00 приняты; перед выдачей fresh WIP/cleanup/idle/clear; source489b6aa, Q00c1028973, retained tarball identity; runtime QA ещё NOT_RUN |
+| Q01 | test | DISPATCH_PREPARED | `decision-q01-go-20261003-2110`, финальный send текущего цикла | cleanup907e05ca/fresh liveidle/cleanQAc1028973/clear подтверждены; immutable source489b6aa, retained tgzSHA0ed018ca; fresh-main trial integration проверяет test; verdict NOT_RUN |
 | G1 | tl | WAIT_DEPENDENCIES | нет | — |
 | Q02 | test | WAIT_DEPENDENCIES | нет | — |
 | G2 | tl | WAIT_DEPENDENCIES | нет | — |
@@ -35,9 +35,9 @@
 
 | Роль | Активный исполнительный лист | Очередь после GO |
 |---|---|---|
-| tl | Q01 clean-slate / dispatch | review → G1 → G2 |
+| tl | Q01 контроль / review | review → G1 → G2 |
 | dev | Резерв после D07; WIP=0, source/artifact сохранены | адресный rework при findings Q01 |
-| test | Q00 план принят; подготовка clean-slate Q01 | Q01 отдельным dispatch → Q02 после G1 |
+| test | Q01 подготовлен к финальной выдаче после idle/clear | Q01 отдельным dispatch → Q02 после G1 |
 
 При G0 MCP list_peers и закрывающие сообщения подтвердили dev/test idle в резерве; чужие задачи не вытесняются. dev подтвердил WIP=0 и cleanup сообщением `c52f5ee6-197c-487f-a54d-85c706e208dd` (служебные дочерние удалены, основная/чужие сохранены, checkout чистый, аренды отсутствуют). Live get_status=idle и /clear перед D01 выполнены, rc=0. Актуальные исполнительные листы — в раскладке выше.
 
@@ -130,3 +130,6 @@ Re-resolve G0: локальный main и live origin/main совпадают �
 - F-D07-PUBLISH-VERSION остаётся OPEN: default npm11 publish dry-run rc1 отверг существующую1.0.0; forced dry-run rc0 подтверждает только inventory, не release eligibility. Это отдельная release limitation, не waiver/full gate PASS и не препятствие независимой local QA; имя/версию не меняем без отдельного release scope. [Carrier Q01](09-local-acceptance.FOLLOWUP-package.md) закрепляет exact artifact/Node20/fresh-tip требования. Все13main baseline bytes совпали. Далее один финальный reviewreplydev с узким cleanup/резервом; отдельный цикл fresh test cleanup/idle/clear и полный Q01 dispatch.
 
 - 2026-10-03 21:06 MSK: dev cleanup e5f6edeb получен; удалены только два собственных idle/detached дочерних, WIP0/lease0. TL повторно сверил clean489b6aa и retained tgzSHA0ed018ca65ccd85585acdfa9b46ef41294389d66170f144f595e2396955c1619; dev резерв на findings Q01, source/artifact не изменять. Test preflightrequest decision-q01-preflight-20261003-2105 доставлен; ответ907e05ca подтверждает fresh WIP0/cleanQAc1028973/nochildren/leases0/readinessclear. Следующий отдельный цикл liveidle/clear и полный Q01 dispatch; приёмка пока NOT_RUN.
+
+- 2026-10-03 21:10 MSK: test cleanup907e05ca лично перечитан/history исключает дубль. QA c102897315d6badcfb59fa583a48c1ab1f43c961 clean, live status/screen idle; TL выполнил /clear. Dev reserve close13d2aceb доставлен, не повторять. Main/origin8134394 совпадают, 13 baseline bytes совпали.
+- Q01 подготовлен к финальной единственной выдаче decision-q01-go-20261003-2110 / replyTo907e05ca. Immutable source489b6aad6061e4e0161c125066ea3b79374beddd + Q00c1028973; новый isolated review/decision-q01 / /opt/art/p/delegate-mcp-wt/test-decision-q01, исходный QAworktree сохранить. Fresh main trial integration делает test, фиксирует exact commit для G1/full gate, retained author tgzSHA0ed018ca65ccd85585acdfa9b46ef41294389d66170f144f595e2396955c1619 проверяет отдельно от own clean pack. Scope leaf09+FOLLOWUP-package, полный26ACplan/6mutations/Node20current/nativeinstalledstdio/legacy; no runtimeTL/publish/live. Timebox4–6ч, контрольдо22:30 MSK03.10, целевая сдачадо03:10 MSK04.10. Prepared не receipt/PASS; подтвердить history/screen/пакетомtest. Во время QA избегать ненужного изменения main; fresh-tip перед final test gate/G1 обязателен.
