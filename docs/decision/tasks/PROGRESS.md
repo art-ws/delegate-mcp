@@ -36,7 +36,7 @@
 | Роль | Активный исполнительный лист | Очередь после GO |
 |---|---|---|
 | tl | Q01 clean-slate / dispatch | review → G1 → G2 |
-| dev | D07 принят; cleanup перед резервом | адресный rework при findings Q01 |
+| dev | Резерв после D07; WIP=0, source/artifact сохранены | адресный rework при findings Q01 |
 | test | Q00 план принят; подготовка clean-slate Q01 | Q01 отдельным dispatch → Q02 после G1 |
 
 При G0 MCP list_peers и закрывающие сообщения подтвердили dev/test idle в резерве; чужие задачи не вытесняются. dev подтвердил WIP=0 и cleanup сообщением `c52f5ee6-197c-487f-a54d-85c706e208dd` (служебные дочерние удалены, основная/чужие сохранены, checkout чистый, аренды отсутствуют). Live get_status=idle и /clear перед D01 выполнены, rc=0. Актуальные исполнительные листы — в раскладке выше.
@@ -128,3 +128,5 @@ Re-resolve G0: локальный main и live origin/main совпадают �
 - Author standard build→typecheck→lint→test→secretlint rc0, 865/865; isolated suite865/865 с negative external-oracle guard; installed stdio native loopback Node26.3.1/24.18.0 rc0, все12 controls на runtime. TL не запускал build/tests/installed smoke: только статический source/evidence review и identity. Первые RED сохранены. ActualNode20 NOT_RUN передан Q01.
 - TL статически проверил retained tgz SHA2560ed018ca65ccd85585acdfa9b46ef41294389d66170f144f595e2396955c1619, ровно5archive files, sizes/modes/source bytes и все production-inputs SHA; ordinary entry b9942bf84d5a309867bbc8397ea4f5d9d2443ddcdba292b528bf0864314eeb47 неизменен. No archive extraction/execution. npm pack/forced publish dry-run inventory/integrity совпали по evidence.
 - F-D07-PUBLISH-VERSION остаётся OPEN: default npm11 publish dry-run rc1 отверг существующую1.0.0; forced dry-run rc0 подтверждает только inventory, не release eligibility. Это отдельная release limitation, не waiver/full gate PASS и не препятствие независимой local QA; имя/версию не меняем без отдельного release scope. [Carrier Q01](09-local-acceptance.FOLLOWUP-package.md) закрепляет exact artifact/Node20/fresh-tip требования. Все13main baseline bytes совпали. Далее один финальный reviewreplydev с узким cleanup/резервом; отдельный цикл fresh test cleanup/idle/clear и полный Q01 dispatch.
+
+- 2026-10-03 21:06 MSK: dev cleanup e5f6edeb получен; удалены только два собственных idle/detached дочерних, WIP0/lease0. TL повторно сверил clean489b6aa и retained tgzSHA0ed018ca65ccd85585acdfa9b46ef41294389d66170f144f595e2396955c1619; dev резерв на findings Q01, source/artifact не изменять. Test preflightrequest decision-q01-preflight-20261003-2105 доставлен; ответ907e05ca подтверждает fresh WIP0/cleanQAc1028973/nochildren/leases0/readinessclear. Следующий отдельный цикл liveidle/clear и полный Q01 dispatch; приёмка пока NOT_RUN.
