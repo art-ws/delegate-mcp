@@ -15,3 +15,13 @@
 Config timeout_ms/max_retries задают defaults; явные execution overrides валидируются по SPEC bounds и применяются последовательно. Не превращать defaults в новый запрет всех повторов и не добавлять незаявленные hard-cap опции. CLI path cascade и старый ProviderPool API не меняются.
 
 Сохраняются optional upstream fields; missing confidence/probabilities/cost не подменяются нулями. Для absent config вызов decision, включая dry-run, возвращает CONFIG_ERROR, поскольку интеграция не настроена. Для configured dry-run attempts=0; ключ не выходит из config и не входит в Request/Envelope.
+
+## S1 — закреплённые экспорты D01
+
+Источник: `e4e68eb7d1f3a76752f3eaa03eccc42bf3749ad5`, `src/decision/schemas.ts`; evidence — `test/decision/fixtures/README.md`. TL принимает component как вход зависимых листьев; независимая QA — Q01, текущие статусы в PROGRESS.md.
+
+- Основные типы: DecisionArgs, DecisionEnvelope, DecisionsRequest, DecisionsResponse, DecisionQuestion, DecisionAnswer, DecisionPolicy, DecisionExecution, DecisionTrace, DecisionAssessment, DecisionMeta, DecisionError, DecisionErrorCode, ProviderPreferences, ProviderOptionSlug, DecisionValidation<T>, JsonValue, JsonObject, StructuredValue.
+- Безопасные границы: validateDecisionArgs / validateDecisionEnvelope / validateDecisionsResponse принимают unknown и возвращают `{success:true,data:T}` либо `{success:false,error:{code,message}}`; INVALID_ARGUMENT для входа, UPSTREAM_PROTOCOL для ответа. Ошибки фиксированные, raw Zod issues наружу не идут. Успех сохраняет исходный объект; потребители считают его immutable.
+- JSON declarations: decisionInputJsonSchema / decisionOutputJsonSchema, providerOptionSlugs. **D06 использует JSON declarations явно в tools/list**, не предполагает lossless automatic conversion custom/preprocess Zod; включение модуля в обычный server bundle принадлежит D06.
+- Экспортированы form schemas: decisionArgsSchema, decisionEnvelopeSchema, decisionsRequestSchema, decisionsResponseSchema, decisionQuestionSchema, decisionAnswerSchema, decisionPolicySchema, decisionExecutionSchema, decisionAssessmentSchema, decisionMetaSchema, decisionErrorSchema, providerPreferencesSchema.
+- D01 уже проверяет finite JSON numbers. D03 закрывает matching policy IDs/types, noul interval, assessment/AND/tie/equality, exact response IDs/types/options, numeric ranges, probability keys/sums/maximum, Score expectation/legend, nonnegative usage/cost и удаление unknown upstream fields. D01 form-validator допускает upstream additional JSON fields согласно канону и не заменяет эти semantic checks. D06 закрывает operational consistency/dry-run attempts=0.

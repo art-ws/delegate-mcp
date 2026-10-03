@@ -11,21 +11,21 @@
 | Live scope Q02 | **GO, WAIT_DEPENDENCIES** | Аппрув полного дерева тем же поручением: до трёх синтетических платных POST без retries, только после Q01/G1 и отдельной выдачи Q02 |
 | npm release / activation | **NONE — HOLD** | Вне текущего этапа, отдельное поручение |
 
-Разрешение стартовать — прямое поручение владельца выше. Текущий статус эпика: **IN_PROGRESS / D01_DISPATCHED**; runtime QA и live — **NOT_RUN**. Публикация npm, tag/GitHub Release, release workflow и активация MCP не разрешены.
+Разрешение стартовать — прямое поручение владельца выше. Текущий статус эпика: **IN_PROGRESS / D01_COMPONENT_PASS**; runtime QA и live — **NOT_RUN**. Публикация npm, tag/GitHub Release, release workflow и активация MCP не разрешены.
 
 ## Листья
 
 | ID | Роль | Статус | Выдан | Candidate / evidence |
 |---|---|---|---|---|
 | G0 | tl | PASS | 2026-10-03 | GO + 13/13 baseline bytes; dev WIP=0, cleanup `c52f5ee6-197c-487f-a54d-85c706e208dd`; idle и /clear подтверждены |
-| D01 | dev | DISPATCHED | 2026-10-03 16:14 MSK; `c8b5c9e1-ae29-43fc-adda-8a7aaf299709` | predecessor G0 `9c268a425fbea852045c05f0ea19b86db37ba929`; candidate ожидается |
-| D02 | dev | WAIT_DEPENDENCIES | нет | — |
+| D01 | dev | COMPONENT_PASS | 2026-10-03 16:14 MSK; `c8b5c9e1-ae29-43fc-adda-8a7aaf299709` | candidate `e4e68eb7d1f3a76752f3eaa03eccc42bf3749ad5`; author 295/295, component PASS, TL static review разрешает D02/Q00; independent QA NOT_RUN |
+| D02 | dev | READY | нет | predecessor D01 `e4e68eb7`; предзадачный cleanup |
 | D03 | dev | WAIT_DEPENDENCIES | нет | — |
 | D04 | dev | WAIT_DEPENDENCIES | нет | — |
 | D05 | dev | WAIT_DEPENDENCIES | нет | — |
 | D06 | dev | WAIT_DEPENDENCIES | нет | — |
 | D07 | dev | WAIT_DEPENDENCIES | нет | — |
-| Q00 | test | WAIT_DEPENDENCIES | нет | — |
+| Q00 | test | READY | нет | source D01 `e4e68eb7`; предзадачный cleanup |
 | Q01 | test | WAIT_DEPENDENCIES | нет | — |
 | G1 | tl | WAIT_DEPENDENCIES | нет | — |
 | Q02 | test | WAIT_DEPENDENCIES | нет | — |
@@ -35,11 +35,11 @@
 
 | Роль | Активный исполнительный лист | Очередь после GO |
 |---|---|---|
-| tl | контроль D01 / чтение evidence | review/диспетч → G1 → G2 |
-| dev | D01 | D02 → D03 → D04 → D05 → D06 → D07 |
-| test | нет | Q00 после D01 → Q01 после D07 → Q02 после G1 |
+| tl | диспетч D02/Q00 | review/диспетч → G1 → G2 |
+| dev | cleanup перед D02 | D02 → D03 → D04 → D05 → D06 → D07 |
+| test | cleanup перед Q00 | Q00 → Q01 после D07 → Q02 после G1 |
 
-MCP list_peers и последние закрывающие сообщения подтверждают dev/test idle в резерве; чужие задачи не вытесняются. dev подтвердил WIP=0 и cleanup сообщением `c52f5ee6-197c-487f-a54d-85c706e208dd` (служебные дочерние удалены, основная/чужие сохранены, checkout чистый, аренды отсутствуют). Live get_status=idle и /clear перед D01 выполнены, rc=0. test получает Q00 после D01, до того исполнительного листа нет.
+При G0 MCP list_peers и закрывающие сообщения подтвердили dev/test idle в резерве; чужие задачи не вытесняются. dev подтвердил WIP=0 и cleanup сообщением `c52f5ee6-197c-487f-a54d-85c706e208dd` (служебные дочерние удалены, основная/чужие сохранены, checkout чистый, аренды отсутствуют). Live get_status=idle и /clear перед D01 выполнены, rc=0. Актуальные исполнительные листы — в раскладке выше.
 
 Re-resolve G0: локальный main и live origin/main совпадают — `595dce8f280045d0134e49060282b13c6293c0a0`; baseline `d622cba5644b844344baac5a6f17a84ab43a9a9e` является предком. Все 13 SHA256 baseline совпали; дельта — только docs/README.md и docs/decision/tasks/. SPEC v0.2 и input/output schema не менялись.
 
@@ -51,3 +51,8 @@ Re-resolve G0: локальный main и live origin/main совпадают �
 - 2026-10-03: прямое GO владельца `14115228-44f6-4438-afe9-962178843ab8` снимает approval HOLD полного дерева. main/remote и 13 baseline bytes проверены чтением, runtime прогоны TL не выполнялись. Убраны устаревшие копии текущего HOLD из листьев: статусы остаются только здесь.
 - G0 PASS: доступность/WIP и clean-slate dev подтверждены; test idle в резерве, Q00 ожидает D01. Первая контрольная точка D01 ≤90 минут после выдачи, timebox 2–3 часа активной работы.
 - 2026-10-03 16:14 MSK: D01 выдан dev через MCP `c8b5c9e1-ae29-43fc-adda-8a7aaf299709` (router queued=true), после idle/cleanup/clear. Predecessor G0 `9c268a425fbea852045c05f0ea19b86db37ba929`; worktree назначен /opt/art/p/delegate-mcp-wt/dev-decision, ветка feat/decision-v0.2 (создание подтверждает dev при сдаче). Контроль до 17:45 MSK, целевая сдача до 19:15 MSK; timebox 2–3 часа активной работы. Диспетч/очередь роутера не является component PASS или QA ACCEPT. Q00 выдаётся test после принятого пакета D01.
+
+- D01 получен сообщением dev `7b9ee01f-c145-4340-9f26-80ffc46710b6`: component PASS, source `e4e68eb7d1f3a76752f3eaa03eccc42bf3749ad5`, parent `9c268a425fbea852045c05f0ea19b86db37ba929`, feat/decision-v0.2, /opt/art/p/delegate-mcp-wt/dev-decision; checkout чистый. TL сверил SHA/parent и diff: ровно шесть owned files, только schemas + tests/fixtures; канон, зависимости и legacy не менялись. Прочитан committed evidence `test/decision/fixtures/README.md` и критические JSON/strict-key/provider/safe-validator участки. Дополнительное delegate-чтение — только сжатие для review; его неподтверждённые предположения о nullable отклонены по исходнику и fixture matrix. Runtime прогоны TL не выполнялись.
+- Авторские команды build (два entry) → typecheck → focused suite 295/295, lint, focused test typecheck, secretlint, whitespace/commit — rc=0 по committed evidence; Node v26.3.1. D01 component принят как вход следующих листьев, **QA ACCEPT/DONE не заявлен**. Фактический Node20, ordinary server bundle, full legacy/package/live — NOT_RUN, закрываются D06/D07/Q01/Q02.
+- S1 закреплён в _shared/interfaces.md; D06 обязан явно опубликовать embedded JSON declarations и включить модуль в обычный bundle. D03 обязан применять semantic relations/очистку неизвестных upstream полей; safe validators сохраняют исходные данные, не нормализуют их.
+- Отменён старый контроль D01. dev/test отправлены отдельные cleanup перед D02/Q00 (`eaf201cb-b668-441e-82da-ae215cdbc1b2` / `9591f7b0-614d-4c3c-9814-87e295630a6e`); до WIP=0/idle/clear следующий исполнительный лист не выдаётся.
