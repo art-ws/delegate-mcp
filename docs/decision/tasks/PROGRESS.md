@@ -11,7 +11,7 @@
 | Live scope Q02 | **GO, WAIT_DEPENDENCIES** | Аппрув полного дерева тем же поручением: до трёх синтетических платных POST без retries, только после Q01/G1 и отдельной выдачи Q02 |
 | npm release / activation | **NONE — HOLD** | Вне текущего этапа, отдельное поручение |
 
-Разрешение стартовать — прямое поручение владельца выше. Текущий статус эпика: **IN_PROGRESS / D04_DISPATCH_PREPARED / Q00_R2**; runtime QA и live — **NOT_RUN**. Публикация npm, tag/GitHub Release, release workflow и активация MCP не разрешены.
+Разрешение стартовать — прямое поручение владельца выше. Текущий статус эпика: **IN_PROGRESS / D04 / Q00_R3_CLEANUP_PENDING**; runtime QA и live — **NOT_RUN**. Публикация npm, tag/GitHub Release, release workflow и активация MCP не разрешены.
 
 ## Листья
 
@@ -21,11 +21,11 @@
 | D01 | dev | COMPONENT_PASS | 2026-10-03 16:14 MSK; `c8b5c9e1-ae29-43fc-adda-8a7aaf299709` | candidate `e4e68eb7d1f3a76752f3eaa03eccc42bf3749ad5`; author 295/295, component PASS, TL static review разрешает D02/Q00; independent QA NOT_RUN |
 | D02 | dev | COMPONENT_PASS | 2026-10-03 17:00 MSK; `25045684-1d29-4e89-a62c-6a61a9113c67` | candidate `b5314e7cf634bff703a9b1fddda33ccd3f6cf7b9`; author 528/528, TL static review разрешает D03; independent QA NOT_RUN |
 | D03 | dev | COMPONENT_PASS | 2026-10-03 17:33 MSK; `aa29ed09-f8ca-41a4-b0f6-eba0122d5c39` | source `79819d6b5606efd2de6f5fb8faa0e1138e40b46d`, parent b5314e7c; TL static review принят, S3/S4 закреплены, author 577/577; independent QA NOT_RUN |
-| D04 | dev | DISPATCH_PREPARED | финальная выдача текущего цикла; id `b39e2617-9f6d-4bcd-bd6a-c58c77259488` | predecessor 79819d6b; cleanup b9706088/live idle/clear подтверждены; контроль20:00/цель23:30 MSK, 4–5 часов |
+| D04 | dev | IN_PROGRESS | 2026-10-03 18:33 MSK; `b39e2617-9f6d-4bcd-bd6a-c58c77259488`, screen подтверждает работу | predecessor 79819d6b; client/scheduler и focused controls; контроль20:00/цель23:30 MSK, 4–5 часов |
 | D05 | dev | WAIT_DEPENDENCIES | нет | — |
 | D06 | dev | WAIT_DEPENDENCIES | нет | — |
 | D07 | dev | WAIT_DEPENDENCIES | нет | — |
-| Q00 | test | R2_DISPATCHED | 2026-10-03 18:28 MSK; `d2cc049f-8f6b-4cb5-a906-6cd04b21e993`, history подтверждена | predecessor QA `93e54d9db217150bd51e20ccc64a8d512c0c084a`; [REWORK r2](08-independent-test-plan.REWORK-r2.md), контроль/сдача до19:15 MSK; PASS пока не принят |
+| Q00 | test | REWORK_REQUIRED / R3_CLEANUP_PENDING | r2 `d2cc049f`; r3 ещё не выдан | QA `0de2036ccb1664fe43052dd93908342f595e7b6c`, parent93e54d9; response/ID fixes приняты, S2 canary recipe и Noul reason требуют [узкого r3](08-independent-test-plan.REWORK-r3.md) |
 | Q01 | test | WAIT_DEPENDENCIES | нет | — |
 | G1 | tl | WAIT_DEPENDENCIES | нет | — |
 | Q02 | test | WAIT_DEPENDENCIES | нет | — |
@@ -35,9 +35,9 @@
 
 | Роль | Активный исполнительный лист | Очередь после GO |
 |---|---|---|
-| tl | контроль/review Q00 r2 / диспетч D04 | review/диспетч → G1 → G2 |
-| dev | D04 подготовлен после idle/clear | D04 → D05 → D06 → D07 |
-| test | Q00 r2 выдан, контроль19:15 MSK | Q00 r2 → Q01 после D07 → Q02 после G1 |
+| tl | Q00 r3 cleanup/диспетч / контроль D04 | review/диспетч → G1 → G2 |
+| dev | D04 transport/bounded scheduler | D04 → D05 → D06 → D07 |
+| test | предзадачный cleanup перед узким Q00 r3 | Q00 r3 → Q01 после D07 → Q02 после G1 |
 
 При G0 MCP list_peers и закрывающие сообщения подтвердили dev/test idle в резерве; чужие задачи не вытесняются. dev подтвердил WIP=0 и cleanup сообщением `c52f5ee6-197c-487f-a54d-85c706e208dd` (служебные дочерние удалены, основная/чужие сохранены, checkout чистый, аренды отсутствуют). Live get_status=idle и /clear перед D01 выполнены, rc=0. Актуальные исполнительные листы — в раскладке выше.
 
@@ -92,3 +92,6 @@ Re-resolve G0: локальный main и live origin/main совпадают �
 - 18:26 MSK: Q00 r2 clean-slate повторно проверен: live QA HEAD93e54d9/parentd108021/clean review/decision-q00, history без ответа cleanup b4380e90, status idle и screen завершённой сдачи cleanup. /clear выполнен успешно. Финальная выдача текущего цикла id d2cc049f-8f6b-4cb5-a906-6cd04b21e993, replyTo b4380e90; только carrier r2/test/decision-qa/, timebox30–45 минут, контроль/сдача до19:15 MSK. Receipt сверить в следующем history/пакете; prepared не является PASS. D03 component-принят, S3/S4 в main942bbd3; dev получил review reply b885268e и делает cleanup перед D04. QA/live NOT_RUN.
 - 18:30 MSK: Q00 r2 dispatch d2cc049f подтверждён live history test; повторного clear/выдачи нет. Dev cleanup b9706088-9a58-4fd8-8276-ecd5d57044be подтверждает WIP=0/no leases и удаление восьми собственных idle dev-d03* дочерних; основные/чужие сохранены. TL повторно проверил live dev worktree HEAD79819d6b/clean и idle status/screen; /clear выполнен успешно. Лично перечитаны D04 leaf, SPEC §8, shared context/interfaces/acceptance/baseline. Все 13 baseline hashes в management main прежние.
 - D04 подготовлен к финальной выдаче: id b39e2617-9f6d-4bcd-bd6a-c58c77259488 / replyTo b9706088; scope client.ts/bounded scheduler + focused synthetic transport/clock fixtures, S5. Predecessor79819d6b, контрольдо20:00 и цельдо23:30 MSK 03.10.2026 (4–5 активных часов). Отправка exact S3 bodyJson, один deadline queue/backoff/HTTP/body, retries/classified safe errors/cancel/slots/response bytes. Runtime QA TL не выполняется; реальные API/keys, D05–D07/merge/release/activation не входят. Receipt сверить history/пакетом dev; prepared не component PASS.
+- Q00 r2 сдан test 967760c4-4e11-4780-9e88-770861b0e248; полный message.json прочитан. TL live проверил SHA0de2036ccb1664fe43052dd93908342f595e7b6c/parent93e54d9/clean review/decision-q00, четыре owned files, whitespace rc=0. Лично прочитаны static checker, changed PLAN/canary recipe и все response/changed-path/critical assessment values. Response baseline/isolated negatives/usage controls и semantic policy-ID исправлены; три positive valid responses согласованы. Статический checker rc=0 по author report, production runtime NOT_RUN.
+- Q00 r2 остаётся REWORK: F-Q00-R3-SETUP — resolver вызывает S2 с полным raw AppConfig вместо raw.decision и неполными opts, а PLAN ошибочно резолвит legacy reference через decision-only loader; в oracle осталось общее scan both canaries для surface, разрешённого context. F-Q00-R3-NOUL-REASON — expected Noul middle reasons=[] расходится с закреплённым S4 ambiguous_probability. Подготовлен узкий carrier r3 (15–25 минут после отдельной выдачи), без повторной переделки принятых response/ID частей. Следующий test шаг cleanup/WIP=0, затем idle/clear/dispatch. Runtime QA TL не выполнял.
+- 18:42 MSK: live screen dev подтверждает доставленный D04 work-order b39e2617 и Working над client.ts/bounded FIFO scheduler; нет component verdict. Активного dev не clear, контроль20:00 и цель23:30 сохраняются.
