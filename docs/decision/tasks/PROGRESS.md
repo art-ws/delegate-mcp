@@ -11,7 +11,7 @@
 | Live scope Q02 | **GO, WAIT_DEPENDENCIES** | Аппрув полного дерева тем же поручением: до трёх синтетических платных POST без retries, только после Q01/G1 и отдельной выдачи Q02 |
 | npm release / activation | **NONE — HOLD** | Вне текущего этапа, отдельное поручение |
 
-Разрешение стартовать — прямое поручение владельца выше. Текущий статус эпика: **IN_PROGRESS / D06_DISPATCH_PREPARED / Q00_PLAN_PASS**; runtime QA и live — **NOT_RUN**. Публикация npm, tag/GitHub Release, release workflow и активация MCP не разрешены.
+Разрешение стартовать — прямое поручение владельца выше. Текущий статус эпика: **IN_PROGRESS / D06_COMPONENT_PASS / Q00_PLAN_PASS**; независимая runtime QA и live — **NOT_RUN**. Публикация npm, tag/GitHub Release, release workflow и активация MCP не разрешены.
 
 ## Листья
 
@@ -23,7 +23,7 @@
 | D03 | dev | COMPONENT_PASS | 2026-10-03 17:33 MSK; `aa29ed09-f8ca-41a4-b0f6-eba0122d5c39` | source `79819d6b5606efd2de6f5fb8faa0e1138e40b46d`, parent b5314e7c; TL static review принят, S3/S4 закреплены, author 577/577; independent QA NOT_RUN |
 | D04 | dev | COMPONENT_PASS | 2026-10-03 18:33 MSK; `b39e2617-9f6d-4bcd-bd6a-c58c77259488` | source `f2e00ed81fbf7582ce75ea94399297e2af8bd8c7`, parent79819d6b; TL static review принят, S5 закреплён, author671/671 (94D04); independent QA NOT_RUN |
 | D05 | dev | COMPONENT_PASS; EXECUTION_FAIL | `decision-d05-go-20261003-1910`, сдача `def1e487-0adc-4536-b5e1-26b9a969decc` | source `0d0ade5fad394e7451453618ac81e71aa1e52f53`, parentf2e00ed8; TL static review принят/S6 закреплён; author699/699, execution incident F-D05-EXEC-ENV отдельно; independent QA NOT_RUN |
-| D06 | dev | DISPATCH_PREPARED | финальная выдача текущего цикла `decision-d06-go-20261003-1945`, replyTo cleanupc2b310f3 | predecessor `0d0ade5fad394e7451453618ac81e71aa1e52f53`; tool.ts/tools.ts/integration, timebox3–4ч, контроль21:10/цель23:45 MSK |
+| D06 | dev | COMPONENT_PASS | `decision-d06-go-20261003-1945`, сдача `014621e8-45d7-4fab-a23d-65833ab540a9` | source `42734c1412a7d24d62e427d49301db86fd7f8255`, parent0d0ade5f; TL static review принят/S7 закреплён; author865/865 с fixture preparation; D07 artifacts/portability followup, independent QA NOT_RUN |
 | D07 | dev | WAIT_DEPENDENCIES | нет | — |
 | Q00 | test | PLAN_PASS | `87fdb5bd-f497-47a6-bc1b-e7d7eabc5729`, сдача `f4e209b2-a0b0-42fe-b0a2-577f50f415e6` | QA `c102897315d6badcfb59fa583a48c1ab1f43c961`, parent0de2036; TL actual bytes/static review закрывает оба r3 findings; independent runtime QA инструмента NOT_RUN |
 | Q01 | test | WAIT_DEPENDENCIES | нет | — |
@@ -35,8 +35,8 @@
 
 | Роль | Активный исполнительный лист | Очередь после GO |
 |---|---|---|
-| tl | D06 диспетч/контроль | review → D07 → Q01/G1 → G2 |
-| dev | D06 подготовлен после cleanup/live idle/clear | D06 → D07 |
+| tl | D06 verdict / D07 clean-slate dispatch | review → Q01/G1 → G2 |
+| dev | D06 сдан; cleanup перед D07 | D07 |
 | test | Q00 план принят, резерв до D07 | Q01 после D07/отдельного dispatch → Q02 после G1 |
 
 При G0 MCP list_peers и закрывающие сообщения подтвердили dev/test idle в резерве; чужие задачи не вытесняются. dev подтвердил WIP=0 и cleanup сообщением `c52f5ee6-197c-487f-a54d-85c706e208dd` (служебные дочерние удалены, основная/чужие сохранены, checkout чистый, аренды отсутствуют). Live get_status=idle и /clear перед D01 выполнены, rc=0. Актуальные исполнительные листы — в раскладке выше.
@@ -114,3 +114,7 @@ Re-resolve G0: локальный main и live origin/main совпадают �
 
 - 19:45 MSK: dev cleanupc2b310f3-c40b-4d52-b5cc-08a805bb7d6b прочитан; WIP=0/no leases/15 owned idle детей удалены, основные/чужие сохранены. TL повторно сверил clean feat/decision-v0.2 HEAD0d0ade5f, live status/screen idle; /clear выполнен. Main/origin33f66ad совпадают, 13 baseline hashes совпали. Ограничения исправленного script/argv канала приняты dev, ротационного approval gate нет.
 - D06 подготовлен к единственному финальному dispatch decision-d06-go-20261003-1945 / replyTocleanupc2b310f3. Только tool.ts/ToolContext/createServer и lifecycle при необходимости + focused stdio/integration controls, явные встроенные JSON declarations S1, persistent S5, minimal S6, no legacy behavior changes. Predecessor0d0ade5f, timebox3–4ч; контрольдо21:10/цельсдачидо23:45 MSK 03.10.2026. Receipt сверить history/screen, prepared не PASS. Q00 PLAN_PASS/testreserve, Q01/live NOT_RUN.
+
+- 20:25 MSK: TL завершил D06 static actual source/evidence review: source42734c1412a7d24d62e427d49301db86fd7f8255/parent0d0ade5f/clean, 41 owned paths. Лично прочитаны полные tool.ts/registration.ts, wiring/EOF diff, 42 integration controls, все три helper fixtures и D06-INTEGRATION.md/final logs; SDK server/index.js и mcp.js подтверждают сохранённую canonical JSON-RPC validation и original decision params/legacy parse. Component принят/S7 закреплён; real stdio/native loopback, 865/865 author (823 predecessor+42D06), build/typecheck/lint/testTS/secretlint/whitespace rc=0. Runtime QA TL не выполнял, independentQ01/Node20/package/live NOT_RUN.
+- Первый full RED: missing six AC-DIST component exports, затем SDK __proto__ preprocessing RED; попытки сохранены. Final полный suite использует test-only artifacts preparation с неизменным ordinary index SHA256 b9942bf84d5a309867bbc8397ea4f5d9d2443ddcdba292b528bf0864314eeb47. Bare build→test ещё не green: D07 обязан оформить воспроизводимый prerequisite/standard gate без waiver и сохранить шесть AC-DIST; также убрать absolute main-checkout schema reads из теста. [Carrier D07](07-docs-packaging.FOLLOWUP-artifacts.md) не выдача нового листа.
+- Все13 baseline hashes совпали. Следующий dev шаг узкий cleanup/WIP0→live idle/clear→отдельныйD07; test остаётся в резерве после Q00 PLAN_PASS. F-D05-EXEC-ENV и corrected script/argv restrictions сохраняются, дополнительного rotation approval gate нет.

@@ -1,0 +1,9 @@
+# D07 — обязательный followup artifacts/portability
+
+Дополнение к [D07](07-docs-packaging.md); фактическая выдача только в [PROGRESS](PROGRESS.md). Источник D06 `42734c1412a7d24d62e427d49301db86fd7f8255`, parent `0d0ade5f`; canonical/runtime producer seams не менять.
+
+1. D06 ordinary build выпускает bundled index; шесть прежних AC-DIST assertions ожидают separate component exports. Author full suite green только после `node test/decision/fixtures/d06-component-artifacts.mjs`; первый bare build→test RED сохранён. В D07 оформить этот prerequisite в воспроизводимом стандартном test/gate workflow (package scripts или test fixtures/build setup при доказанной необходимости разрешены листом). Не удалять/ослаблять assertions, не объявлять bare sequence PASS без исправления. Показать из чистого artifact state build→typecheck→lint→test→secretlint, точные commands/rc и первую RED. Подготовка test exports не должна незаметно менять ordinary index bytes; package inventory получать из явно объявленного clean production build, artifact identity фиксировать.
+
+2. integration.test.ts сравнивает schemas с hardcoded `/opt/art/p/delegate-mcp/docs/decision/*.schema.json`. Убрать зависимость от другого checkout/имени машины: repo-relative canonical files или зафиксированные reviewed canonical fixture bytes. Runtime package не читает src/docs; test oracle остаётся независимым каноном, не заменить его авторскими exports. Подтвердить suite из isolated checkout/temporary cwd без external main path dependency.
+
+Остальной D07 scope README/sample/package/installed stdio/native loopback и Node20/current — исходный лист. Никакой новой dependency/engine downgrade/release/activation/real API. Author evidence и independent Q01 различать. Это followup следующего leaf, не разрешение начать до cleanup/idle/clear/work-order TL.
