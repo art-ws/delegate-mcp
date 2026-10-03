@@ -11,7 +11,7 @@
 | Live scope Q02 | **GO, WAIT_DEPENDENCIES** | Аппрув полного дерева тем же поручением: до трёх синтетических платных POST без retries, только после Q01/G1 и отдельной выдачи Q02 |
 | npm release / activation | **NONE — HOLD** | Вне текущего этапа, отдельное поручение |
 
-Разрешение стартовать — прямое поручение владельца выше. Текущий статус эпика: **IN_PROGRESS / D03_DISPATCH_PREPARED / Q00_R1**; runtime QA и live — **NOT_RUN**. Публикация npm, tag/GitHub Release, release workflow и активация MCP не разрешены.
+Разрешение стартовать — прямое поручение владельца выше. Текущий статус эпика: **IN_PROGRESS / D03_MODEL_CAPACITY_INTERRUPTION / Q00_R1_REVIEW_PENDING**; runtime QA и live — **NOT_RUN**. Публикация npm, tag/GitHub Release, release workflow и активация MCP не разрешены.
 
 ## Листья
 
@@ -20,12 +20,12 @@
 | G0 | tl | PASS | 2026-10-03 | GO + 13/13 baseline bytes; dev WIP=0, cleanup `c52f5ee6-197c-487f-a54d-85c706e208dd`; idle и /clear подтверждены |
 | D01 | dev | COMPONENT_PASS | 2026-10-03 16:14 MSK; `c8b5c9e1-ae29-43fc-adda-8a7aaf299709` | candidate `e4e68eb7d1f3a76752f3eaa03eccc42bf3749ad5`; author 295/295, component PASS, TL static review разрешает D02/Q00; independent QA NOT_RUN |
 | D02 | dev | COMPONENT_PASS | 2026-10-03 17:00 MSK; `25045684-1d29-4e89-a62c-6a61a9113c67` | candidate `b5314e7cf634bff703a9b1fddda33ccd3f6cf7b9`; author 528/528, TL static review разрешает D03; independent QA NOT_RUN |
-| D03 | dev | DISPATCH_PREPARED | финальная выдача текущего цикла; id `aa29ed09-f8ca-41a4-b0f6-eba0122d5c39` | predecessor D02 `b5314e7cf634bff703a9b1fddda33ccd3f6cf7b9`; clean-slate подтверждён |
+| D03 | dev | STARTED / MODEL_CAPACITY_INTERRUPTION | 2026-10-03 17:33 MSK; `aa29ed09-f8ca-41a4-b0f6-eba0122d5c39` | predecessor D02 `b5314e7cf634bff703a9b1fddda33ccd3f6cf7b9`; dispatch/history/screen подтверждены; console capacity error при проверке 18:05 MSK, component verdict отсутствует |
 | D04 | dev | WAIT_DEPENDENCIES | нет | — |
 | D05 | dev | WAIT_DEPENDENCIES | нет | — |
 | D06 | dev | WAIT_DEPENDENCIES | нет | — |
 | D07 | dev | WAIT_DEPENDENCIES | нет | — |
-| Q00 | test | R1_REVIEW_PENDING | 2026-10-03 17:03 MSK; `5f3bf707-0058-4600-9144-7f6cbb104c4a` | QA `d108021b2b4e62f28a4c80394b4022d887fb63bc`; TL findings F-Q00-AND/USAGE/FIXTURE, [REWORK r1](08-independent-test-plan.REWORK-r1.md) |
+| Q00 | test | R1_REVIEW_PENDING | r1 2026-10-03 17:21 MSK; `e97427a6-55a1-4717-8213-df29f6e5483a` | test сдал `93e54d9db217150bd51e20ccc64a8d512c0c084a` / message `43e3c481`; TL actual bytes review ещё ожидается; [REWORK r1](08-independent-test-plan.REWORK-r1.md) |
 | Q01 | test | WAIT_DEPENDENCIES | нет | — |
 | G1 | tl | WAIT_DEPENDENCIES | нет | — |
 | Q02 | test | WAIT_DEPENDENCIES | нет | — |
@@ -35,8 +35,8 @@
 
 | Роль | Активный исполнительный лист | Очередь после GO |
 |---|---|---|
-| tl | контроль D03 / Q00 r1 | review/диспетч → G1 → G2 |
-| dev | D03 подготовлен после /clear | D04 → D05 → D06 → D07 |
+| tl | review Q00 r1 / возобновление D03 после capacity error | review/диспетч → G1 → G2 |
+| dev | D03 начат, console показывает capacity error / выбор модели | D04 → D05 → D06 → D07 |
 | test | сдал Q00 r1, ожидает review TL | Q00 r1 → Q01 после D07 → Q02 после G1 |
 
 При G0 MCP list_peers и закрывающие сообщения подтвердили dev/test idle в резерве; чужие задачи не вытесняются. dev подтвердил WIP=0 и cleanup сообщением `c52f5ee6-197c-487f-a54d-85c706e208dd` (служебные дочерние удалены, основная/чужие сохранены, checkout чистый, аренды отсутствуют). Live get_status=idle и /clear перед D01 выполнены, rc=0. Актуальные исполнительные листы — в раскладке выше.
@@ -79,3 +79,6 @@ Re-resolve G0: локальный main и live origin/main совпадают �
 - Старый D02/Q00 checkpoint отменён; поставлены ближайшие контроли Q00 r1 около18:12 и D03 около18:52 MSK. Q00 r1 остаётся с deadline18:15; Q01/live NOT_RUN.
 
 - Получен Q00 r1 пакет test 43e3c481-8560-46c4-9c16-360f77ced371; полный message.json прочитан. Заявлен QA93e54d9db217150bd51e20ccc64a8d512c0c084a поверх d108021 и закрытие F1–F3. Review actual bytes/fixtures ещё PENDING, готовность плана не принята. Следующий отдельный цикл review/ответ test назначен через schedule_self после окончания D03 dispatch, без задержки dev и без дублирования reply. Q01/runtime/live NOT_RUN.
+
+- 2026-10-03 18:05 MSK: D03 dispatch подтверждён history dev (`aa29ed09`, 17:33 MSK) и начатой работой в screen. На текущей консоли dev — «Selected model is at capacity» и меню выбора модели; get_status=idle не доказывает продолжение D03. Это наблюдаемая инфраструктурная остановка, новый component verdict не получен. TL организует возобновление без потери WIP; активный лист не clear. Контроль 18:55 и цель 21:30 пока плановые, зависят от возобновления.
+- test сдал Q00 r1 в 17:27 MSK и сейчас idle, ожидает TL review. Автоматический quiet-trigger review истёк, не выполнившись; TL повторно назначает отдельный review/финальный ответ test. Q00 план не принят до проверки actual bytes; runtime QA, Q01 и live NOT_RUN. Ответ оператору о текущем статусе идёт отдельным финальным send.
