@@ -400,13 +400,14 @@ describe("D01 AC-DIST: runtime component without checkout source/docs", () => {
   it("loads built schemas and validators from a standalone dist copy", () => {
     const dir = mkdtempSync(resolve(tmpdir(), "decision-d01-"));
     try {
-      const built = resolve("dist/decision/schemas.js");
-      cpSync(built, resolve(dir, "schemas.mjs"));
+      // Shared consumers can cause tsup to split entries into chunks. Preserve
+      // the complete built layout, as the npm package does, without source/docs.
+      cpSync(resolve("dist"), resolve(dir, "dist"), { recursive: true });
       mkdirSync(resolve(dir, "node_modules"), { recursive: true });
       cpSync(resolve("node_modules/zod"), resolve(dir, "node_modules/zod"), { recursive: true });
       const script = `
         import assert from "node:assert/strict";
-        import { decisionInputJsonSchema, decisionOutputJsonSchema, validateDecisionArgs, validateDecisionEnvelope } from "./schemas.mjs";
+        import { decisionInputJsonSchema, decisionOutputJsonSchema, validateDecisionArgs, validateDecisionEnvelope } from "./dist/decision/schemas.js";
         assert.equal(decisionInputJsonSchema.$defs.ProviderOptions.propertyNames.enum.length, 146);
         assert.equal(decisionOutputJsonSchema.oneOf.length, 3);
         assert.equal(validateDecisionArgs({state: [], questions: {q: {type: "noul", instructions: ""}}}).success, true);

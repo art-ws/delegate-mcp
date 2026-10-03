@@ -1,6 +1,9 @@
 import { readFileSync, statSync } from "node:fs";
 import { homedir } from "node:os";
 import { join, resolve } from "node:path";
+import { loadDecisionSetup, type DecisionSetup } from "./decision/config.js";
+
+export type { DecisionConfig, DecisionSetup, RequiredProvider } from "./decision/config.js";
 
 /**
  * Config loader — the server's "front gate" (leaf 02, seams S-CONFIG / S-SECRET).
@@ -46,6 +49,8 @@ export interface FileWalkerConfig {
 }
 
 export interface AppConfig {
+  /** Optional for existing programmatic callers; the loader always supplies S2. */
+  decision?: DecisionSetup;
   /** Active provider pool — providers listed in `disabled_providers` are filtered out. */
   providers: ProviderConfig[];
   session_dir: string;
@@ -225,11 +230,13 @@ export function loadConfig(configPath: string, opts: LoadOptions = {}): AppConfi
   }
 
   const providers = active.map((p, i) => resolveProvider(p, i, env, warn));
+  const metricsFile = expandHome(asString(raw.metrics_file) ?? DEFAULT_METRICS_FILE, home);
 
   return {
     providers,
+    decision: loadDecisionSetup(raw.decision, { env, home, legacyMetricsFile: metricsFile }),
     session_dir: expandHome(asString(raw.session_dir) ?? DEFAULT_SESSION_DIR, home),
-    metrics_file: expandHome(asString(raw.metrics_file) ?? DEFAULT_METRICS_FILE, home),
+    metrics_file: metricsFile,
     default_max_output_tokens: asOptionalNumber(
       raw.default_max_output_tokens,
       "default_max_output_tokens",
