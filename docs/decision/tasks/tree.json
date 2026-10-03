@@ -1,0 +1,131 @@
+{
+  "spec": "../SPEC.md",
+  "baseline": "baseline.json",
+  "progress": "PROGRESS.md",
+  "nodes": [
+    {
+      "id": "G0",
+      "owner": "tl",
+      "file": "00-approval.md",
+      "depends_on": [],
+      "estimate": "до первого исполнительного листа; 30–60 минут после явного GO"
+    },
+    {
+      "id": "D01",
+      "owner": "dev",
+      "file": "01-contracts.md",
+      "depends_on": [
+        "G0"
+      ],
+      "estimate": "2–3 часа активной работы"
+    },
+    {
+      "id": "D02",
+      "owner": "dev",
+      "file": "02-config.md",
+      "depends_on": [
+        "D01"
+      ],
+      "estimate": "2–3 часа"
+    },
+    {
+      "id": "D03",
+      "owner": "dev",
+      "file": "03-decision-core.md",
+      "depends_on": [
+        "D01",
+        "D02"
+      ],
+      "estimate": "3–4 часа"
+    },
+    {
+      "id": "D04",
+      "owner": "dev",
+      "file": "04-http-client.md",
+      "depends_on": [
+        "D01",
+        "D02"
+      ],
+      "estimate": "4–5 часов"
+    },
+    {
+      "id": "D05",
+      "owner": "dev",
+      "file": "05-observability.md",
+      "depends_on": [
+        "D01",
+        "D02"
+      ],
+      "estimate": "1–2 часа"
+    },
+    {
+      "id": "D06",
+      "owner": "dev",
+      "file": "06-mcp-integration.md",
+      "depends_on": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05"
+      ],
+      "estimate": "3–4 часа"
+    },
+    {
+      "id": "D07",
+      "owner": "dev",
+      "file": "07-docs-packaging.md",
+      "depends_on": [
+        "D06"
+      ],
+      "estimate": "2–3 часа"
+    },
+    {
+      "id": "Q00",
+      "owner": "test",
+      "file": "08-independent-test-plan.md",
+      "depends_on": [
+        "D01"
+      ],
+      "estimate": "1–2 часа"
+    },
+    {
+      "id": "Q01",
+      "owner": "test",
+      "file": "09-local-acceptance.md",
+      "depends_on": [
+        "D07",
+        "Q00"
+      ],
+      "estimate": "4–6 часов"
+    },
+    {
+      "id": "G1",
+      "owner": "tl",
+      "file": "10-integration-review.md",
+      "depends_on": [
+        "Q01"
+      ],
+      "estimate": "30–60 минут"
+    },
+    {
+      "id": "Q02",
+      "owner": "test",
+      "file": "11-live-smoke.md",
+      "depends_on": [
+        "G1"
+      ],
+      "estimate": "1–2 часа после Q01/G1 и аппрува, включающего live scope"
+    },
+    {
+      "id": "G2",
+      "owner": "tl",
+      "file": "12-release-handoff.md",
+      "depends_on": [
+        "G1",
+        "Q02"
+      ],
+      "estimate": "30 минут"
+    }
+  ]
+}
