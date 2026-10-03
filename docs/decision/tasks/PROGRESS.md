@@ -11,7 +11,7 @@
 | Live scope Q02 | **GO, WAIT_DEPENDENCIES** | Аппрув полного дерева тем же поручением: до трёх синтетических платных POST без retries, только после Q01/G1 и отдельной выдачи Q02 |
 | npm release / activation | **NONE — HOLD** | Вне текущего этапа, отдельное поручение |
 
-Разрешение стартовать — прямое поручение владельца выше. Текущий статус эпика: **IN_PROGRESS / D01_COMPONENT_PASS**; runtime QA и live — **NOT_RUN**. Публикация npm, tag/GitHub Release, release workflow и активация MCP не разрешены.
+Разрешение стартовать — прямое поручение владельца выше. Текущий статус эпика: **IN_PROGRESS / D02_DISPATCHED / Q00_DISPATCH_PREPARED**; runtime QA и live — **NOT_RUN**. Публикация npm, tag/GitHub Release, release workflow и активация MCP не разрешены.
 
 ## Листья
 
@@ -19,13 +19,13 @@
 |---|---|---|---|---|
 | G0 | tl | PASS | 2026-10-03 | GO + 13/13 baseline bytes; dev WIP=0, cleanup `c52f5ee6-197c-487f-a54d-85c706e208dd`; idle и /clear подтверждены |
 | D01 | dev | COMPONENT_PASS | 2026-10-03 16:14 MSK; `c8b5c9e1-ae29-43fc-adda-8a7aaf299709` | candidate `e4e68eb7d1f3a76752f3eaa03eccc42bf3749ad5`; author 295/295, component PASS, TL static review разрешает D02/Q00; independent QA NOT_RUN |
-| D02 | dev | READY | нет | predecessor D01 `e4e68eb7`; предзадачный cleanup |
+| D02 | dev | DISPATCHED | 2026-10-03 17:00 MSK; `25045684-1d29-4e89-a62c-6a61a9113c67` | predecessor D01 `e4e68eb7`; candidate ожидается |
 | D03 | dev | WAIT_DEPENDENCIES | нет | — |
 | D04 | dev | WAIT_DEPENDENCIES | нет | — |
 | D05 | dev | WAIT_DEPENDENCIES | нет | — |
 | D06 | dev | WAIT_DEPENDENCIES | нет | — |
 | D07 | dev | WAIT_DEPENDENCIES | нет | — |
-| Q00 | test | READY | нет | source D01 `e4e68eb7`; предзадачный cleanup |
+| Q00 | test | DISPATCH_PREPARED | финальная выдача текущего цикла; id `5f3bf707-0058-4600-9144-7f6cbb104c4a` | source D01 `e4e68eb7`; WIP=0/idle/clear подтверждены, router receipt ожидается |
 | Q01 | test | WAIT_DEPENDENCIES | нет | — |
 | G1 | tl | WAIT_DEPENDENCIES | нет | — |
 | Q02 | test | WAIT_DEPENDENCIES | нет | — |
@@ -35,9 +35,9 @@
 
 | Роль | Активный исполнительный лист | Очередь после GO |
 |---|---|---|
-| tl | диспетч D02/Q00 | review/диспетч → G1 → G2 |
-| dev | cleanup перед D02 | D02 → D03 → D04 → D05 → D06 → D07 |
-| test | cleanup перед Q00 | Q00 → Q01 после D07 → Q02 после G1 |
+| tl | контроль D02/Q00 | review/диспетч → G1 → G2 |
+| dev | D02 | D03 → D04 → D05 → D06 → D07 |
+| test | Q00 подготовлен к финальной выдаче | Q01 после D07 → Q02 после G1 |
 
 При G0 MCP list_peers и закрывающие сообщения подтвердили dev/test idle в резерве; чужие задачи не вытесняются. dev подтвердил WIP=0 и cleanup сообщением `c52f5ee6-197c-487f-a54d-85c706e208dd` (служебные дочерние удалены, основная/чужие сохранены, checkout чистый, аренды отсутствуют). Live get_status=idle и /clear перед D01 выполнены, rc=0. Актуальные исполнительные листы — в раскладке выше.
 
@@ -56,3 +56,7 @@ Re-resolve G0: локальный main и live origin/main совпадают �
 - Авторские команды build (два entry) → typecheck → focused suite 295/295, lint, focused test typecheck, secretlint, whitespace/commit — rc=0 по committed evidence; Node v26.3.1. D01 component принят как вход следующих листьев, **QA ACCEPT/DONE не заявлен**. Фактический Node20, ordinary server bundle, full legacy/package/live — NOT_RUN, закрываются D06/D07/Q01/Q02.
 - S1 закреплён в _shared/interfaces.md; D06 обязан явно опубликовать embedded JSON declarations и включить модуль в обычный bundle. D03 обязан применять semantic relations/очистку неизвестных upstream полей; safe validators сохраняют исходные данные, не нормализуют их.
 - Отменён старый контроль D01. dev/test отправлены отдельные cleanup перед D02/Q00 (`eaf201cb-b668-441e-82da-ae215cdbc1b2` / `9591f7b0-614d-4c3c-9814-87e295630a6e`); до WIP=0/idle/clear следующий исполнительный лист не выдаётся.
+
+- 2026-10-03 17:00 MSK: cleanup dev `84fedb41-1d57-4052-9b21-ba5545c19efd`, test `32e9d69e-259b-4db8-aefd-45672d245bf7`; WIP=0, lease=0, сохранены основные/чужие сессии и чистый D01 worktree. get_status=idle и /clear выполнены для каждой руки до нового листа.
+- D02 выдан dev `25045684-1d29-4e89-a62c-6a61a9113c67`, router queued=true. Scope только конфиг/S2, predecessor e4e68eb7, контроль до 18:25 MSK, целевая сдача до 20:00 MSK (2–3 часа активной работы).
+- Q00 подготовлен к выдаче последним действием этого цикла в ответ на cleanup test: id `5f3bf707-0058-4600-9144-7f6cbb104c4a`, replyTo `32e9d69e-259b-4db8-aefd-45672d245bf7`. Только независимые vectors/plan, без runtime acceptance. Source e4e68eb7; назначены review/decision-q00 и /opt/art/p/delegate-mcp-wt/test-decision-q00 (создание подтверждает test). Контроль до 18:25 MSK, целевая сдача до 19:00 MSK (1–2 часа). Receipt сверяется по истории/пакету test, prepared не является PASS.
