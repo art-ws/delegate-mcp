@@ -414,7 +414,7 @@
       }
     },
     {
-      "id": "A-POLICY-BAD-ID",
+      "id": "A-POLICY-VALID-ID",
       "prepared_args": {
         "state": {
           "record_id": "synthetic-record-01"
@@ -431,10 +431,8 @@
         },
         "policy": {
           "q-choice": {
-            "absent-question": {
-              "type": "choice",
-              "min_probability": 0.5
-            }
+            "type": "choice",
+            "min_probability": 0.5
           }
         }
       },
@@ -449,10 +447,8 @@
           }
         },
         "policy": {
-          "absent-question": {
-            "type": "choice",
-            "min_probability": 0.5
-          }
+          "type": "choice",
+          "min_probability": 0.5
         },
         "answer": {
           "choice": "a",
@@ -463,10 +459,49 @@
         }
       },
       "expected": {
+        "status": "accepted",
+        "value": "a",
+        "reasons": []
+      },
+      "mutation_recipe": "Positive control: form-valid Choice rule under existing ID q-choice; prepare succeeds and assessment is accepted.",
+      "baseline_id": "A-POLICY-VALID-ID",
+      "changed_json_paths": []
+    },
+    {
+      "id": "A-POLICY-BAD-ID",
+      "prepared_args": {
+        "state": {
+          "record_id": "synthetic-record-01"
+        },
+        "questions": {
+          "q-choice": {
+            "type": "choice",
+            "instructions": "Choose the best synthetic label.",
+            "criteria": {
+              "a": "label A",
+              "b": "label B"
+            }
+          }
+        },
+        "policy": {
+          "absent-question": {
+            "type": "choice",
+            "min_probability": 0.5
+          }
+        }
+      },
+      "expected": {
         "error": {
           "code": "INVALID_ARGUMENT"
-        }
-      }
+        },
+        "phase": "prepare semantic validation: absent-question is not in prepared_args.questions"
+      },
+      "stage": "prepare semantic validation before assessment",
+      "mutation_recipe": "From existing-ID positive, change only policy map key q-choice to absent-question; nested Choice rule remains form-valid.",
+      "baseline_id": "A-POLICY-VALID-ID",
+      "changed_json_paths": [
+        "prepared_args.policy.q-choice -> prepared_args.policy.absent-question"
+      ]
     },
     {
       "id": "A-POLICY-BAD-TYPE",
@@ -518,8 +553,18 @@
       "expected": {
         "error": {
           "code": "INVALID_ARGUMENT"
-        }
-      }
+        },
+        "phase": "prepare semantic validation: Noul policy type does not match existing Choice question q-choice"
+      },
+      "stage": "prepare semantic validation before assessment",
+      "mutation_recipe": "From A-POLICY-VALID-ID keep key q-choice and use form-valid Noul bounds false_max=.2,true_min=.8; only type correspondence fails.",
+      "baseline_id": "A-POLICY-VALID-ID",
+      "changed_json_paths": [
+        "prepared_args.policy.q-choice.type",
+        "prepared_args.policy.q-choice.false_max",
+        "prepared_args.policy.q-choice.true_min",
+        "prepared_args.policy.q-choice.min_probability"
+      ]
     },
     {
       "id": "A-NO-POLICY",
@@ -612,6 +657,87 @@
   ],
   "responses": [
     {
+      "id": "R-FULL-VALID-BASELINE",
+      "prepared_request": {
+        "model": "synthetic-model",
+        "state": {
+          "record_id": "synthetic-record-01"
+        },
+        "questions": {
+          "q-choice": {
+            "type": "choice",
+            "instructions": "Choose the best synthetic label.",
+            "criteria": {
+              "yes": "affirmative",
+              "no": "negative"
+            }
+          },
+          "q-noul": {
+            "type": "noul",
+            "instructions": "Is the synthetic record verified?",
+            "criteria": {
+              "true": "verified",
+              "false": "not verified"
+            }
+          },
+          "q-score": {
+            "type": "score",
+            "instructions": "Rate the synthetic record.",
+            "criteria": [
+              "low",
+              "middle",
+              "high"
+            ]
+          }
+        }
+      },
+      "response": {
+        "model": "synthetic-model",
+        "answers": {
+          "q-choice": {
+            "type": "choice",
+            "choice": "yes",
+            "confidence": 0.9,
+            "probabilities": {
+              "yes": 0.9,
+              "no": 0.1
+            }
+          },
+          "q-noul": {
+            "type": "noul",
+            "noul": 0.9
+          },
+          "q-score": {
+            "type": "score",
+            "score": 1,
+            "confidence": 0.9,
+            "probabilities": {
+              "0": 0.1,
+              "1": 0.8,
+              "2": 0.1
+            },
+            "legend": {
+              "0": "low",
+              "1": "middle",
+              "2": "high"
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 12,
+          "output_tokens": 5,
+          "cost": 0.001
+        },
+        "id": "synthetic-response-01",
+        "provider": "synthetic-provider"
+      },
+      "expected": {
+        "valid": true,
+        "unknown_fields_removed_from_surfaced_result": false
+      },
+      "mutation_recipe": "Full semantically valid baseline: exact requested IDs/types/options; q-choice yes=.9/no=.1; q-score expectation=1 and legend matches; usage counts and cost are valid."
+    },
+    {
       "id": "R-MINIMAL-OPTIONAL-OMITTED",
       "prepared_request": {
         "model": "synthetic-model",
@@ -623,8 +749,8 @@
             "type": "choice",
             "instructions": "Choose the best synthetic label.",
             "criteria": {
-              "a": "label A",
-              "b": "label B"
+              "yes": "affirmative",
+              "no": "negative"
             }
           },
           "q-noul": {
@@ -680,13 +806,24 @@
           }
         }
       },
-      "mutation_recipe": "remove response.id, response.provider, response.usage.cost and optional answer metrics confidence/probabilities/legend; keep usage.input_tokens=12 and usage.output_tokens=5",
+      "mutation_recipe": "From R-FULL-VALID-BASELINE remove only response.id, response.provider, response.usage.cost, Choice confidence/probabilities and Score confidence/probabilities/legend; retain input_tokens=12 and output_tokens=5.",
       "local_policy": {
         "q-choice": {
           "type": "choice",
           "min_confidence": 0.5
         }
-      }
+      },
+      "baseline_id": "R-FULL-VALID-BASELINE",
+      "changed_json_paths": [
+        "response.id",
+        "response.provider",
+        "response.usage.cost",
+        "response.answers.q-choice.confidence",
+        "response.answers.q-choice.probabilities",
+        "response.answers.q-score.confidence",
+        "response.answers.q-score.probabilities",
+        "response.answers.q-score.legend"
+      ]
     },
     {
       "id": "R-MISSING-USAGE",
@@ -700,8 +837,8 @@
             "type": "choice",
             "instructions": "Choose the best synthetic label.",
             "criteria": {
-              "a": "label A",
-              "b": "label B"
+              "yes": "affirmative",
+              "no": "negative"
             }
           },
           "q-noul": {
@@ -728,7 +865,12 @@
         "answers": {
           "q-choice": {
             "type": "choice",
-            "choice": "yes"
+            "choice": "yes",
+            "confidence": 0.9,
+            "probabilities": {
+              "yes": 0.9,
+              "no": 0.1
+            }
           },
           "q-noul": {
             "type": "noul",
@@ -736,16 +878,33 @@
           },
           "q-score": {
             "type": "score",
-            "score": 1
+            "score": 1,
+            "confidence": 0.9,
+            "probabilities": {
+              "0": 0.1,
+              "1": 0.8,
+              "2": 0.1
+            },
+            "legend": {
+              "0": "low",
+              "1": "middle",
+              "2": "high"
+            }
           }
-        }
+        },
+        "id": "synthetic-response-01",
+        "provider": "synthetic-provider"
       },
       "expected": {
         "error": {
           "code": "UPSTREAM_PROTOCOL"
         }
       },
-      "mutation_recipe": "remove response.usage entirely while retaining valid required model and complete answers"
+      "mutation_recipe": "From R-FULL-VALID-BASELINE remove only response.usage; model and complete answers remain valid.",
+      "baseline_id": "R-FULL-VALID-BASELINE",
+      "changed_json_paths": [
+        "response.usage"
+      ]
     },
     {
       "id": "R-UNKNOWN-UPSTREAM-KEY",
@@ -759,8 +918,8 @@
             "type": "choice",
             "instructions": "Choose the best synthetic label.",
             "criteria": {
-              "a": "label A",
-              "b": "label B"
+              "yes": "affirmative",
+              "no": "negative"
             }
           },
           "q-noul": {
@@ -817,8 +976,11 @@
         },
         "usage": {
           "input_tokens": 12,
-          "output_tokens": 5
+          "output_tokens": 5,
+          "cost": 0.001
         },
+        "id": "synthetic-response-01",
+        "provider": "synthetic-provider",
         "upstream_extension": {
           "ignored": "synthetic"
         }
@@ -827,7 +989,12 @@
         "valid": true,
         "unknown_fields_removed_from_surfaced_result": true
       },
-      "mutation_recipe": "add response.upstream_extension and answers.q-choice.vendor_note"
+      "mutation_recipe": "From R-FULL-VALID-BASELINE add response.upstream_extension and response.answers.q-choice.vendor_note; expected valid and both extras removed from surfaced result.",
+      "baseline_id": "R-FULL-VALID-BASELINE",
+      "changed_json_paths": [
+        "response.upstream_extension",
+        "response.answers.q-choice.vendor_note"
+      ]
     },
     {
       "id": "R-WRONG-ID",
@@ -841,8 +1008,8 @@
             "type": "choice",
             "instructions": "Choose the best synthetic label.",
             "criteria": {
-              "a": "label A",
-              "b": "label B"
+              "yes": "affirmative",
+              "no": "negative"
             }
           },
           "q-noul": {
@@ -894,15 +1061,22 @@
         },
         "usage": {
           "input_tokens": 12,
-          "output_tokens": 5
-        }
+          "output_tokens": 5,
+          "cost": 0.001
+        },
+        "id": "synthetic-response-01",
+        "provider": "synthetic-provider"
       },
       "expected": {
         "error": {
           "code": "UPSTREAM_PROTOCOL"
         }
       },
-      "mutation_recipe": "remove requested answer key q-noul"
+      "mutation_recipe": "remove requested answer key q-noul",
+      "baseline_id": "R-FULL-VALID-BASELINE",
+      "changed_json_paths": [
+        "response.answers.q-noul"
+      ]
     },
     {
       "id": "R-WRONG-TYPE",
@@ -916,8 +1090,8 @@
             "type": "choice",
             "instructions": "Choose the best synthetic label.",
             "criteria": {
-              "a": "label A",
-              "b": "label B"
+              "yes": "affirmative",
+              "no": "negative"
             }
           },
           "q-noul": {
@@ -973,15 +1147,22 @@
         },
         "usage": {
           "input_tokens": 12,
-          "output_tokens": 5
-        }
+          "output_tokens": 5,
+          "cost": 0.001
+        },
+        "id": "synthetic-response-01",
+        "provider": "synthetic-provider"
       },
       "expected": {
         "error": {
           "code": "UPSTREAM_PROTOCOL"
         }
       },
-      "mutation_recipe": "replace answers.q-noul with {\"type\":\"score\",\"score\":1}"
+      "mutation_recipe": "replace answers.q-noul with {\"type\":\"score\",\"score\":1}",
+      "baseline_id": "R-FULL-VALID-BASELINE",
+      "changed_json_paths": [
+        "response.answers.q-noul"
+      ]
     },
     {
       "id": "R-UNKNOWN-CHOICE",
@@ -995,8 +1176,8 @@
             "type": "choice",
             "instructions": "Choose the best synthetic label.",
             "criteria": {
-              "a": "label A",
-              "b": "label B"
+              "yes": "affirmative",
+              "no": "negative"
             }
           },
           "q-noul": {
@@ -1052,15 +1233,22 @@
         },
         "usage": {
           "input_tokens": 12,
-          "output_tokens": 5
-        }
+          "output_tokens": 5,
+          "cost": 0.001
+        },
+        "id": "synthetic-response-01",
+        "provider": "synthetic-provider"
       },
       "expected": {
         "error": {
           "code": "UPSTREAM_PROTOCOL"
         }
       },
-      "mutation_recipe": "replace answers.q-choice.choice with \"maybe\""
+      "mutation_recipe": "replace answers.q-choice.choice with \"maybe\"",
+      "baseline_id": "R-FULL-VALID-BASELINE",
+      "changed_json_paths": [
+        "response.answers.q-choice.choice"
+      ]
     },
     {
       "id": "R-CHOICE-PROBABILITY-KEYS",
@@ -1074,8 +1262,8 @@
             "type": "choice",
             "instructions": "Choose the best synthetic label.",
             "criteria": {
-              "a": "label A",
-              "b": "label B"
+              "yes": "affirmative",
+              "no": "negative"
             }
           },
           "q-noul": {
@@ -1131,15 +1319,22 @@
         },
         "usage": {
           "input_tokens": 12,
-          "output_tokens": 5
-        }
+          "output_tokens": 5,
+          "cost": 0.001
+        },
+        "id": "synthetic-response-01",
+        "provider": "synthetic-provider"
       },
       "expected": {
         "error": {
           "code": "UPSTREAM_PROTOCOL"
         }
       },
-      "mutation_recipe": "replace q-choice probabilities keys no with other"
+      "mutation_recipe": "From R-FULL-VALID-BASELINE replace only Choice probabilities with yes=.9,other=.1; requested no is missing and other is extra.",
+      "baseline_id": "R-FULL-VALID-BASELINE",
+      "changed_json_paths": [
+        "response.answers.q-choice.probabilities"
+      ]
     },
     {
       "id": "R-CHOICE-MAXIMUM",
@@ -1153,8 +1348,8 @@
             "type": "choice",
             "instructions": "Choose the best synthetic label.",
             "criteria": {
-              "a": "label A",
-              "b": "label B"
+              "yes": "affirmative",
+              "no": "negative"
             }
           },
           "q-noul": {
@@ -1184,8 +1379,8 @@
             "choice": "no",
             "confidence": 0.9,
             "probabilities": {
-              "yes": 0.8,
-              "no": 0.2
+              "yes": 0.9,
+              "no": 0.1
             }
           },
           "q-noul": {
@@ -1210,15 +1405,22 @@
         },
         "usage": {
           "input_tokens": 12,
-          "output_tokens": 5
-        }
+          "output_tokens": 5,
+          "cost": 0.001
+        },
+        "id": "synthetic-response-01",
+        "provider": "synthetic-provider"
       },
       "expected": {
         "error": {
           "code": "UPSTREAM_PROTOCOL"
         }
       },
-      "mutation_recipe": "set q-choice.choice=no while probabilities remain yes=0.8,no=0.2"
+      "mutation_recipe": "From R-FULL-VALID-BASELINE set only Choice choice=no while yes=.9,no=.1 remain.",
+      "baseline_id": "R-FULL-VALID-BASELINE",
+      "changed_json_paths": [
+        "response.answers.q-choice.choice"
+      ]
     },
     {
       "id": "R-OUT-OF-RANGE-NONFINITE",
@@ -1232,8 +1434,8 @@
             "type": "choice",
             "instructions": "Choose the best synthetic label.",
             "criteria": {
-              "a": "label A",
-              "b": "label B"
+              "yes": "affirmative",
+              "no": "negative"
             }
           },
           "q-noul": {
@@ -1289,15 +1491,22 @@
         },
         "usage": {
           "input_tokens": 12,
-          "output_tokens": 5
-        }
+          "output_tokens": 5,
+          "cost": 0.001
+        },
+        "id": "synthetic-response-01",
+        "provider": "synthetic-provider"
       },
       "expected": {
         "error": {
           "code": "UPSTREAM_PROTOCOL"
         }
       },
-      "mutation_recipe": "set q-noul.noul=1.1; direct-call non-finite companion control constructs Number.NaN and Number.POSITIVE_INFINITY in memory after JSON.parse because JSON text cannot represent them"
+      "mutation_recipe": "From R-FULL-VALID-BASELINE set only q-noul.noul=1.1; direct-call companion constructs NaN and +Infinity after JSON.parse.",
+      "baseline_id": "R-FULL-VALID-BASELINE",
+      "changed_json_paths": [
+        "response.answers.q-noul.noul"
+      ]
     },
     {
       "id": "R-SCORE-LEGEND",
@@ -1311,8 +1520,8 @@
             "type": "choice",
             "instructions": "Choose the best synthetic label.",
             "criteria": {
-              "a": "label A",
-              "b": "label B"
+              "yes": "affirmative",
+              "no": "negative"
             }
           },
           "q-noul": {
@@ -1368,15 +1577,22 @@
         },
         "usage": {
           "input_tokens": 12,
-          "output_tokens": 5
-        }
+          "output_tokens": 5,
+          "cost": 0.001
+        },
+        "id": "synthetic-response-01",
+        "provider": "synthetic-provider"
       },
       "expected": {
         "error": {
           "code": "UPSTREAM_PROTOCOL"
         }
       },
-      "mutation_recipe": "replace q-score.legend[\"1\"] with \"wrong\""
+      "mutation_recipe": "replace q-score.legend[\"1\"] with \"wrong\"",
+      "baseline_id": "R-FULL-VALID-BASELINE",
+      "changed_json_paths": [
+        "response.answers.q-score.legend.1"
+      ]
     },
     {
       "id": "R-SCORE-PROBABILITY-KEYS",
@@ -1390,8 +1606,8 @@
             "type": "choice",
             "instructions": "Choose the best synthetic label.",
             "criteria": {
-              "a": "label A",
-              "b": "label B"
+              "yes": "affirmative",
+              "no": "negative"
             }
           },
           "q-noul": {
@@ -1447,15 +1663,22 @@
         },
         "usage": {
           "input_tokens": 12,
-          "output_tokens": 5
-        }
+          "output_tokens": 5,
+          "cost": 0.001
+        },
+        "id": "synthetic-response-01",
+        "provider": "synthetic-provider"
       },
       "expected": {
         "error": {
           "code": "UPSTREAM_PROTOCOL"
         }
       },
-      "mutation_recipe": "replace probability key \"2\" with \"3\""
+      "mutation_recipe": "From R-FULL-VALID-BASELINE replace only Score probability key 2 with 3; sum remains 1.",
+      "baseline_id": "R-FULL-VALID-BASELINE",
+      "changed_json_paths": [
+        "response.answers.q-score.probabilities"
+      ]
     },
     {
       "id": "R-PROB-SUM",
@@ -1469,8 +1692,8 @@
             "type": "choice",
             "instructions": "Choose the best synthetic label.",
             "criteria": {
-              "a": "label A",
-              "b": "label B"
+              "yes": "affirmative",
+              "no": "negative"
             }
           },
           "q-noul": {
@@ -1526,15 +1749,22 @@
         },
         "usage": {
           "input_tokens": 12,
-          "output_tokens": 5
-        }
+          "output_tokens": 5,
+          "cost": 0.001
+        },
+        "id": "synthetic-response-01",
+        "provider": "synthetic-provider"
       },
       "expected": {
         "error": {
           "code": "UPSTREAM_PROTOCOL"
         }
       },
-      "mutation_recipe": "set q-choice probabilities to yes=0.8,no=0.1 (sum 0.9; abs(0.9-1)=0.10 > 0.02)"
+      "mutation_recipe": "From R-FULL-VALID-BASELINE set only Choice probabilities to yes=.8,no=.1; sum=.9, error=.10 > .02.",
+      "baseline_id": "R-FULL-VALID-BASELINE",
+      "changed_json_paths": [
+        "response.answers.q-choice.probabilities"
+      ]
     },
     {
       "id": "R-SCORE-EXPECTATION",
@@ -1548,8 +1778,8 @@
             "type": "choice",
             "instructions": "Choose the best synthetic label.",
             "criteria": {
-              "a": "label A",
-              "b": "label B"
+              "yes": "affirmative",
+              "no": "negative"
             }
           },
           "q-noul": {
@@ -1605,15 +1835,22 @@
         },
         "usage": {
           "input_tokens": 12,
-          "output_tokens": 5
-        }
+          "output_tokens": 5,
+          "cost": 0.001
+        },
+        "id": "synthetic-response-01",
+        "provider": "synthetic-provider"
       },
       "expected": {
         "error": {
           "code": "UPSTREAM_PROTOCOL"
         }
       },
-      "mutation_recipe": "set score=2 with probabilities 0.1,0.8,0.1 (expectation 1.0; difference 1.0 > 0.06)"
+      "mutation_recipe": "From R-FULL-VALID-BASELINE set only q-score.score=2; probabilities stay .1,.8,.1, expectation=1, difference 1 > .06.",
+      "baseline_id": "R-FULL-VALID-BASELINE",
+      "changed_json_paths": [
+        "response.answers.q-score.score"
+      ]
     },
     {
       "id": "R-USAGE",
@@ -1627,8 +1864,8 @@
             "type": "choice",
             "instructions": "Choose the best synthetic label.",
             "criteria": {
-              "a": "label A",
-              "b": "label B"
+              "yes": "affirmative",
+              "no": "negative"
             }
           },
           "q-noul": {
@@ -1685,15 +1922,21 @@
         "usage": {
           "input_tokens": -1,
           "output_tokens": 5,
-          "cost": -0.01
-        }
+          "cost": 0.001
+        },
+        "id": "synthetic-response-01",
+        "provider": "synthetic-provider"
       },
       "expected": {
         "error": {
           "code": "UPSTREAM_PROTOCOL"
         }
       },
-      "mutation_recipe": "set usage.input_tokens=-1 and usage.cost=-0.01"
+      "mutation_recipe": "From R-FULL-VALID-BASELINE set only input_tokens=-1; output_tokens and cost remain valid.",
+      "baseline_id": "R-FULL-VALID-BASELINE",
+      "changed_json_paths": [
+        "response.usage.input_tokens"
+      ]
     },
     {
       "id": "R-HTML-NOT-JSON",
@@ -1707,8 +1950,8 @@
             "type": "choice",
             "instructions": "Choose the best synthetic label.",
             "criteria": {
-              "a": "label A",
-              "b": "label B"
+              "yes": "affirmative",
+              "no": "negative"
             }
           },
           "q-noul": {
@@ -1730,14 +1973,190 @@
           }
         }
       },
-      "response": "<html>synthetic upstream failure</html>",
       "expected": {
         "error": {
           "code": "UPSTREAM_PROTOCOL",
           "safe_message": "fixed; does not include body bytes"
         }
       },
-      "mutation_recipe": "the synthetic HTTP fixture returns these exact HTML bytes instead of a JSON response; adapter passes parse failure to client"
+      "mutation_recipe": "Synthetic HTTP fixture returns exactly the transport_body HTML bytes instead of JSON; parse failure maps to UPSTREAM_PROTOCOL without exposing body bytes.",
+      "baseline_id": "R-FULL-VALID-BASELINE",
+      "changed_json_paths": [
+        "transport.body_bytes"
+      ],
+      "transport_body": "<!doctype html><html><body>synthetic upstream error</body></html>"
+    },
+    {
+      "id": "R-USAGE-COST",
+      "prepared_request": {
+        "model": "synthetic-model",
+        "state": {
+          "record_id": "synthetic-record-01"
+        },
+        "questions": {
+          "q-choice": {
+            "type": "choice",
+            "instructions": "Choose the best synthetic label.",
+            "criteria": {
+              "yes": "affirmative",
+              "no": "negative"
+            }
+          },
+          "q-noul": {
+            "type": "noul",
+            "instructions": "Is the synthetic record verified?",
+            "criteria": {
+              "true": "verified",
+              "false": "not verified"
+            }
+          },
+          "q-score": {
+            "type": "score",
+            "instructions": "Rate the synthetic record.",
+            "criteria": [
+              "low",
+              "middle",
+              "high"
+            ]
+          }
+        }
+      },
+      "response": {
+        "model": "synthetic-model",
+        "answers": {
+          "q-choice": {
+            "type": "choice",
+            "choice": "yes",
+            "confidence": 0.9,
+            "probabilities": {
+              "yes": 0.9,
+              "no": 0.1
+            }
+          },
+          "q-noul": {
+            "type": "noul",
+            "noul": 0.9
+          },
+          "q-score": {
+            "type": "score",
+            "score": 1,
+            "confidence": 0.9,
+            "probabilities": {
+              "0": 0.1,
+              "1": 0.8,
+              "2": 0.1
+            },
+            "legend": {
+              "0": "low",
+              "1": "middle",
+              "2": "high"
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 12,
+          "output_tokens": 5,
+          "cost": -0.01
+        },
+        "id": "synthetic-response-01",
+        "provider": "synthetic-provider"
+      },
+      "expected": {
+        "error": {
+          "code": "UPSTREAM_PROTOCOL"
+        }
+      },
+      "mutation_recipe": "From R-FULL-VALID-BASELINE set only response.usage.cost=-0.01; both token counts remain valid.",
+      "baseline_id": "R-FULL-VALID-BASELINE",
+      "changed_json_paths": [
+        "response.usage.cost"
+      ]
+    },
+    {
+      "id": "R-USAGE-OUTPUT-TOKENS",
+      "prepared_request": {
+        "model": "synthetic-model",
+        "state": {
+          "record_id": "synthetic-record-01"
+        },
+        "questions": {
+          "q-choice": {
+            "type": "choice",
+            "instructions": "Choose the best synthetic label.",
+            "criteria": {
+              "yes": "affirmative",
+              "no": "negative"
+            }
+          },
+          "q-noul": {
+            "type": "noul",
+            "instructions": "Is the synthetic record verified?",
+            "criteria": {
+              "true": "verified",
+              "false": "not verified"
+            }
+          },
+          "q-score": {
+            "type": "score",
+            "instructions": "Rate the synthetic record.",
+            "criteria": [
+              "low",
+              "middle",
+              "high"
+            ]
+          }
+        }
+      },
+      "response": {
+        "model": "synthetic-model",
+        "answers": {
+          "q-choice": {
+            "type": "choice",
+            "choice": "yes",
+            "confidence": 0.9,
+            "probabilities": {
+              "yes": 0.9,
+              "no": 0.1
+            }
+          },
+          "q-noul": {
+            "type": "noul",
+            "noul": 0.9
+          },
+          "q-score": {
+            "type": "score",
+            "score": 1,
+            "confidence": 0.9,
+            "probabilities": {
+              "0": 0.1,
+              "1": 0.8,
+              "2": 0.1
+            },
+            "legend": {
+              "0": "low",
+              "1": "middle",
+              "2": "high"
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 12,
+          "output_tokens": -1,
+          "cost": 0.001
+        },
+        "id": "synthetic-response-01",
+        "provider": "synthetic-provider"
+      },
+      "expected": {
+        "error": {
+          "code": "UPSTREAM_PROTOCOL"
+        }
+      },
+      "mutation_recipe": "From R-FULL-VALID-BASELINE set only response.usage.output_tokens=-1; input_tokens and cost remain valid.",
+      "baseline_id": "R-FULL-VALID-BASELINE",
+      "changed_json_paths": [
+        "response.usage.output_tokens"
+      ]
     }
   ],
   "superseded_attempts": [
@@ -1762,9 +2181,9 @@
     }
   ],
   "fixture_rules": {
-    "response_materialization": "For each case, use its full prepared_request and response value as written. mutation_recipe explains a specific altered boundary already materialized in that full response (or HTML transport body); it is descriptive and does not authorize adding hidden fields.",
-    "assessment_materialization": "prepared_args is the complete DecisionArgs. assessment_input identifies the exact question, policy and answer passed to assessment. expected is the complete relevant assessment object or fixed error code.",
-    "usage_contract": "Valid minimal response includes usage.input_tokens and usage.output_tokens. R-MISSING-USAGE is a separate negative that removes usage. Missing id/provider/usage.cost and optional answer metrics are independent optional omissions.",
+    "response_materialization": "R-FULL-VALID-BASELINE is the complete semantically valid request/response pair. q-choice request criteria and response keys are yes/no; q-noul is in [0,1]; q-score probabilities, expectation and legend agree; required usage counts and optional cost are valid. Every later case repeats the complete request and response with baseline_id and changed_json_paths. Each negative mutates only its named response path(s); optional-omission and unknown-extra controls are independently valid.",
+    "assessment_materialization": "prepared_args is complete DecisionArgs. Policy ID/type cases target prepare semantic validation before assessment. A-POLICY-VALID-ID is the existing-ID positive; A-POLICY-BAD-ID changes only the external map key to absent-question while preserving a valid Choice rule; A-POLICY-BAD-TYPE uses existing q-choice with a form-valid Noul rule, so only type correspondence fails. No assessment is invoked for prepare errors.",
+    "usage_contract": "R-FULL-VALID-BASELINE has mandatory nonnegative integer input_tokens/output_tokens and valid optional cost. R-MINIMAL-OPTIONAL-OMITTED retains both counts. R-MISSING-USAGE, R-USAGE, R-USAGE-OUTPUT-TOKENS, and R-USAGE-COST independently target absent usage, negative input count, negative output count, and negative cost.",
     "non_finite": "JSON cannot encode NaN/Infinity. The direct-call companion constructs Number.NaN and Number.POSITIVE_INFINITY after JSON.parse, then invokes response validation with the same prepared_request; expected UPSTREAM_PROTOCOL."
   }
 }

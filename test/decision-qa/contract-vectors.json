@@ -1407,13 +1407,24 @@
           }
         }
       },
-      "expected": "synthetic canary only; key never sent or logged; context not logged",
+      "expected": {
+        "key": "Authorization-only synthetic transport capture; absent from body/results/errors/logs",
+        "context": "preserved in state body and normal dry_run request envelope; absent from reflected safe errors/logs/stderr"
+      },
       "oracle": "captured output/stderr/error/sink scans",
       "fixture_setup": {
         "config": {
           "decision": {
-            "api_key": "SYNTHETIC_Q00_KEY_CANARY_DO_NOT_USE"
-          }
+            "api_key": "env:Q00_SYNTHETIC_KEY"
+          },
+          "providers": [
+            {
+              "name": "q00-synthetic-legacy",
+              "base_url": "https://legacy.invalid/v1",
+              "api_key": "env:Q00_SYNTHETIC_LEGACY_KEY",
+              "default_model": "synthetic-legacy-model"
+            }
+          ]
         },
         "args": {
           "state": {
@@ -1427,32 +1438,40 @@
           }
         },
         "failure": {
-          "phase": "synthetic transport then synthetic event-sink write",
-          "transport_error": {
-            "name": "TypeError",
-            "message": "failed with SYNTHETIC_Q00_KEY_CANARY_DO_NOT_USE and SYNTHETIC_Q00_CONTEXT_CANARY"
+          "transport": {
+            "recipe": "Resolve env-reference config via injected mapping; capture Authorization in isolated memory; then throw a synthetic TypeError reflecting both canaries",
+            "error": {
+              "name": "TypeError",
+              "message": "failed with SYNTHETIC_Q00_KEY_CANARY_DO_NOT_USE and SYNTHETIC_Q00_CONTEXT_CANARY"
+            }
           },
-          "sink_error": {
-            "message": "sink rejected SYNTHETIC_Q00_KEY_CANARY_DO_NOT_USE and SYNTHETIC_Q00_CONTEXT_CANARY"
+          "event_sink": {
+            "recipe": "Independent successful synthetic transport followed by injected sink write error reflecting both canaries",
+            "error": {
+              "message": "sink rejected SYNTHETIC_Q00_KEY_CANARY_DO_NOT_USE and SYNTHETIC_Q00_CONTEXT_CANARY"
+            }
           }
         },
         "expected_surfaces": {
           "allowed": [
-            "request Authorization header in isolated in-memory transport capture only"
+            "resolved key in harness memory",
+            "key in Authorization of isolated in-memory transport capture only",
+            "context in DecisionsRequest state body and normal dry_run MCP request body"
           ],
           "forbidden": [
-            "DecisionRequest body",
-            "stdout",
-            "stderr",
-            "tool error message",
-            "structured result",
-            "JSON text result",
-            "decision log row",
+            "key in request body, stdout, stderr, errors, results, logs or sinks",
+            "reflected context in safe errors/logs/stderr",
             "legacy metrics",
-            "legacy session store"
+            "legacy session store",
+            "legacy provider transport call"
           ]
         },
-        "oracle": "scan every forbidden surface for both exact canary strings; assert transport capture has the key only in Authorization and args preserve state/questions"
+        "oracle": "Run transport failure and event-sink failure independently; scan every forbidden surface for both exact canaries; key is present only in Authorization capture and context is preserved in request body/dry_run envelope. Assert legacy provider transport spy has zero calls.",
+        "env_mapping": {
+          "Q00_SYNTHETIC_KEY": "SYNTHETIC_Q00_KEY_CANARY_DO_NOT_USE",
+          "Q00_SYNTHETIC_LEGACY_KEY": "SYNTHETIC_Q00_LEGACY_KEY"
+        },
+        "resolver": "Construct raw synthetic config with this valid providers[] and decision env-reference; call S2 loadDecisionSetup(raw, {env: env_mapping}) to produce ready in-memory decision config; never read process ENV/files or contact either endpoint."
       }
     },
     {
@@ -1471,7 +1490,7 @@
         "api_key": "SYNTHETIC_Q00_KEY_CANARY_DO_NOT_USE"
       },
       "expected_form_valid": false,
-      "expected": "INVALID_ARGUMENT before config/transport; this does not satisfy downstream secret-leak oracle",
+      "expected": "INVALID_ARGUMENT at argument validation; zero transport; separate from both leak oracles",
       "oracle": "assert fixed safe INVALID_ARGUMENT and zero injected transport/sink calls"
     }
   ]
