@@ -1,0 +1,70 @@
+{
+  "checked_on": "2026-10-03",
+  "method": "Isolated Playwright chromium headless session; rendered pages read via locator.innerText(); OpenAPI downloaded separately for child schemas.",
+  "login_required": false,
+  "live_inference": "NOT_RUN",
+  "pages": [
+    {
+      "url": "https://openrouter.ai/~typesafe/jev-latest",
+      "title": "Jev Latest - API Pricing & Providers | OpenRouter"
+    },
+    {
+      "url": "https://openrouter.ai/docs/api/api-reference/alphadecisions/submit-a-decisions-request",
+      "title": "Submit a Decisions request - OpenRouter | Documentation"
+    },
+    {
+      "url": "https://openrouter.ai/docs/guides/community/typesafe-sdk",
+      "title": "Jev SDK for TypeScript and Python (TypeSafe SDK) - OpenRouter"
+    }
+  ],
+  "openapi": {
+    "url": "https://openrouter.ai/docs/api/api-reference/alphadecisions/submit-a-decisions-request.md",
+    "sha256": "4d91aa4a23750564e833fac77ba0293b3cd458c73b134525f7f905a97ab62325",
+    "license": "MIT (declared by info.license of the OpenAPI document)",
+    "schema_names": [
+      "DecisionsChoiceAnswer",
+      "DecisionsChoiceQuestion",
+      "DecisionsNoulAnswer",
+      "DecisionsNoulQuestion",
+      "DecisionsRequest",
+      "DecisionsResponse",
+      "DecisionsScoreAnswer",
+      "DecisionsScoreQuestion",
+      "PercentileLatencyCutoffs",
+      "PercentileThroughputCutoffs",
+      "PreferredMaxLatency",
+      "PreferredMinThroughput",
+      "ProviderName",
+      "ProviderOptions",
+      "ProviderPreferences",
+      "ProviderSort",
+      "ProviderSortConfig",
+      "Quantization",
+      "TraceConfig"
+    ]
+  },
+  "runtime_observation": "No API keys, cookies, user browser profile, or paid inference used.",
+  "artifact_checks": {
+    "json_schema_compilation": "PASS (Ajv 2020-12)",
+    "document_examples": "PASS: decision configuration fragment parsed; request example conforms to input schema",
+    "local_links": "PASS: root README, docs index and specification references resolve",
+    "runtime_qa": "NOT_RUN",
+    "note": "OpenAPI-only numeric format double removed for standard JSON Schema compatibility; semantic numeric guards are in SPEC.md.",
+    "integration_review": "PASS: proposal uses existing bin, runtime >=20, config cascade and server wiring; runtime implementation NOT_RUN"
+  },
+  "project_integration": {
+    "project": "delegate-mcp",
+    "spec_version": "0.2",
+    "baseline_commit": "105cc6d017f7de7f6afd012b53b590b487436aad",
+    "inspected_files": [
+      "package.json",
+      "src/config.ts",
+      "src/tools.ts",
+      "src/index.ts",
+      "src/metrics.ts",
+      "README.md",
+      "delegate-config.example.json"
+    ],
+    "implementation": "NOT_RUN"
+  }
+}

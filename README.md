@@ -14,6 +14,16 @@
 the files, asks the reader your question, and returns a short structured answer. The
 orchestrator never sees the raw files; it sees the conclusion.
 
+## Proposed `decision` tool (draft)
+
+The [decision specification](docs/decision/SPEC.md) describes a planned fourth tool in
+this same MCP server, using Jev through OpenRouter for typed choices, yes/no
+probabilities, and rubric scores. Its [input](docs/decision/input.schema.json) and
+[output](docs/decision/output.schema.json) schemas are part of this repository.
+The proposal extends the existing configuration with a `decision` block and preserves
+the three reader tools. This is a design document; `decision` is not implemented or
+included in the current published version.
+
 ## Why
 
 A capable orchestrator model is expensive per token. Reading is not the expensive part —
