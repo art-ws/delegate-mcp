@@ -1,6 +1,6 @@
 {
   "name": "delegate-mcp",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "MCP delegate server: routes large tool outputs to a cheap model to save orchestrator tokens.",
   "keywords": [
     "mcp",

@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/art-ws/delegate-mcp/compare/v1.0.0...v1.1.0) (2026-10-04)
+
+
+### Features
+
+* **decision:** prepare automated release of decision tool ([f7ed1f5](https://github.com/art-ws/delegate-mcp/commit/f7ed1f52a3e27a53d3c703b9e0725500abb5f00a))
+
 # 1.0.0 (2026-07-27)
 
 
