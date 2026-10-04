@@ -40,13 +40,15 @@
 |---|---|---|
 | tl | R02 PASS, exact Release candidate parked; G2 handoff HOLD | Решение по Q02 limitation → уведомление владельца |
 | dev | Резерв после принятого cleanup356d2787/WIP0/clean66aeba45 | R02 independent QA после component review |
-| test | R02 r1 принят; внешний report erratum + cleanup перед резервом | Резерв; новых live/Release задач не выдано |
+| test | Резерв после cleanup ee080272/WIP0/clean5cbc/ownleases0 | Новых live/Release задач не выдано |
 
 При G0 MCP list_peers и закрывающие сообщения подтвердили dev/test idle в резерве; чужие задачи не вытесняются. dev подтвердил WIP=0 и cleanup сообщением `c52f5ee6-197c-487f-a54d-85c706e208dd` (служебные дочерние удалены, основная/чужие сохранены, checkout чистый, аренды отсутствуют). Live get_status=idle и /clear перед D01 выполнены, rc=0. Актуальные исполнительные листы — в раскладке выше.
 
 Re-resolve G0: локальный main и live origin/main совпадают — `595dce8f280045d0134e49060282b13c6293c0a0`; baseline `d622cba5644b844344baac5a6f17a84ab43a9a9e` является предком. Все 13 SHA256 baseline совпали; дельта — только docs/README.md и docs/decision/tasks/. SPEC v0.2 и input/output schema не менялись.
 
 ## Журнал
+
+- 2026-10-04 09:27 MSK: cleanup testee080272 принят: exact5cbc/treeb0fa/clean/WIP0/ownleases0, evidence/worktrees сохранены. TL лично прочитал external ancestry erratum, теперь relation R01→finalQA правильный; source/archive/gates не менялись. Dev/test резерв. Оператору доставлен конкретный G2 пакет/выбор decision-release-live-limit-owner-20261004: локальные Release checks PASS, live403UNKNOWN; решение о выпуске с указанным live NOT_RUN либо сохранении HOLD ещё не получено. READY/publish/API отсутствуют.
 
 - 2026-10-04 09:22 MSK: R02r1 пакет7878a870 принят PASS после личного TL review owned3files/classifier/RESULT/negative controls/finalpreview/fullgate/archive/proof identity. Final5cbc2ba/treeb0fa1947/parenteda0cf1, actual historyminor1.1.0/no forbidden lifecycle,14files886PASS. SHA256 нового pack лично совпалb1868080 с author+independent cleanpack; четыре старых installed Node20/current proofs сохранены по exacthash.78canon/task/package-evidence/lockfile blobs unchanged относительно freshmain1e47. Во внешнем RESULT одно направление ancestry перепутано: R01 является предком finalQA, не наоборот; фактический Git подтверждён, нужен только external erratum без изменения gate/source. Под lease после fetch local+origin matched1e47; exact5cbc ff/pushed rc0, main/tree сверены. Последующая status-only запись не заявляет отдельный runtime gate. TL runtimeQA/publish/API NOT_RUN. G2/releaseHOLD: Q02causeUNKNOWN и owner live-limitation decision ещё отсутствует.
 
