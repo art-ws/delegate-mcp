@@ -1,0 +1,181 @@
+{
+  "source_schema": "docs/decision/input.schema.json#/$defs/ProviderPreferences",
+  "fields": [
+    {
+      "field": "allow_fallbacks",
+      "value": false,
+      "expected": "preserve exactly in request body"
+    },
+    {
+      "field": "require_parameters",
+      "value": true,
+      "expected": "preserve exactly in request body"
+    },
+    {
+      "field": "data_collection",
+      "value": "deny",
+      "expected": "preserve exactly in request body"
+    },
+    {
+      "field": "zdr",
+      "value": true,
+      "expected": "preserve exactly in request body"
+    },
+    {
+      "field": "enforce_distillable_text",
+      "value": false,
+      "expected": "preserve exactly in request body"
+    },
+    {
+      "field": "only",
+      "value": [
+        "typesafe"
+      ],
+      "expected": "preserve exactly in request body"
+    },
+    {
+      "field": "ignore",
+      "value": [
+        "synthetic-provider"
+      ],
+      "expected": "preserve exactly in request body"
+    },
+    {
+      "field": "order",
+      "value": [
+        "typesafe",
+        "synthetic-provider"
+      ],
+      "expected": "preserve exactly in request body"
+    },
+    {
+      "field": "sort",
+      "value": {
+        "by": "latency",
+        "partition": "model"
+      },
+      "expected": "preserve exactly in request body"
+    },
+    {
+      "field": "max_price",
+      "value": {
+        "prompt": "0.1",
+        "completion": "0.2",
+        "request": "0.3",
+        "image": "0.4",
+        "audio": "0.5"
+      },
+      "expected": "preserve exactly in request body"
+    },
+    {
+      "field": "preferred_max_latency",
+      "value": {
+        "p50": 1.0,
+        "p75": 2.0,
+        "p90": 3.0,
+        "p99": 4.0
+      },
+      "expected": "preserve exactly in request body"
+    },
+    {
+      "field": "preferred_min_throughput",
+      "value": 12.5,
+      "expected": "preserve exactly in request body"
+    },
+    {
+      "field": "quantizations",
+      "value": [
+        "fp16",
+        "bf16"
+      ],
+      "expected": "preserve exactly in request body"
+    },
+    {
+      "field": "options",
+      "value": {
+        "typesafe": {}
+      },
+      "expected": "preserve exactly in request body"
+    }
+  ],
+  "union_cases": [
+    {
+      "id": "P-NULLABLES",
+      "expected": "null accepted for nullable fields"
+    },
+    {
+      "id": "P-SORT-UNION",
+      "forms": [
+        "price",
+        {
+          "by": "exacto",
+          "partition": "none"
+        },
+        {
+          "by": null,
+          "partition": null
+        },
+        null
+      ],
+      "expected": "preserve every schema-valid scalar/object/null variant"
+    },
+    {
+      "id": "P-LATENCY-UNION",
+      "forms": [
+        1.25,
+        {
+          "p50": null,
+          "p75": 1,
+          "p90": 2,
+          "p99": 3
+        },
+        null
+      ],
+      "expected": "preserve scalar/object/null"
+    },
+    {
+      "id": "P-THROUGHPUT-UNION",
+      "forms": [
+        2.5,
+        {
+          "p50": null,
+          "p75": 10,
+          "p90": 20,
+          "p99": 30
+        },
+        null
+      ],
+      "expected": "preserve scalar/object/null"
+    },
+    {
+      "id": "P-UNKNOWN-ROUTING-SLUGS",
+      "forms": [
+        {
+          "only": [
+            "future-provider"
+          ]
+        },
+        {
+          "ignore": [
+            "future-provider"
+          ]
+        },
+        {
+          "order": [
+            "future-provider"
+          ]
+        }
+      ],
+      "expected": "valid unknown string slugs"
+    },
+    {
+      "id": "P-UNKNOWN-OPTION-SLUG",
+      "value": {
+        "options": {
+          "future-provider": {}
+        }
+      },
+      "expected": "reject unknown options property name"
+    }
+  ]
+}

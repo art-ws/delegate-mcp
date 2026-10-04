@@ -1,0 +1,17 @@
+command=["node","test/decision/fixtures/d06-component-artifacts.mjs"]
+rc=0
+[34mCLI[39m Building entry: {"decision/schemas":"src/decision/schemas.ts","decision/config":"src/decision/config.ts","decision/request":"src/decision/request.ts","decision/response":"src/decision/response.ts","decision/assessment":"src/decision/assessment.ts","decision/client":"src/decision/client.ts","decision/metrics":"src/decision/metrics.ts"}
+[34mCLI[39m Using tsconfig: tsconfig.json
+[34mCLI[39m tsup v8.5.1
+[34mCLI[39m Target: node20
+[34mESM[39m Build start
+[32mESM[39m [1mdist/decision/response.js   [22m[32m4.27 KB[39m
+[32mESM[39m [1mdist/decision/assessment.js [22m[32m2.12 KB[39m
+[32mESM[39m [1mdist/chunk-EYNSNJVF.js      [22m[32m35.75 KB[39m
+[32mESM[39m [1mdist/decision/metrics.js    [22m[32m1.70 KB[39m
+[32mESM[39m [1mdist/decision/config.js     [22m[32m7.10 KB[39m
+[32mESM[39m [1mdist/decision/schemas.js    [22m[32m976.00 B[39m
+[32mESM[39m [1mdist/decision/request.js    [22m[32m3.35 KB[39m
+[32mESM[39m [1mdist/decision/client.js     [22m[32m10.82 KB[39m
+[32mESM[39m ⚡️ Build success in 12ms
+PASS ordinary dist/index.js unchanged sha256=b9942bf84d5a309867bbc8397ea4f5d9d2443ddcdba292b528bf0864314eeb47

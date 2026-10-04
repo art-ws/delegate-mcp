@@ -1,0 +1,2 @@
+command=git diff --cached --check -- README.md delegate-config.example.json package.json test/decision/integration.test.ts test/package
+rc=0

@@ -1,0 +1,19 @@
+
+> delegate-mcp@1.0.0 test
+> vitest run test/decision/client.test.ts test/decision/core.test.ts test/decision/config.test.ts test/decision/schemas.test.ts
+
+
+ RUN  v3.2.7 /opt/art/p/delegate-mcp-wt/dev-decision
+
+ ✓ test/decision/client.test.ts (92 tests) 43ms
+ ✓ test/decision/schemas.test.ts (295 tests) 382ms
+   ✓ D01 AC-DIST: runtime component without checkout source/docs > loads built schemas and validators from a standalone dist copy  326ms
+ ✓ test/decision/core.test.ts (70 tests) 381ms
+   ✓ D03 AC-DIST compiled component > runs S3/S4 exports in a standalone dist copy without source or docs  328ms
+ ✓ test/decision/config.test.ts (212 tests) 395ms
+   ✓ AC-S2 exports / AC-DIST > loads built S2 in a fresh directory without checkout source/docs  329ms
+
+ Test Files  4 passed (4)
+      Tests  669 passed (669)
+   Start at  18:46:15
+   Duration  658ms (transform 149ms, setup 0ms, collect 333ms, tests 1.20s, environment 0ms, prepare 107ms)

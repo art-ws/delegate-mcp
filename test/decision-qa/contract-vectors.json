@@ -1,0 +1,1544 @@
+{
+  "source_commit": "e4e68eb7d1f3a76752f3eaa03eccc42bf3749ad5",
+  "source_schema": "docs/decision/input.schema.json",
+  "cases": [
+    {
+      "id": "V-PRIMITIVE-CHOICE",
+      "area": "primitive",
+      "input": {
+        "questions": {
+          "q": {
+            "type": "choice",
+            "instructions": "choose",
+            "criteria": {
+              "yes": "yes",
+              "no": null
+            }
+          }
+        },
+        "state": {
+          "record_id": "synthetic-record-01"
+        }
+      },
+      "expected": "valid; known answer key and nullable description retained",
+      "oracle": "wire deep-equality and primitive type assertion"
+    },
+    {
+      "id": "V-PRIMITIVE-NOUL-OMIT-CRITERIA",
+      "area": "primitive",
+      "input": {
+        "questions": {
+          "q": {
+            "type": "noul",
+            "instructions": {
+              "question": "verified?"
+            }
+          }
+        },
+        "state": {
+          "record_id": "synthetic-record-01"
+        }
+      },
+      "expected": "valid; criteria absent",
+      "oracle": "wire deep-equality and primitive type assertion"
+    },
+    {
+      "id": "V-PRIMITIVE-SCORE",
+      "area": "primitive",
+      "input": {
+        "questions": {
+          "q": {
+            "type": "score",
+            "instructions": [
+              "rate",
+              {
+                "axis": "synthetic"
+              }
+            ],
+            "criteria": [
+              "low",
+              {
+                "level": 1
+              },
+              [
+                "high"
+              ]
+            ]
+          }
+        },
+        "state": {
+          "record_id": "synthetic-record-01"
+        }
+      },
+      "expected": "valid; score order defines indices",
+      "oracle": "wire deep-equality and primitive type assertion"
+    },
+    {
+      "id": "V-NOUL-CRITERIA",
+      "area": "primitive",
+      "input": {
+        "questions": {
+          "q": {
+            "type": "noul",
+            "instructions": "bool?",
+            "criteria": {
+              "true": {
+                "label": "yes"
+              },
+              "false": [
+                "no"
+              ]
+            }
+          }
+        },
+        "state": {
+          "record_id": "synthetic-record-01"
+        }
+      },
+      "expected": "valid; both keys and structured forms retained",
+      "oracle": "wire exact true/false value assertion"
+    },
+    {
+      "id": "V-CHOICE-1",
+      "area": "primitive-boundary",
+      "input": {
+        "questions": {
+          "q": {
+            "type": "choice",
+            "instructions": "select",
+            "criteria": {
+              "c0": {
+                "index": 0
+              }
+            }
+          }
+        },
+        "state": {
+          "record_id": "synthetic-record-01"
+        }
+      },
+      "expected": "valid; single_option warning",
+      "oracle": "exact criteria count/key assertion",
+      "expected_form_valid": true
+    },
+    {
+      "id": "V-CHOICE-255",
+      "area": "primitive-boundary",
+      "input": {
+        "questions": {
+          "q": {
+            "type": "choice",
+            "instructions": "select",
+            "criteria": {
+              "c0": {
+                "index": 0
+              },
+              "c1": null,
+              "c2": {
+                "index": 2
+              },
+              "c3": null,
+              "c4": {
+                "index": 4
+              },
+              "c5": null,
+              "c6": {
+                "index": 6
+              },
+              "c7": null,
+              "c8": {
+                "index": 8
+              },
+              "c9": null,
+              "c10": {
+                "index": 10
+              },
+              "c11": null,
+              "c12": {
+                "index": 12
+              },
+              "c13": null,
+              "c14": {
+                "index": 14
+              },
+              "c15": null,
+              "c16": {
+                "index": 16
+              },
+              "c17": null,
+              "c18": {
+                "index": 18
+              },
+              "c19": null,
+              "c20": {
+                "index": 20
+              },
+              "c21": null,
+              "c22": {
+                "index": 22
+              },
+              "c23": null,
+              "c24": {
+                "index": 24
+              },
+              "c25": null,
+              "c26": {
+                "index": 26
+              },
+              "c27": null,
+              "c28": {
+                "index": 28
+              },
+              "c29": null,
+              "c30": {
+                "index": 30
+              },
+              "c31": null,
+              "c32": {
+                "index": 32
+              },
+              "c33": null,
+              "c34": {
+                "index": 34
+              },
+              "c35": null,
+              "c36": {
+                "index": 36
+              },
+              "c37": null,
+              "c38": {
+                "index": 38
+              },
+              "c39": null,
+              "c40": {
+                "index": 40
+              },
+              "c41": null,
+              "c42": {
+                "index": 42
+              },
+              "c43": null,
+              "c44": {
+                "index": 44
+              },
+              "c45": null,
+              "c46": {
+                "index": 46
+              },
+              "c47": null,
+              "c48": {
+                "index": 48
+              },
+              "c49": null,
+              "c50": {
+                "index": 50
+              },
+              "c51": null,
+              "c52": {
+                "index": 52
+              },
+              "c53": null,
+              "c54": {
+                "index": 54
+              },
+              "c55": null,
+              "c56": {
+                "index": 56
+              },
+              "c57": null,
+              "c58": {
+                "index": 58
+              },
+              "c59": null,
+              "c60": {
+                "index": 60
+              },
+              "c61": null,
+              "c62": {
+                "index": 62
+              },
+              "c63": null,
+              "c64": {
+                "index": 64
+              },
+              "c65": null,
+              "c66": {
+                "index": 66
+              },
+              "c67": null,
+              "c68": {
+                "index": 68
+              },
+              "c69": null,
+              "c70": {
+                "index": 70
+              },
+              "c71": null,
+              "c72": {
+                "index": 72
+              },
+              "c73": null,
+              "c74": {
+                "index": 74
+              },
+              "c75": null,
+              "c76": {
+                "index": 76
+              },
+              "c77": null,
+              "c78": {
+                "index": 78
+              },
+              "c79": null,
+              "c80": {
+                "index": 80
+              },
+              "c81": null,
+              "c82": {
+                "index": 82
+              },
+              "c83": null,
+              "c84": {
+                "index": 84
+              },
+              "c85": null,
+              "c86": {
+                "index": 86
+              },
+              "c87": null,
+              "c88": {
+                "index": 88
+              },
+              "c89": null,
+              "c90": {
+                "index": 90
+              },
+              "c91": null,
+              "c92": {
+                "index": 92
+              },
+              "c93": null,
+              "c94": {
+                "index": 94
+              },
+              "c95": null,
+              "c96": {
+                "index": 96
+              },
+              "c97": null,
+              "c98": {
+                "index": 98
+              },
+              "c99": null,
+              "c100": {
+                "index": 100
+              },
+              "c101": null,
+              "c102": {
+                "index": 102
+              },
+              "c103": null,
+              "c104": {
+                "index": 104
+              },
+              "c105": null,
+              "c106": {
+                "index": 106
+              },
+              "c107": null,
+              "c108": {
+                "index": 108
+              },
+              "c109": null,
+              "c110": {
+                "index": 110
+              },
+              "c111": null,
+              "c112": {
+                "index": 112
+              },
+              "c113": null,
+              "c114": {
+                "index": 114
+              },
+              "c115": null,
+              "c116": {
+                "index": 116
+              },
+              "c117": null,
+              "c118": {
+                "index": 118
+              },
+              "c119": null,
+              "c120": {
+                "index": 120
+              },
+              "c121": null,
+              "c122": {
+                "index": 122
+              },
+              "c123": null,
+              "c124": {
+                "index": 124
+              },
+              "c125": null,
+              "c126": {
+                "index": 126
+              },
+              "c127": null,
+              "c128": {
+                "index": 128
+              },
+              "c129": null,
+              "c130": {
+                "index": 130
+              },
+              "c131": null,
+              "c132": {
+                "index": 132
+              },
+              "c133": null,
+              "c134": {
+                "index": 134
+              },
+              "c135": null,
+              "c136": {
+                "index": 136
+              },
+              "c137": null,
+              "c138": {
+                "index": 138
+              },
+              "c139": null,
+              "c140": {
+                "index": 140
+              },
+              "c141": null,
+              "c142": {
+                "index": 142
+              },
+              "c143": null,
+              "c144": {
+                "index": 144
+              },
+              "c145": null,
+              "c146": {
+                "index": 146
+              },
+              "c147": null,
+              "c148": {
+                "index": 148
+              },
+              "c149": null,
+              "c150": {
+                "index": 150
+              },
+              "c151": null,
+              "c152": {
+                "index": 152
+              },
+              "c153": null,
+              "c154": {
+                "index": 154
+              },
+              "c155": null,
+              "c156": {
+                "index": 156
+              },
+              "c157": null,
+              "c158": {
+                "index": 158
+              },
+              "c159": null,
+              "c160": {
+                "index": 160
+              },
+              "c161": null,
+              "c162": {
+                "index": 162
+              },
+              "c163": null,
+              "c164": {
+                "index": 164
+              },
+              "c165": null,
+              "c166": {
+                "index": 166
+              },
+              "c167": null,
+              "c168": {
+                "index": 168
+              },
+              "c169": null,
+              "c170": {
+                "index": 170
+              },
+              "c171": null,
+              "c172": {
+                "index": 172
+              },
+              "c173": null,
+              "c174": {
+                "index": 174
+              },
+              "c175": null,
+              "c176": {
+                "index": 176
+              },
+              "c177": null,
+              "c178": {
+                "index": 178
+              },
+              "c179": null,
+              "c180": {
+                "index": 180
+              },
+              "c181": null,
+              "c182": {
+                "index": 182
+              },
+              "c183": null,
+              "c184": {
+                "index": 184
+              },
+              "c185": null,
+              "c186": {
+                "index": 186
+              },
+              "c187": null,
+              "c188": {
+                "index": 188
+              },
+              "c189": null,
+              "c190": {
+                "index": 190
+              },
+              "c191": null,
+              "c192": {
+                "index": 192
+              },
+              "c193": null,
+              "c194": {
+                "index": 194
+              },
+              "c195": null,
+              "c196": {
+                "index": 196
+              },
+              "c197": null,
+              "c198": {
+                "index": 198
+              },
+              "c199": null,
+              "c200": {
+                "index": 200
+              },
+              "c201": null,
+              "c202": {
+                "index": 202
+              },
+              "c203": null,
+              "c204": {
+                "index": 204
+              },
+              "c205": null,
+              "c206": {
+                "index": 206
+              },
+              "c207": null,
+              "c208": {
+                "index": 208
+              },
+              "c209": null,
+              "c210": {
+                "index": 210
+              },
+              "c211": null,
+              "c212": {
+                "index": 212
+              },
+              "c213": null,
+              "c214": {
+                "index": 214
+              },
+              "c215": null,
+              "c216": {
+                "index": 216
+              },
+              "c217": null,
+              "c218": {
+                "index": 218
+              },
+              "c219": null,
+              "c220": {
+                "index": 220
+              },
+              "c221": null,
+              "c222": {
+                "index": 222
+              },
+              "c223": null,
+              "c224": {
+                "index": 224
+              },
+              "c225": null,
+              "c226": {
+                "index": 226
+              },
+              "c227": null,
+              "c228": {
+                "index": 228
+              },
+              "c229": null,
+              "c230": {
+                "index": 230
+              },
+              "c231": null,
+              "c232": {
+                "index": 232
+              },
+              "c233": null,
+              "c234": {
+                "index": 234
+              },
+              "c235": null,
+              "c236": {
+                "index": 236
+              },
+              "c237": null,
+              "c238": {
+                "index": 238
+              },
+              "c239": null,
+              "c240": {
+                "index": 240
+              },
+              "c241": null,
+              "c242": {
+                "index": 242
+              },
+              "c243": null,
+              "c244": {
+                "index": 244
+              },
+              "c245": null,
+              "c246": {
+                "index": 246
+              },
+              "c247": null,
+              "c248": {
+                "index": 248
+              },
+              "c249": null,
+              "c250": {
+                "index": 250
+              },
+              "c251": null,
+              "c252": {
+                "index": 252
+              },
+              "c253": null,
+              "c254": {
+                "index": 254
+              }
+            }
+          }
+        },
+        "state": {
+          "record_id": "synthetic-record-01"
+        }
+      },
+      "expected": "valid",
+      "oracle": "exact criteria count/key assertion",
+      "expected_form_valid": true
+    },
+    {
+      "id": "V-CHOICE-256",
+      "area": "primitive-boundary",
+      "input": {
+        "questions": {
+          "q": {
+            "type": "choice",
+            "instructions": "select",
+            "criteria": {
+              "c0": {
+                "index": 0
+              },
+              "c1": null,
+              "c2": {
+                "index": 2
+              },
+              "c3": null,
+              "c4": {
+                "index": 4
+              },
+              "c5": null,
+              "c6": {
+                "index": 6
+              },
+              "c7": null,
+              "c8": {
+                "index": 8
+              },
+              "c9": null,
+              "c10": {
+                "index": 10
+              },
+              "c11": null,
+              "c12": {
+                "index": 12
+              },
+              "c13": null,
+              "c14": {
+                "index": 14
+              },
+              "c15": null,
+              "c16": {
+                "index": 16
+              },
+              "c17": null,
+              "c18": {
+                "index": 18
+              },
+              "c19": null,
+              "c20": {
+                "index": 20
+              },
+              "c21": null,
+              "c22": {
+                "index": 22
+              },
+              "c23": null,
+              "c24": {
+                "index": 24
+              },
+              "c25": null,
+              "c26": {
+                "index": 26
+              },
+              "c27": null,
+              "c28": {
+                "index": 28
+              },
+              "c29": null,
+              "c30": {
+                "index": 30
+              },
+              "c31": null,
+              "c32": {
+                "index": 32
+              },
+              "c33": null,
+              "c34": {
+                "index": 34
+              },
+              "c35": null,
+              "c36": {
+                "index": 36
+              },
+              "c37": null,
+              "c38": {
+                "index": 38
+              },
+              "c39": null,
+              "c40": {
+                "index": 40
+              },
+              "c41": null,
+              "c42": {
+                "index": 42
+              },
+              "c43": null,
+              "c44": {
+                "index": 44
+              },
+              "c45": null,
+              "c46": {
+                "index": 46
+              },
+              "c47": null,
+              "c48": {
+                "index": 48
+              },
+              "c49": null,
+              "c50": {
+                "index": 50
+              },
+              "c51": null,
+              "c52": {
+                "index": 52
+              },
+              "c53": null,
+              "c54": {
+                "index": 54
+              },
+              "c55": null,
+              "c56": {
+                "index": 56
+              },
+              "c57": null,
+              "c58": {
+                "index": 58
+              },
+              "c59": null,
+              "c60": {
+                "index": 60
+              },
+              "c61": null,
+              "c62": {
+                "index": 62
+              },
+              "c63": null,
+              "c64": {
+                "index": 64
+              },
+              "c65": null,
+              "c66": {
+                "index": 66
+              },
+              "c67": null,
+              "c68": {
+                "index": 68
+              },
+              "c69": null,
+              "c70": {
+                "index": 70
+              },
+              "c71": null,
+              "c72": {
+                "index": 72
+              },
+              "c73": null,
+              "c74": {
+                "index": 74
+              },
+              "c75": null,
+              "c76": {
+                "index": 76
+              },
+              "c77": null,
+              "c78": {
+                "index": 78
+              },
+              "c79": null,
+              "c80": {
+                "index": 80
+              },
+              "c81": null,
+              "c82": {
+                "index": 82
+              },
+              "c83": null,
+              "c84": {
+                "index": 84
+              },
+              "c85": null,
+              "c86": {
+                "index": 86
+              },
+              "c87": null,
+              "c88": {
+                "index": 88
+              },
+              "c89": null,
+              "c90": {
+                "index": 90
+              },
+              "c91": null,
+              "c92": {
+                "index": 92
+              },
+              "c93": null,
+              "c94": {
+                "index": 94
+              },
+              "c95": null,
+              "c96": {
+                "index": 96
+              },
+              "c97": null,
+              "c98": {
+                "index": 98
+              },
+              "c99": null,
+              "c100": {
+                "index": 100
+              },
+              "c101": null,
+              "c102": {
+                "index": 102
+              },
+              "c103": null,
+              "c104": {
+                "index": 104
+              },
+              "c105": null,
+              "c106": {
+                "index": 106
+              },
+              "c107": null,
+              "c108": {
+                "index": 108
+              },
+              "c109": null,
+              "c110": {
+                "index": 110
+              },
+              "c111": null,
+              "c112": {
+                "index": 112
+              },
+              "c113": null,
+              "c114": {
+                "index": 114
+              },
+              "c115": null,
+              "c116": {
+                "index": 116
+              },
+              "c117": null,
+              "c118": {
+                "index": 118
+              },
+              "c119": null,
+              "c120": {
+                "index": 120
+              },
+              "c121": null,
+              "c122": {
+                "index": 122
+              },
+              "c123": null,
+              "c124": {
+                "index": 124
+              },
+              "c125": null,
+              "c126": {
+                "index": 126
+              },
+              "c127": null,
+              "c128": {
+                "index": 128
+              },
+              "c129": null,
+              "c130": {
+                "index": 130
+              },
+              "c131": null,
+              "c132": {
+                "index": 132
+              },
+              "c133": null,
+              "c134": {
+                "index": 134
+              },
+              "c135": null,
+              "c136": {
+                "index": 136
+              },
+              "c137": null,
+              "c138": {
+                "index": 138
+              },
+              "c139": null,
+              "c140": {
+                "index": 140
+              },
+              "c141": null,
+              "c142": {
+                "index": 142
+              },
+              "c143": null,
+              "c144": {
+                "index": 144
+              },
+              "c145": null,
+              "c146": {
+                "index": 146
+              },
+              "c147": null,
+              "c148": {
+                "index": 148
+              },
+              "c149": null,
+              "c150": {
+                "index": 150
+              },
+              "c151": null,
+              "c152": {
+                "index": 152
+              },
+              "c153": null,
+              "c154": {
+                "index": 154
+              },
+              "c155": null,
+              "c156": {
+                "index": 156
+              },
+              "c157": null,
+              "c158": {
+                "index": 158
+              },
+              "c159": null,
+              "c160": {
+                "index": 160
+              },
+              "c161": null,
+              "c162": {
+                "index": 162
+              },
+              "c163": null,
+              "c164": {
+                "index": 164
+              },
+              "c165": null,
+              "c166": {
+                "index": 166
+              },
+              "c167": null,
+              "c168": {
+                "index": 168
+              },
+              "c169": null,
+              "c170": {
+                "index": 170
+              },
+              "c171": null,
+              "c172": {
+                "index": 172
+              },
+              "c173": null,
+              "c174": {
+                "index": 174
+              },
+              "c175": null,
+              "c176": {
+                "index": 176
+              },
+              "c177": null,
+              "c178": {
+                "index": 178
+              },
+              "c179": null,
+              "c180": {
+                "index": 180
+              },
+              "c181": null,
+              "c182": {
+                "index": 182
+              },
+              "c183": null,
+              "c184": {
+                "index": 184
+              },
+              "c185": null,
+              "c186": {
+                "index": 186
+              },
+              "c187": null,
+              "c188": {
+                "index": 188
+              },
+              "c189": null,
+              "c190": {
+                "index": 190
+              },
+              "c191": null,
+              "c192": {
+                "index": 192
+              },
+              "c193": null,
+              "c194": {
+                "index": 194
+              },
+              "c195": null,
+              "c196": {
+                "index": 196
+              },
+              "c197": null,
+              "c198": {
+                "index": 198
+              },
+              "c199": null,
+              "c200": {
+                "index": 200
+              },
+              "c201": null,
+              "c202": {
+                "index": 202
+              },
+              "c203": null,
+              "c204": {
+                "index": 204
+              },
+              "c205": null,
+              "c206": {
+                "index": 206
+              },
+              "c207": null,
+              "c208": {
+                "index": 208
+              },
+              "c209": null,
+              "c210": {
+                "index": 210
+              },
+              "c211": null,
+              "c212": {
+                "index": 212
+              },
+              "c213": null,
+              "c214": {
+                "index": 214
+              },
+              "c215": null,
+              "c216": {
+                "index": 216
+              },
+              "c217": null,
+              "c218": {
+                "index": 218
+              },
+              "c219": null,
+              "c220": {
+                "index": 220
+              },
+              "c221": null,
+              "c222": {
+                "index": 222
+              },
+              "c223": null,
+              "c224": {
+                "index": 224
+              },
+              "c225": null,
+              "c226": {
+                "index": 226
+              },
+              "c227": null,
+              "c228": {
+                "index": 228
+              },
+              "c229": null,
+              "c230": {
+                "index": 230
+              },
+              "c231": null,
+              "c232": {
+                "index": 232
+              },
+              "c233": null,
+              "c234": {
+                "index": 234
+              },
+              "c235": null,
+              "c236": {
+                "index": 236
+              },
+              "c237": null,
+              "c238": {
+                "index": 238
+              },
+              "c239": null,
+              "c240": {
+                "index": 240
+              },
+              "c241": null,
+              "c242": {
+                "index": 242
+              },
+              "c243": null,
+              "c244": {
+                "index": 244
+              },
+              "c245": null,
+              "c246": {
+                "index": 246
+              },
+              "c247": null,
+              "c248": {
+                "index": 248
+              },
+              "c249": null,
+              "c250": {
+                "index": 250
+              },
+              "c251": null,
+              "c252": {
+                "index": 252
+              },
+              "c253": null,
+              "c254": {
+                "index": 254
+              },
+              "c255": null
+            }
+          }
+        },
+        "state": {
+          "record_id": "synthetic-record-01"
+        }
+      },
+      "expected": "INVALID_ARGUMENT; 256 exceeds maximum",
+      "oracle": "exact criteria count/key assertion",
+      "expected_form_valid": false
+    },
+    {
+      "id": "V-SCORE-1",
+      "area": "primitive-boundary",
+      "input": {
+        "questions": {
+          "q": {
+            "type": "score",
+            "instructions": "rate",
+            "criteria": [
+              "level-0"
+            ]
+          }
+        },
+        "state": {
+          "record_id": "synthetic-record-01"
+        }
+      },
+      "expected": "valid; degenerate_scale warning",
+      "oracle": "criteria count and index-order assertion",
+      "expected_form_valid": true
+    },
+    {
+      "id": "V-SCORE-10",
+      "area": "primitive-boundary",
+      "input": {
+        "questions": {
+          "q": {
+            "type": "score",
+            "instructions": "rate",
+            "criteria": [
+              "level-0",
+              {
+                "index": 1
+              },
+              "level-2",
+              {
+                "index": 3
+              },
+              "level-4",
+              {
+                "index": 5
+              },
+              "level-6",
+              {
+                "index": 7
+              },
+              "level-8",
+              {
+                "index": 9
+              }
+            ]
+          }
+        },
+        "state": {
+          "record_id": "synthetic-record-01"
+        }
+      },
+      "expected": "valid",
+      "oracle": "criteria count and index-order assertion",
+      "expected_form_valid": true
+    },
+    {
+      "id": "V-SCORE-11",
+      "area": "primitive-boundary",
+      "input": {
+        "questions": {
+          "q": {
+            "type": "score",
+            "instructions": "rate",
+            "criteria": [
+              "level-0",
+              {
+                "index": 1
+              },
+              "level-2",
+              {
+                "index": 3
+              },
+              "level-4",
+              {
+                "index": 5
+              },
+              "level-6",
+              {
+                "index": 7
+              },
+              "level-8",
+              {
+                "index": 9
+              },
+              "level-10"
+            ]
+          }
+        },
+        "state": {
+          "record_id": "synthetic-record-01"
+        }
+      },
+      "expected": "INVALID_ARGUMENT; 11 exceeds maximum",
+      "oracle": "criteria count and index-order assertion",
+      "expected_form_valid": false
+    },
+    {
+      "id": "V-STRUCTURED-NULL-OPTIONAL",
+      "area": "structured-optionals",
+      "input": {
+        "state": [
+          {
+            "$ref": "opaque",
+            "null": null
+          }
+        ],
+        "user": "synthetic-user",
+        "session_id": "synthetic-session",
+        "trace": {
+          "trace_id": "t",
+          "metadata": {
+            "reserved": "kept"
+          }
+        },
+        "provider": null,
+        "questions": {
+          "q": {
+            "type": "noul",
+            "instructions": "Is the synthetic record verified?"
+          }
+        }
+      },
+      "expected": "valid; optional and structured values preserved; null provider is no override",
+      "oracle": "deep-equal serialized DecisionsRequest"
+    },
+    {
+      "id": "V-JSON-RESERVED-KEYS",
+      "area": "reserved-json-map-keys",
+      "input": {
+        "state": {
+          "__proto__": {
+            "safe": 1
+          },
+          "constructor": {
+            "prototype": "data"
+          },
+          "prototype": "data"
+        },
+        "questions": {
+          "__proto__": {
+            "type": "choice",
+            "instructions": "x",
+            "criteria": {
+              "__proto__": null,
+              "constructor": "c"
+            }
+          }
+        }
+      },
+      "expected": "valid data keys; survive roundtrip without prototype mutation",
+      "oracle": "own-key deep equality after parse/serialize"
+    },
+    {
+      "id": "V-UNKNOWN-ARG-FIELD",
+      "area": "unknown-contract-fields",
+      "input": {
+        "state": "synthetic",
+        "questions": {
+          "q": {
+            "type": "noul",
+            "instructions": {
+              "question": "verified?"
+            }
+          }
+        },
+        "messages": []
+      },
+      "expected": "INVALID_ARGUMENT; fixed safe message, no raw value",
+      "oracle": "safe error and original input unchanged"
+    },
+    {
+      "id": "V-UNKNOWN-QUESTION-FIELD",
+      "area": "unknown-contract-fields",
+      "input": {
+        "state": "synthetic",
+        "questions": {
+          "q": {
+            "type": "noul",
+            "instructions": "x",
+            "temperature": 0
+          }
+        }
+      },
+      "expected": "INVALID_ARGUMENT",
+      "oracle": "closed nested question contract"
+    },
+    {
+      "id": "V-INPUT-UTF8",
+      "area": "utf8-bytes",
+      "input": {
+        "state": "é🧪",
+        "questions": {
+          "q": {
+            "type": "noul",
+            "instructions": {
+              "question": "verified?"
+            }
+          }
+        }
+      },
+      "expected": "size uses UTF-8 bytes of final serialized JSON",
+      "oracle": "independent UTF-8 byte-count assertion"
+    },
+    {
+      "id": "V-SECRET-CANARIES",
+      "area": "redaction-isolation",
+      "input": {
+        "state": {
+          "value": "SYNTHETIC_Q00_CONTEXT_CANARY"
+        },
+        "questions": {
+          "q": {
+            "type": "noul",
+            "instructions": "Is the synthetic record verified?"
+          }
+        }
+      },
+      "expected": {
+        "key": "Authorization-only synthetic transport capture; absent from body/results/errors/logs",
+        "context": "preserved in state body and normal dry_run request envelope; absent from reflected safe errors/logs/stderr"
+      },
+      "oracle": "Apply fixture_setup.oracle per canary and per explicitly listed surface; do not scan every surface indiscriminately.",
+      "fixture_setup": {
+        "config": {
+          "decision": {
+            "api_key": "env:Q00_SYNTHETIC_KEY"
+          },
+          "providers": [
+            {
+              "name": "q00-synthetic-legacy",
+              "base_url": "https://legacy.invalid/v1",
+              "api_key": "env:Q00_SYNTHETIC_LEGACY_KEY",
+              "default_model": "synthetic-legacy-model"
+            }
+          ]
+        },
+        "args": {
+          "state": {
+            "value": "SYNTHETIC_Q00_CONTEXT_CANARY"
+          },
+          "questions": {
+            "q": {
+              "type": "noul",
+              "instructions": "Is the synthetic record verified?"
+            }
+          }
+        },
+        "failure": {
+          "transport": {
+            "recipe": "First resolve the decision-only block through S2; then capture one POST and its Bearer authorization in isolated memory before the injected transport throws the configured synthetic TypeError.",
+            "error": {
+              "name": "TypeError",
+              "message": "failed with SYNTHETIC_Q00_KEY_CANARY_DO_NOT_USE and SYNTHETIC_Q00_CONTEXT_CANARY"
+            },
+            "expected_outcome": {
+              "code": "NETWORK_ERROR",
+              "isError": true
+            },
+            "capture": {
+              "post_count": 1,
+              "authorization": "Bearer SYNTHETIC_Q00_KEY_CANARY_DO_NOT_USE",
+              "key_location": "Authorization header in isolated in-memory capture only"
+            }
+          },
+          "event_sink": {
+            "recipe": "In an independent phase, perform a successful synthetic transport with one captured POST and Bearer authorization, then inject the configured event-sink write error.",
+            "error": {
+              "message": "sink rejected SYNTHETIC_Q00_KEY_CANARY_DO_NOT_USE and SYNTHETIC_Q00_CONTEXT_CANARY"
+            },
+            "expected_outcome": {
+              "result": "decision",
+              "isError": false,
+              "stderr": "safe warning; neither canary reflected"
+            },
+            "capture": {
+              "post_count": 1,
+              "authorization": "Bearer SYNTHETIC_Q00_KEY_CANARY_DO_NOT_USE",
+              "key_location": "Authorization header in isolated in-memory capture only"
+            },
+            "successful_response": {
+              "model": "typesafe/jev-1.13",
+              "answers": {
+                "q": {
+                  "type": "noul",
+                  "noul": 0.9
+                }
+              },
+              "usage": {
+                "input_tokens": 1,
+                "output_tokens": 0
+              }
+            }
+          }
+        },
+        "expected_surfaces": {
+          "allowed": [
+            "resolved key in harness memory",
+            "key in Authorization of isolated in-memory transport capture only",
+            "context in DecisionsRequest state body and normal dry_run request body"
+          ],
+          "forbidden": [
+            "key in request body, public outputs, or sinks",
+            "key and context absent from reflected safe errors, normal logs, and stderr",
+            "legacy metrics",
+            "legacy session store",
+            "legacy provider transport call"
+          ]
+        },
+        "oracle": "For each canary, inspect only its explicitly forbidden surfaces: key is absent from request body/public outputs/sinks and context is preserved in state body and normal dry_run request; both are absent from reflected safe errors, normal logs, and stderr. Run transport and sink phases independently, each with exactly one captured POST and Bearer canary only in Authorization; assert NETWORK_ERROR/isError=true for transport failure and a decision result/isError=false with safe warning for sink failure. Assert zero legacy calls.",
+        "env_mapping": {
+          "Q00_SYNTHETIC_KEY": "SYNTHETIC_Q00_KEY_CANARY_DO_NOT_USE",
+          "Q00_SYNTHETIC_LEGACY_KEY": "SYNTHETIC_Q00_LEGACY_KEY"
+        },
+        "resolver": "Call loadDecisionSetup(fixture_setup.config.decision, {env: fixture_setup.env_mapping, home: \"/tmp/q00-synthetic-home\", legacyMetricsFile: \"/tmp/q00-synthetic-legacy-metrics.jsonl\"}); assert status === \"ready\" and pass setup.config to the harness. This S2 call resolves only the decision block. Configure fixture_setup.config.providers[] and its synthetic spy separately as legacy startup setup. decision.metrics_file is absent. Never read process ENV or real files and never contact either endpoint.",
+        "s2_setup": {
+          "input": "fixture_setup.config.decision",
+          "options": {
+            "env": "fixture_setup.env_mapping",
+            "home": "/tmp/q00-synthetic-home",
+            "legacyMetricsFile": "/tmp/q00-synthetic-legacy-metrics.jsonl"
+          },
+          "expected": "status=ready; pass returned setup.config to the decision harness",
+          "decision_metrics_file": "absent"
+        },
+        "legacy_startup": {
+          "config": "fixture_setup.config with synthetic providers[] and decision block",
+          "purpose": "separate synthetic startup/legacy provider spy setup; do not use loadDecisionSetup to resolve providers[] or its key",
+          "expected_legacy_transport_calls": 0
+        }
+      }
+    },
+    {
+      "id": "V-UNKNOWN-API-KEY-ARG",
+      "area": "unknown-contract-fields",
+      "input": {
+        "state": {
+          "record_id": "synthetic-record-01"
+        },
+        "questions": {
+          "q": {
+            "type": "noul",
+            "instructions": "Is the synthetic record verified?"
+          }
+        },
+        "api_key": "SYNTHETIC_Q00_KEY_CANARY_DO_NOT_USE"
+      },
+      "expected_form_valid": false,
+      "expected": "INVALID_ARGUMENT at argument validation; zero transport; separate from both leak oracles",
+      "oracle": "assert fixed safe INVALID_ARGUMENT and zero injected transport/sink calls"
+    }
+  ]
+}

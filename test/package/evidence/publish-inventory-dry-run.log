@@ -1,0 +1,46 @@
+command=["npm","publish","--dry-run","--force","--json","--ignore-scripts","<source>/test/package/evidence/delegate-mcp-1.0.0.tgz"]
+rc=0
+{
+  "delegate-mcp": {
+    "id": "delegate-mcp@1.0.0",
+    "name": "delegate-mcp",
+    "version": "1.0.0",
+    "size": 36144,
+    "unpackedSize": 135218,
+    "shasum": "6ca6b388e860bca3bb7969fe8303828198420c02",
+    "integrity": "sha512-/+JAo6Val5eVlwsenpKxsZfrgOIyAg2lxXIJ6A6qPr/bBQu+VR6HpHn492yhKq561U6WOL6XBC0VhCCHNhwy3w==",
+    "filename": "delegate-mcp-1.0.0.tgz",
+    "files": [
+      {
+        "path": "LICENSE",
+        "size": 1067,
+        "mode": 420
+      },
+      {
+        "path": "README.md",
+        "size": 27956,
+        "mode": 420
+      },
+      {
+        "path": "delegate-config.example.json",
+        "size": 1592,
+        "mode": 420
+      },
+      {
+        "path": "dist/index.js",
+        "size": 102802,
+        "mode": 493
+      },
+      {
+        "path": "package.json",
+        "size": 1801,
+        "mode": 420
+      }
+    ],
+    "entryCount": 5,
+    "bundled": []
+  }
+}
+npm warn using --force Recommended protections disabled.
+npm warn publish This command requires you to be logged in to https://registry.npmjs.org/ (dry-run)
+npm notice Publishing to https://registry.npmjs.org/ with tag latest and public access (dry-run)
